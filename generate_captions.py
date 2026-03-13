@@ -22,7 +22,7 @@ CLIPS_DIR = "StoricoTTSDataset/clips"
 OUTPUT_FILE = "StoricoTTSDataset/style_captions.json"
 
 # Set to True to test with just 5 clips first
-DRY_RUN = True
+DRY_RUN = False
 DRY_RUN_COUNT = 5
 
 # Load test.csv to get segment metadata
@@ -64,10 +64,10 @@ def get_style_caption(audio_path, text_hint=None):
             "text": "Describe the speaking style, emotion, and tone of this speech. Keep it to one concise sentence. Focus on prosody, emotion, and energy level."
         }
     ]
-    
+
     if text_hint:
         user_content.append({
-            "type": "text", 
+            "type": "text",
             "text": f"Transcript (Hindi): {text_hint}"
         })
     
@@ -141,8 +141,8 @@ def main():
             'had_emotion_annotation': False
         }
         
-        # Rate limiting
-        time.sleep(2)
+        # Rate limiting - Azure GPT-4o audio is fast
+        time.sleep(0.5)
     
     # Save results
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
