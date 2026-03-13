@@ -55,19 +55,19 @@ class Config:
     ATTRIBUTES_LABELED_FILE = os.path.join(DATA_DIR, "attributes_labeled.json")  # NEW: LLM-labeled attributes
     TEST_CSV = os.path.join(DATA_DIR, "test.csv")
     OUTPUT_DIR = "attribute_classifier"
-    
+
     # Model
     BASE_MODEL = "facebook/wav2vec2-large-xlsr-53"  # Multilingual, good for Hindi
     MAX_AUDIO_LENGTH = 10.0  # seconds
     SAMPLING_RATE = 16000
-    
+
     # Training
     NUM_EPOCHS = 5
     BATCH_SIZE = 8
     LEARNING_RATE = 1e-4
     WEIGHT_DECAY = 0.01
     WARMUP_STEPS = 100
-    
+
     # Attributes to predict
     EMOTION_LABELS = [
         "neutral",
@@ -81,17 +81,23 @@ class Config:
         "fearful",
         "disgusted",
     ]
-    
+
     RATE_LABELS = ["slow", "normal", "fast"]
     PITCH_LABELS = ["low", "medium", "high"]
     ENERGY_LABELS = ["low", "medium", "high"]
-    
+
     # Use LLM-labeled attributes if available, else fall back to keyword mapping
     USE_LLM_LABELS = True
-    
+
     # Train/val split
     VAL_SPLIT = 0.15
     SEED = 42
+
+    # Sanity check mode: quick validation of pipeline
+    # Set to True to test with 50 samples, 1 epoch (for debugging)
+    SANITY_CHECK = False
+    SANITY_CHECK_SAMPLES = 50
+    SANITY_CHECK_EPOCHS = 1
 
 
 config = Config()
@@ -321,8 +327,9 @@ def load_and_prepare_data():
             rate_idx = config.RATE_LABELS.index(attributes['rate'])
             pitch_idx = config.PITCH_LABELS.index(attributes['pitch'])
             energy_idx = config.ENERGY_LABELS.index(attributes['energy'])
-        except ValueError as e:
-            print(f"Warning: Unknown label for {segment_id}: {e}")
+        except (ValueError, KeyError) as e:
+            print(f"Warning: Unknown/missing label for {segment_id}: {e}")
+            print(f"  Attributes: {attributes}")
             skipped_no_caption += 1
             continue
 
@@ -339,12 +346,19 @@ def load_and_prepare_data():
     print(f"Total samples: {len(data_list)}")
     print(f"Skipped (no audio): {skipped_no_audio}")
     print(f"Skipped (no caption): {skipped_no_caption}")
-    
+
+    # Sanity check mode: limit samples
+    if config.SANITY_CHECK:
+        print(f"\n=== SANITY CHECK MODE ===")
+        print(f"Limiting to {config.SANITY_CHECK_SAMPLES} samples, {config.SANITY_CHECK_EPOCHS} epoch(s)")
+        data_list = data_list[:config.SANITY_CHECK_SAMPLES]
+        print(f"Samples after limit: {len(data_list)}")
+
     # Show label distribution
     print("\nLabel distribution:")
     print(f"  Emotion: {[(config.EMOTION_LABELS[i], sum(1 for d in data_list if d['emotion_label']==i)) for i in range(len(config.EMOTION_LABELS))]}")
     print(f"  Rate: {[(config.RATE_LABELS[i], sum(1 for d in data_list if d['rate_label']==i)) for i in range(len(config.RATE_LABELS))]}")
-    
+
     return data_list
 
 
@@ -413,15 +427,47 @@ class AttributeClassificationTrainer:
             config.SAMPLING_RATE,
         )
         
+        # Debug: check dataset structure
+        if len(train_data) > 0:
+            sample = train_dataset[0]
+            print(f"  Sample keys: {list(sample.keys())}")
+            print(f"  {attribute_name}_label in sample: {f'{attribute_name}_label' in sample}")
+        
         # Create model
         model = self.create_model(num_labels)
-        
+
+        # Override epochs for sanity check
+        num_epochs = config.SANITY_CHECK_EPOCHS if config.SANITY_CHECK else config.NUM_EPOCHS
+
+        # Create custom data collator class to avoid closure issues
+        class AttributeDataCollator:
+            def __init__(self, attr_name):
+                self.attr_name = attr_name
+                self.label_key = f'{attr_name}_label'
+            
+            def __call__(self, features):
+                input_values = [f['input_values'] for f in features]
+                labels = torch.tensor([f[self.label_key] for f in features])
+                
+                # Pad input values
+                max_length = max(len(x) for x in input_values)
+                input_values = [
+                    np.pad(x, (0, max_length - len(x)), mode='constant')
+                    for x in input_values
+                ]
+                input_values = torch.FloatTensor(np.stack(input_values))
+                
+                return {
+                    'input_values': input_values,
+                    'labels': labels,
+                }
+
         # Training arguments
         training_args = TrainingArguments(
             output_dir=os.path.join(config.OUTPUT_DIR, attribute_name),
             per_device_train_batch_size=config.BATCH_SIZE,
             per_device_eval_batch_size=config.BATCH_SIZE * 2,
-            num_train_epochs=config.NUM_EPOCHS,
+            num_train_epochs=num_epochs,
             learning_rate=config.LEARNING_RATE,
             weight_decay=config.WEIGHT_DECAY,
             warmup_steps=config.WARMUP_STEPS,
@@ -454,26 +500,6 @@ class AttributeClassificationTrainer:
                 "f1_weighted": f1_score(labels, predictions, average="weighted", zero_division=0),
             }
         
-        # Custom data collator for our dataset
-        def data_collator(features):
-            input_values = [f['input_values'] for f in features]
-            labels = {
-                f'{attribute_name}_label': torch.tensor([f[f'{attribute_name}_label'] for f in features])
-            }
-            
-            # Pad input values
-            max_length = max(len(x) for x in input_values)
-            input_values = [
-                np.pad(x, (0, max_length - len(x)), mode='constant')
-                for x in input_values
-            ]
-            input_values = torch.FloatTensor(np.stack(input_values))
-            
-            return {
-                'input_values': input_values,
-                'labels': labels[f'{attribute_name}_label'],
-            }
-        
         # Create trainer
         trainer = Trainer(
             model=model,
@@ -481,7 +507,7 @@ class AttributeClassificationTrainer:
             train_dataset=train_dataset,
             eval_dataset=val_dataset,
             tokenizer=self.feature_extractor,
-            data_collator=data_collator,
+            data_collator=AttributeDataCollator(attribute_name),
             compute_metrics=compute_metrics,
         )
         
@@ -677,8 +703,13 @@ def main():
         print(f"  F1 (weighted): {metrics.get('eval_f1_weighted', 'N/A'):.4f}")
     
     print("\n" + "="*60)
-    print("Training complete!")
-    print("Use AttributeClassifier class for inference.")
+    if config.SANITY_CHECK:
+        print("✓ SANITY CHECK COMPLETE!")
+        print("Pipeline validated successfully.")
+        print("Set SANITY_CHECK = False for full training.")
+    else:
+        print("TRAINING COMPLETE!")
+        print("Use AttributeClassifier class for inference.")
     print("="*60)
 
 

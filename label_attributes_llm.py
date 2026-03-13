@@ -33,6 +33,10 @@ DATA_DIR = "StoricoTTSDataset"
 CAPTIONS_FILE = os.path.join(DATA_DIR, "style_captions.json")
 OUTPUT_FILE = os.path.join(DATA_DIR, "attributes_labeled.json")
 
+# Set to True to test with just 20 captions first
+DRY_RUN = True
+DRY_RUN_COUNT = 20
+
 # Rate limiting
 REQUESTS_PER_MINUTE = 60
 DELAY_BETWEEN_REQUESTS = 60.0 / REQUESTS_PER_MINUTE  # ~1 second
@@ -134,23 +138,23 @@ def main():
     print(f"Endpoint: {AZURE_ENDPOINT}")
     print(f"Deployment: {AZURE_DEPLOYMENT}")
     print(f"Output: {OUTPUT_FILE}")
-    
+
     # Load captions
     print("\nLoading style captions...")
     with open(CAPTIONS_FILE, 'r', encoding='utf-8') as f:
         style_captions = json.load(f)
-    
+
     print(f"Total captions: {len(style_captions)}")
-    
+
     # Filter to only captions that need labeling
     captions_to_label = {}
     for segment_id, data in style_captions.items():
         caption = data.get('style_caption', '')
-        
+
         # Skip if already an error or missing
         if not caption or caption.startswith('[ERROR]'):
             continue
-        
+
         # Skip if it's an [EXISTING] annotation (already has emotion)
         if caption.startswith('[EXISTING]'):
             # Extract emotion from existing annotation
@@ -164,8 +168,14 @@ def main():
                 'caption': caption,
                 'existing_emotion': None,
             }
-    
+
     print(f"Captions to label: {len(captions_to_label)}")
+
+    # Dry run mode
+    if DRY_RUN:
+        print(f"\n=== DRY RUN MODE: Processing only {DRY_RUN_COUNT} captions ===")
+        captions_to_label = dict(list(captions_to_label.items())[:DRY_RUN_COUNT])
+        print(f"Captions to label (dry run): {len(captions_to_label)}")
     
     # Label each caption
     labeled_data = {}
@@ -262,8 +272,13 @@ def main():
             pct = count / len(labeled_data) * 100 if labeled_data else 0
             bar = "█" * int(pct / 2)
             print(f"  {label:<15} {count:>5} ({pct:>5.1f}%) {bar}")
-    
+
     print("\n" + "="*60)
+    if DRY_RUN:
+        print("✓ DRY RUN COMPLETE!")
+        print(f"Set DRY_RUN = False to process all {len(style_captions)} captions")
+    else:
+        print("LABELING COMPLETE!")
     print("Next step: Run train_attribute_classifier.py")
     print("="*60)
 
