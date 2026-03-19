@@ -1,0 +1,78 @@
+{
+  "story_summaries": [
+    {
+      "story_id": "23",
+      "num_segments": 5,
+      "l_dyn": 0.0007365154451690614,
+      "l_sem_avg": 0.20136221051216124,
+      "caption_stats": {
+        "total": 5,
+        "gpt4o_generated": 5,
+        "fallback_emotion": 0,
+        "fallback_template": 0,
+        "failed": 0
+      }
+    }
+  ],
+  "full_results": [
+    {
+      "story_id": "23",
+      "segments": [
+        {
+          "segment_id": "8000_story23_0000",
+          "l_sem": 0.2372148633003235,
+          "style_caption": "The speaking style is warm and engaging, with a cheerful and lively tone, conveying a sense of excitement and enthusiasm.",
+          "character": "",
+          "story": "23",
+          "generated_audio": "evaluation_output\\generated\\8000_story23_0000_gen.wav",
+          "caption_source": "gpt4o"
+        },
+        {
+          "segment_id": "8000_story23_0001",
+          "l_sem": 0.2065540850162506,
+          "style_caption": "The speaking style is narrative, with a warm and reflective tone, and the energy level is calm and steady.",
+          "character": "",
+          "story": "23",
+          "generated_audio": "evaluation_output\\generated\\8000_story23_0001_gen.wav",
+          "caption_source": "gpt4o"
+        },
+        {
+          "segment_id": "8000_story23_0002",
+          "l_sem": 0.25428178906440735,
+          "style_caption": "The speaking style is narrative, the emotion appears to be concerned or puzzled, and the tone is moderate with a slight sense of curiosity.",
+          "character": "",
+          "story": "23",
+          "generated_audio": "evaluation_output\\generated\\8000_story23_0002_gen.wav",
+          "caption_source": "gpt4o"
+        },
+        {
+          "segment_id": "8000_story23_0003",
+          "l_sem": 0.29091668128967285,
+          "style_caption": "The speech has a casual and conversational tone, with a neutral emotion and a moderate energy level.",
+          "character": "",
+          "story": "23",
+          "generated_audio": "evaluation_output\\generated\\8000_story23_0003_gen.wav",
+          "caption_source": "gpt4o"
+        },
+        {
+          "segment_id": "8000_story23_0004",
+          "l_sem": 0.017843633890151978,
+          "style_caption": "The speaker's tone is subdued and reflective, with a low energy level, indicating a sense of weariness or lack of enthusiasm.",
+          "character": "",
+          "story": "23",
+          "generated_audio": "evaluation_output\\generated\\8000_story23_0004_gen.wav",
+          "caption_source": "gpt4o"
+        }
+      ],
+      "l_dyn": 0.0007365154451690614,
+      "l_sem_avg": 0.20136221051216124,
+      "caption_stats": {
+        "total": 5,
+        "gpt4o_generated": 5,
+        "fallback_emotion": 0,
+        "fallback_template": 0,
+        "failed": 0
+      }
+    }
+  ]
+}

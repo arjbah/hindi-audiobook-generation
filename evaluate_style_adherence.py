@@ -209,6 +209,14 @@ def generate_speech(model, tokenizer, description_tokenizer, device,
 
     # Convert to audio array
     audio_arr = generation.cpu().numpy().squeeze()
+    
+    # Validate audio array
+    if audio_arr.ndim == 0 or audio_arr.size == 0:
+        raise ValueError(f"Generated audio is empty or invalid. Shape: {audio_arr.shape}")
+    
+    # Ensure 1D array for mono audio
+    if audio_arr.ndim > 1:
+        audio_arr = audio_arr.mean(axis=0)  # Convert to mono if multi-channel
 
     # Save
     sf.write(output_path, audio_arr, model.config.sampling_rate)
