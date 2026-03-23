@@ -95,7 +95,11 @@ def load_model(model_name=MODEL_NAME, device=DEVICE):
 # ============================================================================
 
 def load_segments(story_ids):
-    """Load segments from test.csv for specified stories."""
+    """Load segments from test.csv for specified stories.
+    
+    Automatically deduplicates segments with identical text to handle
+    dataset issues (e.g., Story 8 has repeated segments).
+    """
     segments_by_story = {story_id: [] for story_id in story_ids}
 
     with open(TEST_CSV, 'r', encoding='utf-8') as f:
@@ -109,7 +113,7 @@ def load_segments(story_ids):
                     'character': row.get('character', '').strip(),
                     'age': row.get('age', '').strip(),
                     'gender': row.get('gender', '').strip(),
-                    'text': row.get('text', ''),
+                    'text': row.get('norm', ''),  # Use 'norm' column for punctuation
                     'story': story,
                     'speaker': row.get('speaker', ''),
                 })
@@ -119,6 +123,24 @@ def load_segments(story_ids):
         segments_by_story[story_id].sort(
             key=lambda x: int(x['segment_id'].split('_')[-1])
         )
+
+    # Deduplicate segments with identical text (handles dataset issues)
+    for story_id in segments_by_story:
+        seen_texts = set()
+        deduplicated = []
+        for seg in segments_by_story[story_id]:
+            # Skip segments with text we've already seen
+            if seg['text'] in seen_texts:
+                continue
+            seen_texts.add(seg['text'])
+            deduplicated.append(seg)
+        
+        original_count = len(segments_by_story[story_id])
+        segments_by_story[story_id] = deduplicated
+        deduplicated_count = len(segments_by_story[story_id])
+        
+        if deduplicated_count < original_count:
+            print(f"Story {story_id}: Removed {original_count - deduplicated_count} duplicate segments")
 
     return segments_by_story
 
