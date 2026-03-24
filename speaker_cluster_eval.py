@@ -1,24 +1,33 @@
 """
-speaker_cluster_eval.py
-=======================
-Evaluates how well Resemblyzer k-means speaker clustering aligns with
-ground-truth character labels from a Pocket FM segment JSON.
+speaker_cluster_eval_compiled.py
+=================================
+Evaluates Resemblyzer speaker clustering against ground-truth character
+labels from a Pocket FM segment JSON, when only a single compiled audio
+file is available (no per-segment WAVs).
 
-Assumes one audio file per segment, named by segment_id, e.g.:
-    ./audio/8000_story120_0000.wav
-    ./audio/8000_story120_0001.wav
-    ...
+Strategy
+--------
+1. Load the compiled audio.
+2. Split into speech segments using silence detection (librosa) or
+   Silero-VAD if available (more accurate).
+3. Match detected segments to JSON entries 1-to-1 by order
+   (valid because the audio was synthesised sequentially from the JSON).
+4. Embed each speech segment with Resemblyzer.
+5. Run k-means clustering and evaluate against GT labels via
+   Hungarian assignment.
 
 Usage
 -----
-python speaker_cluster_eval.py \
-    --json     story120_segments.json \
-    --audio_dir ./audio \
-    --out_dir   ./eval_results \
-    [--ext wav] \
-    [--window 4.0] [--anchor_n 5]
+python speaker_cluster_eval.py `
+    --json     C:/Users/prana/source/repos/hindi-audiobook-generation/data/story120_multi_captions.json `
+    --audio    C:/Users/prana/source/repos/hindi-audiobook-generation/Audios/story120_multi.wav `
+    --out_dir  ./eval_results
 
-If a segment's audio file is missing it is skipped with a warning.
+Optional flags
+    --min_silence_ms   300     silence gap to split on (ms)
+    --silence_thresh   -40     dBFS threshold for silence
+    --n_clusters       5       override k (defaults to #GT characters)
+    --save_segments            dump split WAVs to out_dir/segments/ for inspection
 """
 
 import argparse
@@ -28,10 +37,12 @@ import warnings
 from itertools import combinations
 from pathlib import Path
 
+import librosa
+import librosa.effects
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import numpy as np
-import librosa
+import soundfile as sf
 import torch
 from resemblyzer import VoiceEncoder, preprocess_wav
 from scipy.optimize import linear_sum_assignment
@@ -40,34 +51,21 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import normalize
 
-
-# ──────────────────────────────────────────────────────────────────────
-# Palette (matches your existing drift script)
-# ──────────────────────────────────────────────────────────────────────
+NARRATOR_LABEL = "narrator"
 BLUE   = "#2563EB"
 RED    = "#DC2626"
-PURPLE = "#7C3AED"
 GREEN  = "#059669"
 AMBER  = "#D97706"
-NARRATOR_LABEL = "narrator"
+PURPLE = "#7C3AED"
 
 
 # ──────────────────────────────────────────────────────────────────────
-# 1. Load & normalise ground-truth labels from JSON
+# 1.  Ground-truth loading
 # ──────────────────────────────────────────────────────────────────────
 
 def load_gt_segments(json_path: str) -> list[dict]:
-    """
-    Returns a list of dicts, each with:
-        segment_id : str
-        text       : str
-        character  : str   (empty → NARRATOR_LABEL)
-        gender     : str
-        age        : str
-    """
     with open(json_path, "r", encoding="utf-8") as f:
         raw = json.load(f)
-
     segments = []
     for entry in raw:
         char = entry.get("character", "").strip()
@@ -82,7 +80,6 @@ def load_gt_segments(json_path: str) -> list[dict]:
 
 
 def unique_characters(segments: list[dict]) -> list[str]:
-    """Sorted unique character names, narrator always first."""
     chars = sorted({s["character"] for s in segments})
     if NARRATOR_LABEL in chars:
         chars = [NARRATOR_LABEL] + [c for c in chars if c != NARRATOR_LABEL]
@@ -90,7 +87,139 @@ def unique_characters(segments: list[dict]) -> list[str]:
 
 
 # ──────────────────────────────────────────────────────────────────────
-# 2. Embed each segment
+# 2.  Audio splitting
+# ──────────────────────────────────────────────────────────────────────
+
+def split_on_silence_librosa(wav: np.ndarray, sr: int,
+                              top_db: float = 40,
+                              min_silence_ms: int = 300,
+                              min_seg_ms: int = 300) -> list[tuple[float, float, np.ndarray]]:
+    """
+    Uses librosa.effects.split (energy-based) to find non-silent intervals.
+    Returns list of (start_sec, end_sec, audio_array).
+    """
+    frame_length = 512
+    hop_length   = 128
+    intervals    = librosa.effects.split(
+        wav,
+        top_db=top_db,
+        frame_length=frame_length,
+        hop_length=hop_length,
+    )
+
+    min_silence_samples = int(min_silence_ms / 1000 * sr)
+    min_seg_samples     = int(min_seg_ms / 1000 * sr)
+
+    # Merge intervals that are separated by less than min_silence_ms
+    merged = []
+    for start, end in intervals:
+        if merged and (start - merged[-1][1]) < min_silence_samples:
+            merged[-1] = (merged[-1][0], end)
+        else:
+            merged.append([start, end])
+
+    segments = []
+    for start, end in merged:
+        if (end - start) < min_seg_samples:
+            continue
+        segments.append((start / sr, end / sr, wav[start:end]))
+
+    return segments
+
+
+def split_with_silero(wav: np.ndarray, sr: int,
+                      min_seg_ms: int = 300) -> list[tuple[float, float, np.ndarray]]:
+    """
+    Uses Silero-VAD for more accurate speech/silence boundaries.
+    Falls back to librosa if silero is unavailable.
+    """
+    try:
+        # Silero requires 16kHz mono
+        model, utils = torch.hub.load(
+            repo_or_dir="snakers4/silero-vad",
+            model="silero_vad",
+            force_reload=False,
+            onnx=False,
+            verbose=False,
+        )
+        (get_speech_timestamps, _, _, _, _) = utils
+
+        wav_tensor = torch.from_numpy(wav).float()
+        speech_ts  = get_speech_timestamps(
+            wav_tensor, model,
+            sampling_rate=sr,
+            min_silence_duration_ms=300,
+            min_speech_duration_ms=min_seg_ms,
+        )
+
+        min_samples = int(min_seg_ms / 1000 * sr)
+        segments = []
+        for ts in speech_ts:
+            s, e = ts["start"], ts["end"]
+            if (e - s) < min_samples:
+                continue
+            segments.append((s / sr, e / sr, wav[s:e]))
+
+        print(f"  [Silero-VAD] detected {len(segments)} speech segments")
+        return segments
+
+    except Exception as ex:
+        print(f"  [Silero-VAD] not available ({ex}), falling back to librosa silence split")
+        return None
+
+
+def split_audio(wav: np.ndarray, sr: int,
+                top_db: float = 40,
+                min_silence_ms: int = 300) -> list[tuple[float, float, np.ndarray]]:
+    """Try Silero first, fall back to librosa."""
+    result = split_with_silero(wav, sr, min_seg_ms=300)
+    if result is not None:
+        return result
+    segs = split_on_silence_librosa(wav, sr, top_db=top_db,
+                                     min_silence_ms=min_silence_ms)
+    print(f"  [librosa split] detected {len(segs)} speech segments")
+    return segs
+
+
+# ──────────────────────────────────────────────────────────────────────
+# 3.  Match audio segments → JSON entries 1-to-1
+# ──────────────────────────────────────────────────────────────────────
+
+def align_segments_to_json(audio_segs: list[tuple],
+                            gt_segs: list[dict],
+                            verbose: bool = True
+                            ) -> tuple[list[np.ndarray], list[dict]]:
+    """
+    Simple ordered alignment: audio_segs[i] corresponds to gt_segs[i].
+
+    If counts differ we warn and truncate to the shorter list.
+    This is valid because the compiled audio was synthesised in JSON order.
+    """
+    n_audio = len(audio_segs)
+    n_json  = len(gt_segs)
+
+    if n_audio != n_json:
+        warnings.warn(
+            f"\n  [alignment] detected {n_audio} audio segments but JSON has "
+            f"{n_json} entries.\n"
+            f"  Truncating to {min(n_audio, n_json)}.\n"
+            f"  If the mismatch is large, try adjusting --min_silence_ms or "
+            f"--silence_thresh to get a better split."
+        )
+
+    n = min(n_audio, n_json)
+    wavs     = [audio_segs[i][2] for i in range(n)]
+    matched  = [gt_segs[i]       for i in range(n)]
+
+    if verbose:
+        print(f"\n  Alignment: {n_audio} audio segs  ↔  {n_json} JSON entries "
+              f"→ using {n}")
+
+    return wavs, matched
+
+
+# ──────────────────────────────────────────────────────────────────────
+# 4.  Embedding
 # ──────────────────────────────────────────────────────────────────────
 
 def load_encoder(device: str) -> VoiceEncoder:
@@ -98,195 +227,162 @@ def load_encoder(device: str) -> VoiceEncoder:
     return VoiceEncoder(device=device)
 
 
-def embed_segment_file(audio_path: str, encoder: VoiceEncoder,
-                       min_sec: float = 0.5) -> np.ndarray | None:
+def embed_wavs(wavs: list[np.ndarray],
+               encoder: VoiceEncoder) -> tuple[np.ndarray, list[int]]:
     """
-    Load one segment audio file, return L2-normalised 256-d embedding.
-    Returns None if the file is too short or unreadable.
+    Embed a list of raw waveforms.  Returns:
+        embeddings : (M, 256) — only segments that embedded successfully
+        valid_idx  : indices into input list that succeeded
     """
-    try:
-        wav, _ = librosa.load(audio_path, sr=16000, mono=True)
-        if len(wav) / 16000 < min_sec:
-            return None
-        processed = preprocess_wav(wav, source_sr=16000)
-        emb = encoder.embed_utterance(processed)
-        return emb / (np.linalg.norm(emb) + 1e-8)
-    except Exception as e:
-        warnings.warn(f"    Could not embed {audio_path}: {e}")
-        return None
+    embeddings = []
+    valid_idx  = []
 
-
-def build_embedding_matrix(segments: list[dict], audio_dir: str,
-                            encoder: VoiceEncoder, ext: str = "wav"
-                            ) -> tuple[np.ndarray, list[dict]]:
-    """
-    Embeds every segment that has a corresponding audio file.
-    Returns:
-        embeddings : (N, 256) float32 array
-        valid_segs : list of segment dicts that were successfully embedded
-    """
-    embeddings  = []
-    valid_segs  = []
-    missing     = 0
-
-    for seg in segments:
-        path = os.path.join(audio_dir, f"{seg['segment_id']}.{ext}")
-        if not os.path.exists(path):
-            missing += 1
-            continue
-        emb = embed_segment_file(path, encoder)
-        if emb is not None:
+    for i, wav in enumerate(wavs):
+        try:
+            processed = preprocess_wav(wav, source_sr=16000)
+            emb = encoder.embed_utterance(processed)
+            emb = emb / (np.linalg.norm(emb) + 1e-8)
             embeddings.append(emb)
-            valid_segs.append(seg)
+            valid_idx.append(i)
+        except Exception as e:
+            warnings.warn(f"  [embed] segment {i} failed: {e}")
 
-    if missing:
-        print(f"  [warn] {missing} segment audio files not found — skipped")
-    print(f"  Embedded {len(valid_segs)} / {len(segments)} segments")
-    return np.stack(embeddings).astype(np.float32), valid_segs
+    print(f"  Embedded {len(embeddings)} / {len(wavs)} segments")
+    return np.stack(embeddings).astype(np.float32), valid_idx
 
 
 # ──────────────────────────────────────────────────────────────────────
-# 3. K-means clustering
+# 5.  Clustering + Hungarian (identical to previous script)
 # ──────────────────────────────────────────────────────────────────────
 
-def cluster_embeddings(embeddings: np.ndarray,
-                       n_clusters: int) -> np.ndarray:
-    """L2-normalise then k-means. Returns cluster label array."""
+def cluster_embeddings(embeddings: np.ndarray, n_clusters: int) -> np.ndarray:
     normed = normalize(embeddings)
     km     = KMeans(n_clusters=n_clusters, random_state=42, n_init=20)
     return km.fit_predict(normed)
 
 
-# ──────────────────────────────────────────────────────────────────────
-# 4. Hungarian matching  (predicted cluster → GT character)
-# ──────────────────────────────────────────────────────────────────────
-
-def hungarian_match(cluster_labels: np.ndarray,
-                    gt_labels: np.ndarray,
-                    n_clusters: int,
-                    n_gt: int) -> dict[int, int]:
-    """
-    Finds the optimal 1-to-1 assignment of predicted cluster IDs
-    to GT character IDs that maximises total overlap.
-
-    Returns a dict: {cluster_id → gt_id}
-    """
-    # Cost matrix: -overlap (we minimise, so negate for max)
-    cost = np.zeros((n_clusters, n_gt), dtype=np.float64)
+def hungarian_match(cluster_labels, gt_int, n_clusters, n_gt):
+    cost = np.zeros((n_clusters, n_gt))
     for c in range(n_clusters):
         for g in range(n_gt):
-            cost[c, g] = -np.sum((cluster_labels == c) & (gt_labels == g))
+            cost[c, g] = -np.sum((cluster_labels == c) & (gt_int == g))
+    row, col = linear_sum_assignment(cost)
+    return {int(r): int(c) for r, c in zip(row, col)}
 
-    row_ind, col_ind = linear_sum_assignment(cost)
-    return {int(r): int(c) for r, c in zip(row_ind, col_ind)}
 
-
-# ──────────────────────────────────────────────────────────────────────
-# 5. Evaluation metrics
-# ──────────────────────────────────────────────────────────────────────
-
-def compute_eval_metrics(cluster_labels: np.ndarray,
-                         gt_int: np.ndarray,
-                         mapping: dict[int, int],
-                         char_names: list[str]) -> dict:
-    """
-    Returns a dict with:
-        overall_accuracy    : fraction correctly assigned
-        cluster_purity      : mean purity across all clusters
-        per_char_precision  : {char_name: precision}
-        per_char_recall     : {char_name: recall}
-        per_char_f1         : {char_name: f1}
-        confusion           : (n_gt × n_gt) confusion matrix
-                              rows=GT, cols=predicted-mapped
-    """
-    n = len(cluster_labels)
-    n_gt = len(char_names)
-
-    # Map cluster IDs → GT IDs using Hungarian assignment
+def compute_eval_metrics(cluster_labels, gt_int, mapping, char_names):
+    n_gt   = len(char_names)
     mapped = np.array([mapping.get(int(c), -1) for c in cluster_labels])
+    acc    = float(np.mean(mapped == gt_int))
 
-    overall_accuracy = float(np.mean(mapped == gt_int))
-
-    # Purity per cluster: fraction of dominant GT class
     purities = []
     for c in np.unique(cluster_labels):
         mask = cluster_labels == c
-        gt_in_cluster = gt_int[mask]
-        dominant_frac = np.max(np.bincount(gt_in_cluster, minlength=n_gt)) / mask.sum()
-        purities.append(float(dominant_frac))
-    cluster_purity = float(np.mean(purities))
+        dom  = np.max(np.bincount(gt_int[mask], minlength=n_gt)) / mask.sum()
+        purities.append(float(dom))
 
-    # Per-character precision / recall / F1
-    per_char_precision, per_char_recall, per_char_f1 = {}, {}, {}
+    prec_d, rec_d, f1_d = {}, {}, {}
     for g, char in enumerate(char_names):
         tp = int(np.sum((mapped == g) & (gt_int == g)))
         fp = int(np.sum((mapped == g) & (gt_int != g)))
         fn = int(np.sum((mapped != g) & (gt_int == g)))
-        prec = tp / (tp + fp) if (tp + fp) > 0 else 0.0
-        rec  = tp / (tp + fn) if (tp + fn) > 0 else 0.0
-        f1   = 2 * prec * rec / (prec + rec) if (prec + rec) > 0 else 0.0
-        per_char_precision[char] = round(prec, 4)
-        per_char_recall[char]    = round(rec, 4)
-        per_char_f1[char]        = round(f1, 4)
+        p  = tp / (tp + fp) if (tp + fp) > 0 else 0.0
+        r  = tp / (tp + fn) if (tp + fn) > 0 else 0.0
+        f1 = 2 * p * r / (p + r) if (p + r) > 0 else 0.0
+        prec_d[char] = round(p, 4)
+        rec_d[char]  = round(r, 4)
+        f1_d[char]   = round(f1, 4)
 
-    # Confusion matrix: rows = GT, cols = mapped prediction
     cm = confusion_matrix(gt_int, mapped, labels=list(range(n_gt)))
-
     return {
-        "overall_accuracy":   overall_accuracy,
-        "cluster_purity":     cluster_purity,
-        "per_char_precision": per_char_precision,
-        "per_char_recall":    per_char_recall,
-        "per_char_f1":        per_char_f1,
+        "overall_accuracy":   acc,
+        "cluster_purity":     float(np.mean(purities)),
+        "per_char_precision": prec_d,
+        "per_char_recall":    rec_d,
+        "per_char_f1":        f1_d,
         "confusion":          cm,
         "mapped_labels":      mapped,
     }
 
 
-def compute_embedding_separation(embeddings: np.ndarray,
-                                  gt_int: np.ndarray,
-                                  char_names: list[str]) -> dict:
-    """
-    Intra-character consistency and inter-character distance
-    computed on GT labels (ground-truth grouping, not clusters).
-    """
-    char_embs  = {}
-    char_means = {}
-    intra      = {}
-
+def compute_separation(embeddings, gt_int, char_names):
+    char_means, intra, inter = {}, {}, {}
     for g, char in enumerate(char_names):
-        mask = gt_int == g
-        embs = embeddings[mask]
-        char_embs[char] = embs
+        embs = embeddings[gt_int == g]
         mean = embs.mean(axis=0)
         char_means[char] = mean / (np.linalg.norm(mean) + 1e-8)
-
         if len(embs) < 2:
             intra[char] = float("nan")
         else:
             sims = [1 - cosine(embs[i], embs[j])
                     for i, j in combinations(range(len(embs)), 2)]
             intra[char] = float(np.mean(sims))
-
-    inter = {}
     for ca, cb in combinations(char_names, 2):
         d = float(cosine(char_means[ca], char_means[cb]))
         inter[(ca, cb)] = inter[(cb, ca)] = d
-
-    return {"intra": intra, "inter": inter,
-            "char_means": char_means, "char_embs": char_embs}
+    return {"intra": intra, "inter": inter, "char_means": char_means}
 
 
 # ──────────────────────────────────────────────────────────────────────
-# 6. Visualisation
+# 6.  Segment-level timeline plot  (new — shows GT vs predicted over time)
 # ──────────────────────────────────────────────────────────────────────
 
-def _reduce_dims(embeddings: np.ndarray):
+def plot_timeline(audio_segs_used: list[tuple],
+                  gt_int: np.ndarray,
+                  mapped_labels: np.ndarray,
+                  char_names: list[str],
+                  palette,
+                  out_dir: str, stem: str):
+    """
+    Two horizontal colour strips:
+        top    = ground truth character per segment
+        bottom = predicted (Hungarian-mapped) character per segment
+    """
+    starts = np.array([s[0] for s in audio_segs_used])
+    ends   = np.array([s[1] for s in audio_segs_used])
+
+    fig, axes = plt.subplots(3, 1, figsize=(18, 4),
+                              gridspec_kw={"height_ratios": [1, 1, 0.4]})
+    fig.suptitle(f"Segment-level GT vs Predicted  —  {stem}",
+                 fontsize=11, fontweight="bold")
+
+    for ax, labels, title in zip(
+        axes[:2],
+        [gt_int, mapped_labels],
+        ["Ground Truth", "Predicted (Hungarian-mapped)"]
+    ):
+        for i, (s, e) in enumerate(zip(starts, ends)):
+            ax.axvspan(s, e, color=palette[labels[i]], alpha=0.85)
+        ax.set_yticks([])
+        ax.set_ylabel(title, fontsize=8)
+        ax.set_xlim(starts[0], ends[-1])
+
+    # Legend strip
+    axes[2].axis("off")
+    for g, char in enumerate(char_names):
+        axes[2].barh(0, 1, left=g, color=palette[g], height=0.5)
+        axes[2].text(g + 0.5, 0, char[:12], ha="center", va="center",
+                     fontsize=7, color="white" if g < 8 else "black")
+    axes[2].set_xlim(0, len(char_names))
+    axes[2].set_title("Character legend", fontsize=8, pad=2)
+
+    plt.tight_layout()
+    path = os.path.join(out_dir, f"{stem}_timeline.png")
+    plt.savefig(path, dpi=150, bbox_inches="tight")
+    plt.close()
+    print(f"  [saved] {path}")
+
+
+# ──────────────────────────────────────────────────────────────────────
+# 7.  Main eval panel (same structure as previous script)
+# ──────────────────────────────────────────────────────────────────────
+
+def _reduce_dims(embeddings):
     try:
         from umap import UMAP
-        reducer = UMAP(n_components=2, random_state=42,
-                       n_neighbors=min(15, len(embeddings) - 1))
-        return reducer.fit_transform(embeddings), "UMAP"
+        r = UMAP(n_components=2, random_state=42,
+                 n_neighbors=min(15, len(embeddings) - 1))
+        return r.fit_transform(embeddings), "UMAP"
     except ImportError:
         pass
     try:
@@ -300,292 +396,263 @@ def _reduce_dims(embeddings: np.ndarray):
     return PCA(n_components=2).fit_transform(embeddings), "PCA"
 
 
-def plot_eval_panel(embeddings: np.ndarray,
-                    gt_int: np.ndarray,
-                    cluster_labels: np.ndarray,
-                    mapped_labels: np.ndarray,
-                    eval_metrics: dict,
-                    sep_metrics: dict,
-                    char_names: list[str],
-                    mapping: dict,
-                    stem: str,
-                    out_dir: str):
+def plot_eval_panel(embeddings, gt_int, mapped_labels,
+                    eval_metrics, sep_metrics,
+                    char_names, stem, out_dir):
 
-    n_chars  = len(char_names)
-    palette  = plt.cm.tab10(np.linspace(0, 1, n_chars))
-    embs_2d, proj = _reduce_dims(normalize(embeddings))
+    n      = len(char_names)
+    pal    = plt.cm.tab10(np.linspace(0, 1, n))
+    e2d, proj = _reduce_dims(normalize(embeddings))
 
     fig = plt.figure(figsize=(20, 12))
-    fig.suptitle(f"Speaker Cluster Eval vs Ground Truth  —  {stem}",
+    fig.suptitle(f"Cluster Eval vs Ground Truth  —  {stem}",
                  fontsize=13, fontweight="bold", y=1.0)
     gs = gridspec.GridSpec(2, 3, figure=fig, hspace=0.55, wspace=0.38)
 
-    # ── Panel A: GT labels in projection space
-    ax_gt = fig.add_subplot(gs[0, 0])
-    for g, char in enumerate(char_names):
-        mask = gt_int == g
-        ax_gt.scatter(embs_2d[mask, 0], embs_2d[mask, 1],
-                      color=palette[g], s=28, alpha=0.7, label=char,
-                      edgecolors="none")
-    ax_gt.set_title(f"Ground Truth Labels ({proj})")
-    ax_gt.set_xticks([]); ax_gt.set_yticks([])
-    ax_gt.legend(fontsize=7, title="GT char", title_fontsize=7,
-                 loc="best", framealpha=0.6)
+    for ax, labels, title_str in zip(
+        [fig.add_subplot(gs[0, 0]), fig.add_subplot(gs[0, 1])],
+        [gt_int, mapped_labels],
+        [f"Ground Truth ({proj})",
+         f"Predicted (Hungarian-mapped) — acc={eval_metrics['overall_accuracy']:.3f}"]
+    ):
+        for g, char in enumerate(char_names):
+            mask = labels == g
+            ax.scatter(e2d[mask, 0], e2d[mask, 1],
+                       color=pal[g], s=28, alpha=0.7,
+                       label=char, edgecolors="none")
+        if "Predicted" in title_str:
+            wrong = mapped_labels != gt_int
+            ax.scatter(e2d[wrong, 0], e2d[wrong, 1],
+                       marker="x", color="red", s=40, linewidths=0.8,
+                       alpha=0.6, label="misclassified", zorder=5)
+        ax.set_title(title_str, fontsize=9)
+        ax.set_xticks([]); ax.set_yticks([])
+        ax.legend(fontsize=7, loc="best", framealpha=0.6)
 
-    # ── Panel B: Predicted cluster → GT-mapped colours
-    ax_pred = fig.add_subplot(gs[0, 1])
-    for g, char in enumerate(char_names):
-        mask = mapped_labels == g
-        if mask.sum() == 0:
-            continue
-        ax_pred.scatter(embs_2d[mask, 0], embs_2d[mask, 1],
-                        color=palette[g], s=28, alpha=0.7,
-                        label=char, edgecolors="none")
-    # Mark misclassified segments with a red X
-    wrong = mapped_labels != gt_int
-    ax_pred.scatter(embs_2d[wrong, 0], embs_2d[wrong, 1],
-                    marker="x", color="red", s=40, linewidths=0.8,
-                    alpha=0.6, label="misclassified", zorder=5)
-    ax_pred.set_title(f"Predicted (Hungarian-mapped) — acc={eval_metrics['overall_accuracy']:.3f}")
-    ax_pred.set_xticks([]); ax_pred.set_yticks([])
-    ax_pred.legend(fontsize=7, title="Pred char", title_fontsize=7,
-                   loc="best", framealpha=0.6)
-
-    # ── Panel C: Confusion matrix
     ax_cm = fig.add_subplot(gs[0, 2])
     cm = eval_metrics["confusion"]
-    im = ax_cm.imshow(cm, interpolation="nearest", cmap="Blues")
+    im = ax_cm.imshow(cm, cmap="Blues")
     plt.colorbar(im, ax=ax_cm, fraction=0.046, pad=0.04)
-    ax_cm.set_xticks(range(n_chars))
-    ax_cm.set_yticks(range(n_chars))
     short = [c[:10] for c in char_names]
+    ax_cm.set_xticks(range(n)); ax_cm.set_yticks(range(n))
     ax_cm.set_xticklabels(short, rotation=35, ha="right", fontsize=7)
     ax_cm.set_yticklabels(short, fontsize=7)
-    ax_cm.set_xlabel("Predicted character")
-    ax_cm.set_ylabel("Ground truth character")
-    ax_cm.set_title("Confusion Matrix\n(rows=GT, cols=Pred)")
-    for i in range(n_chars):
-        for j in range(n_chars):
+    ax_cm.set_xlabel("Predicted"); ax_cm.set_ylabel("Ground Truth")
+    ax_cm.set_title("Confusion Matrix")
+    for i in range(n):
+        for j in range(n):
             ax_cm.text(j, i, str(cm[i, j]), ha="center", va="center",
                        fontsize=7,
                        color="white" if cm[i, j] > cm.max() * 0.6 else "black")
 
-    # ── Panel D: Per-character F1 bar chart
     ax_f1 = fig.add_subplot(gs[1, 0])
-    f1_vals = [eval_metrics["per_char_f1"][c] for c in char_names]
-    bars = ax_f1.barh(char_names, f1_vals,
-                      color=[palette[g] for g in range(n_chars)],
+    f1v = [eval_metrics["per_char_f1"][c] for c in char_names]
+    bars = ax_f1.barh(char_names, f1v, color=[pal[g] for g in range(n)],
                       edgecolor="white", height=0.55)
     ax_f1.set_xlim(0, 1.1)
     ax_f1.axvline(0.75, color="gray", linestyle="--", linewidth=1)
-    ax_f1.set_xlabel("F1 score")
-    ax_f1.set_title("Per-Character F1\n(Precision × Recall harmonic mean)")
+    ax_f1.set_title("Per-Character F1")
     for bar, char in zip(bars, char_names):
         ax_f1.text(bar.get_width() + 0.01,
                    bar.get_y() + bar.get_height() / 2,
                    f"{eval_metrics['per_char_f1'][char]:.3f}",
                    va="center", fontsize=8)
 
-    # ── Panel E: Intra-char consistency (GT grouping)
     ax_intra = fig.add_subplot(gs[1, 1])
-    intra_vals = [sep_metrics["intra"].get(c, float("nan")) for c in char_names]
-    valid_chars = [c for c, v in zip(char_names, intra_vals) if not np.isnan(v)]
-    valid_vals  = [v for v in intra_vals if not np.isnan(v)]
-    valid_colors = [palette[char_names.index(c)] for c in valid_chars]
-    bars2 = ax_intra.barh(valid_chars, valid_vals,
-                           color=valid_colors, edgecolor="white", height=0.55)
-    ax_intra.set_xlim(0, 1.1)
-    ax_intra.axvline(0.75, color="gray", linestyle="--", linewidth=1,
-                     label="0.75 ref")
-    ax_intra.set_xlabel("Mean pairwise cosine similarity")
-    ax_intra.set_title("GT Intra-Char Consistency\n(higher = voice is stable within GT class)")
-    ax_intra.legend(fontsize=7)
-    for bar, char in zip(bars2, valid_chars):
-        ax_intra.text(bar.get_width() + 0.01,
-                      bar.get_y() + bar.get_height() / 2,
-                      f"{sep_metrics['intra'][char]:.3f}",
-                      va="center", fontsize=8)
+    valid_c = [(c, sep_metrics["intra"][c]) for c in char_names
+               if not np.isnan(sep_metrics["intra"].get(c, float("nan")))]
+    if valid_c:
+        vc_names, vc_vals = zip(*valid_c)
+        vc_colors = [pal[char_names.index(c)] for c in vc_names]
+        bars2 = ax_intra.barh(vc_names, vc_vals, color=vc_colors,
+                               edgecolor="white", height=0.55)
+        ax_intra.set_xlim(0, 1.1)
+        ax_intra.axvline(0.75, color="gray", linestyle="--", linewidth=1)
+        ax_intra.set_title("GT Intra-Char Consistency")
+        for bar, char in zip(bars2, vc_names):
+            ax_intra.text(bar.get_width() + 0.01,
+                          bar.get_y() + bar.get_height() / 2,
+                          f"{sep_metrics['intra'][char]:.3f}",
+                          va="center", fontsize=8)
 
-    # ── Panel F: Summary table
     ax_tbl = fig.add_subplot(gs[1, 2])
     ax_tbl.axis("off")
     rows = [
-        ["Overall accuracy",    f"{eval_metrics['overall_accuracy']:.4f}"],
-        ["Cluster purity",      f"{eval_metrics['cluster_purity']:.4f}"],
-        ["# GT characters",     str(n_chars)],
-        ["# segments embedded", str(len(gt_int))],
+        ["Overall accuracy", f"{eval_metrics['overall_accuracy']:.4f}"],
+        ["Cluster purity",   f"{eval_metrics['cluster_purity']:.4f}"],
+        ["# GT characters",  str(n)],
+        ["# segs embedded",  str(len(gt_int))],
         ["", ""],
-        ["Character", "Prec / Rec / F1"],
-    ]
-    for char in char_names:
-        p  = eval_metrics["per_char_precision"][char]
-        r  = eval_metrics["per_char_recall"][char]
-        f1 = eval_metrics["per_char_f1"][char]
-        rows.append([char[:16], f"{p:.2f} / {r:.2f} / {f1:.2f}"])
-
+        ["Character", "P / R / F1"],
+    ] + [[c[:16], f"{eval_metrics['per_char_precision'][c]:.2f} / "
+                  f"{eval_metrics['per_char_recall'][c]:.2f} / "
+                  f"{eval_metrics['per_char_f1'][c]:.2f}"]
+         for c in char_names]
     tbl = ax_tbl.table(cellText=rows, cellLoc="left", loc="center",
                         colWidths=[0.62, 0.38])
     tbl.auto_set_font_size(False)
     tbl.set_fontsize(8)
     tbl.scale(1, 1.5)
-    ax_tbl.set_title("Evaluation Summary", pad=8)
+    ax_tbl.set_title("Summary", pad=8)
 
     out_path = os.path.join(out_dir, f"{stem}_cluster_eval.png")
     plt.savefig(out_path, dpi=150, bbox_inches="tight")
     plt.close()
     print(f"  [saved] {out_path}")
 
+    return pal  # return palette for timeline plot
+
 
 # ──────────────────────────────────────────────────────────────────────
-# 7. Console report
+# 8.  Console report + JSON save
 # ──────────────────────────────────────────────────────────────────────
 
-def print_report(eval_metrics: dict, sep_metrics: dict,
-                 char_names: list[str], mapping: dict):
-    print("\n" + "═" * 60)
+def print_report(eval_m, sep_m, char_names, mapping):
+    print("\n" + "═" * 62)
     print("  SPEAKER CLUSTER EVALUATION REPORT")
-    print("═" * 60)
-    print(f"  Overall accuracy  : {eval_metrics['overall_accuracy']:.4f}")
-    print(f"  Cluster purity    : {eval_metrics['cluster_purity']:.4f}")
+    print("═" * 62)
+    print(f"  Overall accuracy : {eval_m['overall_accuracy']:.4f}")
+    print(f"  Cluster purity   : {eval_m['cluster_purity']:.4f}")
     print()
-    print(f"  {'Character':<20} {'Prec':>6} {'Rec':>6} {'F1':>6} "
-          f"{'GT-Intra':>10} {'#segs':>6}")
-    print("  " + "-" * 58)
+    print(f"  {'Character':<22} {'Prec':>6} {'Rec':>6} {'F1':>6} {'Intra':>8}")
+    print("  " + "-" * 52)
     for char in char_names:
-        p     = eval_metrics["per_char_precision"][char]
-        r     = eval_metrics["per_char_recall"][char]
-        f1    = eval_metrics["per_char_f1"][char]
-        intra = sep_metrics["intra"].get(char, float("nan"))
-        intra_str = f"{intra:.3f}" if not np.isnan(intra) else "  n/a"
-        print(f"  {char:<20} {p:>6.3f} {r:>6.3f} {f1:>6.3f} "
-              f"{intra_str:>10}")
-
+        intra = sep_m["intra"].get(char, float("nan"))
+        ist   = f"{intra:.3f}" if not np.isnan(intra) else "  n/a"
+        print(f"  {char:<22} "
+              f"{eval_m['per_char_precision'][char]:>6.3f} "
+              f"{eval_m['per_char_recall'][char]:>6.3f} "
+              f"{eval_m['per_char_f1'][char]:>6.3f} {ist:>8}")
     print()
-    print("  Inter-character cosine distance (GT centroids):")
-    for (ca, cb), d in sep_metrics["inter"].items():
-        if ca < cb:  # avoid duplicate pairs
-            print(f"    {ca:<18} <-> {cb:<18}  {d:.4f}")
-
+    print("  Inter-character distances (GT centroids):")
+    for (ca, cb), d in sep_m["inter"].items():
+        if ca < cb:
+            print(f"    {ca:<20} <-> {cb:<20}  {d:.4f}")
     print()
-    print("  Hungarian cluster → GT character mapping:")
-    for cluster_id, gt_id in mapping.items():
-        print(f"    cluster_{cluster_id}  →  {char_names[gt_id]}")
-    print("═" * 60)
+    print("  Hungarian mapping:")
+    for cid, gid in mapping.items():
+        print(f"    cluster_{cid}  →  {char_names[gid]}")
+    print("═" * 62)
 
 
-# ──────────────────────────────────────────────────────────────────────
-# 8. Save JSON results
-# ──────────────────────────────────────────────────────────────────────
-
-def save_results_json(eval_metrics: dict, sep_metrics: dict,
-                      char_names: list[str], mapping: dict,
-                      stem: str, out_dir: str):
-    output = {
-        "stem":             stem,
-        "overall_accuracy": eval_metrics["overall_accuracy"],
-        "cluster_purity":   eval_metrics["cluster_purity"],
-        "characters":       char_names,
-        "hungarian_mapping": {str(k): char_names[v] for k, v in mapping.items()},
+def save_json(eval_m, sep_m, char_names, mapping, n_audio, n_json, stem, out_dir):
+    out = {
+        "stem": stem,
+        "audio_segments_detected": n_audio,
+        "json_segments":           n_json,
+        "segments_evaluated":      int(len(eval_m["mapped_labels"])),
+        "overall_accuracy":        eval_m["overall_accuracy"],
+        "cluster_purity":          eval_m["cluster_purity"],
+        "characters":              char_names,
+        "hungarian_mapping":       {str(k): char_names[v] for k, v in mapping.items()},
         "per_character": {
-            char: {
-                "precision":        eval_metrics["per_char_precision"][char],
-                "recall":           eval_metrics["per_char_recall"][char],
-                "f1":               eval_metrics["per_char_f1"][char],
-                "gt_intra_consistency": (
-                    None if np.isnan(sep_metrics["intra"].get(char, float("nan")))
-                    else sep_metrics["intra"][char]
+            c: {
+                "precision":   eval_m["per_char_precision"][c],
+                "recall":      eval_m["per_char_recall"][c],
+                "f1":          eval_m["per_char_f1"][c],
+                "intra_consistency": (
+                    None if np.isnan(sep_m["intra"].get(c, float("nan")))
+                    else sep_m["intra"][c]
                 ),
-            }
-            for char in char_names
+            } for c in char_names
         },
         "inter_character_distances": {
             f"{ca}__vs__{cb}": d
-            for (ca, cb), d in sep_metrics["inter"].items()
-            if ca < cb
+            for (ca, cb), d in sep_m["inter"].items() if ca < cb
         },
-        "confusion_matrix": eval_metrics["confusion"].tolist(),
+        "confusion_matrix": eval_m["confusion"].tolist(),
     }
     path = os.path.join(out_dir, f"{stem}_cluster_eval.json")
     with open(path, "w", encoding="utf-8") as f:
-        json.dump(output, f, ensure_ascii=False, indent=2)
+        json.dump(out, f, ensure_ascii=False, indent=2)
     print(f"  [saved] {path}")
 
 
 # ──────────────────────────────────────────────────────────────────────
-# 9. Main
+# 9.  Entry point
 # ──────────────────────────────────────────────────────────────────────
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Evaluate Resemblyzer speaker clustering against JSON ground truth"
+        description="Evaluate speaker clustering on a compiled audio file using JSON GT"
     )
-    parser.add_argument("--json",       required=True,
-                        help="Path to segment JSON (e.g. story120.json)")
-    parser.add_argument("--audio_dir",  required=True,
-                        help="Directory containing per-segment audio files")
-    parser.add_argument("--ext",        default="wav",
-                        help="Audio file extension (default: wav)")
-    parser.add_argument("--out_dir",    default="./eval_results")
-    parser.add_argument("--n_clusters", type=int, default=None,
-                        help="Override k-means k. Defaults to #unique GT characters.")
-    parser.add_argument("--anchor_n",   type=int, default=5,
-                        help="Anchor segments for drift (not used here but kept for API parity)")
+    parser.add_argument("--json",             required=True)
+    parser.add_argument("--audio",            required=True)
+    parser.add_argument("--out_dir",          default="./eval_results")
+    parser.add_argument("--n_clusters",       type=int,   default=None)
+    parser.add_argument("--min_silence_ms",   type=int,   default=300,
+                        help="Minimum silence gap between segments (ms)")
+    parser.add_argument("--silence_thresh",   type=float, default=40,
+                        help="top_db threshold for librosa silence split")
+    parser.add_argument("--save_segments",    action="store_true",
+                        help="Save split WAV segments for manual inspection")
     args = parser.parse_args()
 
     os.makedirs(args.out_dir, exist_ok=True)
-    stem = Path(args.json).stem
+    stem = Path(args.audio).stem
 
-    print(f"\n{'═'*60}")
-    print(f"  Story: {stem}")
-    print(f"{'═'*60}")
+    print(f"\n{'═'*62}")
+    print(f"  Story  : {stem}")
+    print(f"  Audio  : {args.audio}")
+    print(f"  JSON   : {args.json}")
+    print(f"{'═'*62}")
 
-    # ── Load GT
-    segments   = load_gt_segments(args.json)
-    char_names = unique_characters(segments)
-    n_gt       = len(char_names)
+    # Load GT
+    gt_segs    = load_gt_segments(args.json)
+    char_names = unique_characters(gt_segs)
     char_to_id = {c: i for i, c in enumerate(char_names)}
+    print(f"\n  GT characters ({len(char_names)}):")
+    for c in char_names:
+        cnt = sum(1 for s in gt_segs if s["character"] == c)
+        print(f"    {c:<24} {cnt:>4} segments")
 
-    print(f"\n  Ground-truth characters ({n_gt}):")
-    for char in char_names:
-        count = sum(1 for s in segments if s["character"] == char)
-        print(f"    {char:<24} {count:>4} segments")
+    # Load + split audio
+    print(f"\n  Loading audio…")
+    wav, sr = librosa.load(args.audio, sr=16000, mono=True)
+    print(f"  Duration: {len(wav)/sr:.1f} s")
 
-    # ── Embed
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    print(f"  Splitting on silence (top_db={args.silence_thresh}, "
+          f"min_silence={args.min_silence_ms} ms)…")
+    audio_segs = split_audio(wav, sr,
+                              top_db=args.silence_thresh,
+                              min_silence_ms=args.min_silence_ms)
+
+    # Optionally save splits for inspection
+    if args.save_segments:
+        seg_dir = os.path.join(args.out_dir, "segments")
+        os.makedirs(seg_dir, exist_ok=True)
+        for i, (s, e, w) in enumerate(audio_segs):
+            sf.write(os.path.join(seg_dir, f"seg_{i:04d}.wav"), w, sr)
+        print(f"  [saved] {len(audio_segs)} segment WAVs → {seg_dir}/")
+
+    # Align to JSON
+    wavs, matched_segs = align_segments_to_json(audio_segs, gt_segs)
+    gt_int = np.array([char_to_id[s["character"]] for s in matched_segs])
+
+    # Embed
+    device  = "cuda" if torch.cuda.is_available() else "cpu"
     encoder = load_encoder(device)
+    print("\n  Embedding segments…")
+    embeddings, valid_idx = embed_wavs(wavs, encoder)
+    gt_int   = gt_int[valid_idx]
+    audio_segs_valid = [audio_segs[i] for i in valid_idx]
 
-    print("\n  Extracting per-segment embeddings…")
-    embeddings, valid_segs = build_embedding_matrix(
-        segments, args.audio_dir, encoder, ext=args.ext
-    )
-
-    gt_int = np.array([char_to_id[s["character"]] for s in valid_segs])
-
-    # ── Cluster
-    n_clusters = args.n_clusters or n_gt
-    print(f"\n  Running k-means with k={n_clusters}…")
+    # Cluster + evaluate
+    n_clusters = args.n_clusters or len(char_names)
+    print(f"\n  K-means clustering (k={n_clusters})…")
     cluster_labels = cluster_embeddings(embeddings, n_clusters)
+    mapping        = hungarian_match(cluster_labels, gt_int, n_clusters, len(char_names))
+    eval_m         = compute_eval_metrics(cluster_labels, gt_int, mapping, char_names)
+    sep_m          = compute_separation(embeddings, gt_int, char_names)
 
-    # ── Hungarian match
-    mapping = hungarian_match(cluster_labels, gt_int, n_clusters, n_gt)
+    print_report(eval_m, sep_m, char_names, mapping)
 
-    # ── Eval metrics
-    eval_metrics = compute_eval_metrics(
-        cluster_labels, gt_int, mapping, char_names
-    )
-    sep_metrics = compute_embedding_separation(embeddings, gt_int, char_names)
-
-    # ── Report
-    print_report(eval_metrics, sep_metrics, char_names, mapping)
-
-    # ── Plots + JSON
-    plot_eval_panel(
-        embeddings, gt_int, cluster_labels,
-        eval_metrics["mapped_labels"],
-        eval_metrics, sep_metrics,
-        char_names, mapping, stem, args.out_dir
-    )
-    save_results_json(eval_metrics, sep_metrics, char_names, mapping, stem, args.out_dir)
+    palette = plot_eval_panel(embeddings, gt_int, eval_m["mapped_labels"],
+                               eval_m, sep_m, char_names, stem, args.out_dir)
+    plot_timeline(audio_segs_valid, gt_int, eval_m["mapped_labels"],
+                  char_names, palette, args.out_dir, stem)
+    save_json(eval_m, sep_m, char_names, mapping,
+              len(audio_segs), len(gt_segs), stem, args.out_dir)
 
     print("\nDone.\n")
 

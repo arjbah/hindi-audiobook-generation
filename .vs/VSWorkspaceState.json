@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Audios",
+    "\\drift_results"
   ],
-  "SelectedNode": "\\README.md",
+  "SelectedNode": "\\speaker_cluster_eval.py",
   "PreviewInSolutionExplorer": false
 }
