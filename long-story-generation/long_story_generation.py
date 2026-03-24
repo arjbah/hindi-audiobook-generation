@@ -11,7 +11,7 @@ device = "cuda:0" if torch.cuda.is_available() else "cpu"
 print(f"Device: {device}")
 folder_name = "../data/long_story_output"
 os.makedirs(folder_name, exist_ok=True)
-max_tokens = 512
+max_tokens = 100
 
 with open("../data/long_story_transcript.txt", "r") as f:
     transcript = f.read()
@@ -47,15 +47,27 @@ if current_chunk:
 
 print(f"# of chunks: {len(chunks)}")
 
-for index, chunk in enumerate(chunks):
-    description_input_ids = description_tokenizer("A clear, natural-speaking narrator with a smooth tone. Include subtle emotional variation suitable for storytelling.", return_tensors="pt").to(device)
-    prompt_input_ids = tokenizer(chunk, return_tensors="pt").to(device)
-
-    generation = model.generate(input_ids=description_input_ids.input_ids, attention_mask=description_input_ids.attention_mask, prompt_input_ids=prompt_input_ids.input_ids, prompt_attention_mask=prompt_input_ids.attention_mask)
-    audio_arr = generation.cpu().numpy().squeeze()
-    indicparler_path = f"{folder_name}/indicparler_generation_{index}_{max_tokens}.wav"
-    sf.write(indicparler_path, audio_arr, model.config.sampling_rate)
-    print(f"Finished IndicParler {index}")
+batch_size = 8
+batch_index = 0
+description_input_ids = description_tokenizer("A clear, natural-speaking narrator with a smooth tone. Include subtle emotional variation suitable for storytelling.", return_tensors="pt").to(device)
+for i in range(0, len(chunks), batch_size):
+    batch = chunks[i:i+batch_size]
+    prompt_input_ids = tokenizer(batch, return_tensors="pt", padding=True).to(device)
+    with torch.no_grad():
+        generation = model.generate(
+            input_ids=description_input_ids.input_ids.repeat(len(batch), 1),
+            attention_mask=description_input_ids.attention_mask.repeat(len(batch), 1),
+            prompt_input_ids=prompt_input_ids.input_ids,
+            prompt_attention_mask=prompt_input_ids.attention_mask
+        )
+    print(f"Finished generating batch {batch_index}. Shape: {generation.shape}")
+    batch_index += 1
+    for j, audio in enumerate(generation):
+        audio_arr = audio.cpu().numpy().squeeze()
+        index = i + j
+        indicparler_path = f"{folder_name}/indicparler_generation_{index}_{max_tokens}.wav"
+        sf.write(indicparler_path, audio_arr, model.config.sampling_rate)
+        print(f"Finished IndicParler {index}")
 
 """# ElevenLabs - Long-form generation must be done on website so this isn't used
 elevenlabs_api_key = os.getenv("ELEVENLABS_API_KEY")
