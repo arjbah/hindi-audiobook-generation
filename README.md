@@ -1,0 +1,7 @@
+## Long Story Generation
+The story transcript is in `data/long_story_transcript.txt`. To replicate the audio generation with IndicParler-TTS, run `long-story-generation/long_story_generation.py` to get audio samples for ~100 tokens segments. Then, run `long-story-generation/stitch_stories.py` to stitch together all the samples in order into `full_story.wav`. Based on previous generations, IndicParler-TTS seems to have a maximum audio generation length of 30 seconds, so 100 tokens is about the maximum generation length where no samples are 30 seconds long. Longer generations (~300+ tokens) result in incoherent speech.
+
+## Rasa Model Comparison
+The code in the `rasa-model-comparison` folder creates the Hugging Face table that runs inference on **IndicParler-TTS** and **ElevenLabs-V3** and then allows you to compare the results to **Rasa**'s ground truth. Run `rasa_model_comparison.csv` to create the 96 total generations for IndicParler-TTS and Elevenlabs-V3 along with the full dataset, then run `hf_commit.py` to commit the dataset to Hugging Face where you can listen to the audio samples instead of seeing the raw bytes.
+
+Link to IndicParler-TTS + ElevenLabs testing on emotional Rasa dataset: https://huggingface.co/datasets/williamxing1/rasa_indicparler_comparison
