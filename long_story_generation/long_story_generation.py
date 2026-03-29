@@ -9,9 +9,9 @@ from indicnlp.tokenize import sentence_tokenize
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 print(f"Device: {device}")
-folder_name = "../data/long_story_output"
+folder_name = "../data/long_story_output_Rohit"
 os.makedirs(folder_name, exist_ok=True)
-max_tokens = 100
+max_tokens = 64
 
 with open("../data/long_story_transcript.txt", "r") as f:
     transcript = f.read()
@@ -49,7 +49,7 @@ print(f"# of chunks: {len(chunks)}")
 
 batch_size = 8
 batch_index = 0
-description_input_ids = description_tokenizer("A clear, natural-speaking narrator with a smooth tone. Include subtle emotional variation suitable for storytelling.", return_tensors="pt").to(device)
+description_input_ids = description_tokenizer("Rohit narrating a story in an engaging and expressive tone.", return_tensors="pt").to(device)
 for i in range(0, len(chunks), batch_size):
     batch = chunks[i:i+batch_size]
     prompt_input_ids = tokenizer(batch, return_tensors="pt", padding=True).to(device)
