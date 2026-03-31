@@ -48,7 +48,7 @@ for gender in genders:
                              row["audio"], None, f"very {elevenlabs_prompt_emotion}", None]
             index += 1
 
-# IndicParler-TTS + ElevenLabs Eval
+# IndicParler-TTS + ElevenLabs + Mistral Eval
 index = 0
 for row in df.itertuples():
     # IndicParler
