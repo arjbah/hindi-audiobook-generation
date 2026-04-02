@@ -2,10 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Audios",
-    "\\data",
-    "\\drift_results",
-    "\\eval_results"
+    "\\Audios\\Inference",
+    "\\transcripts"
   ],
-  "SelectedNode": "\\speaker_cluster_eval.py",
+  "SelectedNode": "\\Audios\\Inference\\story_narration.wav",
   "PreviewInSolutionExplorer": false
 }
