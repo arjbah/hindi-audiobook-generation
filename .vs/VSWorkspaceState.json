@@ -3,8 +3,12 @@
     "",
     "\\Audios",
     "\\Audios\\Inference",
+    "\\Audios\\Inference\\IndicParler",
+    "\\Audios\\Inference\\IndicParler\\ENG",
+    "\\drift_results",
+    "\\eval_results",
     "\\transcripts"
   ],
-  "SelectedNode": "\\Audios\\Inference\\story_narration.wav",
+  "SelectedNode": "\\voxtral_narrator_pipeline.py",
   "PreviewInSolutionExplorer": false
 }
