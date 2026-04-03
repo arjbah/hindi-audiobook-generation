@@ -3,9 +3,9 @@ import soundfile as sf
 import numpy as np
 
 # Get folder -> Glob all files -> read all files -> concatenate -> write
-folder = Path("../data/long_story_output_Rohit")
+folder = Path("../data/hindi_story_output_voxtral")
 def extract_num(path):
-    return path.stem.split("_")[2]
+    return int(path.stem.split("_")[2])
 files = sorted(folder.glob("*.wav"), key=extract_num)
 
 audio_data = []

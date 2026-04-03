@@ -1,0 +1,71 @@
+import torch
+from transformers import AutoTokenizer
+import soundfile as sf
+from dotenv import load_dotenv
+import os
+load_dotenv()
+from indicnlp.tokenize import sentence_tokenize
+import httpx
+import io
+
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
+print(f"Device: {device}")
+speaker_name = "Rohit"
+folder_name = f"../data/hindi_story_output_voxtral"
+os.makedirs(folder_name, exist_ok=True)
+max_tokens = 64
+
+with open("../data/hindi_story_transcript.txt", "r") as f:
+    transcript = f.read()
+transcript = transcript.replace("\n", " ")
+
+# IndicParler Model + Tokenizers Generation
+tokenizer = AutoTokenizer.from_pretrained("ai4bharat/indic-parler-tts")
+
+# Splitting up the transcript
+full_tokenized = tokenizer(transcript, return_tensors="pt").to(device)
+full_length = full_tokenized.input_ids.shape[1]
+print(f"Transcript token length: {full_length}")
+sentences = sentence_tokenize.sentence_split(transcript, lang="hi")
+chunks = []
+current_chunk = ""
+current_len = 0
+
+for sentence in sentences:
+    tokens = tokenizer(sentence, return_tensors="pt").to(device)
+    sentence_length = tokens.input_ids.shape[1]
+    if current_len + sentence_length > max_tokens:
+        chunks.append(current_chunk)
+        current_chunk = sentence
+        current_len = sentence_length
+    else:
+        if current_chunk:
+            current_chunk += " " + sentence
+        else:
+            current_chunk = sentence
+        current_len += sentence_length
+    
+if current_chunk:
+    chunks.append(current_chunk.strip())
+
+print(f"# of chunks: {len(chunks)}")
+
+index = 0
+for chunk in chunks:
+    path = f"{folder_name}/voxtral_generation_{index}_{max_tokens}.wav"
+    base_url = "http://localhost:8000/v1"
+ 
+    payload = {
+        "input": chunk,
+        "model": "mistralai/Voxtral-4B-TTS-2603",
+        "response_format": "wav",
+        "voice": "hi_male",
+    }
+    
+    response = httpx.post(f"{base_url}/audio/speech", json=payload, timeout=120.0)
+    response.raise_for_status()
+    
+    audio_array, sr = sf.read(io.BytesIO(response.content), dtype="float32")
+    sf.write(path, audio_array, sr)
+    print(f"Finished Voxtral {index}")
+    index += 1

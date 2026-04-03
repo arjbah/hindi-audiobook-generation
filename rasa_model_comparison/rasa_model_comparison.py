@@ -8,11 +8,14 @@ from elevenlabs.client import ElevenLabs
 from dotenv import load_dotenv
 import os
 from pathlib import Path
+import httpx
+import io
 load_dotenv()
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
-folder_name = "../data/tts_model_out_v3"
+folder_name = "../data/rasa_clips"
 os.makedirs(folder_name, exist_ok=True)
+speaker_name = "Rohit"
 
 # Model Setup
 model = ParlerTTSForConditionalGeneration.from_pretrained("ai4bharat/indic-parler-tts").to(device)
@@ -33,7 +36,7 @@ genders = ["Male"] # Rasa Hindi has no female samples
 emotions = ["HAPPY", "ANGER", "SURPRISE", "SAD", "FEAR", "DISGUST"]
 prompt_emotions = ["happiness", "anger", "surprise", "sadness", "fear", "disgust"]
 elevenlabs_prompt_emotions = ["happy", "angry", "surprised", "sad", "fearful", "disgusted"]
-df = pd.DataFrame(columns=["transcript", "gender", "emotion", "description", "rasa_audio", "indicparler_audio", "elevenlabs_description", "elevenlabs_audio"])
+df = pd.DataFrame(columns=["transcript", "gender", "emotion", "description", "rasa_audio", "indicparler_audio", "elevenlabs_description", "elevenlabs_audio", "voxtral_audio"])
 index = 0
 for gender in genders:
     for i in range(len(emotions)):
@@ -44,8 +47,8 @@ for gender in genders:
         first_rows = subset[:8]
         for _, row in first_rows.iterrows():
             df.loc[index] = [row["text"], gender, emotion,
-                             f"A {gender.lower()} speaker expressing a lot of {prompt_emotion}. Use clear articulation, precise pronunciation, and expressive pitch variation where necessary.",
-                             row["audio"], None, f"very {elevenlabs_prompt_emotion}", None]
+                             f"{speaker_name} expressing a lot of {prompt_emotion}. Use clear articulation, precise pronunciation, and expressive pitch variation where necessary.",
+                             row["audio"], None, f"very {elevenlabs_prompt_emotion}", None, None]
             index += 1
 
 # IndicParler-TTS + ElevenLabs + Mistral Eval
@@ -91,6 +94,29 @@ for row in df.itertuples():
         "path": elevenlabs_path
     }
     print(f"Finished {index} ElevenLabs")
+
+    # Voxtral
+    voxtral_path = f"{folder_name}/voxtral_out_{index}.wav"
+    base_url = "http://localhost:8000/v1"
+    if not Path(voxtral_path).exists():
+        payload = {
+            "input": transcript,
+            "model": "mistralai/Voxtral-4B-TTS-2603",
+            "response_format": "wav",
+            "voice": "hi_male",
+        }
+        response = httpx.post(f"{base_url}/audio/speech", json=payload, timeout=120.0)
+        response.raise_for_status()
+        
+        audio_array, sr = sf.read(io.BytesIO(response.content), dtype="float32")
+        sf.write(voxtral_path, audio_array, sr)
+    with open(voxtral_path, "rb") as f:
+        voxtral_audio_bytes = f.read()
+    df.at[index, "voxtral_audio"] = {
+        "bytes": voxtral_audio_bytes,
+        "path": voxtral_path
+    }
+    print(f"Finished {index} Voxtral")
     index += 1
 
 df.to_csv(f"{folder_name}/rasa_model_comparison.csv", index=False)
