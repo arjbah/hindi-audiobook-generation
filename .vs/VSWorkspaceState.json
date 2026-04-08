@@ -7,8 +7,9 @@
     "\\Audios\\Inference\\IndicParler\\ENG",
     "\\drift_results",
     "\\eval_results",
-    "\\transcripts"
+    "\\transcripts",
+    "\\~"
   ],
-  "SelectedNode": "\\voxtral_narrator_pipeline.py",
+  "SelectedNode": "\\english_indic_narrator_pipeline.py",
   "PreviewInSolutionExplorer": false
 }

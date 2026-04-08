@@ -1,0 +1,1167 @@
+{
+  "stem": "story120_multi",
+  "text_model": "tabularisai/multilingual-sentiment-analysis",
+  "audio_model": "audeering/wav2vec2-large-robust-12-ft-emotion-msp-dim",
+  "valence_thresholds": {
+    "low": 0.4,
+    "high": 0.6
+  },
+  "aggregate": {
+    "n_segments": 56,
+    "agreement": 0.32142857142857145,
+    "cohen_kappa": -0.050345508390918114,
+    "pearson_r": -0.04185565825127217,
+    "pearson_p": 0.7593847244839175,
+    "spearman_r": -0.051368187990419735,
+    "spearman_p": 0.7069297505907514,
+    "text_polarity_dist": {
+      "negative": 21,
+      "neutral": 22,
+      "positive": 13
+    },
+    "audio_polarity_dist": {
+      "negative": 5,
+      "neutral": 38,
+      "positive": 13
+    },
+    "confusion_matrix": [
+      [
+        0,
+        15,
+        6
+      ],
+      [
+        3,
+        15,
+        4
+      ],
+      [
+        2,
+        8,
+        3
+      ]
+    ]
+  },
+  "segments": [
+    {
+      "idx": 0,
+      "segment_id": "8000_story120_0000",
+      "text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.44706180691719055,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.6329176425933838,
+        "arousal": 0.658671498298645,
+        "dominance": 0.4737565219402313,
+        "numeric_score": 0.2658352851867676,
+        "polarity": "positive"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 1,
+      "segment_id": "8000_story120_0001",
+      "text": "बात बहुत पुरानी है, कान्यकुब्ज में एक राजा राज्य करता था।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.7011735439300537,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.5342389941215515,
+        "arousal": 0.5556440949440002,
+        "dominance": 0.37849828600883484,
+        "numeric_score": 0.06847798824310303,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 2,
+      "segment_id": "8000_story120_0002",
+      "text": "एक बार उसे अपने खजाने की रक्षा के लिए कोषाध्यक्ष की जरूरत पड़ी।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8845749497413635,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5499780774116516,
+        "arousal": 0.5826436281204224,
+        "dominance": 0.5705356597900391,
+        "numeric_score": 0.09995615482330322,
+        "polarity": "neutral"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 3,
+      "segment_id": "8000_story120_0003",
+      "text": "राजा चाहता था कि कोई ईमानदार और निर्लोभी व्यक्ति ही इस पद पर रखा जाए।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.3107755780220032,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.4055444896221161,
+        "arousal": 0.4821127653121948,
+        "dominance": 0.5512739419937134,
+        "numeric_score": -0.18891102075576782,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 4,
+      "segment_id": "8000_story120_0004",
+      "text": "ऐसे व्यक्ति को ढूंढना सरल नहीं था। अनेक व्यक्ति राजा द्वारा ली गई परीक्षा में असफल हो चुके थे।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.6877127289772034,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5590375065803528,
+        "arousal": 0.6038703918457031,
+        "dominance": 0.6110535860061646,
+        "numeric_score": 0.11807501316070557,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 5,
+      "segment_id": "8000_story120_0005",
+      "text": "राजभवन से आधा मील दूर पर एक गरीब किसान रहता था।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7870726585388184,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.4613594114780426,
+        "arousal": 0.5138399600982666,
+        "dominance": 0.5583290457725525,
+        "numeric_score": -0.0772811770439148,
+        "polarity": "neutral"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 6,
+      "segment_id": "8000_story120_0006",
+      "text": "टूटी-फूटी एक उसकी झोपड़ी थी।  वर्षा ऋतु में जब उससे पानी टपकता तो वहां बैठना भी दूभर हो जाता था।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7839553356170654,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5000356435775757,
+        "arousal": 0.5351847410202026,
+        "dominance": 0.3662596046924591,
+        "numeric_score": 7.128715515136719e-05,
+        "polarity": "neutral"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 7,
+      "segment_id": "8000_story120_0007",
+      "text": "किसान और उसका परिवार दिन में बस एक बार रूखी-सूखी रोटी खाता।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.5304405689239502,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.53365159034729,
+        "arousal": 0.5953885316848755,
+        "dominance": 0.36761853098869324,
+        "numeric_score": 0.06730318069458008,
+        "polarity": "neutral"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 8,
+      "segment_id": "8000_story120_0008",
+      "text": "उसका सारा परिवार फटे-पुराने कपड़े पहनता था।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.5393006205558777,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.560838520526886,
+        "arousal": 0.6030054092407227,
+        "dominance": 0.588780403137207,
+        "numeric_score": 0.12167704105377197,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 9,
+      "segment_id": "8000_story120_0009",
+      "text": "एक दिन किसान सुबह-सुबह अपने खेत पर जा रहा था।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7733127474784851,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.33294788002967834,
+        "arousal": 0.4231690466403961,
+        "dominance": 0.37162789702415466,
+        "numeric_score": -0.3341042399406433,
+        "polarity": "negative"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 10,
+      "segment_id": "8000_story120_0010",
+      "text": "सहसा उसकी निगाह झोंपड़ी के द्वार पर पड़ी।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7362090349197388,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.35100609064102173,
+        "arousal": 0.44321003556251526,
+        "dominance": 0.48307761549949646,
+        "numeric_score": -0.29798781871795654,
+        "polarity": "negative"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 11,
+      "segment_id": "8000_story120_0011",
+      "text": "उसके पास मिट्टी का एक सुंदर-सा घड़ा रखा था।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.691175639629364,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.35162901878356934,
+        "arousal": 0.44404280185699463,
+        "dominance": 0.43054065108299255,
+        "numeric_score": -0.29674196243286133,
+        "polarity": "negative"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 12,
+      "segment_id": "8000_story120_0012",
+      "text": "उसका मुँह कपड़े से ढका था। किसान को बड़ी उत्सुकता हुई कि यह क्या है?",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.46393877267837524,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.4291849136352539,
+        "arousal": 0.49583545327186584,
+        "dominance": 0.6371778845787048,
+        "numeric_score": -0.1416301727294922,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 13,
+      "segment_id": "8000_story120_0013",
+      "text": "उसने घड़े को खोल कर देखा, कपड़ा हटाते ही उसकी आंखें चौंधिया गई।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.6453098058700562,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.40263354778289795,
+        "arousal": 0.4937589764595032,
+        "dominance": 0.5486292243003845,
+        "numeric_score": -0.1947329044342041,
+        "polarity": "neutral"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 14,
+      "segment_id": "8000_story120_0014",
+      "text": "घड़ा तो स्वर्ण मोहरों से खचा-खच भरा हुआ था।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.5384198427200317,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5206257104873657,
+        "arousal": 0.5484217405319214,
+        "dominance": 0.5576170086860657,
+        "numeric_score": 0.041251420974731445,
+        "polarity": "neutral"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 15,
+      "segment_id": "8000_story120_0015",
+      "text": "किसान उसे लेकर तुरंत घर में घुस गया।  उसने यह घड़ा पत्नी को दिखाया,",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.27511733770370483,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.5593380928039551,
+        "arousal": 0.6254303455352783,
+        "dominance": 0.2924322485923767,
+        "numeric_score": 0.11867618560791016,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 16,
+      "segment_id": "8000_story120_0016",
+      "text": "उसके चारों बच्चे भी वहां इकट्ठा हो गए थे।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.5538460612297058,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5551565885543823,
+        "arousal": 0.6059088706970215,
+        "dominance": 0.6152083873748779,
+        "numeric_score": 0.11031317710876465,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 17,
+      "segment_id": "8000_story120_0017",
+      "text": "बच्चे सोच रहे थे कि अब तो हमारी सारी गरीबी दूर हो जाएगी।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.4533027112483978,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.47034794092178345,
+        "arousal": 0.5330185294151306,
+        "dominance": 0.521398663520813,
+        "numeric_score": -0.059304118156433105,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 18,
+      "segment_id": "8000_story120_0018",
+      "text": "हम भी अच्छेे कपड़े पहनेंगे, अच्छा खाना खाएंगे।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.9115827679634094,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.7090869545936584,
+        "arousal": 0.676690399646759,
+        "dominance": 0.39715391397476196,
+        "numeric_score": 0.4181739091873169,
+        "polarity": "positive"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 19,
+      "segment_id": "8000_story120_0019",
+      "text": "बड़ा बेटा कहने लगा \"",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.31744781136512756,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.6989394426345825,
+        "arousal": 0.7009835243225098,
+        "dominance": 0.44107386469841003,
+        "numeric_score": 0.39787888526916504,
+        "polarity": "positive"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 20,
+      "segment_id": "8000_story120_0020",
+      "text": "पिताजी इतने ढेर सारे धन से तो अब हमारे सारे दुख दूर हो जाएंगे\"।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.6879058480262756,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5961355566978455,
+        "arousal": 0.5955689549446106,
+        "dominance": 0.34309351444244385,
+        "numeric_score": 0.19227111339569092,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 21,
+      "segment_id": "8000_story120_0021",
+      "text": "इस पर किसान ने कहा \"",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.3842366337776184,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.7311256527900696,
+        "arousal": 0.7170835137367249,
+        "dominance": 0.3115586042404175,
+        "numeric_score": 0.46225130558013916,
+        "polarity": "positive"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 22,
+      "segment_id": "8000_story120_0022",
+      "text": "पुत्र इस धन पर हमारा क्या अधिकार। इसे तो मैं अभी जाकर राजा के खजाने में जमा करा दूंगा।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.31378936767578125,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.4796467125415802,
+        "arousal": 0.5284003615379333,
+        "dominance": 0.4334193170070648,
+        "numeric_score": -0.0407065749168396,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 23,
+      "segment_id": "8000_story120_0023",
+      "text": "ध्यान रखो मुफ्त का धन कभी सुख नहीं देत। वह अपने साथ रोग,",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.44708821177482605,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.4375371038913727,
+        "arousal": 0.5254272222518921,
+        "dominance": 0.3843469023704529,
+        "numeric_score": -0.12492579221725464,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 24,
+      "segment_id": "8000_story120_0024",
+      "text": "शोक, पतन और संकट लेकर आता है। इमानदारी और परिश्रम की कमाई ही फलती है\"।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7911998629570007,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.6187648177146912,
+        "arousal": 0.6459619998931885,
+        "dominance": 0.5681845545768738,
+        "numeric_score": 0.23752963542938232,
+        "polarity": "positive"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 25,
+      "segment_id": "8000_story120_0025",
+      "text": "किसान और उसकी पत्नी दोनों राज दरबार पहुंचे।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8538219928741455,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5949464440345764,
+        "arousal": 0.6011503338813782,
+        "dominance": 0.5147485733032227,
+        "numeric_score": 0.18989288806915283,
+        "polarity": "neutral"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 26,
+      "segment_id": "8000_story120_0026",
+      "text": "सोने की मोहरों से भरा घड़ा राजा के सामने",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.4264332056045532,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5263926386833191,
+        "arousal": 0.5494378805160522,
+        "dominance": 0.4124629497528076,
+        "numeric_score": 0.052785277366638184,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 27,
+      "segment_id": "8000_story120_0027",
+      "text": "रखते हुए बोले \"",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.6644008159637451,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.46909940242767334,
+        "arousal": 0.47637447714805603,
+        "dominance": 0.38359370827674866,
+        "numeric_score": -0.06180119514465332,
+        "polarity": "neutral"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 28,
+      "segment_id": "8000_story120_0028",
+      "text": "महाराज यह हमें अपनी झोपड़ी के द्वार पर पड़ा हुआ मिला है\"।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.4591904580593109,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5493679046630859,
+        "arousal": 0.5665834546089172,
+        "dominance": 0.42680099606513977,
+        "numeric_score": 0.09873580932617188,
+        "polarity": "neutral"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 29,
+      "segment_id": "8000_story120_0029",
+      "text": "राजा ने देखा कि एक कृषक अपनी पत्नी के साथ उनके सामने खड़ा यह कह रहा है।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.5611127614974976,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.6041345596313477,
+        "arousal": 0.631596028804779,
+        "dominance": 0.5729401111602783,
+        "numeric_score": 0.2082691192626953,
+        "polarity": "positive"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 30,
+      "segment_id": "8000_story120_0030",
+      "text": "राजा ने बड़े गौर से उन्हे देखा, दोनों के शरीर पर पैबंद लगे हुए,",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.47544679045677185,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.44814255833625793,
+        "arousal": 0.5229796767234802,
+        "dominance": 0.2508319020271301,
+        "numeric_score": -0.10371488332748413,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 31,
+      "segment_id": "8000_story120_0031",
+      "text": "मटमैले कपड़े थे। गरीबी उनकी वेशभूषा से साफ झलक रही थी।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.46504494547843933,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.49299779534339905,
+        "arousal": 0.540668785572052,
+        "dominance": 0.4731488525867462,
+        "numeric_score": -0.014004409313201904,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 32,
+      "segment_id": "8000_story120_0032",
+      "text": "राजा बोले \"",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.3711557984352112,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5309510827064514,
+        "arousal": 0.5887266397476196,
+        "dominance": 0.46793192625045776,
+        "numeric_score": 0.06190216541290283,
+        "polarity": "neutral"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 33,
+      "segment_id": "8000_story120_0033",
+      "text": "क्यों तुम्हें धन की जरूरत नहीं है\"।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.495492160320282,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.652668833732605,
+        "arousal": 0.6652390360832214,
+        "dominance": 0.6819871664047241,
+        "numeric_score": 0.30533766746520996,
+        "polarity": "positive"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 34,
+      "segment_id": "8000_story120_0034",
+      "text": "\"हम ईमानदारी और परिश्रम से धन कमाएंगे। इस धन को मैं कैसे ले लूँ,",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.4062356948852539,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.550090491771698,
+        "arousal": 0.5844743847846985,
+        "dominance": 0.568564236164093,
+        "numeric_score": 0.100180983543396,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 35,
+      "segment_id": "8000_story120_0035",
+      "text": "यह न जाने किसका है। दूसरे के धन पर मेरा क्या अधिकार,",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.4672311246395111,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.4424566924571991,
+        "arousal": 0.506166934967041,
+        "dominance": 0.3661818504333496,
+        "numeric_score": -0.1150866150856018,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 36,
+      "segment_id": "8000_story120_0036",
+      "text": "इसलिए मैं इसे राज्य के खजाने में जमा करा",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.3907691538333893,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.548215389251709,
+        "arousal": 0.5804533958435059,
+        "dominance": 0.45620837807655334,
+        "numeric_score": 0.09643077850341797,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 37,
+      "segment_id": "8000_story120_0037",
+      "text": "ने लाया हूं\"",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.5762392282485962,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.39568009972572327,
+        "arousal": 0.45881322026252747,
+        "dominance": 0.48728862404823303,
+        "numeric_score": -0.20863980054855347,
+        "polarity": "negative"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 38,
+      "segment_id": "8000_story120_0038",
+      "text": "किसान कह रहा था। राजा कुछ सोने की मोहर",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.8079491257667542,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.27607664465904236,
+        "arousal": 0.3629092574119568,
+        "dominance": 0.3829916715621948,
+        "numeric_score": -0.4478467106819153,
+        "polarity": "negative"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 39,
+      "segment_id": "8000_story120_0039",
+      "text": "ें किसान की पत्नी को देता हुआ बोला \"",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8501630425453186,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.44683942198753357,
+        "arousal": 0.5360698103904724,
+        "dominance": 0.7113296389579773,
+        "numeric_score": -0.10632115602493286,
+        "polarity": "neutral"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 40,
+      "segment_id": "8000_story120_0040",
+      "text": "मैं तुम दोनों की ईमानदारी से बहुत खुश हूँ।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.8339844942092896,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.48158860206604004,
+        "arousal": 0.5626667141914368,
+        "dominance": 0.38423699140548706,
+        "numeric_score": -0.03682279586791992,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 41,
+      "segment_id": "8000_story120_0041",
+      "text": "यह कुछ इनाम रख लो\"।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.7953670024871826,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5683283805847168,
+        "arousal": 0.6434237957000732,
+        "dominance": 0.5021054148674011,
+        "numeric_score": 0.1366567611694336,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 42,
+      "segment_id": "8000_story120_0042",
+      "text": "राजन यह तो हमारा कर्त्तव्य है",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.3998521566390991,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.5795440673828125,
+        "arousal": 0.5765742063522339,
+        "dominance": 0.36585134267807007,
+        "numeric_score": 0.159088134765625,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 43,
+      "segment_id": "8000_story120_0043",
+      "text": "\" किसान की पत्नी ने कहा और मोहरे लेने से इनकार कर दिया।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.467415452003479,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5210552215576172,
+        "arousal": 0.5319851040840149,
+        "dominance": 0.5430391430854797,
+        "numeric_score": 0.042110443115234375,
+        "polarity": "neutral"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 44,
+      "segment_id": "8000_story120_0044",
+      "text": "किसान भी सिर को हिला-हिलाकर नहीं नहीं ऐसा ही कह रहा था।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.5814059972763062,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.6185393333435059,
+        "arousal": 0.6291256546974182,
+        "dominance": 0.5968232154846191,
+        "numeric_score": 0.23707866668701172,
+        "polarity": "positive"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 45,
+      "segment_id": "8000_story120_0045",
+      "text": "अब राजा से रहा नहीं गया, वह अपने सिंहासन से उतर पड़ा।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.5267787575721741,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.6224189400672913,
+        "arousal": 0.6445514559745789,
+        "dominance": 0.7292734384536743,
+        "numeric_score": 0.24483788013458252,
+        "polarity": "positive"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 46,
+      "segment_id": "8000_story120_0046",
+      "text": "किसान को गले लगाते हुए बोला \"",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7597466111183167,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.48793765902519226,
+        "arousal": 0.5328218340873718,
+        "dominance": 0.4835282564163208,
+        "numeric_score": -0.02412468194961548,
+        "polarity": "neutral"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 47,
+      "segment_id": "8000_story120_0047",
+      "text": "मुझे तुम्हारे जैसे ईमानदार कोषाध्यक्ष की ही जरूरत है।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.5224812030792236,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.41849175095558167,
+        "arousal": 0.500361979007721,
+        "dominance": 0.456877201795578,
+        "numeric_score": -0.16301649808883667,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 48,
+      "segment_id": "8000_story120_0048",
+      "text": "आज से तुम राज्य के खजाने की देखभाल करो\"।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8254039883613586,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5124757289886475,
+        "arousal": 0.5644650459289551,
+        "dominance": 0.5330153703689575,
+        "numeric_score": 0.024951457977294922,
+        "polarity": "neutral"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 49,
+      "segment_id": "8000_story120_0049",
+      "text": "किसान और उसकी पत्नी ने यह स्वप्नों में भी न सोचा था कि कभी वे इतने बड़े पद के अधिकारी बनेंगे।",
+      "text_sentiment": {
+        "label": "Very Positive",
+        "stars": 5,
+        "confidence": 0.3731773793697357,
+        "numeric_score": 1.0,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.6574977040290833,
+        "arousal": 0.6398758292198181,
+        "dominance": 0.5839683413505554,
+        "numeric_score": 0.3149954080581665,
+        "polarity": "positive"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 50,
+      "segment_id": "8000_story120_0050",
+      "text": "दोनों के मुख प्रसन्नता से चमकने लगे। यह तो उन्हे बाद में पता लगा कि उनकी परीक्षा के लिए ही वह घड़ा राजा ने रखवाया था।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.578122079372406,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5317577123641968,
+        "arousal": 0.5740290880203247,
+        "dominance": 0.44281360507011414,
+        "numeric_score": 0.06351542472839355,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 51,
+      "segment_id": "8000_story120_0051",
+      "text": "अन्य व्यक्तियों ने तो अपने द्वार पर घड़ा पाकर उसमेंं से मोहरें निकाल कर उन्हें अपने-अपने घरों में छिपा लिया था।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8302348852157593,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5861194133758545,
+        "arousal": 0.6043270826339722,
+        "dominance": 0.31132450699806213,
+        "numeric_score": 0.17223882675170898,
+        "polarity": "neutral"
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 52,
+      "segment_id": "8000_story120_0052",
+      "text": "राजा ने उन सबको चोरी के आरोप में कड़ी सजा दी थी।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8222545385360718,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.626374363899231,
+        "arousal": 0.6361371874809265,
+        "dominance": 0.5022227168083191,
+        "numeric_score": 0.2527487277984619,
+        "polarity": "positive"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 53,
+      "segment_id": "8000_story120_0053",
+      "text": "राजा को जमा कराने वाला एकमात्र व्यक्ति किसान ही था।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7558490633964539,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.608256995677948,
+        "arousal": 0.638481080532074,
+        "dominance": 0.6116852760314941,
+        "numeric_score": 0.216513991355896,
+        "polarity": "positive"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 54,
+      "segment_id": "8000_story120_0054",
+      "text": "तो बच्चों इस छोटी सी कहानी से हमने यही सीखा कि हमेंं हमेशा ईमानदारी से ही कार्य करना चाहिए।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.4022008776664734,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.5375890731811523,
+        "arousal": 0.5674842596054077,
+        "dominance": 0.5621559619903564,
+        "numeric_score": 0.07517814636230469,
+        "polarity": "neutral"
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 55,
+      "segment_id": "8000_story120_0055",
+      "text": "ओके! बाय।",
+      "text_sentiment": {
+        "label": "Very Positive",
+        "stars": 5,
+        "confidence": 0.5566348433494568,
+        "numeric_score": 1.0,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.6164624691009521,
+        "arousal": 0.6383002400398254,
+        "dominance": 0.5256132483482361,
+        "numeric_score": 0.2329249382019043,
+        "polarity": "positive"
+      },
+      "sentiment_match": true
+    }
+  ]
+}
