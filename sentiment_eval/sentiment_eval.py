@@ -8,7 +8,6 @@ Text Sentiment  : tabularisai/multilingual-sentiment-analysis (multilingual BERT
                   → 5-class (1–5 stars = Very Negative … Very Positive)
 Audio Sentiment : audeering/wav2vec2-large-robust-12-ft-emotion-msp-dim
                   → dimensional (valence, arousal, dominance ∈ [0,1])
-                  → valence maps directly to sentiment polarity
 
 Matched-pair design
 -------------------
@@ -24,8 +23,22 @@ Inputs (choose one text source)
 
 Audio
   --audio      Compiled/stitched audio file (WAV or MP3)
-               Segments are aligned to text entries 1-to-1 in order, via
-               silence-based VAD (Silero → librosa fallback).
+
+Audio alignment mode  (--align_mode)
+  vad      [default] Silence-based VAD (Silero → librosa fallback).
+           Splits on silences, so mid-sentence pauses can misalign segments.
+  whisper  ASR-based alignment using openai/whisper-base (via transformers).
+           Transcribes audio with word-level timestamps, then fuzzy-matches
+           each text sentence to the corresponding word span in the audio.
+           More reliable when the audio contains expressive pauses mid-sentence.
+
+Audio sentiment mode  (--sentiment_mode)
+  valence      [default] Use valence only to decide polarity (original behaviour).
+  vad_weighted Use all three VAD dimensions: arousal amplifies the valence signal
+               (excited emotions are more extreme; calm speech is dampened toward
+               neutral). Dominance provides a small additional push in the direction
+               of valence. Reduces the over-prediction of neutral seen with
+               valence-only scoring.
 
 Usage
 -----
@@ -37,9 +50,13 @@ python sentiment_eval/sentiment_eval.py `
 python sentiment_eval/sentiment_eval.py `
     --text  transcripts/bad_blood_eng.txt `
     --audio Audios/Inference/IndicParler/ENG/elevenlabs_vampire_story.mp3 `
-    --out_dir sentiment_eval/results
+    --out_dir sentiment_eval/results `
+    --align_mode whisper `
+    --sentiment_mode vad_weighted
 
 Optional flags
+  --align_mode      vad|whisper   (default: vad)
+  --sentiment_mode  valence|vad_weighted  (default: valence)
   --min_silence_ms  300    silence gap to split audio on (ms)
   --silence_thresh  40     top_db threshold for librosa silence split
   --valence_low     0.4    valence below this → negative
@@ -49,12 +66,13 @@ Optional flags
 Outputs  (all in --out_dir)
   <stem>_sentiment_eval.json       per-segment scores + aggregate stats
   <stem>_sentiment_timeline.png    colour strip: text vs audio sentiment over time
-  <stem>_sentiment_scatter.png     scatter: text score vs audio valence
+  <stem>_sentiment_scatter.png     scatter: text score vs audio valence/composite
   <stem>_sentiment_confusion.png   confusion matrix (text polarity vs audio polarity)
   <stem>_sentiment_distribution.png polarity distribution comparison bar chart
 """
 
 import argparse
+import difflib
 import json
 import os
 import re
@@ -208,6 +226,74 @@ def valence_to_polarity(
 def valence_to_numeric(valence: float) -> float:
     """Map [0, 1] valence to [-1, 1] so it is comparable with text scores."""
     return (valence - 0.5) * 2.0
+
+
+def vad_composite_score(
+    valence: float,
+    arousal: float,
+    dominance: float,
+) -> float:
+    """
+    Combine all three VAD dimensions into a single [0, 1] sentiment score.
+
+    Arousal amplifies the valence signal — excited speech is more extreme in
+    polarity than calm speech (a fearful shriek should score more negative than
+    a quiet sigh, even if both have the same raw valence).  Dominance provides a
+    smaller push in the same direction as valence, capturing the difference
+    between angry (high dominance, negative) and fearful (low dominance, negative).
+
+    composite = 0.5 + (valence − 0.5)
+                    × (1 + arousal_weight × |arousal − 0.5| × 2)
+                    × (1 + dominance_weight × (dominance − 0.5) × sign(valence − 0.5))
+    Clipped to [0, 1].
+    """
+    arousal_weight   = 0.35   # how much arousal amplifies polarity
+    dominance_weight = 0.15   # how much dominance nudges polarity
+
+    v_centered = valence - 0.5
+    # |arousal - 0.5| * 2 is in [0, 1]; multiply by weight so the max boost is arousal_weight
+    arousal_amp  = 1.0 + arousal_weight * abs(arousal - 0.5) * 2.0
+    # dominance pushes in the same direction as valence
+    dom_sign     = 1.0 if v_centered >= 0 else -1.0
+    dominance_amp = 1.0 + dominance_weight * (dominance - 0.5) * dom_sign * 2.0
+
+    composite = 0.5 + v_centered * arousal_amp * dominance_amp
+    return float(np.clip(composite, 0.0, 1.0))
+
+
+def audio_to_polarity(
+    valence: float,
+    arousal: float,
+    dominance: float,
+    low: float = 0.4,
+    high: float = 0.6,
+    sentiment_mode: str = "valence",
+) -> str:
+    score = (
+        vad_composite_score(valence, arousal, dominance)
+        if sentiment_mode == "vad_weighted"
+        else valence
+    )
+    if score < low:
+        return "negative"
+    if score > high:
+        return "positive"
+    return "neutral"
+
+
+def audio_to_numeric(
+    valence: float,
+    arousal: float,
+    dominance: float,
+    sentiment_mode: str = "valence",
+) -> float:
+    """Map audio emotion dims to [-1, 1] for correlation with text scores."""
+    score = (
+        vad_composite_score(valence, arousal, dominance)
+        if sentiment_mode == "vad_weighted"
+        else valence
+    )
+    return (score - 0.5) * 2.0
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -388,6 +474,135 @@ def _split_with_silero(
         return None
 
 
+def load_and_split_audio_whisper(
+    audio_path: str,
+    text_segments: list[dict],
+) -> tuple[np.ndarray, int, list[tuple]]:
+    """
+    Whisper-based sentence alignment.
+
+    Uses HuggingFace openai/whisper-base with word-level timestamps to get
+    the actual start/end time of each spoken word.  Each text sentence is then
+    matched to a contiguous span of Whisper words via fuzzy string similarity
+    (difflib), walking forward through the word list so the matching stays in
+    order.
+
+    This avoids the VAD problem where a dramatic pause *inside* a sentence
+    causes the silence splitter to cut mid-sentence, misaligning the audio
+    segment with the corresponding text entry.
+
+    Falls back to VAD if the Whisper pipeline fails or returns no words.
+
+    Returns (full_waveform, sample_rate, list_of_(start_s, end_s, wav_array)).
+    """
+    from transformers import pipeline as hf_pipeline
+
+    wav, sr = librosa.load(audio_path, sr=16000, mono=True)
+    print(f"  Duration : {len(wav)/sr:.1f} s")
+    print("  [Whisper] Transcribing with word-level timestamps (openai/whisper-base)…")
+
+    try:
+        asr = hf_pipeline(
+            "automatic-speech-recognition",
+            model="openai/whisper-base",
+            return_timestamps="word",
+            device=0 if torch.cuda.is_available() else -1,
+        )
+        result = asr(audio_path)
+        chunks = result.get("chunks", [])  # [{"text": str, "timestamp": (start, end)}, ...]
+
+        # Filter to chunks that have valid timestamps
+        words = []
+        for ch in chunks:
+            ts = ch.get("timestamp")
+            if ts and ts[0] is not None and ts[1] is not None:
+                words.append({
+                    "word":  ch["text"].strip().lower(),
+                    "start": float(ts[0]),
+                    "end":   float(ts[1]),
+                })
+
+        if not words:
+            raise ValueError("Whisper returned no word timestamps")
+
+        print(f"  [Whisper] {len(words)} words with timestamps")
+        segs = _align_sentences_to_words(words, text_segments, wav, sr)
+        print(f"  [Whisper align] {len(segs)} sentence segments")
+        return wav, sr, segs
+
+    except Exception as e:
+        print(f"  [Whisper] failed ({e}), falling back to Silero/librosa VAD")
+        segs = _split_with_silero(wav, sr)
+        if segs is None:
+            segs = _split_librosa(wav, sr)
+        return wav, sr, segs
+
+
+def _normalize_for_match(text: str) -> str:
+    """Strip punctuation and lowercase for fuzzy word matching."""
+    return re.sub(r"[^\w\s]", "", text.lower()).strip()
+
+
+def _align_sentences_to_words(
+    words: list[dict],
+    text_segments: list[dict],
+    wav: np.ndarray,
+    sr: int,
+) -> list[tuple]:
+    """
+    Greedily match each text sentence to a contiguous span of Whisper words.
+
+    Algorithm:
+      For each sentence, try every possible end index (starting just after the
+      previous sentence's end) and pick the span whose joined text has the best
+      SequenceMatcher similarity to the sentence.  The search window is capped
+      at sentence_word_count × 2.5 to stay O(n) in practice.
+
+    Returns list of (start_s, end_s, wav_array).
+    """
+    n_words  = len(words)
+    cursor   = 0   # word index where the next sentence search starts
+    segments = []
+
+    for seg in text_segments:
+        sent_norm  = _normalize_for_match(seg["text"])
+        sent_words = sent_norm.split()
+        n_sw       = max(len(sent_words), 1)
+        # Search window: allow up to 2.5× the number of sentence words
+        window     = max(int(n_sw * 2.5), 5)
+        search_end = min(cursor + window, n_words)
+
+        best_ratio     = -1.0
+        best_start_idx = cursor
+        best_end_idx   = min(cursor + n_sw, n_words)
+
+        # Slide a window of exactly n_sw words; also try ±2 to absorb timing slop
+        for span in range(max(1, n_sw - 2), n_sw + 3):
+            for start in range(cursor, max(cursor + 1, search_end - span + 1)):
+                end   = start + span
+                if end > n_words:
+                    break
+                chunk = " ".join(w["word"] for w in words[start:end])
+                ratio = difflib.SequenceMatcher(None, sent_norm, chunk).ratio()
+                if ratio > best_ratio:
+                    best_ratio     = ratio
+                    best_start_idx = start
+                    best_end_idx   = end
+
+        start_s = words[best_start_idx]["start"]
+        end_s   = words[min(best_end_idx - 1, n_words - 1)]["end"]
+        s_samp  = int(start_s * sr)
+        e_samp  = int(end_s   * sr)
+        # Guard against empty slices
+        if e_samp <= s_samp:
+            e_samp = min(s_samp + sr, len(wav))  # at least 1 s
+        segments.append((start_s, end_s, wav[s_samp:e_samp]))
+        # Advance cursor to just after the matched span
+        cursor = best_end_idx
+
+    return segments
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 # 5.  Matched-pair analysis
 # ══════════════════════════════════════════════════════════════════════════════
@@ -397,6 +612,7 @@ def matched_pair_analysis(
     audio_results: list[dict],
     valence_low: float = 0.4,
     valence_high: float = 0.6,
+    sentiment_mode: str = "valence",
 ) -> dict:
     """
     Compute alignment statistics between text and audio sentiment results.
@@ -409,11 +625,17 @@ def matched_pair_analysis(
     assert n == len(audio_results), "Unequal number of text/audio results"
 
     text_scores  = np.array([r["numeric_score"] for r in text_results])
-    audio_scores = np.array([valence_to_numeric(r["valence"]) for r in audio_results])
+    audio_scores = np.array([
+        audio_to_numeric(r["valence"], r["arousal"], r["dominance"], sentiment_mode)
+        for r in audio_results
+    ])
 
     text_pols  = [r["polarity"] for r in text_results]
     audio_pols = [
-        valence_to_polarity(r["valence"], valence_low, valence_high)
+        audio_to_polarity(
+            r["valence"], r["arousal"], r["dominance"],
+            valence_low, valence_high, sentiment_mode
+        )
         for r in audio_results
     ]
 
@@ -454,6 +676,7 @@ def plot_timeline(
     valence_high: float,
     stem: str,
     out_dir: str,
+    sentiment_mode: str = "valence",
 ) -> None:
     """
     Two colour strips (text sentiment, audio sentiment) over time,
@@ -469,10 +692,14 @@ def plot_timeline(
 
     text_pols  = [r["polarity"] for r in text_results]
     audio_pols = [
-        valence_to_polarity(r["valence"], valence_low, valence_high)
+        audio_to_polarity(
+            r["valence"], r["arousal"], r["dominance"],
+            valence_low, valence_high, sentiment_mode
+        )
         for r in audio_results
     ]
 
+    mode_label = "wav2vec2 VAD composite" if sentiment_mode == "vad_weighted" else "wav2vec2 valence"
     fig, axes = plt.subplots(
         3, 1, figsize=(18, 4),
         gridspec_kw={"height_ratios": [1, 1, 0.45]}
@@ -485,7 +712,7 @@ def plot_timeline(
     for ax, pols, title in zip(
         axes[:2],
         [text_pols, audio_pols],
-        ["Text Sentiment (BERT)", "Audio Sentiment (wav2vec2 valence)"],
+        ["Text Sentiment (BERT)", f"Audio Sentiment ({mode_label})"],
     ):
         for i, (s, e) in enumerate(zip(starts, ends)):
             ax.axvspan(s, e, color=_POL_COLORS[pols[i]], alpha=0.85)
@@ -513,10 +740,14 @@ def plot_scatter(
     stats: dict,
     stem: str,
     out_dir: str,
+    sentiment_mode: str = "valence",
 ) -> None:
-    """Scatter plot of text numeric score vs audio valence, by polarity class."""
+    """Scatter plot of text numeric score vs audio sentiment score, by polarity class."""
     ts = np.array([r["numeric_score"] for r in text_results])
-    av = np.array([valence_to_numeric(r["valence"]) for r in audio_results])
+    av = np.array([
+        audio_to_numeric(r["valence"], r["arousal"], r["dominance"], sentiment_mode)
+        for r in audio_results
+    ])
 
     fig, ax = plt.subplots(figsize=(7, 6))
     text_pols = [r["polarity"] for r in text_results]
@@ -538,7 +769,12 @@ def plot_scatter(
     ax.axhline(0, color="gray", linewidth=0.5, zorder=1)
     ax.axvline(0, color="gray", linewidth=0.5, zorder=1)
     ax.set_xlabel("Text Sentiment Score  [-1 = very negative … +1 = very positive]")
-    ax.set_ylabel("Audio Valence Score  [-1 … +1]")
+    y_label = (
+        "Audio VAD Composite Score  [-1 … +1]"
+        if sentiment_mode == "vad_weighted"
+        else "Audio Valence Score  [-1 … +1]"
+    )
+    ax.set_ylabel(y_label)
     ax.set_title(
         f"Text vs Audio Sentiment  —  {stem}\n"
         f"Pearson r={stats['pearson_r']:.3f} (p={stats['pearson_p']:.3f})  "
@@ -628,12 +864,16 @@ def print_report(
     audio_results: list[dict],
     valence_low: float,
     valence_high: float,
+    sentiment_mode: str = "valence",
+    align_mode: str = "vad",
 ) -> None:
     n = stats["n_segments"]
     print("\n" + "═" * 65)
     print("  SENTIMENT ALIGNMENT REPORT")
     print("═" * 65)
     print(f"  Segments evaluated    : {n}")
+    print(f"  Align mode            : {align_mode}")
+    print(f"  Sentiment mode        : {sentiment_mode}")
     print(f"  Agreement (3-class)   : {stats['agreement']:.4f}  ({stats['agreement']:.1%})")
     print(f"  Cohen's kappa         : {stats['cohen_kappa']:.4f}")
     print(f"  Pearson r             : {stats['pearson_r']:.4f}  (p={stats['pearson_p']:.4f})")
@@ -647,13 +887,22 @@ def print_report(
         print(f"  {pol:<12}  {tc:>4} ({tc/n:.0%})  {ac:>4} ({ac/n:.0%})")
     print()
     print("  Sample (first 8 segments):")
-    print(f"  {'#':>3}  {'Text-score':>10}  {'Valence':>7}  {'T-Pol':<10}  {'A-Pol':<10}  Match")
-    print("  " + "-" * 58)
+    score_hdr = "Composite" if sentiment_mode == "vad_weighted" else "Valence"
+    print(f"  {'#':>3}  {'Text-score':>10}  {score_hdr:>9}  {'T-Pol':<10}  {'A-Pol':<10}  Match")
+    print("  " + "-" * 60)
     for i, (tr, ar) in enumerate(zip(text_results[:8], audio_results[:8])):
-        ap    = valence_to_polarity(ar["valence"], valence_low, valence_high)
+        ap = audio_to_polarity(
+            ar["valence"], ar["arousal"], ar["dominance"],
+            valence_low, valence_high, sentiment_mode
+        )
+        score = (
+            vad_composite_score(ar["valence"], ar["arousal"], ar["dominance"])
+            if sentiment_mode == "vad_weighted"
+            else ar["valence"]
+        )
         match = "✓" if tr["polarity"] == ap else "✗"
         print(
-            f"  {i:>3}  {tr['numeric_score']:>10.3f}  {ar['valence']:>7.3f}"
+            f"  {i:>3}  {tr['numeric_score']:>10.3f}  {score:>9.3f}"
             f"  {tr['polarity']:<10}  {ap:<10}  {match}"
         )
     print("═" * 65)
@@ -668,10 +917,16 @@ def save_results(
     valence_high: float,
     stem: str,
     out_dir: str,
+    sentiment_mode: str = "valence",
+    align_mode: str = "vad",
 ) -> None:
     per_segment = []
     for i, (seg, tr, ar) in enumerate(zip(segments, text_results, audio_results)):
-        audio_pol = valence_to_polarity(ar["valence"], valence_low, valence_high)
+        composite = vad_composite_score(ar["valence"], ar["arousal"], ar["dominance"])
+        audio_pol = audio_to_polarity(
+            ar["valence"], ar["arousal"], ar["dominance"],
+            valence_low, valence_high, sentiment_mode
+        )
         per_segment.append({
             "idx":        i,
             "segment_id": seg.get("segment_id", str(i)),
@@ -684,11 +939,14 @@ def save_results(
                 "polarity":      tr["polarity"],
             },
             "audio_sentiment": {
-                "valence":       ar["valence"],
-                "arousal":       ar["arousal"],
-                "dominance":     ar["dominance"],
-                "numeric_score": valence_to_numeric(ar["valence"]),
-                "polarity":      audio_pol,
+                "valence":         ar["valence"],
+                "arousal":         ar["arousal"],
+                "dominance":       ar["dominance"],
+                "composite_score": composite,
+                "numeric_score":   audio_to_numeric(
+                    ar["valence"], ar["arousal"], ar["dominance"], sentiment_mode
+                ),
+                "polarity":        audio_pol,
             },
             "sentiment_match": tr["polarity"] == audio_pol,
         })
@@ -697,12 +955,14 @@ def save_results(
     stats_out = {k: v for k, v in stats.items() if not k.startswith("_")}
 
     out = {
-        "stem":        stem,
-        "text_model":  TEXT_MODEL_ID,
-        "audio_model": AUDIO_MODEL_ID,
+        "stem":            stem,
+        "text_model":      TEXT_MODEL_ID,
+        "audio_model":     AUDIO_MODEL_ID,
+        "align_mode":      align_mode,
+        "sentiment_mode":  sentiment_mode,
         "valence_thresholds": {"low": valence_low, "high": valence_high},
-        "aggregate":   stats_out,
-        "segments":    per_segment,
+        "aggregate":       stats_out,
+        "segments":        per_segment,
     }
     path = os.path.join(out_dir, f"{stem}_sentiment_eval.json")
     with open(path, "w", encoding="utf-8") as f:
@@ -736,6 +996,26 @@ def main() -> None:
                         help="Valence above this threshold → positive")
     parser.add_argument("--save_segments",  action="store_true",
                         help="Dump split WAV segments to <out_dir>/segments/")
+    parser.add_argument(
+        "--align_mode",
+        choices=["vad", "whisper"],
+        default="vad",
+        help=(
+            "vad    : silence-based VAD split (Silero → librosa fallback). "
+            "whisper: ASR word-timestamp alignment via openai/whisper-base — "
+            "more robust when expressive pauses occur mid-sentence."
+        ),
+    )
+    parser.add_argument(
+        "--sentiment_mode",
+        choices=["valence", "vad_weighted"],
+        default="valence",
+        help=(
+            "valence     : use valence only for audio polarity (original). "
+            "vad_weighted: combine valence + arousal + dominance — high arousal "
+            "amplifies the polarity signal, dominance provides a smaller nudge."
+        ),
+    )
     args = parser.parse_args()
 
     os.makedirs(args.out_dir, exist_ok=True)
@@ -746,6 +1026,8 @@ def main() -> None:
     print(f"\n{'═'*65}")
     print(f"  Sentiment Eval  :  {stem}")
     print(f"  Audio           :  {args.audio}")
+    print(f"  Align mode      :  {args.align_mode}")
+    print(f"  Sentiment mode  :  {args.sentiment_mode}")
     print(f"  Device          :  {device}")
     print(f"{'═'*65}")
 
@@ -762,30 +1044,42 @@ def main() -> None:
 
     # ── Load + split audio ─────────────────────────────────────────────────
     print(f"\n  Loading audio  : {args.audio}")
-    wav, sr, audio_segs = load_and_split_audio(
-        args.audio,
-        top_db=args.silence_thresh,
-        min_silence_ms=args.min_silence_ms,
-    )
-    print(f"  Audio segments : {len(audio_segs)}")
+    if args.align_mode == "whisper":
+        wav, sr, audio_segs = load_and_split_audio_whisper(args.audio, segments)
+        # Whisper alignment already produces one segment per text entry
+        n = min(len(segments), len(audio_segs))
+        if len(audio_segs) != len(segments):
+            warnings.warn(
+                f"Whisper produced {len(audio_segs)} segments for {len(segments)} text entries. "
+                f"Truncating to {n}."
+            )
+        segments        = segments[:n]
+        audio_segs_used = audio_segs[:n]
+    else:
+        wav, sr, audio_segs = load_and_split_audio(
+            args.audio,
+            top_db=args.silence_thresh,
+            min_silence_ms=args.min_silence_ms,
+        )
+        print(f"  Audio segments : {len(audio_segs)}")
+
+        n = min(len(segments), len(audio_segs))
+        if len(segments) != len(audio_segs):
+            warnings.warn(
+                f"Text segments ({len(segments)}) ≠ audio segments ({len(audio_segs)}). "
+                f"Truncating to {n} for matched-pair analysis. "
+                f"Consider --align_mode whisper for better sentence-level alignment, "
+                f"or adjust --min_silence_ms / --silence_thresh."
+            )
+        segments        = segments[:n]
+        audio_segs_used = audio_segs[:n]
 
     if args.save_segments:
         seg_dir = os.path.join(args.out_dir, "segments")
         os.makedirs(seg_dir, exist_ok=True)
-        for i, (s, e, w) in enumerate(audio_segs):
+        for i, (s, e, w) in enumerate(audio_segs_used):
             sf.write(os.path.join(seg_dir, f"seg_{i:04d}.wav"), w, sr)
-        print(f"  [saved] {len(audio_segs)} WAVs → {seg_dir}/")
-
-    # ── Align (ordered 1-to-1) ─────────────────────────────────────────────
-    n = min(len(segments), len(audio_segs))
-    if len(segments) != len(audio_segs):
-        warnings.warn(
-            f"Text segments ({len(segments)}) ≠ audio segments ({len(audio_segs)}). "
-            f"Truncating to {n} for matched-pair analysis. "
-            f"Adjust --min_silence_ms or --silence_thresh for a better split."
-        )
-    segments        = segments[:n]
-    audio_segs_used = audio_segs[:n]
+        print(f"  [saved] {len(audio_segs_used)} WAVs → {seg_dir}/")
 
     # ── Load models ────────────────────────────────────────────────────────
     print()
@@ -829,21 +1123,33 @@ def main() -> None:
         text_results, audio_results,
         valence_low=args.valence_low,
         valence_high=args.valence_high,
+        sentiment_mode=args.sentiment_mode,
     )
 
-    print_report(stats, text_results, audio_results, args.valence_low, args.valence_high)
+    print_report(
+        stats, text_results, audio_results,
+        args.valence_low, args.valence_high,
+        sentiment_mode=args.sentiment_mode,
+        align_mode=args.align_mode,
+    )
 
     # ── Visualisation ──────────────────────────────────────────────────────
     print("\n  Generating plots…")
     plot_timeline(text_results, audio_results, audio_segs_used,
-                  args.valence_low, args.valence_high, stem, args.out_dir)
-    plot_scatter(text_results, audio_results, stats, stem, args.out_dir)
+                  args.valence_low, args.valence_high, stem, args.out_dir,
+                  sentiment_mode=args.sentiment_mode)
+    plot_scatter(text_results, audio_results, stats, stem, args.out_dir,
+                 sentiment_mode=args.sentiment_mode)
     plot_confusion(stats, stem, args.out_dir)
     plot_distribution(stats, stem, args.out_dir)
 
     # ── Save JSON ──────────────────────────────────────────────────────────
-    save_results(text_results, audio_results, stats, segments,
-                 args.valence_low, args.valence_high, stem, args.out_dir)
+    save_results(
+        text_results, audio_results, stats, segments,
+        args.valence_low, args.valence_high, stem, args.out_dir,
+        sentiment_mode=args.sentiment_mode,
+        align_mode=args.align_mode,
+    )
 
     print("\nDone.\n")
 

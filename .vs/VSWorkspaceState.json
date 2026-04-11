@@ -4,12 +4,13 @@
     "\\Audios",
     "\\Audios\\Inference",
     "\\Audios\\Inference\\IndicParler",
-    "\\Audios\\Inference\\IndicParler\\ENG",
+    "\\Audios\\Inference\\IndicParler\\HIN",
     "\\drift_results",
-    "\\eval_results",
-    "\\transcripts",
-    "\\~"
+    "\\env1",
+    "\\sentiment_eval",
+    "\\sentiment_eval\\results",
+    "\\transcripts"
   ],
-  "SelectedNode": "\\english_indic_narrator_pipeline.py",
+  "SelectedNode": "\\sentiment_eval\\results\\elevenlabs_vampire_story_sentiment_confusion.png",
   "PreviewInSolutionExplorer": false
 }

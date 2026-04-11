@@ -24,7 +24,6 @@ Changes vs. the Hindi pipeline
 Usage
 -----
   python english_indic_narrator_pipeline.py --story path/to/story.txt --output out/
-  python english_indic_narrator_pipeline.py --story story.txt --narrator-cvc "Gary..." --f0-threshold 0.10
 """
 
 from __future__ import annotations
@@ -50,12 +49,8 @@ warnings.filterwarnings("ignore")
 
 @dataclass
 class PipelineConfig:
-    # ── Narrator voice ────────────────────────────────────────────────────────
-    # "Gary" is a well-represented English male speaker in Parler-TTS / IndicParler
-    # training data.  Uses the same RASMALAI-style CVC format as the Hindi pipeline
-    # so the F0 descriptor patching machinery works unchanged.
     narrator_cvc: str = (
-        "Gary speaks at a slightly slow pace with a deep, low-pitched voice "
+        "Thoma speaks at a slightly slow pace with a deep, low-pitched voice "
         "and a narrow pitch range in a very close-sounding studio environment. "
         "The audio is of excellent quality with no background noise."
     )
