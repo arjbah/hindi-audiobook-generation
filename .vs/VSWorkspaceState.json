@@ -1,16 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Audios",
-    "\\Audios\\Inference",
-    "\\Audios\\Inference\\IndicParler",
-    "\\Audios\\Inference\\IndicParler\\HIN",
-    "\\drift_results",
-    "\\env1",
-    "\\sentiment_eval",
-    "\\sentiment_eval\\results",
     "\\transcripts"
   ],
-  "SelectedNode": "\\sentiment_eval\\results\\elevenlabs_vampire_story_sentiment_confusion.png",
+  "SelectedNode": "\\sentiment_narrator_eng.py",
   "PreviewInSolutionExplorer": false
 }

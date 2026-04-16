@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ':*)",
+      "Read(//c/Users/prana/AppData/Local/Temp/claude/C--Users-prana-source-repos-hindi-audiobook-generation/8a5d5df3-34c9-4ce3-8455-277acccdabc1/tasks/**)",
+      "Bash(python sentiment_narrator_eng.py --story transcripts/bad_blood_eng.txt --output output/ENG_sentiment/)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(tasklist)",
+      "Bash(tasklist:*)",
+      "Bash(jobs:*)"
+    ]
+  }
+}

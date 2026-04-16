@@ -336,19 +336,112 @@ class IndicParlerTTS:
         print(f"[IndicParlerTTS] Loading model on {device} ...")
         try:
             from parler_tts import ParlerTTSForConditionalGeneration
-            from transformers import AutoTokenizer
+            from parler_tts.configuration_parler_tts import ParlerTTSConfig
+            from transformers import AutoTokenizer, GenerationConfig, GenerationMixin
         except ImportError:
             raise ImportError(
                 "parler_tts not installed.\n"
                 "Run: pip install git+https://github.com/huggingface/parler-tts.git"
             )
 
+        # ── Compatibility shims for transformers ≥ 4.50 ──────────────────────
+        # Fix 1: safe to_diff_dict (repr crash during from_pretrained logging)
+        if not getattr(ParlerTTSConfig, "_to_diff_dict_patched", False):
+            def _to_diff_dict_safe(self):
+                return self.to_dict()
+            ParlerTTSConfig.to_diff_dict = _to_diff_dict_safe
+            ParlerTTSConfig._to_diff_dict_patched = True
+
+        # Fix 2: inject GenerationMixin so generate() can call _validate_model_kwargs
+        # and other mixin helpers.  Then delete parler_tts's own
+        # _get_initial_cache_position — it uses the old 2-arg API while new
+        # GenerationMixin._sample calls it with 3 args (cur_len, device, model_kwargs).
+        # Removing it lets the correct GenerationMixin version be inherited instead.
+        try:
+            from parler_tts.modeling_parler_tts import ParlerTTSForCausalLM
+            _gen_classes = (ParlerTTSForConditionalGeneration, ParlerTTSForCausalLM)
+        except ImportError:
+            _gen_classes = (ParlerTTSForConditionalGeneration,)
+        for _cls in _gen_classes:
+            if not issubclass(_cls, GenerationMixin):
+                try:
+                    _bases = list(_cls.__bases__)
+                    _bases.insert(1, GenerationMixin)
+                    _cls.__bases__ = tuple(_bases)
+                except TypeError:
+                    pass
+            # Drop parler_tts's old-signature _get_initial_cache_position
+            if "_get_initial_cache_position" in _cls.__dict__:
+                try:
+                    delattr(_cls, "_get_initial_cache_position")
+                except AttributeError:
+                    pass
+
         dtype = torch.float16 if device == "cuda" else torch.float32
         self.model = ParlerTTSForConditionalGeneration.from_pretrained(
-            self.MODEL_ID,
-            torch_dtype=dtype,
+            self.MODEL_ID
         ).to(device)
+        if dtype == torch.float16:
+            self.model = self.model.half()
         self.model.eval()
+
+        # Fix 3: manually load generation_config (not auto-loaded for non-mixin models)
+        if self.model.generation_config is None:
+            try:
+                self.model.generation_config = GenerationConfig.from_pretrained(
+                    self.MODEL_ID
+                )
+            except Exception:
+                self.model.generation_config = GenerationConfig()
+
+        # Fix 4: cache_position[0] under-counts past length because it tracks
+        # only decoder positions, not the prompt tokens prepended as embeddings
+        # on step 1.  On step 2+, prepare_inputs_for_generation uses
+        # cache_position[0] (e.g. 1) instead of past_key_values.get_seq_length()
+        # (e.g. 5 = 4 prompt + 1 decoder), so generated_length goes negative.
+        # Clearing cache_position when the cache is already populated forces the
+        # fallback to get_seq_length(), which is always correct.
+        if not getattr(ParlerTTSForConditionalGeneration,
+                       "_prepare_inputs_patched", False):
+            _orig_prepare = \
+                ParlerTTSForConditionalGeneration.prepare_inputs_for_generation
+            def _patched_prepare(
+                self, decoder_input_ids,
+                past_key_values=None, cache_position=None, **kwargs
+            ):
+                if (past_key_values is not None
+                        and cache_position is not None):
+                    try:
+                        if past_key_values.get_seq_length() > 0:
+                            cache_position = None
+                    except Exception:
+                        pass
+                return _orig_prepare(
+                    self, decoder_input_ids,
+                    past_key_values=past_key_values,
+                    cache_position=cache_position,
+                    **kwargs,
+                )
+            ParlerTTSForConditionalGeneration.prepare_inputs_for_generation = \
+                _patched_prepare
+            ParlerTTSForConditionalGeneration._prepare_inputs_patched = True
+
+        # Fix 5: transformers ≥ 4.50 replaced DynamicCache's flat key_cache /
+        # value_cache lists with a layered DynamicLayer structure.  parler_tts's
+        # attention code still indexes into past_key_value.key_cache[layer_idx]
+        # (OLD API), which now raises AttributeError.  Add read-only properties
+        # that expose the same interface via the new layer objects.
+        from transformers.cache_utils import DynamicCache
+        if not getattr(DynamicCache, "_legacy_api_patched", False):
+            @property
+            def _key_cache_compat(self):
+                return [layer.keys for layer in self.layers]
+            @property
+            def _value_cache_compat(self):
+                return [layer.values for layer in self.layers]
+            DynamicCache.key_cache = _key_cache_compat
+            DynamicCache.value_cache = _value_cache_compat
+            DynamicCache._legacy_api_patched = True
 
         self.prompt_tokenizer = AutoTokenizer.from_pretrained(self.MODEL_ID)
         self.desc_tokenizer = AutoTokenizer.from_pretrained(
