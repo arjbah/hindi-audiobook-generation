@@ -12,39 +12,36 @@ from nltk.tokenize import sent_tokenize
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 print(f"Device: {device}")
-speaker_name = "Rohit"
+speaker_name = "Thoma"
 folder_name = f"../data/english_story_output_{speaker_name}"
 os.makedirs(folder_name, exist_ok=True)
-max_tokens = 100
+max_chars = 200
 
 with open("../data/english_story_transcript.txt", "r") as f:
     transcript = f.read()
 transcript = transcript.replace("\n", " ")
 
-# IndicParler Model + Tokenizers Generation
-model = ParlerTTSForConditionalGeneration.from_pretrained("ai4bharat/indic-parler-tts").to(device)
-tokenizer = AutoTokenizer.from_pretrained("ai4bharat/indic-parler-tts")
-description_tokenizer = AutoTokenizer.from_pretrained(model.config.text_encoder._name_or_path)
-
-# Splitting up the transcript
-full_tokenized = tokenizer(transcript, return_tensors="pt").to(device)
-full_length = full_tokenized.input_ids.shape[1]
-print(f"Transcript token length: {full_length}")
+# Chunking the text
 sentences = sent_tokenize(transcript)
 chunks = []
 current_chunk = ""
 current_len = 0
 
 for sentence in sentences:
-    tokens = tokenizer(sentence, return_tensors="pt").to(device)
-    sentence_length = tokens.input_ids.shape[1]
-    if current_len + sentence_length > max_tokens:
-        chunks.append(current_chunk)
-        current_chunk = sentence
-        current_len = sentence_length
+    sentence_length = len(sentence)
+    if current_len + sentence_length > max_chars:
+        if current_chunk:
+            chunks.append(current_chunk)
+            current_chunk = sentence
+            current_len = sentence_length
+        else:
+            chunks.append(sentence)
+            current_chunk = ""
+            current_len = 0
     else:
         if current_chunk:
             current_chunk += " " + sentence
+            sentence_length += 1 # Accounting for the space
         else:
             current_chunk = sentence
         current_len += sentence_length
@@ -54,9 +51,15 @@ if current_chunk:
 
 print(f"# of chunks: {len(chunks)}")
 
+# IndicParler model setup
+model = ParlerTTSForConditionalGeneration.from_pretrained("ai4bharat/indic-parler-tts").to(device)
+tokenizer = AutoTokenizer.from_pretrained("ai4bharat/indic-parler-tts")
+description_tokenizer = AutoTokenizer.from_pretrained(model.config.text_encoder._name_or_path)
+
+# Generating the audio
 batch_size = 8
 batch_index = 0
-description_input_ids = description_tokenizer(f"{speaker_name} narrating a story in an engaging and expressive tone.", return_tensors="pt").to(device)
+description_input_ids = description_tokenizer(f"{speaker_name} speaks at a slightly slow pace with a deep, low-pitched voice and a narrow pitch range in a very close-sounding studio environment. The audio is of excellent quality with no background noise. The intended style is Narration. Delivered in a calm, clear narrative voice.", return_tensors="pt").to(device)
 for i in range(0, len(chunks), batch_size):
     batch = chunks[i:i+batch_size]
     prompt_input_ids = tokenizer(batch, return_tensors="pt", padding=True).to(device)
@@ -72,6 +75,6 @@ for i in range(0, len(chunks), batch_size):
     for j, audio in enumerate(generation):
         audio_arr = audio.cpu().numpy().squeeze()
         index = i + j
-        indicparler_path = f"{folder_name}/indicparler_generation_{index}_{max_tokens}.wav"
+        indicparler_path = f"{folder_name}/indicparler_generation_{index}_{max_chars}.wav"
         sf.write(indicparler_path, audio_arr, model.config.sampling_rate)
         print(f"Finished IndicParler {index}")

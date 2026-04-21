@@ -1,6 +1,4 @@
 import torch
-from parler_tts import ParlerTTSForConditionalGeneration
-from transformers import AutoTokenizer
 import soundfile as sf
 from dotenv import load_dotenv
 import os
@@ -16,36 +14,33 @@ device = "cuda:0" if torch.cuda.is_available() else "cpu"
 print(f"Device: {device}")
 folder_name = f"../data/english_story_output_voxtral"
 os.makedirs(folder_name, exist_ok=True)
-max_tokens = 100
+max_chars = 200
 
 with open("../data/english_story_transcript.txt", "r") as f:
     transcript = f.read()
 transcript = transcript.replace("\n", " ")
 
-# IndicParler Model + Tokenizers Generation
-model = ParlerTTSForConditionalGeneration.from_pretrained("ai4bharat/indic-parler-tts").to(device)
-tokenizer = AutoTokenizer.from_pretrained("ai4bharat/indic-parler-tts")
-description_tokenizer = AutoTokenizer.from_pretrained(model.config.text_encoder._name_or_path)
-
-# Splitting up the transcript
-full_tokenized = tokenizer(transcript, return_tensors="pt").to(device)
-full_length = full_tokenized.input_ids.shape[1]
-print(f"Transcript token length: {full_length}")
+# Chunking the text
 sentences = sent_tokenize(transcript)
 chunks = []
 current_chunk = ""
 current_len = 0
 
 for sentence in sentences:
-    tokens = tokenizer(sentence, return_tensors="pt").to(device)
-    sentence_length = tokens.input_ids.shape[1]
-    if current_len + sentence_length > max_tokens:
-        chunks.append(current_chunk)
-        current_chunk = sentence
-        current_len = sentence_length
+    sentence_length = len(sentence)
+    if current_len + sentence_length > max_chars:
+        if current_chunk:
+            chunks.append(current_chunk)
+            current_chunk = sentence
+            current_len = sentence_length
+        else:
+            chunks.append(sentence)
+            current_chunk = ""
+            current_len = 0
     else:
         if current_chunk:
             current_chunk += " " + sentence
+            sentence_length += 1 # Accounting for the space
         else:
             current_chunk = sentence
         current_len += sentence_length
@@ -57,7 +52,7 @@ print(f"# of chunks: {len(chunks)}")
 
 index = 0
 for chunk in chunks:
-    path = f"{folder_name}/voxtral_generation_{index}_{max_tokens}.wav"
+    path = f"{folder_name}/voxtral_generation_{index}_{max_chars}.wav"
     base_url = "http://localhost:8000/v1"
  
     payload = {

@@ -13,34 +13,33 @@ print(f"Device: {device}")
 speaker_name = "Rohit"
 folder_name = f"../data/hindi_story_output_voxtral"
 os.makedirs(folder_name, exist_ok=True)
-max_tokens = 64
+max_chars = 150
 
 with open("../data/hindi_story_transcript.txt", "r") as f:
     transcript = f.read()
 transcript = transcript.replace("\n", " ")
 
-# IndicParler Model + Tokenizers Generation
-tokenizer = AutoTokenizer.from_pretrained("ai4bharat/indic-parler-tts")
-
-# Splitting up the transcript
-full_tokenized = tokenizer(transcript, return_tensors="pt").to(device)
-full_length = full_tokenized.input_ids.shape[1]
-print(f"Transcript token length: {full_length}")
+# Chunking the text
 sentences = sentence_tokenize.sentence_split(transcript, lang="hi")
 chunks = []
 current_chunk = ""
 current_len = 0
 
 for sentence in sentences:
-    tokens = tokenizer(sentence, return_tensors="pt").to(device)
-    sentence_length = tokens.input_ids.shape[1]
-    if current_len + sentence_length > max_tokens:
-        chunks.append(current_chunk)
-        current_chunk = sentence
-        current_len = sentence_length
+    sentence_length = len(sentence)
+    if current_len + sentence_length > max_chars:
+        if current_chunk:
+            chunks.append(current_chunk)
+            current_chunk = sentence
+            current_len = sentence_length
+        else:
+            chunks.append(sentence)
+            current_chunk = ""
+            current_len = 0
     else:
         if current_chunk:
             current_chunk += " " + sentence
+            sentence_length += 1 # Accounting for the space
         else:
             current_chunk = sentence
         current_len += sentence_length
@@ -52,7 +51,7 @@ print(f"# of chunks: {len(chunks)}")
 
 index = 0
 for chunk in chunks:
-    path = f"{folder_name}/voxtral_generation_{index}_{max_tokens}.wav"
+    path = f"{folder_name}/voxtral_generation_{index}_{max_chars}.wav"
     base_url = "http://localhost:8000/v1"
  
     payload = {
