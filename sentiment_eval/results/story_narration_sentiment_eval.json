@@ -1,0 +1,3316 @@
+{
+  "stem": "story_narration",
+  "text_model": "tabularisai/multilingual-sentiment-analysis",
+  "audio_model": "audeering/wav2vec2-large-robust-12-ft-emotion-msp-dim",
+  "align_mode": "vad",
+  "sentiment_mode": "prosodic",
+  "threshold_mode": "match_text",
+  "thresholds_used": {
+    "low": -0.3289717255952713,
+    "high": 0.5454284556108971
+  },
+  "score_info": {
+    "sentiment_mode": "prosodic",
+    "n_segments": 112,
+    "valence_mean": 0.5111426091087716,
+    "valence_std": 0.05730580357990424,
+    "arousal_mean": 0.5628412187631641,
+    "arousal_std": 0.04484330637546018,
+    "f0_std_st_mean": 4.069402751946227,
+    "f0_std_st_std": 0.6587618423474286,
+    "rms_std_mean": 0.04715006938204169,
+    "rms_std_std": 0.008707880424071368
+  },
+  "aggregate": {
+    "n_segments": 112,
+    "agreement": 0.375,
+    "cohen_kappa": -0.021099244594946498,
+    "pearson_r": 0.0024715360269097,
+    "pearson_p": 0.979366705340391,
+    "spearman_r": 0.0054213703938278375,
+    "spearman_p": 0.9547593588826284,
+    "expressiveness_pearson_r": 0.038671249109574826,
+    "expressiveness_pearson_p": 0.6856110899735625,
+    "expressiveness_spearman_r": 0.03196163972651274,
+    "expressiveness_spearman_p": 0.7379713176419741,
+    "positive_class_match": 0.6964285714285714,
+    "negative_class_match": 0.5714285714285714,
+    "text_polarity_dist": {
+      "negative": 37,
+      "neutral": 56,
+      "positive": 19
+    },
+    "audio_polarity_dist": {
+      "negative": 37,
+      "neutral": 56,
+      "positive": 19
+    },
+    "confusion_matrix": [
+      [
+        13,
+        18,
+        6
+      ],
+      [
+        18,
+        27,
+        11
+      ],
+      [
+        6,
+        11,
+        2
+      ]
+    ]
+  },
+  "segments": [
+    {
+      "idx": 0,
+      "segment_id": "0",
+      "text": "गाड़ी ने लाहौर का स्टेशन छोड़ा तो एकबारगी मेरा मन काँप उठा।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7624901533126831,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5002484917640686,
+        "arousal": 0.5544123649597168,
+        "dominance": 0.5161601901054382,
+        "composite_score": 0.5002592070689906,
+        "numeric_score": -0.15762069705641638,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 120.73440548226108,
+        "f0_std_st": 3.91980305627719,
+        "rms_mean": 0.07727347314357758,
+        "rms_std": 0.05729042738676071,
+        "voiced_ratio": 0.6172839506172839,
+        "duration_s": 10.364
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 1,
+      "segment_id": "1",
+      "text": "अब हम लोग उस ओर जा रहे थे जहाँ चौदह साल पहले आग लगी थी।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.30522215366363525,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.46791765093803406,
+        "arousal": 0.5304620265960693,
+        "dominance": 0.46736717224121094,
+        "composite_score": 0.4669127669597427,
+        "numeric_score": -0.5802399557710906,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 115.01796886051817,
+        "f0_std_st": 5.021046868809447,
+        "rms_mean": 0.08303950726985931,
+        "rms_std": 0.05861508101224899,
+        "voiced_ratio": 0.6685393258426966,
+        "duration_s": 5.692
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 2,
+      "segment_id": "2",
+      "text": "जिसमें लाखों जल गये थे, और लाखों पर जलने के निशान आज तक बने हुए थे।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8707746863365173,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5570422410964966,
+        "arousal": 0.5857791900634766,
+        "dominance": 0.5997951030731201,
+        "composite_score": 0.5622776713065969,
+        "numeric_score": 0.5893986377652594,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 114.94670110209697,
+        "f0_std_st": 3.7599689977319386,
+        "rms_mean": 0.07319009304046631,
+        "rms_std": 0.05555469170212746,
+        "voiced_ratio": 0.5714285714285714,
+        "duration_s": 5.82
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 3,
+      "segment_id": "3",
+      "text": "मुझे लगा हमारी गाड़ी किसी गहरी, लम्बी अन्धकारमय गुफा में घुस रही है।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.3325030207633972,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5322769284248352,
+        "arousal": 0.5674952268600464,
+        "dominance": 0.5249142646789551,
+        "composite_score": 0.534054550335006,
+        "numeric_score": 0.3047635156911407,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 124.72152040664871,
+        "f0_std_st": 4.415853560014851,
+        "rms_mean": 0.06714776903390884,
+        "rms_std": 0.05264311283826828,
+        "voiced_ratio": 0.7455012853470437,
+        "duration_s": 12.444
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 4,
+      "segment_id": "4",
+      "text": "और हम अपना सब-कुछ इस अन्धकार को सौंप दे रहे हैं।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.7896522879600525,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.5453312397003174,
+        "arousal": 0.5892630219459534,
+        "dominance": 0.47849687933921814,
+        "composite_score": 0.5478530210128528,
+        "numeric_score": 0.4470441557241152,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 133.27419455345694,
+        "f0_std_st": 4.4912640946668985,
+        "rms_mean": 0.05327363312244415,
+        "rms_std": 0.035506315529346466,
+        "voiced_ratio": 0.6622073578595318,
+        "duration_s": 9.564
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 5,
+      "segment_id": "5",
+      "text": "हम सब लगभग तीन सौ यात्री थे।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.7700183987617493,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.5333284139633179,
+        "arousal": 0.5755234956741333,
+        "dominance": 0.482948362827301,
+        "composite_score": 0.5349108643216938,
+        "numeric_score": 0.27466707731286477,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 145.9355944078833,
+        "f0_std_st": 3.186328693305424,
+        "rms_mean": 0.05356588214635849,
+        "rms_std": 0.03486202657222748,
+        "voiced_ratio": 0.8461538461538461,
+        "duration_s": 2.492
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 6,
+      "segment_id": "6",
+      "text": "स्त्रियों और बच्चों की भी संख्या काफी थी।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.8066582083702087,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.4842275083065033,
+        "arousal": 0.5682448148727417,
+        "dominance": 0.5347911715507507,
+        "composite_score": 0.48364652207098546,
+        "numeric_score": -0.36627264625730216,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 127.2232792771822,
+        "f0_std_st": 4.809389579701298,
+        "rms_mean": 0.05583808943629265,
+        "rms_std": 0.03826667368412018,
+        "voiced_ratio": 0.6698113207547169,
+        "duration_s": 3.388
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 7,
+      "segment_id": "7",
+      "text": "लाहौर में हमने सभी गुरुद्वारों के दर्शन किये।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.6258713603019714,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.4077325463294983,
+        "arousal": 0.5242994427680969,
+        "dominance": 0.35697129368782043,
+        "composite_score": 0.40213670236413845,
+        "numeric_score": -0.8937748061311211,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 108.03535547897303,
+        "f0_std_st": 4.937069576175731,
+        "rms_mean": 0.05776066705584526,
+        "rms_std": 0.04022704437375069,
+        "voiced_ratio": 0.8620689655172413,
+        "duration_s": 0.924
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 8,
+      "segment_id": "8",
+      "text": "वहाँ हमें जैसा स्वागत मिला,उससे आगे अब पंजासाहिब की यात्रा में किसी प्रकार का अनिष्ट घट सकता है, ऐसी सम्भावना तो नहीं थी, परन्तु मनुष्य के अन्दर का पशु कब जागकर सभी सम्भावनाओं को डकार जाएगा, कौन जानता है?",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.5390224456787109,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5167143940925598,
+        "arousal": 0.5641894340515137,
+        "dominance": 0.43713557720184326,
+        "composite_score": 0.517136029364384,
+        "numeric_score": 0.07582510873435754,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 127.54875980210706,
+        "f0_std_st": 3.7848418931543564,
+        "rms_mean": 0.06387574225664139,
+        "rms_std": 0.04347977787256241,
+        "voiced_ratio": 0.8016997167138811,
+        "duration_s": 11.292
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 9,
+      "segment_id": "9",
+      "text": "यही सब सोचते-सोचते मैंने मां की ओर देखा, हथेली पर मुंह टिकाये, कोहनी को खिड़की का सहारा दिये वे निरन्तर बाहर की ओर देख रही थीं।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.47790515422821045,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.44603171944618225,
+        "arousal": 0.5168960690498352,
+        "dominance": 0.45363134145736694,
+        "composite_score": 0.44463381307557814,
+        "numeric_score": -0.7010247747122396,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 119.2572155191838,
+        "f0_std_st": 3.578603530976176,
+        "rms_mean": 0.06422491371631622,
+        "rms_std": 0.05121484026312828,
+        "voiced_ratio": 0.8557692307692307,
+        "duration_s": 3.324
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 10,
+      "segment_id": "10",
+      "text": "खेत कट चुके थे।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8536213636398315,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5540779232978821,
+        "arousal": 0.5919079780578613,
+        "dominance": 0.5876578092575073,
+        "composite_score": 0.5590706557957486,
+        "numeric_score": 0.552124987389009,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 119.19021466949367,
+        "f0_std_st": 4.086814500470058,
+        "rms_mean": 0.06331667304039001,
+        "rms_std": 0.04612287878990173,
+        "voiced_ratio": 0.6972972972972973,
+        "duration_s": 5.916
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 11,
+      "segment_id": "11",
+      "text": "दूर-दूर तक सपाट धरती दिखाई दे रही थी।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8951672911643982,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5403510928153992,
+        "arousal": 0.592754602432251,
+        "dominance": 0.2647663950920105,
+        "composite_score": 0.5399385493086268,
+        "numeric_score": 0.3936288470853692,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 129.576320148925,
+        "f0_std_st": 3.823734097937441,
+        "rms_mean": 0.07634451985359192,
+        "rms_std": 0.04616784304380417,
+        "voiced_ratio": 0.9005524861878453,
+        "duration_s": 5.788
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 12,
+      "segment_id": "12",
+      "text": "मुझे लगा, मां की आँखों में से उतरकर यह सपाटता मन में पूरी तरह छा गयी है।",
+      "text_sentiment": {
+        "label": "Very Positive",
+        "stars": 5,
+        "confidence": 0.3597639203071594,
+        "numeric_score": 1.0,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.5737373232841492,
+        "arousal": 0.6087865233421326,
+        "dominance": 0.5295159220695496,
+        "composite_score": 0.5800551105398035,
+        "numeric_score": 0.7405880186905459,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 119.28610809021242,
+        "f0_std_st": 4.733034267892038,
+        "rms_mean": 0.0604189969599247,
+        "rms_std": 0.0451803132891655,
+        "voiced_ratio": 0.6805970149253732,
+        "duration_s": 10.716
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 13,
+      "segment_id": "13",
+      "text": "फिर मैंने अपने डिब्बे के दूसरे यात्रियों की तरफ देखा।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.889250636100769,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.37938252091407776,
+        "arousal": 0.47686439752578735,
+        "dominance": 0.5417340993881226,
+        "composite_score": 0.3789637457384615,
+        "numeric_score": -0.9470168635628164,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 114.12342275873331,
+        "f0_std_st": 4.649739287556631,
+        "rms_mean": 0.06689279526472092,
+        "rms_std": 0.0496097169816494,
+        "voiced_ratio": 0.775,
+        "duration_s": 2.556
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 14,
+      "segment_id": "14",
+      "text": "उन पर भी गहरी उदासी छा गयी थी।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.5927950143814087,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5212369561195374,
+        "arousal": 0.5729621052742004,
+        "dominance": 0.5226939916610718,
+        "composite_score": 0.5224735711089207,
+        "numeric_score": 0.14246487109772613,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 127.28381463376986,
+        "f0_std_st": 4.056732325040043,
+        "rms_mean": 0.06415040045976639,
+        "rms_std": 0.04642597958445549,
+        "voiced_ratio": 0.7879656160458453,
+        "duration_s": 11.164
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 15,
+      "segment_id": "15",
+      "text": "समझ में नहीं आ रहा था कि एकाएक ऐसी उदासी सब पर क्यों छा गयी है?",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.47176334261894226,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.439031720161438,
+        "arousal": 0.48823580145835876,
+        "dominance": 0.563966691493988,
+        "composite_score": 0.4397092665697797,
+        "numeric_score": -0.7098454138950673,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 124.88745144041741,
+        "f0_std_st": 3.846946028994948,
+        "rms_mean": 0.05877051502466202,
+        "rms_std": 0.035807885229587555,
+        "voiced_ratio": 0.6611570247933884,
+        "duration_s": 3.868
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 16,
+      "segment_id": "16",
+      "text": "''तुम्हें तो रास्ता अच्छी तरह याद होगा।'' मैंने मां का ध्यान तोड़ते हुए पूछा, ''सैकड़ों बार आना-जाना हुआ होगा तुम्हारा?''\n\n\nमां मेरी ओर देखकर मुसकरायी।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.6898179650306702,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5287880301475525,
+        "arousal": 0.5446334481239319,
+        "dominance": 0.5989294052124023,
+        "composite_score": 0.5305685555030976,
+        "numeric_score": 0.23407144158855278,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 116.8724767384921,
+        "f0_std_st": 3.8677999401879517,
+        "rms_mean": 0.08778950572013855,
+        "rms_std": 0.044441916048526764,
+        "voiced_ratio": 0.8472222222222222,
+        "duration_s": 2.3
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 17,
+      "segment_id": "17",
+      "text": "वह मुस्कराहट सब-कुछ खोकर पायी हुई मुसकराहट थी।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.4963113069534302,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.3754328787326813,
+        "arousal": 0.46831849217414856,
+        "dominance": 0.5336890816688538,
+        "composite_score": 0.3739572324995126,
+        "numeric_score": -0.9228918525053094,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 103.64993487833554,
+        "f0_std_st": 3.5938560926619676,
+        "rms_mean": 0.04496857523918152,
+        "rms_std": 0.03362169489264488,
+        "voiced_ratio": 0.796875,
+        "duration_s": 2.044
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 18,
+      "segment_id": "18",
+      "text": "बोलीं, ''मुझे तो रास्ते का एक-एक स्टेशन तक याद है।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8471408486366272,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5785574316978455,
+        "arousal": 0.6060730814933777,
+        "dominance": 0.6009398698806763,
+        "composite_score": 0.5869459190547079,
+        "numeric_score": 0.7724434376220599,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 120.68842424507535,
+        "f0_std_st": 4.156825541301945,
+        "rms_mean": 0.07116611301898956,
+        "rms_std": 0.05362160503864288,
+        "voiced_ratio": 0.752906976744186,
+        "duration_s": 22.012
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 19,
+      "segment_id": "19",
+      "text": "पर आज यह इलाका कितना बेगाना-बेगाना-सा लग रहा है।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.37599122524261475,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.487222820520401,
+        "arousal": 0.5403807163238525,
+        "dominance": 0.5183203816413879,
+        "composite_score": 0.4869338642102989,
+        "numeric_score": -0.32841694005691263,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 122.35459975222757,
+        "f0_std_st": 4.242195848529857,
+        "rms_mean": 0.0683584213256836,
+        "rms_std": 0.0509888157248497,
+        "voiced_ratio": 0.7258064516129032,
+        "duration_s": 7.932
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 20,
+      "segment_id": "20",
+      "text": "आज चौदह साल बाद इधर से जा रही हूं।",
+      "text_sentiment": {
+        "label": "Very Positive",
+        "stars": 5,
+        "confidence": 0.42225807905197144,
+        "numeric_score": 1.0,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.47267046570777893,
+        "arousal": 0.5267285108566284,
+        "dominance": 0.5122858285903931,
+        "composite_score": 0.47226174572222424,
+        "numeric_score": -0.4868303635429455,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 121.14110504081569,
+        "f0_std_st": 3.905468830461172,
+        "rms_mean": 0.07021819055080414,
+        "rms_std": 0.051911137998104095,
+        "voiced_ratio": 0.660455486542443,
+        "duration_s": 15.452
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 21,
+      "segment_id": "21",
+      "text": "पहले भी ऐसे ही जाती थी।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.498453825712204,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5349289774894714,
+        "arousal": 0.5867432355880737,
+        "dominance": 0.6033366918563843,
+        "composite_score": 0.5381984576875097,
+        "numeric_score": 0.34294299740901146,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 127.3712071041727,
+        "f0_std_st": 4.377693473592981,
+        "rms_mean": 0.07139522582292557,
+        "rms_std": 0.051407549530267715,
+        "voiced_ratio": 0.6414565826330533,
+        "duration_s": 11.42
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 22,
+      "segment_id": "22",
+      "text": "लाहौर पार करते ही अजीब-सी उमंग नस-नस में दौड़ी जाती थी।''\n\n\nसराई (हमारा गाँव ) जैसे-जैसे निकट आता जाता, वहाँ की एक-एक शक्ल मेरे सामने दौड़ जाती, स्टेशन पर कितने लोग आये होते...!",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.41362231969833374,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5276727676391602,
+        "arousal": 0.5830468535423279,
+        "dominance": 0.6126099824905396,
+        "composite_score": 0.5302706785479636,
+        "numeric_score": 0.2242264770397912,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 128.73458862247125,
+        "f0_std_st": 3.7202420346010774,
+        "rms_mean": 0.07619493454694748,
+        "rms_std": 0.043044209480285645,
+        "voiced_ratio": 0.8835978835978836,
+        "duration_s": 6.044
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 23,
+      "segment_id": "23",
+      "text": "मां की आँखों में चौदह साल पहले की याद तरल हो आयी थी।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8439280986785889,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5102564692497253,
+        "arousal": 0.5607520937919617,
+        "dominance": 0.5677206516265869,
+        "composite_score": 0.5109098744144731,
+        "numeric_score": -0.012685027668313453,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 120.79551387334709,
+        "f0_std_st": 4.197340637581412,
+        "rms_mean": 0.06693830341100693,
+        "rms_std": 0.04844731464982033,
+        "voiced_ratio": 0.7533039647577092,
+        "duration_s": 14.524
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 24,
+      "segment_id": "24",
+      "text": "पिताजी ने अपना रोजगार उत्तर प्रदेश में ही जमा लिया था।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.6409137845039368,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5531257390975952,
+        "arousal": 0.5884060859680176,
+        "dominance": 0.48259589076042175,
+        "composite_score": 0.556118838737458,
+        "numeric_score": 0.544060346968057,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 119.35164148489633,
+        "f0_std_st": 3.6364808155422588,
+        "rms_mean": 0.06693287193775177,
+        "rms_std": 0.053528763353824615,
+        "voiced_ratio": 0.6652719665271967,
+        "duration_s": 7.644
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 25,
+      "segment_id": "25",
+      "text": "हम सब भाई-बहनों का जन्म पंजाब के बाहर ही हुआ था।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.5010562539100647,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.5228106379508972,
+        "arousal": 0.5521026253700256,
+        "dominance": 0.5427923202514648,
+        "composite_score": 0.523946100143165,
+        "numeric_score": 0.15521312517143615,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 129.98147214616296,
+        "f0_std_st": 3.742395233676957,
+        "rms_mean": 0.07302447408437729,
+        "rms_std": 0.043099865317344666,
+        "voiced_ratio": 0.7458563535911602,
+        "duration_s": 5.788
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 26,
+      "segment_id": "26",
+      "text": "मुझे याद है, पिताजी तो शायद साल में एकाध बार ही पंजाब आते हों, पर मां के दो-तीन चक्कर जरूर लग जाते थे।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.4351486265659332,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.4552501142024994,
+        "arousal": 0.5199850797653198,
+        "dominance": 0.5096151232719421,
+        "composite_score": 0.4547549716866436,
+        "numeric_score": -0.6692430791697579,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 124.21226710416906,
+        "f0_std_st": 4.608693922671024,
+        "rms_mean": 0.06342264264822006,
+        "rms_std": 0.053293514996767044,
+        "voiced_ratio": 0.6342592592592593,
+        "duration_s": 6.908
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 27,
+      "segment_id": "27",
+      "text": "हममें जो छोटा होता वह मां के साथ जाता, और जबसे मुझे याद है मेरी छोटी बहन ही उनके साथ जाएा करती थी।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.32217535376548767,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.45511457324028015,
+        "arousal": 0.5199934244155884,
+        "dominance": 0.5339406728744507,
+        "composite_score": 0.4549498126961117,
+        "numeric_score": -0.6232213278022551,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 119.17513287047666,
+        "f0_std_st": 3.785499145518109,
+        "rms_mean": 0.057757310569286346,
+        "rms_std": 0.04302683100104332,
+        "voiced_ratio": 0.7371794871794872,
+        "duration_s": 4.988
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 28,
+      "segment_id": "28",
+      "text": "उन दिनों, पंजाब का विभाजन घोषित हो चुका था, पंजाब की पाँचों नदियों का जल उन्माद की तीखी शराब बन चुका था, मां ने फिर पंजाब जाने का फैसला किया था।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8830463886260986,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5228094458580017,
+        "arousal": 0.5779806971549988,
+        "dominance": 0.5835714936256409,
+        "composite_score": 0.5246576153862421,
+        "numeric_score": 0.176458494760524,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 118.37993554487257,
+        "f0_std_st": 5.167973638046707,
+        "rms_mean": 0.06315234303474426,
+        "rms_std": 0.04665857180953026,
+        "voiced_ratio": 0.7421875,
+        "duration_s": 8.188
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 29,
+      "segment_id": "29",
+      "text": "सभी ने ऐसे विरोध किया जैसे वे जलती आग में कूदने जा रही हों।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.3563573658466339,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5682945847511292,
+        "arousal": 0.598728597164154,
+        "dominance": 0.595111072063446,
+        "composite_score": 0.5750977687973529,
+        "numeric_score": 0.6654549604367745,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 125.79104008440063,
+        "f0_std_st": 3.3894239443534078,
+        "rms_mean": 0.06881901621818542,
+        "rms_std": 0.04785101115703583,
+        "voiced_ratio": 0.6403940886699507,
+        "duration_s": 6.492
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 30,
+      "segment_id": "30",
+      "text": "और वह सचमुच आग में कूदने जैसा ही तो था।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.6215621829032898,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.4949868321418762,
+        "arousal": 0.5490013360977173,
+        "dominance": 0.4309026002883911,
+        "composite_score": 0.49470739221577514,
+        "numeric_score": -0.2255173150644463,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 113.5132467405954,
+        "f0_std_st": 4.116747527366918,
+        "rms_mean": 0.062251802533864975,
+        "rms_std": 0.05018661171197891,
+        "voiced_ratio": 0.6306306306306306,
+        "duration_s": 3.548
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 31,
+      "segment_id": "31",
+      "text": "परन्तु पिताजी सहित हम सब जानते थे कि मां को अपने निश्चय से डिगाना कोई आसान बात नहीं।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.520778477191925,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5491437315940857,
+        "arousal": 0.578386664390564,
+        "dominance": 0.5332065224647522,
+        "composite_score": 0.5523567114658381,
+        "numeric_score": 0.49600954513646656,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 120.0141078444879,
+        "f0_std_st": 4.191490905303476,
+        "rms_mean": 0.06190698221325874,
+        "rms_std": 0.04509543254971504,
+        "voiced_ratio": 0.675146771037182,
+        "duration_s": 16.348
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 32,
+      "segment_id": "32",
+      "text": "उन्होंने सबकी बातों को हँसकर टाल दिया।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7522585391998291,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5081650018692017,
+        "arousal": 0.5568692684173584,
+        "dominance": 0.4954274594783783,
+        "composite_score": 0.5084783919340765,
+        "numeric_score": -0.043364087392545714,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 123.61446420173905,
+        "f0_std_st": 4.1911732455329425,
+        "rms_mean": 0.06791198998689651,
+        "rms_std": 0.052972640842199326,
+        "voiced_ratio": 0.7274143302180686,
+        "duration_s": 20.54
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 33,
+      "segment_id": "33",
+      "text": "बीस-बाईस दिनों में वह वापस आ गयीं।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7865208387374878,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.49736401438713074,
+        "arousal": 0.5484417676925659,
+        "dominance": 0.5581771731376648,
+        "composite_score": 0.49732219641976144,
+        "numeric_score": -0.19549761234687202,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 130.037262683844,
+        "f0_std_st": 4.0029941216189995,
+        "rms_mean": 0.07132265716791153,
+        "rms_std": 0.054233960807323456,
+        "voiced_ratio": 0.7513812154696132,
+        "duration_s": 5.788
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 34,
+      "segment_id": "34",
+      "text": "गाँव के घर का बहुत-सा सामान वे 'बुक' करा आयी थीं।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.4129789173603058,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.45508748292922974,
+        "arousal": 0.508004367351532,
+        "dominance": 0.5250180959701538,
+        "composite_score": 0.45517481194984866,
+        "numeric_score": -0.5825719955468724,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 126.60034195076084,
+        "f0_std_st": 3.41735765370459,
+        "rms_mean": 0.05415579304099083,
+        "rms_std": 0.02910594828426838,
+        "voiced_ratio": 0.7272727272727273,
+        "duration_s": 3.164
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 35,
+      "segment_id": "35",
+      "text": "अपने साथ वे अपना पुराना चरखा और दही मथने की मथनी ले आयी थीं।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.6296512484550476,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.4678730070590973,
+        "arousal": 0.5277271866798401,
+        "dominance": 0.5707796812057495,
+        "composite_score": 0.46794487524469364,
+        "numeric_score": -0.5240936475051354,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 116.54333601577711,
+        "f0_std_st": 4.2746334318346,
+        "rms_mean": 0.0580076202750206,
+        "rms_std": 0.041374657303094864,
+        "voiced_ratio": 0.7433862433862434,
+        "duration_s": 12.092
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 36,
+      "segment_id": "36",
+      "text": "फिर सारे पंजाब में आग लग गयी।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.2754349112510681,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.4064382314682007,
+        "arousal": 0.5183120965957642,
+        "dominance": 0.36076977849006653,
+        "composite_score": 0.4012808308266905,
+        "numeric_score": -0.8769872450600898,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 113.07028488809678,
+        "f0_std_st": 4.086522360980103,
+        "rms_mean": 0.05436541885137558,
+        "rms_std": 0.03905597701668739,
+        "voiced_ratio": 0.9038461538461539,
+        "duration_s": 1.66
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 37,
+      "segment_id": "37",
+      "text": "घर के घर, गाँव के गाँव और शहर के शहर उस आग में जलने लगे।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.9148236513137817,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.4942493140697479,
+        "arousal": 0.5406621694564819,
+        "dominance": 0.5481895208358765,
+        "composite_score": 0.4941711325205227,
+        "numeric_score": -0.23313536924970243,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 123.93280518910215,
+        "f0_std_st": 4.320545429934561,
+        "rms_mean": 0.06306557357311249,
+        "rms_std": 0.047057509422302246,
+        "voiced_ratio": 0.8315412186379928,
+        "duration_s": 8.924
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 38,
+      "segment_id": "38",
+      "text": "आग रुकी तो लगा इधर तक सपाट फैली हुई जमीन अमृतसर और लाहौर के बीच से फट गयी है और उस पार का फटा हुआ हिस्सा बीच में गहरी खाई छोड़कर न जाने कितना उधर खिसक गया है।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.6789742112159729,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.4410611689090729,
+        "arousal": 0.5235452651977539,
+        "dominance": 0.34248900413513184,
+        "composite_score": 0.4372588010413502,
+        "numeric_score": -0.7188833684313064,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 105.8616062684204,
+        "f0_std_st": 4.084261988126414,
+        "rms_mean": 0.05888167768716812,
+        "rms_std": 0.03655827417969704,
+        "voiced_ratio": 0.8780487804878049,
+        "duration_s": 1.308
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 39,
+      "segment_id": "39",
+      "text": "हम सब भूल-से गये कि उस गहरी खाई के उस पार हमारा अपना गाँव था।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.5113409161567688,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.4357773959636688,
+        "arousal": 0.5060968399047852,
+        "dominance": 0.4508203864097595,
+        "composite_score": 0.4345517307847492,
+        "numeric_score": -0.7377440267913558,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 118.30438295031159,
+        "f0_std_st": 3.6556570642537807,
+        "rms_mean": 0.05446173995733261,
+        "rms_std": 0.03937811776995659,
+        "voiced_ratio": 0.7070707070707071,
+        "duration_s": 3.164
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 40,
+      "segment_id": "40",
+      "text": "पक्की सड़क के किनारे पीछे की ओर एक नहर थी, और पास ही झेलम नदी, अल्हड़ लड़की की तरह उछलती-कूदती बहती थी !",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.5957918763160706,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.3656603991985321,
+        "arousal": 0.45200738310813904,
+        "dominance": 0.5053000450134277,
+        "composite_score": 0.36136806059751925,
+        "numeric_score": -0.9374119078107452,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 115.5976485164127,
+        "f0_std_st": 3.828484972893195,
+        "rms_mean": 0.047657303512096405,
+        "rms_std": 0.03243006765842438,
+        "voiced_ratio": 0.8349514563106796,
+        "duration_s": 3.292
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 41,
+      "segment_id": "41",
+      "text": "मैं मां के साथ खाई पर राजकीय नियम के बांधे हुए पुल से गुज़रकर उसी ओर जा रहा था जो कल कितना अपना था, आज कितना पराया है!",
+      "text_sentiment": {
+        "label": "Very Positive",
+        "stars": 5,
+        "confidence": 0.5418578386306763,
+        "numeric_score": 1.0,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.4562555253505707,
+        "arousal": 0.5124234557151794,
+        "dominance": 0.5145451426506042,
+        "composite_score": 0.45606764593741667,
+        "numeric_score": -0.593809403221856,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 130.0710953099331,
+        "f0_std_st": 3.08608227508499,
+        "rms_mean": 0.06674835830926895,
+        "rms_std": 0.04403453320264816,
+        "voiced_ratio": 0.7710843373493976,
+        "duration_s": 5.308
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 42,
+      "segment_id": "42",
+      "text": "मैं एक पुस्तक के पन्ने उलट रहा था, मां ने पूछा, ''यह गाड़ी सराई स्टेशन पर रुकेगी?''\n\n\nमैंने कुछ सोचा फिर कहा, 'हाँ,  शायद रुके।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.4629214107990265,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5210082530975342,
+        "arousal": 0.5877479314804077,
+        "dominance": 0.3837614059448242,
+        "composite_score": 0.5215210653459873,
+        "numeric_score": 0.14325875700637328,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 124.63309838151763,
+        "f0_std_st": 3.9113187081632805,
+        "rms_mean": 0.06158186495304108,
+        "rms_std": 0.05138588324189186,
+        "voiced_ratio": 0.5695067264573991,
+        "duration_s": 7.132
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 43,
+      "segment_id": "43",
+      "text": "पर पहुँचेगी रात के एक-दो बजे।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8574526309967041,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5448431968688965,
+        "arousal": 0.5954827666282654,
+        "dominance": 0.5444362759590149,
+        "composite_score": 0.5484781786997368,
+        "numeric_score": 0.4878992985974927,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 136.12191540571797,
+        "f0_std_st": 4.432766078214218,
+        "rms_mean": 0.08852449059486389,
+        "rms_std": 0.06206854432821274,
+        "voiced_ratio": 0.7766990291262136,
+        "duration_s": 9.884
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 44,
+      "segment_id": "44",
+      "text": "हम लोग गहरी नींद में सो रहे होंगे।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.49497881531715393,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.528066098690033,
+        "arousal": 0.5562794208526611,
+        "dominance": 0.5562305450439453,
+        "composite_score": 0.5296638828515295,
+        "numeric_score": 0.23068431503164183,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 137.50101794976436,
+        "f0_std_st": 2.5279413159643553,
+        "rms_mean": 0.08732517063617706,
+        "rms_std": 0.06517492979764938,
+        "voiced_ratio": 0.7,
+        "duration_s": 2.236
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 45,
+      "segment_id": "45",
+      "text": "स्टेशन कब आकर निकल जाएगा, पता भी नहीं लगेगा।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.49898770451545715,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5382386445999146,
+        "arousal": 0.5658094882965088,
+        "dominance": 0.4514041543006897,
+        "composite_score": 0.5394170179091959,
+        "numeric_score": 0.372615479979423,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 121.96947108304063,
+        "f0_std_st": 4.168685076237251,
+        "rms_mean": 0.06628454476594925,
+        "rms_std": 0.04972505569458008,
+        "voiced_ratio": 0.7892156862745098,
+        "duration_s": 6.524
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 46,
+      "segment_id": "46",
+      "text": "और अब अपना रखा ही क्या है वहाँ?'\n\n\nमां के चेहरे पर खिसियाहट-सी दौड़ गयी।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.49421238899230957,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.6290408968925476,
+        "arousal": 0.6568548083305359,
+        "dominance": 0.5806328654289246,
+        "composite_score": 0.6466735912117314,
+        "numeric_score": 0.9430957132449045,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 94.29683811383796,
+        "f0_std_st": 4.702292585064817,
+        "rms_mean": 0.04270604997873306,
+        "rms_std": 0.0327010340988636,
+        "voiced_ratio": 0.9375,
+        "duration_s": 0.508
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 47,
+      "segment_id": "47",
+      "text": "बोलीं, ''तुम्हारे लिए पहले भी वहाँ क्या रखा था?''\n\n\nमेरी बात से मां को चोट पहुँची थी।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7988384962081909,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5281026363372803,
+        "arousal": 0.5971059799194336,
+        "dominance": 0.6914210319519043,
+        "composite_score": 0.5317364196873592,
+        "numeric_score": 0.26702299902425586,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 129.6842722156094,
+        "f0_std_st": 4.779820712799972,
+        "rms_mean": 0.0921371728181839,
+        "rms_std": 0.06311134248971939,
+        "voiced_ratio": 0.6935483870967742,
+        "duration_s": 3.964
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 48,
+      "segment_id": "48",
+      "text": "बिना और कुछ बोले मैं सिर झुकाकर अपनी पुस्तक के पन्नों में उलझ गया।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.554698646068573,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.43991759419441223,
+        "arousal": 0.49808913469314575,
+        "dominance": 0.4975084364414215,
+        "composite_score": 0.43979225781367814,
+        "numeric_score": -0.725859187101521,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 129.50648633063997,
+        "f0_std_st": 3.299687248437342,
+        "rms_mean": 0.07890650629997253,
+        "rms_std": 0.051830992102622986,
+        "voiced_ratio": 0.898876404494382,
+        "duration_s": 2.844
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 49,
+      "segment_id": "49",
+      "text": "धीरे-धीरे अँधेरा छाने लगा।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8592371940612793,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.4869776964187622,
+        "arousal": 0.538689911365509,
+        "dominance": 0.5797446370124817,
+        "composite_score": 0.4869449891956361,
+        "numeric_score": -0.3300962908757281,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 125.40457619691615,
+        "f0_std_st": 4.198012519721299,
+        "rms_mean": 0.06847351789474487,
+        "rms_std": 0.05094979703426361,
+        "voiced_ratio": 0.7709677419354839,
+        "duration_s": 9.916
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 50,
+      "segment_id": "50",
+      "text": "मां ने पोटली खोलकर खाने के लिए कुछ निकाला।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.9064498543739319,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5354746580123901,
+        "arousal": 0.5698442459106445,
+        "dominance": 0.5977969765663147,
+        "composite_score": 0.538300728262969,
+        "numeric_score": 0.3383077568677278,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 122.53931914679485,
+        "f0_std_st": 3.8714011813738827,
+        "rms_mean": 0.07798546552658081,
+        "rms_std": 0.05325800180435181,
+        "voiced_ratio": 0.7111517367458866,
+        "duration_s": 17.5
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 51,
+      "segment_id": "51",
+      "text": "मेरे एक दूर के मामाजी हमारे साथ थे।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7550062537193298,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.47607046365737915,
+        "arousal": 0.5302660465240479,
+        "dominance": 0.5202784538269043,
+        "composite_score": 0.4757121473457704,
+        "numeric_score": -0.4552985104377934,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 112.452965391131,
+        "f0_std_st": 3.651305664806938,
+        "rms_mean": 0.07672863453626633,
+        "rms_std": 0.057225197553634644,
+        "voiced_ratio": 0.7534246575342466,
+        "duration_s": 2.332
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 52,
+      "segment_id": "52",
+      "text": "तीनों ने मिलकर कुछ खाया और सोने की तैयारी करने लगे।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.6671271920204163,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5488952994346619,
+        "arousal": 0.601493775844574,
+        "dominance": 0.6112133860588074,
+        "composite_score": 0.5541163408220489,
+        "numeric_score": 0.524742360551833,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 115.13619666818033,
+        "f0_std_st": 4.091401912573152,
+        "rms_mean": 0.07792022079229355,
+        "rms_std": 0.058799777179956436,
+        "voiced_ratio": 0.8008849557522124,
+        "duration_s": 7.228
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 53,
+      "segment_id": "53",
+      "text": "मामाजी तो दस मिनट में ही खर्राटे भरने लगे।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.4707087576389313,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5326548218727112,
+        "arousal": 0.610332190990448,
+        "dominance": 0.634864091873169,
+        "composite_score": 0.5366000641362388,
+        "numeric_score": 0.3238617851722564,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 117.59366503738589,
+        "f0_std_st": 4.55626087614478,
+        "rms_mean": 0.07269039750099182,
+        "rms_std": 0.053906772285699844,
+        "voiced_ratio": 0.4292682926829268,
+        "duration_s": 6.556
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 54,
+      "segment_id": "54",
+      "text": "मैं भी एक ओर लुढ़क गया।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.4535856246948242,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.6522896885871887,
+        "arousal": 0.6572604179382324,
+        "dominance": 0.5771109461784363,
+        "composite_score": 0.6729648628124557,
+        "numeric_score": 0.9739498688697295,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 132.71549838805726,
+        "f0_std_st": 3.499583308528793,
+        "rms_mean": 0.11186234652996063,
+        "rms_std": 0.05404701456427574,
+        "voiced_ratio": 0.8,
+        "duration_s": 1.916
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 55,
+      "segment_id": "55",
+      "text": "मां वैसी ही बैठी रहीं।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.590160608291626,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.4980515241622925,
+        "arousal": 0.5716825723648071,
+        "dominance": 0.7041470408439636,
+        "composite_score": 0.4980790744541272,
+        "numeric_score": -0.1633362667284226,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 116.39823485092738,
+        "f0_std_st": 2.406526174329268,
+        "rms_mean": 0.08229250460863113,
+        "rms_std": 0.04392099380493164,
+        "voiced_ratio": 0.7857142857142857,
+        "duration_s": 1.34
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 56,
+      "segment_id": "56",
+      "text": "कुछ देर बाद एकाएक मेरी आँख खुली, देखा मां, वैसे ही बाहर फैले हुए अँधेरे की ओर निष्पलक देखती हुई बैठी हैं।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.3957107365131378,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5117723345756531,
+        "arousal": 0.558946430683136,
+        "dominance": 0.5356569290161133,
+        "composite_score": 0.5123892163078508,
+        "numeric_score": 0.009203695280844517,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 119.4290927179003,
+        "f0_std_st": 4.263455424206405,
+        "rms_mean": 0.07048969715833664,
+        "rms_std": 0.05224078148603439,
+        "voiced_ratio": 0.5121951219512195,
+        "duration_s": 2.62
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 57,
+      "segment_id": "57",
+      "text": "घड़ी देखी, साढ़े दस बज गये थे।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.35435473918914795,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.535832405090332,
+        "arousal": 0.5667107701301575,
+        "dominance": 0.548673152923584,
+        "composite_score": 0.5380533462865545,
+        "numeric_score": 0.34923619856076743,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 130.28050081918727,
+        "f0_std_st": 4.101785339274504,
+        "rms_mean": 0.07701557129621506,
+        "rms_std": 0.05506452918052673,
+        "voiced_ratio": 0.757085020242915,
+        "duration_s": 7.9
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 58,
+      "segment_id": "58",
+      "text": "मैंने कहा, ''मां तुम भी लेट जाओ न।''\n\n\n''अच्छा!'' उनके मुंह से निकला और वे अधलेटी-सी हो गयी।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.4395962655544281,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5396592617034912,
+        "arousal": 0.6000359058380127,
+        "dominance": 0.6252036094665527,
+        "composite_score": 0.5440303642141278,
+        "numeric_score": 0.3798768737857289,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 127.96455607628899,
+        "f0_std_st": 2.917757679544896,
+        "rms_mean": 0.07452388852834702,
+        "rms_std": 0.05357092618942261,
+        "voiced_ratio": 0.7317073170731707,
+        "duration_s": 3.932
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 59,
+      "segment_id": "59",
+      "text": "उस अधनींदी अवस्था में मैंने कोई स्वप्न देखा, ऐसा तो मुझे याद नहीं आता, पर उस नींद में भी कुछ घबराहट अवश्य होती रही थी।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.4879930913448334,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5228785872459412,
+        "arousal": 0.6024827361106873,
+        "dominance": 0.46306729316711426,
+        "composite_score": 0.5242481740766219,
+        "numeric_score": 0.1864361887249774,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 107.07447732564262,
+        "f0_std_st": 4.545466955250015,
+        "rms_mean": 0.08424785733222961,
+        "rms_std": 0.06393253803253174,
+        "voiced_ratio": 0.8076923076923077,
+        "duration_s": 0.828
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 60,
+      "segment_id": "60",
+      "text": "शायद किसी अस्पष्ट स्वप्न की ही घबराहट हो।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.5479184985160828,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.529625654220581,
+        "arousal": 0.5835795998573303,
+        "dominance": 0.6078682541847229,
+        "composite_score": 0.5323737141782721,
+        "numeric_score": 0.25867556889585147,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 127.15957237305952,
+        "f0_std_st": 3.784929356117855,
+        "rms_mean": 0.06291431933641434,
+        "rms_std": 0.049536291509866714,
+        "voiced_ratio": 0.6916666666666667,
+        "duration_s": 3.836
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 61,
+      "segment_id": "61",
+      "text": "कोई लाल-सी तरल चीज मुझे अपने चारों ओर फिरती अनुभव होती थी और मुझे लग रहा था उस लाल-लाल गाढ़ी-सी चीज पर मेरे पैर फच-फच पड़ रहे हैं।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8361467719078064,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5410710573196411,
+        "arousal": 0.5847383737564087,
+        "dominance": 0.4977482557296753,
+        "composite_score": 0.5434778733742264,
+        "numeric_score": 0.4156186148874143,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 113.44383124247403,
+        "f0_std_st": 4.304529393403737,
+        "rms_mean": 0.06398650258779526,
+        "rms_std": 0.049107734113931656,
+        "voiced_ratio": 0.8598130841121495,
+        "duration_s": 3.42
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 62,
+      "segment_id": "62",
+      "text": "फिर एकाएक मैं हड़बड़ा कर उठा।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.37752461433410645,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5716870427131653,
+        "arousal": 0.6104074120521545,
+        "dominance": 0.47226572036743164,
+        "composite_score": 0.5765848355145191,
+        "numeric_score": 0.7048821567948632,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 135.44702902611542,
+        "f0_std_st": 3.914690729318079,
+        "rms_mean": 0.06560581177473068,
+        "rms_std": 0.04495692253112793,
+        "voiced_ratio": 0.7613168724279835,
+        "duration_s": 7.772
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 63,
+      "segment_id": "63",
+      "text": "मां मुझे झकझोर रही थीं और अजीब-सी घबराहट और उत्तेजना से उनके हाथ काँप रहे थे।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.3781079053878784,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.598550021648407,
+        "arousal": 0.6359543204307556,
+        "dominance": 0.612127423286438,
+        "composite_score": 0.6115593670696401,
+        "numeric_score": 0.8532376206723762,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 134.09327235792264,
+        "f0_std_st": 3.44422568366244,
+        "rms_mean": 0.0729583129286766,
+        "rms_std": 0.04652957618236542,
+        "voiced_ratio": 0.8012820512820513,
+        "duration_s": 4.988
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 64,
+      "segment_id": "64",
+      "text": "''क्या है?''\n\n\n''देखो यह बाहर शोर कैसा है?''\n\n\nमैंने बाहर झाँककर देखा।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7564672827720642,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5614238977432251,
+        "arousal": 0.6056300401687622,
+        "dominance": 0.7068043947219849,
+        "composite_score": 0.5700582394107274,
+        "numeric_score": 0.6134055323582097,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 112.1039301435134,
+        "f0_std_st": 4.093655579063778,
+        "rms_mean": 0.05218071490526199,
+        "rms_std": 0.039556361734867096,
+        "voiced_ratio": 0.6147540983606558,
+        "duration_s": 3.9
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 65,
+      "segment_id": "65",
+      "text": "हमारी गाड़ी छोटे-से स्टेशन पर खड़ी थी।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.5690253973007202,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5073524117469788,
+        "arousal": 0.5708079934120178,
+        "dominance": 0.6048330664634705,
+        "composite_score": 0.5079595323630223,
+        "numeric_score": -0.05280734629814982,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 124.81199670915937,
+        "f0_std_st": 4.726561912970863,
+        "rms_mean": 0.05290207266807556,
+        "rms_std": 0.0342177152633667,
+        "voiced_ratio": 0.7012987012987013,
+        "duration_s": 2.46
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 66,
+      "segment_id": "66",
+      "text": "प्लेट-फॉर्म पर लैम्प पोस्टों की हलकी-हलकी रोशनी थी और अजीब-सा कोलाहल वहाँ छाया हुआ था।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.9294881224632263,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.47571733593940735,
+        "arousal": 0.5739872455596924,
+        "dominance": 0.7209215760231018,
+        "composite_score": 0.47615243102598764,
+        "numeric_score": -0.48138467347461855,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 116.00364924676143,
+        "f0_std_st": 6.1933512737450975,
+        "rms_mean": 0.0457138754427433,
+        "rms_std": 0.02670656517148018,
+        "voiced_ratio": 0.7692307692307693,
+        "duration_s": 0.828
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 67,
+      "segment_id": "67",
+      "text": "एकबारगी मेरा रोयां-रोयां काँप उठा।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7102378606796265,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5397759675979614,
+        "arousal": 0.5758885145187378,
+        "dominance": 0.5856240391731262,
+        "composite_score": 0.5429649551635092,
+        "numeric_score": 0.4036453414349288,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 133.02772353158394,
+        "f0_std_st": 3.9234228028137803,
+        "rms_mean": 0.08586040139198303,
+        "rms_std": 0.05833006650209427,
+        "voiced_ratio": 0.7815126050420168,
+        "duration_s": 11.42
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 68,
+      "segment_id": "68",
+      "text": "चौदह साल पहले की अनेक सुनी-सुनायी घटनाएं बिजली बनकर कौंध गयी, जब दंगाइयों ने कितनी गाडियों को जहां-तहां रोककर लोगों को गाजर-मूली की तरह काट डाला था।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8894961476325989,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.7249122262001038,
+        "arousal": 0.765100359916687,
+        "dominance": 0.018347080796957016,
+        "composite_score": 0.7281195285496801,
+        "numeric_score": 0.9981443144257532,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 125.95933703257653,
+        "f0_std_st": 3.7536318501040697,
+        "rms_mean": 0.09627589583396912,
+        "rms_std": 0.04818755388259888,
+        "voiced_ratio": 1.0,
+        "duration_s": 1.052
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 69,
+      "segment_id": "69",
+      "text": "मामाजी जागकर मेरा कन्धा हिला रहे थे।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.5325102210044861,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.4923816919326782,
+        "arousal": 0.5485788583755493,
+        "dominance": 0.519745945930481,
+        "composite_score": 0.4921692936742098,
+        "numeric_score": -0.27915155327909796,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 128.10621600932168,
+        "f0_std_st": 4.428854066904409,
+        "rms_mean": 0.08322828263044357,
+        "rms_std": 0.06214248761534691,
+        "voiced_ratio": 0.773109243697479,
+        "duration_s": 3.804
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 70,
+      "segment_id": "70",
+      "text": "''अरे क्या बात है?''\n\n\nतभी मेरे कानों में आवांज पड़ी।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8111893534660339,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.47015297412872314,
+        "arousal": 0.5188135504722595,
+        "dominance": 0.4399552047252655,
+        "composite_score": 0.4692151760501978,
+        "numeric_score": -0.4856050458970782,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 119.77451603401764,
+        "f0_std_st": 3.940211471470699,
+        "rms_mean": 0.07614725828170776,
+        "rms_std": 0.03968488425016403,
+        "voiced_ratio": 0.9333333333333333,
+        "duration_s": 1.436
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 71,
+      "segment_id": "71",
+      "text": "उस भीड़ में से कोई चिल्ला रहा था-''अरे इस गाड़ी में कोई सराई का है?''\n\n\n''यह कौन-सा स्टेशन है?'' मैंने मां से पूछा।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.4668245315551758,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5188171863555908,
+        "arousal": 0.5624322891235352,
+        "dominance": 0.4769251346588135,
+        "composite_score": 0.5195035924025739,
+        "numeric_score": 0.10961014759226943,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 141.1360811464985,
+        "f0_std_st": 3.154247136798257,
+        "rms_mean": 0.08190304040908813,
+        "rms_std": 0.06225461885333061,
+        "voiced_ratio": 0.6779661016949152,
+        "duration_s": 1.884
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 72,
+      "segment_id": "72",
+      "text": "मां ने कहा, ''सराई-अपने गाँव का स्टेशन।''\n\n\nबाहर से फिर आवांज आयी, 'अरे इस गाड़ी में कोई सराई का है?'\n\n\nमैंने मां की ओर देखा।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8680985569953918,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.4740257263183594,
+        "arousal": 0.528723955154419,
+        "dominance": 0.4447101354598999,
+        "composite_score": 0.4730639707016532,
+        "numeric_score": -0.48661820915569715,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 124.67543897132974,
+        "f0_std_st": 3.907445505152391,
+        "rms_mean": 0.0765717551112175,
+        "rms_std": 0.058601003140211105,
+        "voiced_ratio": 0.8867924528301887,
+        "duration_s": 3.388
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 73,
+      "segment_id": "73",
+      "text": "उनके चेहरे पर पूर्ण आश्वस्तता थी।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.7328532934188843,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.5485609173774719,
+        "arousal": 0.5786031484603882,
+        "dominance": 0.613315224647522,
+        "composite_score": 0.5529744845148002,
+        "numeric_score": 0.5101301964630703,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 125.2905822107758,
+        "f0_std_st": 3.930584580117011,
+        "rms_mean": 0.08513054251670837,
+        "rms_std": 0.05915889889001846,
+        "voiced_ratio": 0.8267326732673267,
+        "duration_s": 12.924
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 74,
+      "segment_id": "74",
+      "text": "''पूछो इनसे, क्या बात है?''\n\n\nमैंने खिड़की से गरदन निकाली।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8797473907470703,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.49505382776260376,
+        "arousal": 0.5340906381607056,
+        "dominance": 0.5109327435493469,
+        "composite_score": 0.49495240474120217,
+        "numeric_score": -0.22164145828157344,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 120.83894841181792,
+        "f0_std_st": 3.7238913914057896,
+        "rms_mean": 0.08035700768232346,
+        "rms_std": 0.055502019822597504,
+        "voiced_ratio": 0.802547770700637,
+        "duration_s": 5.02
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 75,
+      "segment_id": "75",
+      "text": "बहुत-से लोग घूमते हुए पुकार रहे थे, ''अरे कोई सराई का है?''\n\n\nपास से जाते हुए एक आदमी को बुलाकर मैंने पूछा, ''क्या बात है जी?''\n\n\n''आपमें कोई इस गाँव का है?''\n\n\n''हां, हम हैं इस गाँव के...'' मां आगे आकर बोली।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.4214964509010315,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.49474990367889404,
+        "arousal": 0.5637882351875305,
+        "dominance": 0.5106106996536255,
+        "composite_score": 0.494532935999608,
+        "numeric_score": -0.22529469305014485,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 120.1094875011273,
+        "f0_std_st": 3.9098096177969275,
+        "rms_mean": 0.06194709241390228,
+        "rms_std": 0.04691852629184723,
+        "voiced_ratio": 0.7652173913043478,
+        "duration_s": 7.356
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 76,
+      "segment_id": "76",
+      "text": "''तुम सराई की हो?'' उस आदमी ने जोर देकर पूछा।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7297191023826599,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5408720970153809,
+        "arousal": 0.5862928628921509,
+        "dominance": 0.6017814874649048,
+        "composite_score": 0.5446643689078327,
+        "numeric_score": 0.3962002703662687,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 126.66663435927587,
+        "f0_std_st": 3.777760506174797,
+        "rms_mean": 0.06291268765926361,
+        "rms_std": 0.045931510627269745,
+        "voiced_ratio": 0.6061452513966481,
+        "duration_s": 11.452
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 77,
+      "segment_id": "77",
+      "text": "''हां, जी।''\n\n\nमां के इतना कहते ही स्टेशन पर चारों ओर शोर मच गया।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.5494431853294373,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.4777302145957947,
+        "arousal": 0.5226168632507324,
+        "dominance": 0.510867714881897,
+        "composite_score": 0.477451399707446,
+        "numeric_score": -0.45557168101091683,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 127.45637404085055,
+        "f0_std_st": 4.62312734538136,
+        "rms_mean": 0.07792003452777863,
+        "rms_std": 0.056005410850048065,
+        "voiced_ratio": 0.7251461988304093,
+        "duration_s": 5.468
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 78,
+      "segment_id": "78",
+      "text": "इधर-उधर घूमते हुए बहुत-से आदमी हमारे डिब्बे के सामने जमा हो गये।",
+      "text_sentiment": {
+        "label": "Very Positive",
+        "stars": 5,
+        "confidence": 0.503376841545105,
+        "numeric_score": 1.0,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.49917852878570557,
+        "arousal": 0.55079585313797,
+        "dominance": 0.5625543594360352,
+        "composite_score": 0.49916528378313535,
+        "numeric_score": -0.1783824000566838,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 121.1882860350882,
+        "f0_std_st": 4.887830885287257,
+        "rms_mean": 0.07452581077814102,
+        "rms_std": 0.052323438227176666,
+        "voiced_ratio": 0.7669172932330827,
+        "duration_s": 8.508
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 79,
+      "segment_id": "79",
+      "text": "फिर कई आवांजें एक-साथ आयीं।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.7196014523506165,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.517665445804596,
+        "arousal": 0.5637585520744324,
+        "dominance": 0.5280565619468689,
+        "composite_score": 0.5186091977384973,
+        "numeric_score": 0.09468518635205755,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 117.19385837992658,
+        "f0_std_st": 4.072960304697823,
+        "rms_mean": 0.06865368783473969,
+        "rms_std": 0.05300989747047424,
+        "voiced_ratio": 0.583732057416268,
+        "duration_s": 6.684
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 80,
+      "segment_id": "80",
+      "text": "''हम सराई के ही हैं...'' मां ने जोर देकर कहा, ''इसी गांव के?''\n\n \n\nउपस्थित जनसमुदाय में एक कोलाहल-सा हुआ।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.835768461227417,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.4737544357776642,
+        "arousal": 0.5252345204353333,
+        "dominance": 0.539857029914856,
+        "composite_score": 0.4736101942774423,
+        "numeric_score": -0.47455211417365567,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 123.32514874516544,
+        "f0_std_st": 4.878257117959681,
+        "rms_mean": 0.06119696423411369,
+        "rms_std": 0.03896501287817955,
+        "voiced_ratio": 0.8253012048192772,
+        "duration_s": 5.308
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 81,
+      "segment_id": "81",
+      "text": "किसी की आवांज आयी, ''तुम किसके घर से हो?''\n\n\nमां ने मेरी ओर देखा।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8199256658554077,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.4765208959579468,
+        "arousal": 0.5289625525474548,
+        "dominance": 0.3898985981941223,
+        "composite_score": 0.47525363810626775,
+        "numeric_score": -0.4257497697508396,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 118.36832678776966,
+        "f0_std_st": 4.116551512851558,
+        "rms_mean": 0.05976078286767006,
+        "rms_std": 0.038454458117485046,
+        "voiced_ratio": 0.8051948051948052,
+        "duration_s": 2.46
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 82,
+      "segment_id": "82",
+      "text": "मैंने कहा, ''मेरे पिताजी का नाम सरदार मूलासिंह है।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.5233754515647888,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.4329020380973816,
+        "arousal": 0.5106691122055054,
+        "dominance": 0.4336552917957306,
+        "composite_score": 0.4310554728490017,
+        "numeric_score": -0.7404070434655707,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 114.52289566499715,
+        "f0_std_st": 3.495848687953145,
+        "rms_mean": 0.04981444776058197,
+        "rms_std": 0.03337429463863373,
+        "voiced_ratio": 0.6693548387096774,
+        "duration_s": 3.964
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 83,
+      "segment_id": "83",
+      "text": "ये मेरी मां हैं!''\n\n\n''तुम मूलासिंह के बेटे हो?'' कई लोग एक-साथ चिल्लाए, ''तुम मूलासिंह की बीवी हो...रवेलसिंह की भाभी?",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.3366911709308624,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5114261507987976,
+        "arousal": 0.5673879384994507,
+        "dominance": 0.6345593929290771,
+        "composite_score": 0.512448146719253,
+        "numeric_score": 0.0035763883900606958,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 119.45800419545238,
+        "f0_std_st": 3.8498332431418376,
+        "rms_mean": 0.05343113839626312,
+        "rms_std": 0.02608525939285755,
+        "voiced_ratio": 1.0,
+        "duration_s": 1.596
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 84,
+      "segment_id": "84",
+      "text": "कैसे हैं सब लोग...?'' कहते-कहते कितने ही हाथ हमारी ओर बढ़ने लगे।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.29321515560150146,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5814870595932007,
+        "arousal": 0.5858671069145203,
+        "dominance": 0.4201631546020508,
+        "composite_score": 0.5843159884614538,
+        "numeric_score": 0.7506332668479155,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 117.87616604395622,
+        "f0_std_st": 4.250521935997398,
+        "rms_mean": 0.06121620163321495,
+        "rms_std": 0.03624466061592102,
+        "voiced_ratio": 0.8780487804878049,
+        "duration_s": 1.308
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 85,
+      "segment_id": "85",
+      "text": "लोग हमारे सम्बन्धियों में सबकी कुशल-क्षेम पूछते हुए अपने हाथ की पोटलियाँ मुझे और मां को थमाते जा रहे थे।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.4576573371887207,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5622842907905579,
+        "arousal": 0.5874329805374146,
+        "dominance": 0.6751514673233032,
+        "composite_score": 0.5695693398327831,
+        "numeric_score": 0.5777753566316655,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 129.16097086476196,
+        "f0_std_st": 2.6251857077166942,
+        "rms_mean": 0.06469595432281494,
+        "rms_std": 0.04295366629958153,
+        "voiced_ratio": 0.8771929824561403,
+        "duration_s": 1.82
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 86,
+      "segment_id": "86",
+      "text": "मैं और मां गुमसुम से उन्हें ले-लेकर अपनी सीट पर रखते जा रहे थे।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8259307146072388,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.6324885487556458,
+        "arousal": 0.654801607131958,
+        "dominance": 0.4023740589618683,
+        "composite_score": 0.642544387957249,
+        "numeric_score": 0.9647898139004324,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 125.70164447522518,
+        "f0_std_st": 5.979094134287122,
+        "rms_mean": 0.07597678899765015,
+        "rms_std": 0.0459381565451622,
+        "voiced_ratio": 0.8823529411764706,
+        "duration_s": 1.084
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 87,
+      "segment_id": "87",
+      "text": "देखते-देखते हमारी बर्थ कपडों की छोटी-छोटी पोटलियों से भर गयी।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8328664302825928,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.47997769713401794,
+        "arousal": 0.5316562056541443,
+        "dominance": 0.5166366100311279,
+        "composite_score": 0.4796361614162052,
+        "numeric_score": -0.4228850313255446,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 121.07963067138901,
+        "f0_std_st": 4.575122485327689,
+        "rms_mean": 0.06491449475288391,
+        "rms_std": 0.05142739787697792,
+        "voiced_ratio": 0.8231939163498099,
+        "duration_s": 16.828
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 88,
+      "segment_id": "88",
+      "text": "मैं हक्का-बक्का-सा यह देख रहा था।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.4661174714565277,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.4854816794395447,
+        "arousal": 0.5603243112564087,
+        "dominance": 0.3767509162425995,
+        "composite_score": 0.48430913522164626,
+        "numeric_score": -0.3575850668566747,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 127.72821893977971,
+        "f0_std_st": 5.039433854809033,
+        "rms_mean": 0.05307130888104439,
+        "rms_std": 0.041184358298778534,
+        "voiced_ratio": 0.6559139784946236,
+        "duration_s": 2.972
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 89,
+      "segment_id": "89",
+      "text": "मां अपने सिर का कपड़ा बार-बार संभालती हुई हाथ जोड़ रही थीं।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.5497785210609436,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5638169050216675,
+        "arousal": 0.5910693407058716,
+        "dominance": 0.5470912456512451,
+        "composite_score": 0.5688441781813609,
+        "numeric_score": 0.6655968353450182,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 117.04826290119085,
+        "f0_std_st": 4.353291279020967,
+        "rms_mean": 0.06862794607877731,
+        "rms_std": 0.0541924424469471,
+        "voiced_ratio": 0.7530120481927711,
+        "duration_s": 5.308
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 90,
+      "segment_id": "90",
+      "text": "खुशी से उनके होंठ फड़फड़ा रहे थे।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.47456374764442444,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5455767512321472,
+        "arousal": 0.5738966464996338,
+        "dominance": 0.4884266257286072,
+        "composite_score": 0.5477679010032118,
+        "numeric_score": 0.45063507305227546,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 133.54619901968485,
+        "f0_std_st": 3.8776301849508785,
+        "rms_mean": 0.06851556152105331,
+        "rms_std": 0.04703341796994209,
+        "voiced_ratio": 0.7168141592920354,
+        "duration_s": 3.612
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 91,
+      "segment_id": "91",
+      "text": "मुंह से निकल कुछ भी न रहा था और लगता था आँखें अभी चू पड़ेंगी।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.5206894874572754,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5888786911964417,
+        "arousal": 0.6397130489349365,
+        "dominance": 0.596605122089386,
+        "composite_score": 0.6003987063174809,
+        "numeric_score": 0.8094451419042683,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 119.17135539835023,
+        "f0_std_st": 3.700093112018883,
+        "rms_mean": 0.056512922048568726,
+        "rms_std": 0.04200517758727074,
+        "voiced_ratio": 0.6094674556213018,
+        "duration_s": 5.404
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 92,
+      "segment_id": "92",
+      "text": "वहीं खड़े गार्ड ने हरी लालटेन ऊपर उठायी और कोट की जेब से सीटी निकाली।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7757137417793274,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5041414499282837,
+        "arousal": 0.5421127080917358,
+        "dominance": 0.4783898591995239,
+        "composite_score": 0.5042358946191848,
+        "numeric_score": -0.09758786899256881,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 121.64366435379917,
+        "f0_std_st": 5.450291506133058,
+        "rms_mean": 0.05172249674797058,
+        "rms_std": 0.030762411653995514,
+        "voiced_ratio": 0.8809523809523809,
+        "duration_s": 2.684
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 93,
+      "segment_id": "93",
+      "text": "मैंने देखा तीन-चार आदमियों ने उसे पकड़-सा लिया।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8584180474281311,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5454214811325073,
+        "arousal": 0.5807542204856873,
+        "dominance": 0.606294572353363,
+        "composite_score": 0.5495193576720234,
+        "numeric_score": 0.4692855843877765,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 122.2552141370087,
+        "f0_std_st": 4.596371108529608,
+        "rms_mean": 0.0618758425116539,
+        "rms_std": 0.04708557203412056,
+        "voiced_ratio": 0.6595744680851063,
+        "duration_s": 15.036
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 94,
+      "segment_id": "94",
+      "text": "''अरे बाबू, दो-चार मिनट और खड़ी रहने दे गाड़ी को।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8924359679222107,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.45042282342910767,
+        "arousal": 0.5137218236923218,
+        "dominance": 0.4789401888847351,
+        "composite_score": 0.44963038652322795,
+        "numeric_score": -0.6329066115911296,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 113.82545699751414,
+        "f0_std_st": 3.507649758811062,
+        "rms_mean": 0.047394827008247375,
+        "rms_std": 0.03517879545688629,
+        "voiced_ratio": 0.9423076923076923,
+        "duration_s": 1.66
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 95,
+      "segment_id": "95",
+      "text": "देखता नहीं, ये बीवी इसी गाँव की हैं...!'' और एक ने उसका लालटेन वाला हाथ पकड़कर नीचे कर दिया।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.7055359482765198,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.4518200159072876,
+        "arousal": 0.5245066285133362,
+        "dominance": 0.5607192516326904,
+        "composite_score": 0.4518861969259729,
+        "numeric_score": -0.6381570806327492,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 114.75586977407124,
+        "f0_std_st": 3.25968780388133,
+        "rms_mean": 0.054700739681720734,
+        "rms_std": 0.04415898770093918,
+        "voiced_ratio": 0.6538461538461539,
+        "duration_s": 5.82
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 96,
+      "segment_id": "96",
+      "text": "''भरजाई, सरदारजी कैसे हैं?",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.7572405934333801,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5074396133422852,
+        "arousal": 0.5473127365112305,
+        "dominance": 0.577349066734314,
+        "composite_score": 0.507864356868678,
+        "numeric_score": -0.05568719621516076,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 125.84649590628929,
+        "f0_std_st": 4.102302725361768,
+        "rms_mean": 0.09044525772333145,
+        "rms_std": 0.06312326341867447,
+        "voiced_ratio": 0.8120300751879699,
+        "duration_s": 12.764
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 97,
+      "segment_id": "97",
+      "text": "उन्हें क्यों नहीं लायी, पंजे साहब के दरशन कराने?'' एक बूढ़ा-सा मुसलमान पूछ रहा था।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.4718301594257355,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.6080532670021057,
+        "arousal": 0.6462893486022949,
+        "dominance": 0.6615697145462036,
+        "composite_score": 0.6248919643314472,
+        "numeric_score": 0.9150987543221702,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 130.2188106783923,
+        "f0_std_st": 4.547777184366112,
+        "rms_mean": 0.11152876168489456,
+        "rms_std": 0.05545463040471077,
+        "voiced_ratio": 0.75,
+        "duration_s": 1.404
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 98,
+      "segment_id": "98",
+      "text": "मां ने दोनों हाथों से सिर का कपड़ा और आगे कर लिया, उनके मुंह से धीरे से निकला, ''सरदारजी नहीं रहे...!''\n\n\n''क्या...?",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.3063123822212219,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.4770204424858093,
+        "arousal": 0.5524051785469055,
+        "dominance": 0.51878422498703,
+        "composite_score": 0.4763117153502182,
+        "numeric_score": -0.3900028514412533,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 130.36263382643023,
+        "f0_std_st": 2.4740889282671272,
+        "rms_mean": 0.07099851965904236,
+        "rms_std": 0.0369078665971756,
+        "voiced_ratio": 0.8266666666666667,
+        "duration_s": 2.396
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 99,
+      "segment_id": "99",
+      "text": "मूलासिंह गुजर गये?",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8963789939880371,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.4743831753730774,
+        "arousal": 0.5392647981643677,
+        "dominance": 0.6672369837760925,
+        "composite_score": 0.4749996367510884,
+        "numeric_score": -0.472291846628394,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 117.47290875077432,
+        "f0_std_st": 3.937383019411656,
+        "rms_mean": 0.08124541491270065,
+        "rms_std": 0.050924159586429596,
+        "voiced_ratio": 0.8715596330275229,
+        "duration_s": 3.484
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 100,
+      "segment_id": "100",
+      "text": "क्या हुआ था उन्हें?''\n\n\nमां चुप रहीं, मैंने जवाब दिया, ''उनसे पेट में रसोली हो गयी थी।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.5244815945625305,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.4847242832183838,
+        "arousal": 0.5427031517028809,
+        "dominance": 0.4126558005809784,
+        "composite_score": 0.4838554197065017,
+        "numeric_score": -0.38203250638886127,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 117.40883967488296,
+        "f0_std_st": 4.617321483582745,
+        "rms_mean": 0.07500237226486206,
+        "rms_std": 0.059976980090141296,
+        "voiced_ratio": 0.7405660377358491,
+        "duration_s": 20.348
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 101,
+      "segment_id": "101",
+      "text": "एक दिन वह फूट गयी और दूसरे दिन पूरे हो गये।''\n\n\n''ओह, बड़े ही नेक बन्दे थे, खुदा उन्हें अपनी दरगाह में जगह दे।'' उनमें से एक ने अंफसोस प्रकट करते हुए कहा।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.47138726711273193,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5433486700057983,
+        "arousal": 0.6017043590545654,
+        "dominance": 0.6406924724578857,
+        "composite_score": 0.5483947018917517,
+        "numeric_score": 0.4569874569108919,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 110.15508114689298,
+        "f0_std_st": 5.056885211553812,
+        "rms_mean": 0.07076624035835266,
+        "rms_std": 0.0441286675632,
+        "voiced_ratio": 0.82,
+        "duration_s": 1.596
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 102,
+      "segment_id": "102",
+      "text": "कुछ क्षण के लिए सबमें खामोशी छा गयी।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.39799192547798157,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.4969434142112732,
+        "arousal": 0.5544742345809937,
+        "dominance": 0.6181472539901733,
+        "composite_score": 0.4969393299036796,
+        "numeric_score": -0.18491209150060672,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 115.39159409440346,
+        "f0_std_st": 3.814662709478821,
+        "rms_mean": 0.05534698814153671,
+        "rms_std": 0.03812167048454285,
+        "voiced_ratio": 0.7640918580375783,
+        "duration_s": 15.324
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 103,
+      "segment_id": "103",
+      "text": "''भरजाई, तेरे बच्चे कैसे हैं?''\n\n\n''वाहे गुरु जी की किरपा है, सब अच्छे हैं।'' मां ने धीरे से कहा।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.7344205975532532,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.5224511027336121,
+        "arousal": 0.5626695156097412,
+        "dominance": 0.5456867218017578,
+        "composite_score": 0.5237572167854172,
+        "numeric_score": 0.1525298601293661,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 127.17936713338278,
+        "f0_std_st": 3.8983006411626193,
+        "rms_mean": 0.06636723130941391,
+        "rms_std": 0.0416819304227829,
+        "voiced_ratio": 0.8287292817679558,
+        "duration_s": 11.58
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 104,
+      "segment_id": "104",
+      "text": "''अल्लाह, उनकी उम्र दराज करे।'' कई आवांज एक-साथ आयी।",
+      "text_sentiment": {
+        "label": "Positive",
+        "stars": 4,
+        "confidence": 0.7231447100639343,
+        "numeric_score": 0.5,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.3539802134037018,
+        "arousal": 0.4351240396499634,
+        "dominance": 0.49674999713897705,
+        "composite_score": 0.3472001568196925,
+        "numeric_score": -0.9404556543305402,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 98.92304293639245,
+        "f0_std_st": 2.2438457500461126,
+        "rms_mean": 0.055418021976947784,
+        "rms_std": 0.033581629395484924,
+        "voiced_ratio": 1.0,
+        "duration_s": 1.02
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 105,
+      "segment_id": "105",
+      "text": "''भरजाई तुम अपने बच्चों को लेकर यहाँ आ जाओ।'' किसी एक ने कहा, और कितनों ने दुहराया,\n\n\n''भरजाई, तुम लोग वापस आ जाओ...वापस आ जाओ।''\n\n\nप्लेटफॉर्म पर खड़ी कितनी आवांजें कह रही थीं :\n''वापस आ जाओ!''\n''वापस आ जाओ!''\n\n\nमैंने सुना, मेरे पीछे खड़े मामाजी कुढ़ते हुए कह रहे थे, ''हूं...बदमाश कहीं के!",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.39751455187797546,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5486529469490051,
+        "arousal": 0.5788602828979492,
+        "dominance": 0.4196080267429352,
+        "composite_score": 0.5501005308248582,
+        "numeric_score": 0.5049733433219014,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 130.10706376950455,
+        "f0_std_st": 4.376374995390266,
+        "rms_mean": 0.07589531689882278,
+        "rms_std": 0.049890924245119095,
+        "voiced_ratio": 0.6237623762376238,
+        "duration_s": 3.228
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 106,
+      "segment_id": "106",
+      "text": "पहले तो मार-मारकर यहाँ से निकाल दिया, अब कहते हैं वापस आ जाओ।",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.5898105502128601,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.4504542946815491,
+        "arousal": 0.5164109468460083,
+        "dominance": 0.3921472430229187,
+        "composite_score": 0.44826362226808386,
+        "numeric_score": -0.6515332822875021,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 125.64815514118315,
+        "f0_std_st": 3.929275200480113,
+        "rms_mean": 0.06546127051115036,
+        "rms_std": 0.03838377073407173,
+        "voiced_ratio": 0.6386554621848739,
+        "duration_s": 3.804
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 107,
+      "segment_id": "107",
+      "text": "लुच्चे!''\n\n\nपर प्लेटफॉर्म पर खड़े लोगों ने उनकी बात नहीं सुनी थी।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.46675029397010803,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5412571430206299,
+        "arousal": 0.5719174742698669,
+        "dominance": 0.588421642780304,
+        "composite_score": 0.5444836219010902,
+        "numeric_score": 0.41344357629135126,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 127.56224916790161,
+        "f0_std_st": 3.798985833005303,
+        "rms_mean": 0.08799366652965546,
+        "rms_std": 0.05567336454987526,
+        "voiced_ratio": 0.7692307692307693,
+        "duration_s": 6.652
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 108,
+      "segment_id": "108",
+      "text": "वे कहे जा रहे थे-\n''भरजाई, तुम अपने बच्चों को लेकर वापस आ जाओ!",
+      "text_sentiment": {
+        "label": "Very Positive",
+        "stars": 5,
+        "confidence": 0.48497915267944336,
+        "numeric_score": 1.0,
+        "polarity": "positive"
+      },
+      "audio_sentiment": {
+        "valence": 0.5295919179916382,
+        "arousal": 0.5835220813751221,
+        "dominance": 0.5320010185241699,
+        "composite_score": 0.5316227239908843,
+        "numeric_score": 0.2531242421229224,
+        "polarity": "neutral"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 128.09708759715315,
+        "f0_std_st": 3.828340508591104,
+        "rms_mean": 0.06632722169160843,
+        "rms_std": 0.044753577560186386,
+        "voiced_ratio": 0.7581395348837209,
+        "duration_s": 6.876
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 109,
+      "segment_id": "109",
+      "text": "बोलो भरजाई, कब आओगी।",
+      "text_sentiment": {
+        "label": "Very Negative",
+        "stars": 1,
+        "confidence": 0.41870275139808655,
+        "numeric_score": -1.0,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.455710768699646,
+        "arousal": 0.5233075022697449,
+        "dominance": 0.5174657106399536,
+        "composite_score": 0.45522402778191307,
+        "numeric_score": -0.6373594695403342,
+        "polarity": "negative"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 120.08700995219817,
+        "f0_std_st": 3.8061002129822716,
+        "rms_mean": 0.06941190361976624,
+        "rms_std": 0.050587404519319534,
+        "voiced_ratio": 0.7070063694267515,
+        "duration_s": 5.02
+      },
+      "sentiment_match": true
+    },
+    {
+      "idx": 110,
+      "segment_id": "110",
+      "text": "अपना गाँव तो तुम्हें याद आता है?",
+      "text_sentiment": {
+        "label": "Neutral",
+        "stars": 3,
+        "confidence": 0.8412815928459167,
+        "numeric_score": 0.0,
+        "polarity": "neutral"
+      },
+      "audio_sentiment": {
+        "valence": 0.5696895718574524,
+        "arousal": 0.6091707348823547,
+        "dominance": 0.5066447257995605,
+        "composite_score": 0.5751647517593106,
+        "numeric_score": 0.7185174349766088,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 139.286197731686,
+        "f0_std_st": 5.36005465468863,
+        "rms_mean": 0.06212793290615082,
+        "rms_std": 0.04072628915309906,
+        "voiced_ratio": 0.8913043478260869,
+        "duration_s": 2.94
+      },
+      "sentiment_match": false
+    },
+    {
+      "idx": 111,
+      "segment_id": "111",
+      "text": "भरजाई वापस आ जाओ...''\n\n\nमां के मुंह से कुछ नहीं निकल रहा था।",
+      "text_sentiment": {
+        "label": "Negative",
+        "stars": 2,
+        "confidence": 0.6076394319534302,
+        "numeric_score": -0.5,
+        "polarity": "negative"
+      },
+      "audio_sentiment": {
+        "valence": 0.5851265788078308,
+        "arousal": 0.6218389272689819,
+        "dominance": 0.5595278143882751,
+        "composite_score": 0.594036665654382,
+        "numeric_score": 0.8255636846145845,
+        "polarity": "positive"
+      },
+      "audio_prosodic": {
+        "f0_mean_hz": 147.78662100887877,
+        "f0_std_st": 5.256345139131582,
+        "rms_mean": 0.06348263472318649,
+        "rms_std": 0.04687083885073662,
+        "voiced_ratio": 0.5550561797752809,
+        "duration_s": 14.2261875
+      },
+      "sentiment_match": false
+    }
+  ]
+}

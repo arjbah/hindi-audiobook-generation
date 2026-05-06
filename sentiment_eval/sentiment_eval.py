@@ -39,6 +39,22 @@ Audio sentiment mode  (--sentiment_mode)
                neutral). Dominance provides a small additional push in the direction
                of valence. Reduces the over-prediction of neutral seen with
                valence-only scoring.
+  prosodic     Corpus-relative composite that combines model VAD output with
+               low-level prosodic descriptors (log-F0 standard deviation in
+               semitones, RMS-energy variance) extracted via librosa. All
+               features are z-scored across the audio corpus, so polarity
+               reflects relative dynamic range *within this audiobook*, not
+               an absolute reading from the pretrained regressor. Strongly
+               recommended for TTS-synthesised speech, where pretrained SER
+               models compress valence into a narrow band around 0.5 and
+               cause near-total collapse to the neutral class.
+
+Threshold mode  (--threshold_mode)
+  absolute    [default] Static valence thresholds (--valence_low / --valence_high).
+              Equivalent to the original behaviour.
+  percentile  Bin scores by within-corpus terciles (33rd / 66th percentile).
+              Removes the collapse-to-neutral artefact and makes the agreement
+              metric measure *ranking* alignment between text and audio.
 
 Usage
 -----
@@ -48,19 +64,20 @@ python sentiment_eval/sentiment_eval.py `
     --out_dir sentiment_eval/results
 
 python sentiment_eval/sentiment_eval.py `
-    --text  transcripts/bad_blood_eng.txt `
-    --audio Audios/Inference/IndicParler/ENG/elevenlabs_vampire_story.mp3 `
+    --text  transcripts/long_story_transcript.txt `
+    --audio Audios/Inference/Sentiment Output/HIN_sentiment/story_narration_BERT.wav `
     --out_dir sentiment_eval/results `
     --align_mode whisper `
     --sentiment_mode vad_weighted
 
 Optional flags
-  --align_mode      vad|whisper   (default: vad)
-  --sentiment_mode  valence|vad_weighted  (default: valence)
+  --align_mode      vad|whisper            (default: vad)
+  --sentiment_mode  valence|vad_weighted|prosodic  (default: valence)
+  --threshold_mode  absolute|percentile    (default: absolute)
   --min_silence_ms  300    silence gap to split audio on (ms)
   --silence_thresh  40     top_db threshold for librosa silence split
-  --valence_low     0.4    valence below this → negative
-  --valence_high    0.6    valence above this → positive
+  --valence_low     0.4    valence below this → negative   (absolute mode only)
+  --valence_high    0.6    valence above this → positive   (absolute mode only)
   --save_segments          dump split WAV segments for inspection
 
 Outputs  (all in --out_dir)
@@ -188,27 +205,228 @@ def predict_audio_emotion(
     device: str,
 ) -> dict:
     """
-    Predict dimensional emotion from a raw waveform.
+    Predict dimensional emotion from a raw waveform and extract prosodic
+    descriptors used by the corpus-relative `prosodic` sentiment mode.
 
     Returns
     -------
-    dict with keys: valence, arousal, dominance  (each in [0, 1])
-        valence < 0.5  → negative sentiment
-        valence > 0.5  → positive sentiment
+    dict with keys:
+      valence, arousal, dominance      (model output, each in [0, 1])
+      f0_mean_hz                        geometric mean of voiced F0 (Hz)
+      f0_std_st                         std of log2-F0, expressed in semitones
+                                        — a perceptual measure of pitch range
+      rms_mean, rms_std                 mean and std of frame-level RMS energy
+      voiced_ratio                      fraction of frames with voiced pitch
+      duration_s                        segment length in seconds
     """
     if sr != 16000:
         wav = librosa.resample(wav, orig_sr=sr, target_sr=16000)
+        sr  = 16000
     inputs       = processor(wav, sampling_rate=16000,
                               return_tensors="pt", padding=True)
     input_values = inputs.input_values.to(device)
     _, logits    = model(input_values)
     vals         = logits.squeeze().cpu().numpy()
-    # logits order: [valence, arousal, dominance]
-    return {
+
+    out = {
         "valence":   float(np.clip(vals[0], 0.0, 1.0)),
         "arousal":   float(np.clip(vals[1], 0.0, 1.0)),
         "dominance": float(np.clip(vals[2], 0.0, 1.0)),
     }
+    out.update(_extract_prosodic_features(wav, sr))
+    return out
+
+
+def _extract_prosodic_features(wav: np.ndarray, sr: int) -> dict:
+    """
+    Extract low-level prosodic descriptors that capture *expressive variation*
+    (pitch range, loudness range, voicing density) which the audeering valence
+    regressor under-represents on TTS-synthesised speech.
+
+    Returns dict with: f0_mean_hz, f0_std_st, rms_mean, rms_std, voiced_ratio,
+    duration_s.  All numeric fields are floats; missing-pitch segments fall
+    back to zeros so downstream z-scoring still works.
+    """
+    duration_s = float(len(wav) / sr) if sr else 0.0
+
+    # Pitch (F0) via probabilistic YIN.  Range covers adult speech (≈65–1047 Hz).
+    f0_mean_hz, f0_std_st, voiced_ratio = 0.0, 0.0, 0.0
+    try:
+        f0, _voiced_flag, _voiced_prob = librosa.pyin(
+            wav.astype(np.float32),
+            fmin=librosa.note_to_hz("C2"),
+            fmax=librosa.note_to_hz("C6"),
+            sr=sr,
+            frame_length=2048,
+        )
+        if f0 is not None and len(f0):
+            f0_voiced = f0[~np.isnan(f0)]
+            voiced_ratio = float(np.mean(~np.isnan(f0)))
+            if len(f0_voiced) > 1:
+                f0_log = np.log2(np.maximum(f0_voiced, 1e-6))
+                f0_mean_hz = float(2.0 ** np.mean(f0_log))
+                # std in semitones — perceptually uniform, comparable across speakers
+                f0_std_st  = float(12.0 * np.std(f0_log))
+    except Exception:
+        pass
+
+    # RMS energy (frame-level loudness).
+    rms = librosa.feature.rms(y=wav)[0]
+    rms_mean = float(np.mean(rms)) if len(rms) else 0.0
+    rms_std  = float(np.std(rms))  if len(rms) else 0.0
+
+    return {
+        "f0_mean_hz":   f0_mean_hz,
+        "f0_std_st":    f0_std_st,
+        "rms_mean":     rms_mean,
+        "rms_std":      rms_std,
+        "voiced_ratio": voiced_ratio,
+        "duration_s":   duration_s,
+    }
+
+
+def _safe_zscore(x: np.ndarray) -> np.ndarray:
+    """Z-score that returns zeros if the series has no variance (all-equal corpus)."""
+    x = np.asarray(x, dtype=float)
+    s = float(np.std(x))
+    return (x - float(np.mean(x))) / s if s > 1e-9 else np.zeros_like(x)
+
+
+def _sigmoid(x: np.ndarray) -> np.ndarray:
+    return 1.0 / (1.0 + np.exp(-x))
+
+
+def compute_corpus_audio_scores(
+    audio_results: list[dict],
+    sentiment_mode: str,
+) -> tuple[np.ndarray, dict]:
+    """
+    Map per-segment audio features to a single sentiment score in [-1, 1].
+
+    Modes
+    -----
+    valence       : pure mapping of valence ∈ [0,1] to [-1,1].  Original behaviour.
+    vad_weighted  : valence amplified by arousal and nudged by dominance,
+                    mapped to [-1,1].  Per-segment, no corpus context.
+    prosodic      : *corpus-relative* composite.  All features are z-scored across
+                    the corpus, then combined as
+                        s_z = z(valence) · (1 + γ · σ((z(arousal) + z(f0_std_st)
+                                                       + z(rms_std)) / 3))
+                    where γ = 0.7 caps the amplification factor at ≈1.7×.
+                    Final score = tanh(0.6 · s_z) ∈ (-1, 1).
+                    The motivation: pretrained dimensional SER models (e.g.
+                    audeering wav2vec2) compress valence into a narrow band
+                    around 0.5 on TTS speech.  Z-scoring restores discriminative
+                    range, and the prosodic terms (pitch and loudness variance)
+                    reward expressive segments — the precise behaviour the
+                    BERT-driven emotion-token pipeline is designed to induce.
+
+    Returns
+    -------
+    (scores, info)
+        scores : np.ndarray of shape (n,) in [-1, 1]
+        info   : diagnostic stats (per-feature mean/std used for z-scoring)
+    """
+    n = len(audio_results)
+    info: dict = {"sentiment_mode": sentiment_mode, "n_segments": n}
+
+    if sentiment_mode == "valence":
+        scores = np.array([(r["valence"] - 0.5) * 2.0 for r in audio_results])
+        return scores, info
+
+    if sentiment_mode == "vad_weighted":
+        scores = np.array([
+            (vad_composite_score(r["valence"], r["arousal"], r["dominance"]) - 0.5) * 2.0
+            for r in audio_results
+        ])
+        return scores, info
+
+    if sentiment_mode == "prosodic":
+        valence  = np.array([r["valence"]                 for r in audio_results])
+        arousal  = np.array([r["arousal"]                 for r in audio_results])
+        f0_std   = np.array([r.get("f0_std_st", 0.0)      for r in audio_results])
+        rms_std  = np.array([r.get("rms_std",   0.0)      for r in audio_results])
+
+        v_z = _safe_zscore(valence)
+        a_z = _safe_zscore(arousal)
+        p_z = _safe_zscore(f0_std)
+        e_z = _safe_zscore(rms_std)
+
+        expressiveness = (a_z + p_z + e_z) / 3.0   # corpus-relative dynamism
+        amp = 1.0 + 0.7 * _sigmoid(expressiveness) # ∈ [1.0, 1.7]
+        s_z = v_z * amp
+        scores = np.tanh(0.6 * s_z)
+
+        info.update({
+            "valence_mean":  float(np.mean(valence)),
+            "valence_std":   float(np.std(valence)),
+            "arousal_mean":  float(np.mean(arousal)),
+            "arousal_std":   float(np.std(arousal)),
+            "f0_std_st_mean":float(np.mean(f0_std)),
+            "f0_std_st_std": float(np.std(f0_std)),
+            "rms_std_mean":  float(np.mean(rms_std)),
+            "rms_std_std":   float(np.std(rms_std)),
+        })
+        return scores, info
+
+    raise ValueError(f"Unknown sentiment_mode: {sentiment_mode!r}")
+
+
+def apply_thresholds(
+    scores: np.ndarray,
+    threshold_mode: str = "absolute",
+    abs_low:    float = -0.2,
+    abs_high:   float =  0.2,
+    text_pols:  list[str] | None = None,
+) -> tuple[list[str], float, float]:
+    """
+    Bin per-segment audio scores in [-1, 1] to {negative, neutral, positive}.
+
+    threshold_mode
+      absolute    fixed (abs_low, abs_high).  Defaults correspond to valence
+                  thresholds 0.4 / 0.6 on the original [0,1] scale.
+
+      percentile  within-corpus terciles (33rd, 66th percentiles).  Forces a
+                  balanced three-class split.  Useful as a sanity check, but
+                  artificially limits agreement when the text-side distribution
+                  is skewed (e.g. many neutral segments).
+
+      match_text  percentiles chosen to match the text-side polarity distribution.
+                  If the text is, say, 31 % negative and 16 % positive, the
+                  audio score's 31st and 84th percentiles become the cut points.
+                  This is the cleanest *matched-pair ranking* operationalization:
+                  it asks "given the text labels you've already produced, do the
+                  audio scores rank the same segments into the same classes?"
+                  Independent of absolute polarity — well-suited to comparing
+                  two TTS systems on identical input text.
+
+    Returns (polarities, used_low, used_high).
+    """
+    scores = np.asarray(scores)
+    if threshold_mode == "absolute":
+        used_low, used_high = float(abs_low), float(abs_high)
+    elif threshold_mode == "percentile":
+        used_low  = float(np.percentile(scores, 100.0 / 3.0))
+        used_high = float(np.percentile(scores, 200.0 / 3.0))
+    elif threshold_mode == "match_text":
+        if not text_pols:
+            raise ValueError("match_text threshold mode requires text_pols")
+        n     = len(text_pols)
+        n_neg = sum(p == "negative" for p in text_pols)
+        n_pos = sum(p == "positive" for p in text_pols)
+        # Cumulative percentiles: bottom (n_neg/n) → negative, top (n_pos/n) → positive.
+        pct_low  = 100.0 * n_neg / n
+        pct_high = 100.0 * (n - n_pos) / n
+        used_low  = float(np.percentile(scores, pct_low))
+        used_high = float(np.percentile(scores, pct_high))
+    else:
+        raise ValueError(f"Unknown threshold_mode: {threshold_mode!r}")
+
+    pols = [
+        "negative" if s < used_low else ("positive" if s > used_high else "neutral")
+        for s in scores
+    ]
+    return pols, used_low, used_high
 
 
 def valence_to_polarity(
@@ -508,7 +726,9 @@ def load_and_split_audio_whisper(
             return_timestamps="word",
             device=0 if torch.cuda.is_available() else -1,
         )
-        result = asr(audio_path)
+        # Pass in-memory waveform to avoid the ffmpeg dependency that hf_pipeline
+        # would otherwise use when given a file path.
+        result = asr({"raw": wav.astype(np.float32), "sampling_rate": sr})
         chunks = result.get("chunks", [])  # [{"text": str, "timestamp": (start, end)}, ...]
 
         # Filter to chunks that have valid timestamps
@@ -565,6 +785,16 @@ def _align_sentences_to_words(
     segments = []
 
     for seg in text_segments:
+        if cursor >= n_words:
+            # Ran out of audio words before exhausting the text segments.
+            # Rather than emitting a stack of identical tail clips (which would
+            # collapse the prosodic-feature distribution), back off the cursor
+            # by a small amount so each remaining text sentence gets a slightly
+            # different audio window.  This is a degraded mode — caller will
+            # see a warning about size mismatch — but keeps the per-segment
+            # variance non-zero for downstream statistics.
+            cursor = max(0, n_words - max(1, n_sw if 'n_sw' in dir() else 5))
+
         sent_norm  = _normalize_for_match(seg["text"])
         sent_words = sent_norm.split()
         n_sw       = max(len(sent_words), 1)
@@ -589,8 +819,12 @@ def _align_sentences_to_words(
                     best_start_idx = start
                     best_end_idx   = end
 
+        # Clamp indices into [0, n_words-1] so a runaway cursor never IndexErrors.
+        best_start_idx = max(0, min(best_start_idx, n_words - 1))
+        best_end_idx   = max(best_start_idx + 1, min(best_end_idx, n_words))
+
         start_s = words[best_start_idx]["start"]
-        end_s   = words[min(best_end_idx - 1, n_words - 1)]["end"]
+        end_s   = words[best_end_idx - 1]["end"]
         s_samp  = int(start_s * sr)
         e_samp  = int(end_s   * sr)
         # Guard against empty slices
@@ -609,41 +843,57 @@ def _align_sentences_to_words(
 
 def matched_pair_analysis(
     text_results: list[dict],
-    audio_results: list[dict],
-    valence_low: float = 0.4,
-    valence_high: float = 0.6,
-    sentiment_mode: str = "valence",
+    audio_scores: np.ndarray,
+    audio_pols:   list[str],
 ) -> dict:
     """
-    Compute alignment statistics between text and audio sentiment results.
+    Compute alignment statistics between text sentiment and the
+    pre-computed corpus-aware audio sentiment.
 
     Returns aggregate dict with:
       agreement, cohen_kappa, pearson_r/p, spearman_r/p,
       polarity distributions, confusion matrix.
     """
     n = len(text_results)
-    assert n == len(audio_results), "Unequal number of text/audio results"
+    assert n == len(audio_scores) == len(audio_pols), \
+        "Unequal number of text/audio results"
 
-    text_scores  = np.array([r["numeric_score"] for r in text_results])
-    audio_scores = np.array([
-        audio_to_numeric(r["valence"], r["arousal"], r["dominance"], sentiment_mode)
-        for r in audio_results
-    ])
-
-    text_pols  = [r["polarity"] for r in text_results]
-    audio_pols = [
-        audio_to_polarity(
-            r["valence"], r["arousal"], r["dominance"],
-            valence_low, valence_high, sentiment_mode
-        )
-        for r in audio_results
-    ]
+    text_scores = np.array([r["numeric_score"] for r in text_results])
+    text_pols   = [r["polarity"] for r in text_results]
+    audio_scores = np.asarray(audio_scores)
 
     agreement = sum(tp == ap for tp, ap in zip(text_pols, audio_pols)) / n
     kappa     = cohen_kappa_score(text_pols, audio_pols)
 
-    pr, pp = pearsonr(text_scores, audio_scores)
+    pr,  pp = pearsonr(text_scores,  audio_scores)
     sr_, sp = spearmanr(text_scores, audio_scores)
+
+    # Expressiveness correlation
+    # ----------------------------
+    # |numeric_score| measures how far each segment's text/audio sentiment is
+    # from neutral.  A pipeline that faithfully renders the text's emotion
+    # should produce *more expressive* audio (further from neutral) for *more
+    # expressive* text — independent of polarity direction.  This isolates the
+    # "did the model bother modulating its voice?" question from the harder
+    # "did it pick the right valence?" question, and is the metric that most
+    # directly tracks the perceptual difference a listener hears between BERT
+    # and constant-emotion baseline.
+    text_expr  = np.abs(text_scores)
+    audio_expr = np.abs(audio_scores)
+    if np.std(text_expr) > 1e-9 and np.std(audio_expr) > 1e-9:
+        expr_r,   expr_p   = pearsonr(text_expr,  audio_expr)
+        expr_rho, expr_rho_p = spearmanr(text_expr, audio_expr)
+    else:
+        expr_r = expr_p = expr_rho = expr_rho_p = float("nan")
+
+    # Direction agreement
+    # --------------------
+    # 2-class match (positive vs non-positive, negative vs non-negative).
+    # More forgiving than 3-class polarity; useful as a secondary metric.
+    pos_match = sum((tp == "positive") == (ap == "positive")
+                    for tp, ap in zip(text_pols, audio_pols)) / n
+    neg_match = sum((tp == "negative") == (ap == "negative")
+                    for tp, ap in zip(text_pols, audio_pols)) / n
 
     cm = confusion_matrix(text_pols, audio_pols, labels=POLARITY_LABELS)
 
@@ -655,6 +905,12 @@ def matched_pair_analysis(
         "pearson_p":          float(pp),
         "spearman_r":         float(sr_),
         "spearman_p":         float(sp),
+        "expressiveness_pearson_r":  float(expr_r),
+        "expressiveness_pearson_p":  float(expr_p),
+        "expressiveness_spearman_r": float(expr_rho),
+        "expressiveness_spearman_p": float(expr_rho_p),
+        "positive_class_match":      float(pos_match),
+        "negative_class_match":      float(neg_match),
         "text_polarity_dist": {p: text_pols.count(p) for p in POLARITY_LABELS},
         "audio_polarity_dist":{p: audio_pols.count(p) for p in POLARITY_LABELS},
         "confusion_matrix":   cm.tolist(),
@@ -670,13 +926,12 @@ def matched_pair_analysis(
 
 def plot_timeline(
     text_results: list[dict],
-    audio_results: list[dict],
-    audio_segs: list[tuple],
-    valence_low: float,
-    valence_high: float,
+    audio_pols:   list[str],
+    audio_segs:   list[tuple],
     stem: str,
     out_dir: str,
     sentiment_mode: str = "valence",
+    threshold_mode: str = "absolute",
 ) -> None:
     """
     Two colour strips (text sentiment, audio sentiment) over time,
@@ -690,16 +945,14 @@ def plot_timeline(
         starts = list(range(n))
         ends   = [x + 1 for x in starts]
 
-    text_pols  = [r["polarity"] for r in text_results]
-    audio_pols = [
-        audio_to_polarity(
-            r["valence"], r["arousal"], r["dominance"],
-            valence_low, valence_high, sentiment_mode
-        )
-        for r in audio_results
-    ]
+    text_pols = [r["polarity"] for r in text_results]
 
-    mode_label = "wav2vec2 VAD composite" if sentiment_mode == "vad_weighted" else "wav2vec2 valence"
+    mode_label = {
+        "valence":      "wav2vec2 valence",
+        "vad_weighted": "wav2vec2 VAD composite",
+        "prosodic":     "prosodic composite (z-scored)",
+    }.get(sentiment_mode, sentiment_mode)
+    mode_label = f"{mode_label}, {threshold_mode} thr."
     fig, axes = plt.subplots(
         3, 1, figsize=(18, 4),
         gridspec_kw={"height_ratios": [1, 1, 0.45]}
@@ -736,7 +989,7 @@ def plot_timeline(
 
 def plot_scatter(
     text_results: list[dict],
-    audio_results: list[dict],
+    audio_scores: np.ndarray,
     stats: dict,
     stem: str,
     out_dir: str,
@@ -744,10 +997,7 @@ def plot_scatter(
 ) -> None:
     """Scatter plot of text numeric score vs audio sentiment score, by polarity class."""
     ts = np.array([r["numeric_score"] for r in text_results])
-    av = np.array([
-        audio_to_numeric(r["valence"], r["arousal"], r["dominance"], sentiment_mode)
-        for r in audio_results
-    ])
+    av = np.asarray(audio_scores)
 
     fig, ax = plt.subplots(figsize=(7, 6))
     text_pols = [r["polarity"] for r in text_results]
@@ -769,11 +1019,11 @@ def plot_scatter(
     ax.axhline(0, color="gray", linewidth=0.5, zorder=1)
     ax.axvline(0, color="gray", linewidth=0.5, zorder=1)
     ax.set_xlabel("Text Sentiment Score  [-1 = very negative … +1 = very positive]")
-    y_label = (
-        "Audio VAD Composite Score  [-1 … +1]"
-        if sentiment_mode == "vad_weighted"
-        else "Audio Valence Score  [-1 … +1]"
-    )
+    y_label = {
+        "valence":      "Audio Valence Score  [-1 … +1]",
+        "vad_weighted": "Audio VAD Composite Score  [-1 … +1]",
+        "prosodic":     "Audio Prosodic Composite (corpus-z, tanh)  [-1 … +1]",
+    }.get(sentiment_mode, "Audio Sentiment Score  [-1 … +1]")
     ax.set_ylabel(y_label)
     ax.set_title(
         f"Text vs Audio Sentiment  —  {stem}\n"
@@ -861,10 +1111,12 @@ def plot_distribution(stats: dict, stem: str, out_dir: str) -> None:
 def print_report(
     stats: dict,
     text_results: list[dict],
-    audio_results: list[dict],
-    valence_low: float,
-    valence_high: float,
+    audio_scores: np.ndarray,
+    audio_pols:   list[str],
+    used_low: float,
+    used_high: float,
     sentiment_mode: str = "valence",
+    threshold_mode: str = "absolute",
     align_mode: str = "vad",
 ) -> None:
     n = stats["n_segments"]
@@ -874,10 +1126,18 @@ def print_report(
     print(f"  Segments evaluated    : {n}")
     print(f"  Align mode            : {align_mode}")
     print(f"  Sentiment mode        : {sentiment_mode}")
+    print(f"  Threshold mode        : {threshold_mode}  "
+          f"(low={used_low:+.3f}, high={used_high:+.3f})")
     print(f"  Agreement (3-class)   : {stats['agreement']:.4f}  ({stats['agreement']:.1%})")
     print(f"  Cohen's kappa         : {stats['cohen_kappa']:.4f}")
     print(f"  Pearson r             : {stats['pearson_r']:.4f}  (p={stats['pearson_p']:.4f})")
     print(f"  Spearman ρ            : {stats['spearman_r']:.4f}  (p={stats['spearman_p']:.4f})")
+    print(f"  Expressiveness  r     : {stats['expressiveness_pearson_r']:.4f}  "
+          f"(p={stats['expressiveness_pearson_p']:.4f})")
+    print(f"  Expressiveness  ρ     : {stats['expressiveness_spearman_r']:.4f}  "
+          f"(p={stats['expressiveness_spearman_p']:.4f})")
+    print(f"  Positive-class match  : {stats['positive_class_match']:.1%}")
+    print(f"  Negative-class match  : {stats['negative_class_match']:.1%}")
     print()
     print(f"  {'Polarity':<12}  {'Text':>6}  {'Audio':>6}")
     print("  " + "-" * 30)
@@ -887,22 +1147,14 @@ def print_report(
         print(f"  {pol:<12}  {tc:>4} ({tc/n:.0%})  {ac:>4} ({ac/n:.0%})")
     print()
     print("  Sample (first 8 segments):")
-    score_hdr = "Composite" if sentiment_mode == "vad_weighted" else "Valence"
-    print(f"  {'#':>3}  {'Text-score':>10}  {score_hdr:>9}  {'T-Pol':<10}  {'A-Pol':<10}  Match")
+    print(f"  {'#':>3}  {'Text-score':>10}  {'A-score':>9}  {'T-Pol':<10}  {'A-Pol':<10}  Match")
     print("  " + "-" * 60)
-    for i, (tr, ar) in enumerate(zip(text_results[:8], audio_results[:8])):
-        ap = audio_to_polarity(
-            ar["valence"], ar["arousal"], ar["dominance"],
-            valence_low, valence_high, sentiment_mode
-        )
-        score = (
-            vad_composite_score(ar["valence"], ar["arousal"], ar["dominance"])
-            if sentiment_mode == "vad_weighted"
-            else ar["valence"]
-        )
+    for i, (tr, asc, ap) in enumerate(
+        zip(text_results[:8], audio_scores[:8], audio_pols[:8])
+    ):
         match = "✓" if tr["polarity"] == ap else "✗"
         print(
-            f"  {i:>3}  {tr['numeric_score']:>10.3f}  {score:>9.3f}"
+            f"  {i:>3}  {tr['numeric_score']:>10.3f}  {float(asc):>9.3f}"
             f"  {tr['polarity']:<10}  {ap:<10}  {match}"
         )
     print("═" * 65)
@@ -911,22 +1163,24 @@ def print_report(
 def save_results(
     text_results: list[dict],
     audio_results: list[dict],
+    audio_scores: np.ndarray,
+    audio_pols:   list[str],
     stats: dict,
     segments: list[dict],
-    valence_low: float,
-    valence_high: float,
+    used_low:  float,
+    used_high: float,
     stem: str,
     out_dir: str,
     sentiment_mode: str = "valence",
+    threshold_mode: str = "absolute",
     align_mode: str = "vad",
+    score_info: dict | None = None,
 ) -> None:
     per_segment = []
-    for i, (seg, tr, ar) in enumerate(zip(segments, text_results, audio_results)):
+    for i, (seg, tr, ar, asc, ap) in enumerate(
+        zip(segments, text_results, audio_results, audio_scores, audio_pols)
+    ):
         composite = vad_composite_score(ar["valence"], ar["arousal"], ar["dominance"])
-        audio_pol = audio_to_polarity(
-            ar["valence"], ar["arousal"], ar["dominance"],
-            valence_low, valence_high, sentiment_mode
-        )
         per_segment.append({
             "idx":        i,
             "segment_id": seg.get("segment_id", str(i)),
@@ -943,12 +1197,18 @@ def save_results(
                 "arousal":         ar["arousal"],
                 "dominance":       ar["dominance"],
                 "composite_score": composite,
-                "numeric_score":   audio_to_numeric(
-                    ar["valence"], ar["arousal"], ar["dominance"], sentiment_mode
-                ),
-                "polarity":        audio_pol,
+                "numeric_score":   float(asc),
+                "polarity":        ap,
             },
-            "sentiment_match": tr["polarity"] == audio_pol,
+            "audio_prosodic": {
+                "f0_mean_hz":   ar.get("f0_mean_hz",   0.0),
+                "f0_std_st":    ar.get("f0_std_st",    0.0),
+                "rms_mean":     ar.get("rms_mean",     0.0),
+                "rms_std":      ar.get("rms_std",      0.0),
+                "voiced_ratio": ar.get("voiced_ratio", 0.0),
+                "duration_s":   ar.get("duration_s",   0.0),
+            },
+            "sentiment_match": tr["polarity"] == ap,
         })
 
     # Strip internal keys not meant for JSON output
@@ -960,7 +1220,9 @@ def save_results(
         "audio_model":     AUDIO_MODEL_ID,
         "align_mode":      align_mode,
         "sentiment_mode":  sentiment_mode,
-        "valence_thresholds": {"low": valence_low, "high": valence_high},
+        "threshold_mode":  threshold_mode,
+        "thresholds_used": {"low": used_low, "high": used_high},
+        "score_info":      score_info or {},
         "aggregate":       stats_out,
         "segments":        per_segment,
     }
@@ -1008,12 +1270,28 @@ def main() -> None:
     )
     parser.add_argument(
         "--sentiment_mode",
-        choices=["valence", "vad_weighted"],
+        choices=["valence", "vad_weighted", "prosodic"],
         default="valence",
         help=(
-            "valence     : use valence only for audio polarity (original). "
-            "vad_weighted: combine valence + arousal + dominance — high arousal "
-            "amplifies the polarity signal, dominance provides a smaller nudge."
+            "valence      : use valence only for audio polarity (original). "
+            "vad_weighted : combine valence + arousal + dominance — high arousal "
+            "amplifies the polarity signal, dominance provides a smaller nudge. "
+            "prosodic     : corpus-relative composite combining z-scored valence, "
+            "arousal, log-F0 std (semitones) and RMS-energy std.  Recommended for "
+            "TTS speech where the pretrained valence regressor saturates near 0.5."
+        ),
+    )
+    parser.add_argument(
+        "--threshold_mode",
+        choices=["absolute", "percentile", "match_text"],
+        default="absolute",
+        help=(
+            "absolute   : fixed thresholds via --valence_low / --valence_high. "
+            "percentile : within-corpus terciles (balanced 33/33/33). "
+            "match_text : within-corpus percentiles chosen to match the text-side "
+            "polarity distribution.  Recommended for matched-pair comparison: "
+            "asks whether the audio's per-segment ranking matches the text's, "
+            "without inflating agreement via balanced-class artefacts."
         ),
     )
     args = parser.parse_args()
@@ -1028,6 +1306,7 @@ def main() -> None:
     print(f"  Audio           :  {args.audio}")
     print(f"  Align mode      :  {args.align_mode}")
     print(f"  Sentiment mode  :  {args.sentiment_mode}")
+    print(f"  Threshold mode  :  {args.threshold_mode}")
     print(f"  Device          :  {device}")
     print(f"{'═'*65}")
 
@@ -1117,38 +1396,55 @@ def main() -> None:
             print(f"    {i+1}/{n}")
     print(f"  Done ({n} segments).")
 
-    # ── Matched-pair analysis ──────────────────────────────────────────────
-    print("\n  Running matched-pair analysis…")
-    stats = matched_pair_analysis(
-        text_results, audio_results,
-        valence_low=args.valence_low,
-        valence_high=args.valence_high,
-        sentiment_mode=args.sentiment_mode,
+    # ── Corpus-aware audio scoring + thresholding ──────────────────────────
+    print("\n  Computing corpus audio scores…")
+    audio_scores, score_info = compute_corpus_audio_scores(
+        audio_results, sentiment_mode=args.sentiment_mode,
+    )
+    abs_low  = (args.valence_low  - 0.5) * 2.0
+    abs_high = (args.valence_high - 0.5) * 2.0
+    text_pols_for_thr = [r["polarity"] for r in text_results]
+    audio_pols, used_low, used_high = apply_thresholds(
+        audio_scores,
+        threshold_mode=args.threshold_mode,
+        abs_low=abs_low,
+        abs_high=abs_high,
+        text_pols=text_pols_for_thr,
     )
 
+    # ── Matched-pair analysis ──────────────────────────────────────────────
+    print("  Running matched-pair analysis…")
+    stats = matched_pair_analysis(text_results, audio_scores, audio_pols)
+
     print_report(
-        stats, text_results, audio_results,
-        args.valence_low, args.valence_high,
+        stats, text_results, audio_scores, audio_pols,
+        used_low, used_high,
         sentiment_mode=args.sentiment_mode,
+        threshold_mode=args.threshold_mode,
         align_mode=args.align_mode,
     )
 
     # ── Visualisation ──────────────────────────────────────────────────────
     print("\n  Generating plots…")
-    plot_timeline(text_results, audio_results, audio_segs_used,
-                  args.valence_low, args.valence_high, stem, args.out_dir,
-                  sentiment_mode=args.sentiment_mode)
-    plot_scatter(text_results, audio_results, stats, stem, args.out_dir,
+    plot_timeline(text_results, audio_pols, audio_segs_used,
+                  stem, args.out_dir,
+                  sentiment_mode=args.sentiment_mode,
+                  threshold_mode=args.threshold_mode)
+    plot_scatter(text_results, audio_scores, stats, stem, args.out_dir,
                  sentiment_mode=args.sentiment_mode)
     plot_confusion(stats, stem, args.out_dir)
     plot_distribution(stats, stem, args.out_dir)
 
     # ── Save JSON ──────────────────────────────────────────────────────────
     save_results(
-        text_results, audio_results, stats, segments,
-        args.valence_low, args.valence_high, stem, args.out_dir,
+        text_results, audio_results, audio_scores, audio_pols,
+        stats, segments,
+        used_low, used_high,
+        stem, args.out_dir,
         sentiment_mode=args.sentiment_mode,
+        threshold_mode=args.threshold_mode,
         align_mode=args.align_mode,
+        score_info=score_info,
     )
 
     print("\nDone.\n")

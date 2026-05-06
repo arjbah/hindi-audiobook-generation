@@ -1,8 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\transcripts"
+    "\\Audios",
+    "\\Audios\\Inference",
+    "\\Audios\\Inference\\IndicParler",
+    "\\Audios\\Inference\\IndicParler\\ENG",
+    "\\Audios\\Inference\\IndicParler\\HIN",
+    "\\Audios\\Inference\\Sentiment Output",
+    "\\Audios\\Inference\\Sentiment Output\\ENG_sentiment"
   ],
-  "SelectedNode": "\\.gitignore",
   "PreviewInSolutionExplorer": false
 }
