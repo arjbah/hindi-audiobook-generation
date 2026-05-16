@@ -1,0 +1,22 @@
+{
+  "clips": [
+    {
+      "id": "story120_intro",
+      "path": "Audios/story120reference.wav",
+      "text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "tags": ["happy"]
+    },
+    {
+      "id": "story120_single_narration",
+      "path": "Audios/story120_single.wav",
+      "text": "टूटी-फूटी एक उसकी झोपड़ी थी। वर्षा ऋतु में जब उससे पानी टपकता तो वहां बैठना भी दूभर हो जाता था।",
+      "tags": ["sad"]
+    },
+    {
+      "id": "story120_neutral",
+      "path": "Audios/story120_multi.wav",
+      "text": "बात बहुत पुरानी है, कान्यकुब्ज में एक राजा राज्य करता था।",
+      "tags": ["neutral"]
+    }
+  ]
+}

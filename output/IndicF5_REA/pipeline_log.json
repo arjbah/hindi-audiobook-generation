@@ -1,0 +1,387 @@
+{
+  "story": "transcripts/long_story_transcript.txt",
+  "total_chunks": 38,
+  "top_k": 1,
+  "chunks": [
+    {
+      "chunk_idx": 0,
+      "chunk_preview": "गाड़ी ने लाहौर का स्टेशन छोड़ा तो एकबारगी मेरा मन काँप उठा। अब हम लोग उस ओर जा र",
+      "retrieved_ids": [
+        "story120_neutral"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120_multi.wav",
+      "ref_text": "बात बहुत पुरानी है, कान्यकुब्ज में एक राजा राज्य करता था।",
+      "audio_samples": 640248
+    },
+    {
+      "chunk_idx": 1,
+      "chunk_preview": "और हम अपना सब-कुछ इस अन्धकार को सौंप दे रहे हैं। हम सब लगभग तीन सौ यात्री थे। स्",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 449544
+    },
+    {
+      "chunk_idx": 2,
+      "chunk_preview": "वहाँ हमें जैसा स्वागत मिला,उससे आगे अब पंजासाहिब की यात्रा में किसी प्रकार का अन",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 548592
+    },
+    {
+      "chunk_idx": 3,
+      "chunk_preview": "यही सब सोचते-सोचते मैंने मां की ओर देखा, हथेली पर मुंह टिकाये, कोहनी को खिड़की क",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 668136
+    },
+    {
+      "chunk_idx": 4,
+      "chunk_preview": "फिर मैंने अपने डिब्बे के दूसरे यात्रियों की तरफ देखा। उन पर भी गहरी उदासी छा गयी",
+      "retrieved_ids": [
+        "story120_single_narration"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120_single.wav",
+      "ref_text": "टूटी-फूटी एक उसकी झोपड़ी थी। वर्षा ऋतु में जब उससे पानी टपकता तो वहां बैठना भी दूभर हो जाता था।",
+      "audio_samples": 703200
+    },
+    {
+      "chunk_idx": 5,
+      "chunk_preview": "मां मेरी ओर देखकर मुसकरायी। वह मुस्कराहट सब-कुछ खोकर पायी हुई मुसकराहट थी। बोलीं",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 619248
+    },
+    {
+      "chunk_idx": 6,
+      "chunk_preview": "लाहौर पार करते ही अजीब-सी उमंग नस-नस में दौड़ी जाती थी।'' सराई (हमारा गाँव ) जैस",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 590832
+    },
+    {
+      "chunk_idx": 7,
+      "chunk_preview": "पिताजी ने अपना रोजगार उत्तर प्रदेश में ही जमा लिया था। हम सब भाई-बहनों का जन्म प",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 544488
+    },
+    {
+      "chunk_idx": 8,
+      "chunk_preview": "हममें जो छोटा होता वह मां के साथ जाता, और जबसे मुझे याद है मेरी छोटी बहन ही उनके",
+      "retrieved_ids": [
+        "story120_neutral"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120_multi.wav",
+      "ref_text": "बात बहुत पुरानी है, कान्यकुब्ज में एक राजा राज्य करता था।",
+      "audio_samples": 613104
+    },
+    {
+      "chunk_idx": 9,
+      "chunk_preview": "सभी ने ऐसे विरोध किया जैसे वे जलती आग में कूदने जा रही हों। और वह सचमुच आग में क",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 676680
+    },
+    {
+      "chunk_idx": 10,
+      "chunk_preview": "गाँव के घर का बहुत-सा सामान वे 'बुक' करा आयी थीं। अपने साथ वे अपना पुराना चरखा औ",
+      "retrieved_ids": [
+        "story120_neutral"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120_multi.wav",
+      "ref_text": "बात बहुत पुरानी है, कान्यकुब्ज में एक राजा राज्य करता था।",
+      "audio_samples": 488184
+    },
+    {
+      "chunk_idx": 11,
+      "chunk_preview": "आग रुकी तो लगा इधर तक सपाट फैली हुई जमीन अमृतसर और लाहौर के बीच से फट गयी है और ",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 583176
+    },
+    {
+      "chunk_idx": 12,
+      "chunk_preview": "पक्की सड़क के किनारे पीछे की ओर एक नहर थी, और पास ही झेलम नदी, अल्हड़ लड़की की त",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 581352
+    },
+    {
+      "chunk_idx": 13,
+      "chunk_preview": "मैं एक पुस्तक के पन्ने उलट रहा था, मां ने पूछा, ''यह गाड़ी सराई स्टेशन पर रुकेगी",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 687840
+    },
+    {
+      "chunk_idx": 14,
+      "chunk_preview": "मां के चेहरे पर खिसियाहट-सी दौड़ गयी। बोलीं, ''तुम्हारे लिए पहले भी वहाँ क्या रख",
+      "retrieved_ids": [
+        "story120_neutral"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120_multi.wav",
+      "ref_text": "बात बहुत पुरानी है, कान्यकुब्ज में एक राजा राज्य करता था।",
+      "audio_samples": 656112
+    },
+    {
+      "chunk_idx": 15,
+      "chunk_preview": "मेरे एक दूर के मामाजी हमारे साथ थे। तीनों ने मिलकर कुछ खाया और सोने की तैयारी कर",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 478968
+    },
+    {
+      "chunk_idx": 16,
+      "chunk_preview": "कुछ देर बाद एकाएक मेरी आँख खुली, देखा मां, वैसे ही बाहर फैले हुए अँधेरे की ओर नि",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 585720
+    },
+    {
+      "chunk_idx": 17,
+      "chunk_preview": "उस अधनींदी अवस्था में मैंने कोई स्वप्न देखा, ऐसा तो मुझे याद नहीं आता, पर उस नीं",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 426600
+    },
+    {
+      "chunk_idx": 18,
+      "chunk_preview": "कोई लाल-सी तरल चीज मुझे अपने चारों ओर फिरती अनुभव होती थी और मुझे लग रहा था उस ल",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 664320
+    },
+    {
+      "chunk_idx": 19,
+      "chunk_preview": "''देखो यह बाहर शोर कैसा है?'' मैंने बाहर झाँककर देखा। हमारी गाड़ी छोटे-से स्टेशन",
+      "retrieved_ids": [
+        "story120_neutral"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120_multi.wav",
+      "ref_text": "बात बहुत पुरानी है, कान्यकुब्ज में एक राजा राज्य करता था।",
+      "audio_samples": 552696
+    },
+    {
+      "chunk_idx": 20,
+      "chunk_preview": "चौदह साल पहले की अनेक सुनी-सुनायी घटनाएं बिजली बनकर कौंध गयी, जब दंगाइयों ने कित",
+      "retrieved_ids": [
+        "story120_neutral"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120_multi.wav",
+      "ref_text": "बात बहुत पुरानी है, कान्यकुब्ज में एक राजा राज्य करता था।",
+      "audio_samples": 604920
+    },
+    {
+      "chunk_idx": 21,
+      "chunk_preview": "उस भीड़ में से कोई चिल्ला रहा था-''अरे इस गाड़ी में कोई सराई का है?'' ''यह कौन-स",
+      "retrieved_ids": [
+        "story120_neutral"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120_multi.wav",
+      "ref_text": "बात बहुत पुरानी है, कान्यकुब्ज में एक राजा राज्य करता था।",
+      "audio_samples": 655344
+    },
+    {
+      "chunk_idx": 22,
+      "chunk_preview": "''पूछो इनसे, क्या बात है?'' मैंने खिड़की से गरदन निकाली। बहुत-से लोग घूमते हुए प",
+      "retrieved_ids": [
+        "story120_neutral"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120_multi.wav",
+      "ref_text": "बात बहुत पुरानी है, कान्यकुब्ज में एक राजा राज्य करता था।",
+      "audio_samples": 604128
+    },
+    {
+      "chunk_idx": 23,
+      "chunk_preview": "''तुम सराई की हो?'' उस आदमी ने जोर देकर पूछा। ''हां, जी।'' मां के इतना कहते ही स",
+      "retrieved_ids": [
+        "story120_neutral"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120_multi.wav",
+      "ref_text": "बात बहुत पुरानी है, कान्यकुब्ज में एक राजा राज्य करता था।",
+      "audio_samples": 630240
+    },
+    {
+      "chunk_idx": 24,
+      "chunk_preview": "उपस्थित जनसमुदाय में एक कोलाहल-सा हुआ। किसी की आवांज आयी, ''तुम किसके घर से हो?'",
+      "retrieved_ids": [
+        "story120_neutral"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120_multi.wav",
+      "ref_text": "बात बहुत पुरानी है, कान्यकुब्ज में एक राजा राज्य करता था।",
+      "audio_samples": 655080
+    },
+    {
+      "chunk_idx": 25,
+      "chunk_preview": "कैसे हैं सब लोग...?'' कहते-कहते कितने ही हाथ हमारी ओर बढ़ने लगे। लोग हमारे सम्बन",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 622080
+    },
+    {
+      "chunk_idx": 26,
+      "chunk_preview": "देखते-देखते हमारी बर्थ कपडों की छोटी-छोटी पोटलियों से भर गयी। मैं हक्का-बक्का-सा",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 679176
+    },
+    {
+      "chunk_idx": 27,
+      "chunk_preview": "वहीं खड़े गार्ड ने हरी लालटेन ऊपर उठायी और कोट की जेब से सीटी निकाली। मैंने देखा",
+      "retrieved_ids": [
+        "story120_neutral"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120_multi.wav",
+      "ref_text": "बात बहुत पुरानी है, कान्यकुब्ज में एक राजा राज्य करता था।",
+      "audio_samples": 650232
+    },
+    {
+      "chunk_idx": 28,
+      "chunk_preview": "''भरजाई, सरदारजी कैसे हैं? उन्हें क्यों नहीं लायी, पंजे साहब के दरशन कराने?'' एक",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 666840
+    },
+    {
+      "chunk_idx": 29,
+      "chunk_preview": "मां चुप रहीं, मैंने जवाब दिया, ''उनसे पेट में रसोली हो गयी थी। एक दिन वह फूट गयी",
+      "retrieved_ids": [
+        "story120_single_narration"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120_single.wav",
+      "ref_text": "टूटी-फूटी एक उसकी झोपड़ी थी। वर्षा ऋतु में जब उससे पानी टपकता तो वहां बैठना भी दूभर हो जाता था।",
+      "audio_samples": 642072
+    },
+    {
+      "chunk_idx": 30,
+      "chunk_preview": "''भरजाई, तेरे बच्चे कैसे हैं?'' ''वाहे गुरु जी की किरपा है, सब अच्छे हैं।'' मां ",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 687072
+    },
+    {
+      "chunk_idx": 31,
+      "chunk_preview": "प्लेटफॉर्म पर खड़ी कितनी आवांजें कह रही थीं :\n''वापस आ जाओ!''\n''वापस आ जाओ!'' मै",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 576240
+    },
+    {
+      "chunk_idx": 32,
+      "chunk_preview": "पर प्लेटफॉर्म पर खड़े लोगों ने उनकी बात नहीं सुनी थी। वे कहे जा रहे थे-\n''भरजाई,",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 721632
+    },
+    {
+      "chunk_idx": 33,
+      "chunk_preview": "दूर खड़ा गार्ड हरी लालटेन दिखाता हुआ सीटी बजा रहा था। इंजन ने सीटी दी। गाड़ी फकफ",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 605424
+    },
+    {
+      "chunk_idx": 34,
+      "chunk_preview": "मां के हाथ जुड़े हुए थे और मुंह से गद्गद स्वर में धीरे-धीरे कुछ निकल रहा था। धीर",
+      "retrieved_ids": [
+        "story120_neutral"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120_multi.wav",
+      "ref_text": "बात बहुत पुरानी है, कान्यकुब्ज में एक राजा राज्य करता था।",
+      "audio_samples": 522504
+    },
+    {
+      "chunk_idx": 35,
+      "chunk_preview": "गाड़ी स्टेशन के बाहर निकल आयी तो मैंने बर्थ से पोटलियाँ हटाकर एक ओर कीं और मां स",
+      "retrieved_ids": [
+        "story120_neutral"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120_multi.wav",
+      "ref_text": "बात बहुत पुरानी है, कान्यकुब्ज में एक राजा राज्य करता था।",
+      "audio_samples": 663288
+    },
+    {
+      "chunk_idx": 36,
+      "chunk_preview": "हमारी गाड़ी जेहलम के पुल पर आ गयी थी। रात्रि की उस नीरवता में खडर...खडर....खडर..",
+      "retrieved_ids": [
+        "story120_intro"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120reference.wav",
+      "ref_text": "हे गाइस, आज की हमारी कहानी है गरीब किसान और सोने का घड़ा।",
+      "audio_samples": 667392
+    },
+    {
+      "chunk_idx": 37,
+      "chunk_preview": "मेरी दृष्टि और नीचे की ओर जा रही थी, वहाँ घुप्प अँधेरा था, पर मैं जानता था वहाँ ",
+      "retrieved_ids": [
+        "story120_neutral"
+      ],
+      "ref_audio": "C:\\Users\\prana\\source\\repos\\hindi-audiobook-generation\\Audios\\story120_multi.wav",
+      "ref_text": "बात बहुत पुरानी है, कान्यकुब्ज में एक राजा राज्य करता था।",
+      "audio_samples": 487152
+    }
+  ]
+}
