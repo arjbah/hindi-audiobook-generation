@@ -58,7 +58,7 @@ def train():
     num_epochs = 120
     total_steps = len(train_loader) * num_epochs
     scheduler = CosineAnnealingLR(optimizer, T_max=total_steps)
-    scaler = GradScaler()
+    #scaler = GradScaler()
 
     # 4. Training Loop
     for epoch in range(num_epochs):
@@ -72,13 +72,12 @@ def train():
             attention_mask = batch['attention_mask'].to(device)
 
             optimizer.zero_grad()
-            with torch.autocast(device_type="cuda", dtype=torch.float16):
+            with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
                 logits_per_audio, logits_per_text = model(mel_spec, input_ids, attention_mask)
                 loss = contrastive_loss(logits_per_audio, logits_per_text)
             
-            scaler.scale(loss).backward()
-            scaler.step(optimizer)
-            scaler.update()
+            loss.backward()
+            optimizer.step()
             scheduler.step()
 
             total_loss += loss.item()
@@ -92,7 +91,6 @@ def train():
                 'epoch': epoch,
                 'model_state_dict': model.state_dict(),
                 'optimizer_state_dict': optimizer.state_dict(),
-                'scaler_state_dict': scaler.state_dict(),
                 'scheduler_state_dict': scheduler.state_dict(),
                 'loss': total_loss,
             }, f"clap_checkpoint_epoch_{epoch+1}.pt")

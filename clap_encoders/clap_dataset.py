@@ -77,3 +77,11 @@ def get_dataloader(split="train", batch_size=32, num_workers=4):
     dataset = ConcatDataset([indicvoices, rasa])
     
     return DataLoader(dataset, batch_size=batch_size, shuffle=(split=="train"), num_workers=num_workers)
+
+def get_full_dataset():
+    indicvoices_train = IndicVoicesCLAPDataset(dataset_name="indicvoices", split="train")
+    indicvoices_test = IndicVoicesCLAPDataset(dataset_name="indicvoices", split="test")
+    rasa_train = IndicVoicesCLAPDataset(dataset_name="rasa", split="train")
+    rasa_test = IndicVoicesCLAPDataset(dataset_name="rasa", split="test")
+    dataset = ConcatDataset([indicvoices_train, indicvoices_test, rasa_train, rasa_test])
+    return dataset
