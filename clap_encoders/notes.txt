@@ -1,0 +1,2 @@
+IndicSBERT: https://huggingface.co/l3cube-pune/indic-sentence-similarity-sbert
+IndicBERT: https://huggingface.co/ai4bharat/indic-bert
