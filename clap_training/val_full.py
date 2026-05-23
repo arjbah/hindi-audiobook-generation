@@ -44,17 +44,17 @@ def retrieval_metrics(similarity_matrix, ks=[1,5,10]):
 
     return metrics
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 print(f"Using device: {device}")
 
 config = HTSATConfig()
 
 loader = get_dataloader(split="test", batch_size=512, num_workers=4)
 
-for i in range(50, 121, 10):
+for i in range(120, 121, 10):
     model = CLAPModel(config).to(device)
-    checkpoint = torch.load(f"clap_checkpoint_epoch_{i}.pt", map_location=device)
-    model.load_state_dict(checkpoint["model_state_dict"])
+    checkpoint = torch.load(f"clap_model_epoch_{i}.pt", map_location=device)
+    model.load_state_dict(checkpoint) # ["model_state_dict"]
     model.train()
     
     all_audio_embs = []
@@ -65,8 +65,12 @@ for i in range(50, 121, 10):
             mel_spec = batch['mel_spec'].to(device)
             input_ids = batch['input_ids'].to(device)
             attention_mask = batch['attention_mask'].to(device)
-
-            with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
+            
+            if device == "cuda":
+                with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
+                    audio_embs = model.encode_audio(mel_spec)
+                    text_embs = model.encode_text(input_ids, attention_mask)
+            else:
                 audio_embs = model.encode_audio(mel_spec)
                 text_embs = model.encode_text(input_ids, attention_mask)
 

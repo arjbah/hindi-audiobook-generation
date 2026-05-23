@@ -36,7 +36,7 @@ genders = ["Male"] # Rasa Hindi has no female samples
 emotions = ["HAPPY", "ANGER", "SURPRISE", "SAD", "FEAR", "DISGUST"]
 prompt_emotions = ["happiness", "anger", "surprise", "sadness", "fear", "disgust"]
 elevenlabs_prompt_emotions = ["happy", "angry", "surprised", "sad", "fearful", "disgusted"]
-df = pd.DataFrame(columns=["transcript", "gender", "emotion", "description", "rasa_audio", "indicparler_audio", "elevenlabs_description", "elevenlabs_audio", "voxtral_audio"])
+df = pd.DataFrame(columns=["transcript", "gender", "emotion", "description", "rasa_audio", "indicf5_audio", "indicparler_audio", "elevenlabs_description", "elevenlabs_audio", "voxtral_audio"])
 index = 0
 for gender in genders:
     for i in range(len(emotions)):
@@ -54,8 +54,9 @@ for gender in genders:
 # IndicParler-TTS + ElevenLabs + Mistral Eval
 index = 0
 for row in df.itertuples():
-    # IndicParler
     transcript = row.transcript
+
+    # IndicParler
     indicparler_path = f"{folder_name}/indic_tts_out_{index}.wav"
     if not Path(indicparler_path).exists():
         indicparler_description = row.description
