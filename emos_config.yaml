@@ -1,0 +1,63 @@
+# ReSEval EMOS (Emotionality) Configuration
+
+name: hindi-audiobook-emos
+test: mos
+datatype: audio
+
+storage: local
+database: localhost
+server: local
+
+crowdsource:
+  platform: mturk
+  title: "Evaluate Hindi Speech Emotionality"
+  description: "Rate how well the speech conveys emotion and expression."
+  keywords: "Hindi, Emotion, EMOS, Expressive Speech"
+  
+  filter:
+    countries: ['IN', 'US']
+    approved_tasks: 100
+    approval_rating: 95
+
+  payment:
+    base: 0.05
+    completion: 0.45
+
+  duration:
+    total: 86400
+    assignment: 1800
+    autoapprove: 172800
+
+participants: 20
+samples_per_participant: 5
+random_seed: 123  # Different seed to show different variety
+
+welcome_text: "
+  # **Welcome!**\n
+  We are evaluating the **Emotional Expressiveness** of Hindi speech. 
+  You will listen to clips and rate how well the speaker conveys the mood or feeling of the text."
+
+listening_test:
+  instructions: "Please wear headphones. Count how many distinct tones you hear."
+  num_questions: 1
+  retries: 2
+
+survey_instructions: "
+  ## **Instructions** \n
+  Listen to the Hindi clip. Rate the **Emotionality/Expression** on a scale from 1 to 5.\n
+  *   **5**: Highly expressive, perfectly captures the intended emotion/mood.
+  *   **1**: Completely monotone, flat, or mismatched emotion.\n
+  **Note:** Focus on how 'alive' or 'emotive' the voice sounds, rather than technical clarity."
+
+prescreen_questions:
+  - name: NativeSpeaker
+    type: multiple-choice
+    text: "Are you a fluent speaker of Hindi?"
+    answers: ['Yes', 'No']
+    correct_answer: 'Yes'
+
+followup_questions:
+  - name: Feedback
+    type: free-response
+    text: "Any feedback on the emotional quality?"
+    placeholder: "Optional..."
