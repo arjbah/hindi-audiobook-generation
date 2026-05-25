@@ -71,6 +71,4 @@ with torch.no_grad():
                 if count % 100 == 0:
                     print(count)
 
-                
-
 torch.save(reference_library, "reference_library.pt")
