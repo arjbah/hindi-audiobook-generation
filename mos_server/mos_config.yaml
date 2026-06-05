@@ -1,0 +1,81 @@
+# ReSEval MOS Configuration for Hindi Audiobook Evaluation
+
+# The name of this evaluation (internal identifier)
+name: hindi-audiobook-mos-v1
+
+# Test type and data type
+test: mos
+datatype: audio
+
+# Infrastructure - Change these to 'aws' when ready for production
+storage: local
+database: localhost
+server: local
+
+# Crowdsourcing configuration (Used when deploying to MTurk)
+crowdsource:
+  platform: mturk
+  title: "Evaluate Hindi Audiobook Speech Quality"
+  description: "Listen to short Hindi audio clips and rate them based on naturalness and clarity."
+  keywords: "Hindi, Speech, Audio, Evaluation, Listening"
+  
+  filter:
+    countries: ['IN', 'US'] # Common to include IN for Hindi tests
+    approved_tasks: 100
+    approval_rating: 95
+
+  payment:
+    base: 0.05
+    completion: 0.45
+
+  duration:
+    total: 86400        # 24 hours
+    assignment: 1800    # 30 minutes
+    autoapprove: 172800 # 2 days
+
+# ==============================================================================
+# EDITABLE PARAMETERS (You can change these anytime before running 'create')
+# ==============================================================================
+
+# Total number of unique participants you want to recruit
+participants: 20
+
+# Number of audio samples each participant will rate
+samples_per_participant: 10
+
+# A seed to use for deterministic random sampling (Change this to get new random sets)
+random_seed: 42
+
+# ==============================================================================
+
+# UI Content
+welcome_text: "
+  # **Welcome!**\n
+  We are conducting a study to evaluate the quality of Hindi speech synthesis. 
+  You will listen to several short audio clips and rate them on a scale of 1 to 5.\n
+  ### **Consent**\nBy pressing **I Agree**, you confirm you are 18+ and willing to participate."
+
+listening_test:
+  instructions: "Please wear headphones. Count how many distinct tones you hear in the clip."
+  num_questions: 1
+  retries: 2
+
+survey_instructions: "
+  ## **Instructions** \n
+  Listen to the Hindi audio clip. Rate the **overall audio quality** on a scale from 1 (Very Poor) to 5 (Excellent).\n
+  *   **5**: Perfectly natural, human-like speech.
+  *   **1**: Extremely robotic or unintelligible.
+  **Note:** Ignore periods of silence or an abrupt cut at the end of the audio in your evaluation."
+
+prescreen_questions:
+  - name: NativeSpeaker
+    type: multiple-choice
+    text: "Are you a fluent speaker of Hindi?"
+    answers: ['Yes', 'No']
+    correct_answer: 'Yes'
+
+followup_questions:
+  - name: Feedback
+    type: free-response
+    text: "Any feedback on the audio quality? After you submit this question you will be given a code. You don't have to do anything with the code, after this question you're done."
+    placeholder: "Optional feedback..."

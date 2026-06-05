@@ -1,0 +1,63 @@
+# ReSEval NMOS (Naturalness) Configuration
+
+name: hindi-audiobook-nmos-v3
+test: mos
+datatype: audio
+
+storage: local
+database: localhost
+server: local
+
+crowdsource:
+  platform: mturk
+  title: "Evaluate Hindi Speech Naturalness"
+  description: "Rate how human-like and natural the Hindi speech sounds."
+  keywords: "Hindi, Naturalness, NMOS, Speech Synthesis"
+  
+  filter:
+    countries: ['IN', 'US']
+    approved_tasks: 100
+    approval_rating: 95
+
+  payment:
+    base: 0.05
+    completion: 0.45
+
+  duration:
+    total: 86400
+    assignment: 1800
+    autoapprove: 172800
+
+participants: 20
+samples_per_participant: 10
+random_seed: 42
+
+welcome_text: "
+  # **Welcome!**\n
+  We are evaluating the **Naturalness** of Hindi speech synthesis. 
+  You will listen to several clips and rate how closely they resemble a real human speaker."
+
+listening_test:
+  instructions: "Please wear headphones. Count how many distinct tones you hear."
+  num_questions: 1
+  retries: 2
+
+survey_instructions: "
+  ## **Instructions** \n
+  Listen to the Hindi clip. Rate the **Naturalness** on a scale from 1 to 5.\n
+  *   **5**: Perfectly natural, indistinguishable from a human.
+  *   **1**: Extremely robotic, distorted, or difficult to understand.\n
+  **Note:** Focus only on the voice quality and flow, not the emotion or story content. Ignore periods of silence or an abrupt cut at the end of the audio in your evaluation."
+
+prescreen_questions:
+  - name: NativeSpeaker
+    type: multiple-choice
+    text: "Are you a fluent speaker of Hindi?"
+    answers: ['Yes', 'No']
+    correct_answer: 'Yes'
+
+followup_questions:
+  - name: Feedback
+    type: free-response
+    text: "Any feedback on the voice naturalness? After you submit this question you will be given a code. You don't have to do anything with the code, after this question you're done."
+    placeholder: "Optional..."
