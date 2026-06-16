@@ -101,11 +101,26 @@ class CLAPModel(nn.Module):
       """
       Extract pre-trained LAION HTS-AT representations and map them via custom projection head
       """
-      outputs = self.audio_encoder(input_features=input_features, is_longer=is_longer)
-      # pooler_output has shape [batch_size, 768]
-      audio_features = outputs.pooler_output
-      audio_features = self.audio_projection(audio_features)
-      return F.normalize(audio_features, p=2, dim=-1)
+      # Convert batched PyTorch raw audio waveforms to CPU numpy array list for HF Feature Extractor
+        waveforms_list = [w.detach().cpu().numpy() for w in audio_waveforms]
+        
+        # Extract features (mel spectrograms and length flags) using the LAION processor config
+        extracted_features = self.feature_extractor(
+            waveforms_list, 
+            sampling_rate=48000, 
+            return_tensors="pt"
+        )
+        
+        # Move extracted features to the same GPU device as the model
+        input_features = extracted_features["input_features"].to(audio_waveforms.device)
+        is_longer = extracted_features["is_longer"].to(audio_waveforms.device)
+        
+        # Forward pass through pre-trained unfrozen HTS-AT
+        outputs = self.audio_encoder(input_features=input_features, is_longer=is_longer)
+        audio_features = outputs.pooler_output
+        audio_features = self.audio_projection(audio_features)
+        
+        return F.normalize(audio_features, p=2, dim=-1)
       
     def encode_text(self, input_ids, attention_mask):
         """
