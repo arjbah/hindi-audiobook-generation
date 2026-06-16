@@ -8,7 +8,7 @@ from transformers import AutoTokenizer
 import numpy as np
 
 class IndicVoicesCLAPDataset(Dataset):
-    def __init__(self, dataset_name, split="train", target_sr=32000, max_audio_len=10.24, max_text_len=128, muril_model_name="google/muril-base-cased"):
+    def __init__(self, dataset_name, split="train", target_sr=48000, max_audio_len=10.24, max_text_len=128, muril_model_name="google/muril-base-cased"):
         if dataset_name == "indicvoices":
             self.dataset = load_dataset("ai4bharat/indicvoices_r", "Hindi", split=split)
         elif dataset_name == "rasa":
