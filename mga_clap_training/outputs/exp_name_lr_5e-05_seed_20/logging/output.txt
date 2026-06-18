@@ -1,0 +1,88 @@
+ 2026-06-16 at 04:53:49 | Training setting:
+{'audio_args': {'f_max': 14000,
+                'f_min': 50,
+                'hop_length': 320,
+                'max_length': 10,
+                'mono': True,
+                'n_fft': 1024,
+                'n_mels': 64,
+                'sr': 32000},
+ 'audio_encoder_args': {'freeze': False,
+                        'model': 'htsat',
+                        'pretrained': True,
+                        'type': 'transformer'},
+ 'blacklist': 'data/json_files/blacklist/blacklist_exclude_all_ac.json',
+ 'data_args': {'batch_size': 128, 'num_workers': 12},
+ 'device': 'cuda',
+ 'dist_args': {'dist_url': 'env://'},
+ 'embed_regularization': True,
+ 'embed_size': 1024,
+ 'json_files': ['data/json_files/BBC_Sound_Effects/bbc_final.json',
+                'data/json_files/FreeSound/fsd_final.json',
+                'data/json_files/SoundBible/sb_final.json',
+                'data/json_files/AudioSet_SL/as_final.json',
+                'data/json_files/Clotho/clotho_train_final.json',
+                'data/json_files/AudioCaps/audiocaps_train_final.json'],
+ 'optim_args': {'betas': [0.9, 0.999],
+                'eps': 1e-08,
+                'lr': 5e-05,
+                'momentum': 0.9,
+                'optimizer_name': 'adam',
+                'warmup_epochs': 2,
+                'warmup_steps': 0},
+ 'queue_size': 5120,
+ 'resume': False,
+ 'seed': 20,
+ 'temp': 0.07,
+ 'text_encoder_args': {'freeze': False, 'type': 'google/muril-base-cased'},
+ 'training': {'clip_grad': 2,
+              'dropout': 0.2,
+              'epochs': 120,
+              'spec_augmentation': True}}
+ 2026-06-16 at 04:53:49 | Total numer of parameters: 276166360
+ 2026-06-16 at 04:53:49 | Size of training set: 25713, size of batches: 200
+ 2026-06-16 at 04:53:49 | Training for epoch [1]
+ 2026-06-16 at 04:55:53 | Training statistics:	loss for epoch [1]: 4.158,	time: 123.7, lr: 0.000025.
+ 2026-06-16 at 04:56:14 | Epoch [1] | Rasa metrics | T2A: R@1=0.019, R@5=0.082, R@10=0.140, R@50=0.430, MedR=64.000, MeanR=104.528, mAP=0.064 | A2T: R@1=0.021, R@5=0.080, R@10=0.149, R@50=0.448, MedR=62.000, MeanR=102.657, mAP=0.068
+ 2026-06-16 at 04:56:19 | Epoch [1] | IndicVoices metrics | T2A: R@1=0.021, R@5=0.093, R@10=0.162, R@50=0.535, MedR=43.000, MeanR=61.981, mAP=0.074 | A2T: R@1=0.021, R@5=0.090, R@10=0.168, R@50=0.511, MedR=49.000, MeanR=66.165, mAP=0.074
+ 2026-06-16 at 04:56:25 | Training for epoch [2]
+ 2026-06-16 at 04:58:22 | Training statistics:	loss for epoch [2]: 2.797,	time: 117.3, lr: 0.000050.
+ 2026-06-16 at 04:58:42 | Epoch [2] | Rasa metrics | T2A: R@1=0.144, R@5=0.383, R@10=0.531, R@50=0.850, MedR=9.000, MeanR=29.740, mAP=0.265 | A2T: R@1=0.158, R@5=0.414, R@10=0.558, R@50=0.871, MedR=8.000, MeanR=24.660, mAP=0.286
+ 2026-06-16 at 04:58:48 | Epoch [2] | IndicVoices metrics | T2A: R@1=0.048, R@5=0.176, R@10=0.287, R@50=0.585, MedR=38.000, MeanR=58.907, mAP=0.122 | A2T: R@1=0.045, R@5=0.160, R@10=0.245, R@50=0.556, MedR=39.000, MeanR=64.168, mAP=0.113
+ 2026-06-16 at 04:58:55 | Training for epoch [3]
+ 2026-06-16 at 05:00:53 | Training statistics:	loss for epoch [3]: 1.709,	time: 117.8, lr: 0.000050.
+ 2026-06-16 at 05:01:13 | Epoch [3] | Rasa metrics | T2A: R@1=0.351, R@5=0.696, R@10=0.815, R@50=0.965, MedR=2.000, MeanR=8.763, mAP=0.505 | A2T: R@1=0.370, R@5=0.707, R@10=0.820, R@50=0.972, MedR=2.000, MeanR=8.181, mAP=0.518
+ 2026-06-16 at 05:01:18 | Epoch [3] | IndicVoices metrics | T2A: R@1=0.077, R@5=0.229, R@10=0.348, R@50=0.630, MedR=26.000, MeanR=53.335, mAP=0.161 | A2T: R@1=0.090, R@5=0.218, R@10=0.298, R@50=0.644, MedR=30.000, MeanR=56.875, mAP=0.161
+ 2026-06-16 at 05:01:25 | Training for epoch [4]
+ 2026-06-16 at 05:03:23 | Training statistics:	loss for epoch [4]: 1.074,	time: 117.7, lr: 0.000050.
+ 2026-06-16 at 05:03:43 | Epoch [4] | Rasa metrics | T2A: R@1=0.527, R@5=0.840, R@10=0.912, R@50=0.987, MedR=1.000, MeanR=4.802, mAP=0.664 | A2T: R@1=0.533, R@5=0.850, R@10=0.918, R@50=0.990, MedR=1.000, MeanR=4.471, mAP=0.673
+ 2026-06-16 at 05:03:48 | Epoch [4] | IndicVoices metrics | T2A: R@1=0.101, R@5=0.279, R@10=0.399, R@50=0.718, MedR=17.000, MeanR=46.364, mAP=0.196 | A2T: R@1=0.069, R@5=0.213, R@10=0.319, R@50=0.649, MedR=27.000, MeanR=61.285, mAP=0.149
+ 2026-06-16 at 05:03:55 | Training for epoch [5]
+ 2026-06-16 at 05:05:52 | Training statistics:	loss for epoch [5]: 0.771,	time: 117.1, lr: 0.000050.
+ 2026-06-16 at 05:06:17 | Epoch [5] | Rasa metrics | T2A: R@1=0.613, R@5=0.886, R@10=0.942, R@50=0.991, MedR=1.000, MeanR=4.090, mAP=0.732 | A2T: R@1=0.606, R@5=0.874, R@10=0.937, R@50=0.989, MedR=1.000, MeanR=4.335, mAP=0.727
+ 2026-06-16 at 05:06:23 | Epoch [5] | IndicVoices metrics | T2A: R@1=0.122, R@5=0.330, R@10=0.410, R@50=0.721, MedR=16.000, MeanR=43.500, mAP=0.228 | A2T: R@1=0.109, R@5=0.253, R@10=0.351, R@50=0.665, MedR=23.000, MeanR=59.364, mAP=0.191
+ 2026-06-16 at 05:06:30 | Training for epoch [6]
+ 2026-06-16 at 05:08:27 | Training statistics:	loss for epoch [6]: 0.587,	time: 117.7, lr: 0.000050.
+ 2026-06-16 at 05:08:49 | Epoch [6] | Rasa metrics | T2A: R@1=0.665, R@5=0.911, R@10=0.961, R@50=0.994, MedR=1.000, MeanR=2.957, mAP=0.774 | A2T: R@1=0.668, R@5=0.916, R@10=0.963, R@50=0.996, MedR=1.000, MeanR=2.804, mAP=0.776
+ 2026-06-16 at 05:08:54 | Epoch [6] | IndicVoices metrics | T2A: R@1=0.125, R@5=0.298, R@10=0.407, R@50=0.713, MedR=20.000, MeanR=46.678, mAP=0.218 | A2T: R@1=0.085, R@5=0.229, R@10=0.335, R@50=0.633, MedR=25.000, MeanR=60.814, mAP=0.171
+ 2026-06-16 at 05:09:00 | Training for epoch [7]
+ 2026-06-16 at 05:10:58 | Training statistics:	loss for epoch [7]: 0.467,	time: 117.8, lr: 0.000050.
+ 2026-06-16 at 05:11:18 | Epoch [7] | Rasa metrics | T2A: R@1=0.693, R@5=0.924, R@10=0.962, R@50=0.995, MedR=1.000, MeanR=2.761, mAP=0.794 | A2T: R@1=0.707, R@5=0.937, R@10=0.964, R@50=0.994, MedR=1.000, MeanR=2.725, mAP=0.805
+ 2026-06-16 at 05:11:23 | Epoch [7] | IndicVoices metrics | T2A: R@1=0.122, R@5=0.311, R@10=0.412, R@50=0.747, MedR=17.000, MeanR=42.856, mAP=0.220 | A2T: R@1=0.114, R@5=0.261, R@10=0.348, R@50=0.612, MedR=26.000, MeanR=59.729, mAP=0.197
+ 2026-06-16 at 05:11:30 | Training for epoch [8]
+ 2026-06-16 at 05:13:28 | Training statistics:	loss for epoch [8]: 0.390,	time: 117.5, lr: 0.000050.
+ 2026-06-16 at 05:13:53 | Epoch [8] | Rasa metrics | T2A: R@1=0.750, R@5=0.953, R@10=0.981, R@50=0.998, MedR=1.000, MeanR=2.121, mAP=0.841 | A2T: R@1=0.745, R@5=0.944, R@10=0.972, R@50=0.998, MedR=1.000, MeanR=2.347, mAP=0.834
+ 2026-06-16 at 05:13:58 | Epoch [8] | IndicVoices metrics | T2A: R@1=0.152, R@5=0.316, R@10=0.434, R@50=0.745, MedR=15.000, MeanR=42.535, mAP=0.242 | A2T: R@1=0.104, R@5=0.250, R@10=0.354, R@50=0.649, MedR=22.000, MeanR=59.878, mAP=0.186
+ 2026-06-16 at 05:14:04 | Training for epoch [9]
+ 2026-06-16 at 05:16:02 | Training statistics:	loss for epoch [9]: 0.344,	time: 117.3, lr: 0.000050.
+ 2026-06-16 at 05:16:25 | Epoch [9] | Rasa metrics | T2A: R@1=0.765, R@5=0.953, R@10=0.979, R@50=0.999, MedR=1.000, MeanR=2.275, mAP=0.849 | A2T: R@1=0.768, R@5=0.954, R@10=0.981, R@50=0.998, MedR=1.000, MeanR=2.157, mAP=0.852
+ 2026-06-16 at 05:16:31 | Epoch [9] | IndicVoices metrics | T2A: R@1=0.130, R@5=0.322, R@10=0.436, R@50=0.737, MedR=16.000, MeanR=43.949, mAP=0.235 | A2T: R@1=0.088, R@5=0.250, R@10=0.338, R@50=0.641, MedR=25.000, MeanR=60.843, mAP=0.170
+ 2026-06-16 at 05:16:37 | Training for epoch [10]
+ 2026-06-16 at 05:18:35 | Training statistics:	loss for epoch [10]: 0.304,	time: 117.2, lr: 0.000049.
+ 2026-06-16 at 05:18:55 | Epoch [10] | Rasa metrics | T2A: R@1=0.762, R@5=0.954, R@10=0.977, R@50=0.997, MedR=1.000, MeanR=2.136, mAP=0.847 | A2T: R@1=0.769, R@5=0.957, R@10=0.979, R@50=0.998, MedR=1.000, MeanR=2.073, mAP=0.852
+ 2026-06-16 at 05:19:00 | Epoch [10] | IndicVoices metrics | T2A: R@1=0.141, R@5=0.314, R@10=0.415, R@50=0.726, MedR=17.000, MeanR=41.375, mAP=0.238 | A2T: R@1=0.098, R@5=0.269, R@10=0.346, R@50=0.638, MedR=24.000, MeanR=56.489, mAP=0.183
+ 2026-06-16 at 05:19:05 | Training for epoch [11]
+ 2026-06-16 at 05:21:00 | Training statistics:	loss for epoch [11]: nan,	time: 115.0, lr: 0.000049.
+ 2026-06-16 at 05:21:21 | Epoch [11] | Rasa metrics | T2A: R@1=0.013, R@5=0.042, R@10=0.066, R@50=0.170, MedR=406.000, MeanR=643.424, mAP=0.033 | A2T: R@1=0.001, R@5=0.008, R@10=0.014, R@50=0.061, MedR=587.000, MeanR=732.516, mAP=0.008
+ 2026-06-16 at 05:21:27 | Epoch [11] | IndicVoices metrics | T2A: R@1=0.024, R@5=0.072, R@10=0.109, R@50=0.322, MedR=109.000, MeanR=129.529, mAP=0.059 | A2T: R@1=0.016, R@5=0.045, R@10=0.061, R@50=0.261, MedR=107.000, MeanR=130.891, mAP=0.041
+ 2026-06-16 at 05:21:27 | Training for epoch [12]
