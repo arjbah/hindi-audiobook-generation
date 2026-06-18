@@ -343,6 +343,5 @@ def validate_re(model, dataloader, device):
     return {"t2a": [r1, r5, r10, r50, medr, meanr, mAP],
             "a2t": [r1_a, r5_a, r10_a, r50_a, medr_a, meanr_a, mAP_a]}
 
-
 if __name__ == '__main__':
     main()
