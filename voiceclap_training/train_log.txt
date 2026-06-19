@@ -1,0 +1,297 @@
+Total params: 328,692,483
+Trainable params: 328,692,483
+ 2026-06-19 at 05:15:52 | Using device: cuda
+ 2026-06-19 at 05:18:20 | Epoch [1] | Rasa metrics | T2A: R@1=0.002, R@5=0.021, R@10=0.040, MedR=129.000, MeanR=152.366, mAP=0.023 | A2T: R@1=0.005, R@5=0.024, R@10=0.047, MedR=127.000, MeanR=149.310, mAP=0.026
+ 2026-06-19 at 05:18:20 | Epoch [1] | IndicVoices metrics | T2A: R@1=0.021, R@5=0.109, R@10=0.210, MedR=33.000, MeanR=39.005, mAP=0.088 | A2T: R@1=0.024, R@5=0.090, R@10=0.191, MedR=31.000, MeanR=41.027, mAP=0.083
+ 2026-06-19 at 05:18:26 | Saved new best Rasa checkpoint at epoch 1.
+ 2026-06-19 at 05:20:48 | Epoch [2] | Rasa metrics | T2A: R@1=0.007, R@5=0.039, R@10=0.071, MedR=83.000, MeanR=107.149, mAP=0.037 | A2T: R@1=0.012, R@5=0.057, R@10=0.103, MedR=80.000, MeanR=103.307, mAP=0.050
+ 2026-06-19 at 05:20:48 | Epoch [2] | IndicVoices metrics | T2A: R@1=0.016, R@5=0.101, R@10=0.226, MedR=28.000, MeanR=36.021, mAP=0.086 | A2T: R@1=0.013, R@5=0.112, R@10=0.215, MedR=31.000, MeanR=37.636, mAP=0.083
+ 2026-06-19 at 05:20:57 | Saved new best Rasa checkpoint at epoch 2.
+ 2026-06-19 at 05:23:19 | Epoch [3] | Rasa metrics | T2A: R@1=0.020, R@5=0.089, R@10=0.172, MedR=38.000, MeanR=60.829, mAP=0.076 | A2T: R@1=0.021, R@5=0.095, R@10=0.175, MedR=39.000, MeanR=60.892, mAP=0.077
+ 2026-06-19 at 05:23:19 | Epoch [3] | IndicVoices metrics | T2A: R@1=0.029, R@5=0.170, R@10=0.295, MedR=22.000, MeanR=30.553, mAP=0.118 | A2T: R@1=0.027, R@5=0.152, R@10=0.311, MedR=23.000, MeanR=32.061, mAP=0.117
+ 2026-06-19 at 05:23:27 | Saved new best Rasa checkpoint at epoch 3.
+ 2026-06-19 at 05:25:49 | Epoch [4] | Rasa metrics | T2A: R@1=0.031, R@5=0.141, R@10=0.251, MedR=26.000, MeanR=41.686, mAP=0.106 | A2T: R@1=0.033, R@5=0.136, R@10=0.246, MedR=27.000, MeanR=41.479, mAP=0.106
+ 2026-06-19 at 05:25:49 | Epoch [4] | IndicVoices metrics | T2A: R@1=0.035, R@5=0.207, R@10=0.322, MedR=21.000, MeanR=32.455, mAP=0.129 | A2T: R@1=0.035, R@5=0.173, R@10=0.346, MedR=19.000, MeanR=31.144, mAP=0.125
+ 2026-06-19 at 05:25:58 | Saved new best Rasa checkpoint at epoch 4.
+ 2026-06-19 at 05:28:20 | Epoch [5] | Rasa metrics | T2A: R@1=0.042, R@5=0.174, R@10=0.297, MedR=21.000, MeanR=35.980, mAP=0.126 | A2T: R@1=0.037, R@5=0.166, R@10=0.297, MedR=21.000, MeanR=34.704, mAP=0.123
+ 2026-06-19 at 05:28:20 | Epoch [5] | IndicVoices metrics | T2A: R@1=0.048, R@5=0.189, R@10=0.311, MedR=21.000, MeanR=36.872, mAP=0.134 | A2T: R@1=0.048, R@5=0.202, R@10=0.298, MedR=21.000, MeanR=33.037, mAP=0.140
+ 2026-06-19 at 05:28:28 | Saved new best Rasa checkpoint at epoch 5.
+ 2026-06-19 at 05:30:50 | Epoch [6] | Rasa metrics | T2A: R@1=0.087, R@5=0.308, R@10=0.476, MedR=11.000, MeanR=19.918, mAP=0.209 | A2T: R@1=0.100, R@5=0.325, R@10=0.493, MedR=11.000, MeanR=19.110, mAP=0.221
+ 2026-06-19 at 05:30:50 | Epoch [6] | IndicVoices metrics | T2A: R@1=0.069, R@5=0.213, R@10=0.340, MedR=17.000, MeanR=36.670, mAP=0.156 | A2T: R@1=0.066, R@5=0.207, R@10=0.338, MedR=18.000, MeanR=32.878, mAP=0.156
+ 2026-06-19 at 05:30:58 | Saved new best Rasa checkpoint at epoch 6.
+ 2026-06-19 at 05:33:21 | Epoch [7] | Rasa metrics | T2A: R@1=0.094, R@5=0.326, R@10=0.495, MedR=11.000, MeanR=18.900, mAP=0.216 | A2T: R@1=0.094, R@5=0.325, R@10=0.505, MedR=10.000, MeanR=18.467, mAP=0.220
+ 2026-06-19 at 05:33:21 | Epoch [7] | IndicVoices metrics | T2A: R@1=0.074, R@5=0.231, R@10=0.375, MedR=17.000, MeanR=36.553, mAP=0.165 | A2T: R@1=0.061, R@5=0.221, R@10=0.380, MedR=18.000, MeanR=33.221, mAP=0.158
+ 2026-06-19 at 05:33:29 | Saved new best Rasa checkpoint at epoch 7.
+ 2026-06-19 at 05:35:51 | Epoch [8] | Rasa metrics | T2A: R@1=0.129, R@5=0.397, R@10=0.567, MedR=8.000, MeanR=16.438, mAP=0.263 | A2T: R@1=0.122, R@5=0.396, R@10=0.570, MedR=8.000, MeanR=16.483, mAP=0.258
+ 2026-06-19 at 05:35:51 | Epoch [8] | IndicVoices metrics | T2A: R@1=0.074, R@5=0.242, R@10=0.383, MedR=17.000, MeanR=38.580, mAP=0.169 | A2T: R@1=0.072, R@5=0.245, R@10=0.383, MedR=18.000, MeanR=33.678, mAP=0.168
+ 2026-06-19 at 05:35:59 | Saved new best Rasa checkpoint at epoch 8.
+ 2026-06-19 at 05:38:22 | Epoch [9] | Rasa metrics | T2A: R@1=0.152, R@5=0.448, R@10=0.624, MedR=7.000, MeanR=14.215, mAP=0.297 | A2T: R@1=0.151, R@5=0.452, R@10=0.631, MedR=6.000, MeanR=14.075, mAP=0.300
+ 2026-06-19 at 05:38:22 | Epoch [9] | IndicVoices metrics | T2A: R@1=0.069, R@5=0.218, R@10=0.372, MedR=19.000, MeanR=43.418, mAP=0.162 | A2T: R@1=0.064, R@5=0.223, R@10=0.354, MedR=20.000, MeanR=38.213, mAP=0.160
+ 2026-06-19 at 05:38:30 | Saved new best Rasa checkpoint at epoch 9.
+ 2026-06-19 at 05:40:52 | Epoch [10] | Rasa metrics | T2A: R@1=0.193, R@5=0.498, R@10=0.657, MedR=6.000, MeanR=13.439, mAP=0.339 | A2T: R@1=0.188, R@5=0.495, R@10=0.663, MedR=6.000, MeanR=13.286, mAP=0.337
+ 2026-06-19 at 05:40:52 | Epoch [10] | IndicVoices metrics | T2A: R@1=0.066, R@5=0.231, R@10=0.364, MedR=19.000, MeanR=42.314, mAP=0.163 | A2T: R@1=0.080, R@5=0.253, R@10=0.364, MedR=19.000, MeanR=36.617, mAP=0.177
+ 2026-06-19 at 05:41:00 | Saved new best Rasa checkpoint at epoch 10.
+ 2026-06-19 at 05:43:23 | Epoch [11] | Rasa metrics | T2A: R@1=0.272, R@5=0.631, R@10=0.784, MedR=3.000, MeanR=8.495, mAP=0.435 | A2T: R@1=0.272, R@5=0.631, R@10=0.787, MedR=3.000, MeanR=8.291, mAP=0.435
+ 2026-06-19 at 05:43:23 | Epoch [11] | IndicVoices metrics | T2A: R@1=0.085, R@5=0.263, R@10=0.380, MedR=18.000, MeanR=41.681, mAP=0.182 | A2T: R@1=0.082, R@5=0.290, R@10=0.399, MedR=16.000, MeanR=37.019, mAP=0.187
+ 2026-06-19 at 05:43:31 | Saved new best Rasa checkpoint at epoch 11.
+ 2026-06-19 at 05:45:53 | Epoch [12] | Rasa metrics | T2A: R@1=0.335, R@5=0.699, R@10=0.843, MedR=3.000, MeanR=6.506, mAP=0.500 | A2T: R@1=0.339, R@5=0.707, R@10=0.841, MedR=3.000, MeanR=6.300, mAP=0.501
+ 2026-06-19 at 05:45:53 | Epoch [12] | IndicVoices metrics | T2A: R@1=0.085, R@5=0.269, R@10=0.391, MedR=18.000, MeanR=42.045, mAP=0.188 | A2T: R@1=0.109, R@5=0.274, R@10=0.394, MedR=17.000, MeanR=39.069, mAP=0.202
+ 2026-06-19 at 05:46:01 | Saved new best Rasa checkpoint at epoch 12.
+ 2026-06-19 at 05:48:24 | Epoch [13] | Rasa metrics | T2A: R@1=0.375, R@5=0.751, R@10=0.874, MedR=2.000, MeanR=5.686, mAP=0.540 | A2T: R@1=0.386, R@5=0.757, R@10=0.875, MedR=2.000, MeanR=5.457, mAP=0.548
+ 2026-06-19 at 05:48:24 | Epoch [13] | IndicVoices metrics | T2A: R@1=0.104, R@5=0.279, R@10=0.418, MedR=15.000, MeanR=42.832, mAP=0.202 | A2T: R@1=0.104, R@5=0.298, R@10=0.418, MedR=15.000, MeanR=39.258, mAP=0.207
+ 2026-06-19 at 05:48:32 | Saved new best Rasa checkpoint at epoch 13.
+ 2026-06-19 at 05:50:54 | Epoch [14] | Rasa metrics | T2A: R@1=0.385, R@5=0.767, R@10=0.888, MedR=2.000, MeanR=5.181, mAP=0.554 | A2T: R@1=0.392, R@5=0.776, R@10=0.899, MedR=2.000, MeanR=5.023, mAP=0.561
+ 2026-06-19 at 05:50:54 | Epoch [14] | IndicVoices metrics | T2A: R@1=0.117, R@5=0.316, R@10=0.439, MedR=13.000, MeanR=39.146, mAP=0.218 | A2T: R@1=0.117, R@5=0.306, R@10=0.428, MedR=15.000, MeanR=38.383, mAP=0.221
+ 2026-06-19 at 05:51:02 | Saved new best Rasa checkpoint at epoch 14.
+ 2026-06-19 at 05:53:25 | Epoch [15] | Rasa metrics | T2A: R@1=0.450, R@5=0.817, R@10=0.914, MedR=2.000, MeanR=4.526, mAP=0.609 | A2T: R@1=0.449, R@5=0.822, R@10=0.920, MedR=2.000, MeanR=4.489, mAP=0.608
+ 2026-06-19 at 05:53:25 | Epoch [15] | IndicVoices metrics | T2A: R@1=0.136, R@5=0.314, R@10=0.463, MedR=13.000, MeanR=38.074, mAP=0.231 | A2T: R@1=0.138, R@5=0.335, R@10=0.452, MedR=15.000, MeanR=36.566, mAP=0.244
+ 2026-06-19 at 05:53:33 | Saved new best Rasa checkpoint at epoch 15.
+ 2026-06-19 at 05:55:55 | Epoch [16] | Rasa metrics | T2A: R@1=0.500, R@5=0.848, R@10=0.935, MedR=2.000, MeanR=4.008, mAP=0.649 | A2T: R@1=0.499, R@5=0.853, R@10=0.939, MedR=2.000, MeanR=3.885, mAP=0.653
+ 2026-06-19 at 05:55:55 | Epoch [16] | IndicVoices metrics | T2A: R@1=0.152, R@5=0.340, R@10=0.455, MedR=13.000, MeanR=40.915, mAP=0.246 | A2T: R@1=0.144, R@5=0.327, R@10=0.428, MedR=13.000, MeanR=39.029, mAP=0.241
+ 2026-06-19 at 05:56:03 | Saved new best Rasa checkpoint at epoch 16.
+ 2026-06-19 at 05:58:25 | Epoch [17] | Rasa metrics | T2A: R@1=0.492, R@5=0.854, R@10=0.939, MedR=2.000, MeanR=3.959, mAP=0.646 | A2T: R@1=0.512, R@5=0.859, R@10=0.941, MedR=1.000, MeanR=3.791, mAP=0.662
+ 2026-06-19 at 05:58:25 | Epoch [17] | IndicVoices metrics | T2A: R@1=0.141, R@5=0.364, R@10=0.487, MedR=11.000, MeanR=39.152, mAP=0.249 | A2T: R@1=0.152, R@5=0.346, R@10=0.463, MedR=13.000, MeanR=37.771, mAP=0.255
+ 2026-06-19 at 06:00:48 | Epoch [18] | Rasa metrics | T2A: R@1=0.534, R@5=0.868, R@10=0.942, MedR=1.000, MeanR=3.488, mAP=0.679 | A2T: R@1=0.541, R@5=0.875, R@10=0.943, MedR=1.000, MeanR=3.433, mAP=0.683
+ 2026-06-19 at 06:00:48 | Epoch [18] | IndicVoices metrics | T2A: R@1=0.149, R@5=0.364, R@10=0.484, MedR=11.000, MeanR=40.431, mAP=0.260 | A2T: R@1=0.138, R@5=0.364, R@10=0.484, MedR=11.000, MeanR=38.761, mAP=0.253
+ 2026-06-19 at 06:00:56 | Saved new best Rasa checkpoint at epoch 18.
+ 2026-06-19 at 06:03:18 | Epoch [19] | Rasa metrics | T2A: R@1=0.549, R@5=0.891, R@10=0.950, MedR=1.000, MeanR=3.276, mAP=0.697 | A2T: R@1=0.565, R@5=0.889, R@10=0.955, MedR=1.000, MeanR=3.138, mAP=0.705
+ 2026-06-19 at 06:03:18 | Epoch [19] | IndicVoices metrics | T2A: R@1=0.146, R@5=0.359, R@10=0.479, MedR=11.000, MeanR=41.814, mAP=0.254 | A2T: R@1=0.117, R@5=0.354, R@10=0.463, MedR=13.000, MeanR=40.644, mAP=0.234
+ 2026-06-19 at 06:03:26 | Saved new best Rasa checkpoint at epoch 19.
+ 2026-06-19 at 06:05:49 | Epoch [20] | Rasa metrics | T2A: R@1=0.552, R@5=0.888, R@10=0.949, MedR=1.000, MeanR=3.254, mAP=0.698 | A2T: R@1=0.570, R@5=0.896, R@10=0.955, MedR=1.000, MeanR=3.070, mAP=0.711
+ 2026-06-19 at 06:05:49 | Epoch [20] | IndicVoices metrics | T2A: R@1=0.165, R@5=0.370, R@10=0.500, MedR=10.000, MeanR=37.428, mAP=0.265 | A2T: R@1=0.152, R@5=0.351, R@10=0.473, MedR=12.000, MeanR=37.370, mAP=0.258
+ 2026-06-19 at 06:05:57 | Saved new best Rasa checkpoint at epoch 20.
+ 2026-06-19 at 06:08:19 | Epoch [21] | Rasa metrics | T2A: R@1=0.577, R@5=0.907, R@10=0.962, MedR=1.000, MeanR=2.891, mAP=0.719 | A2T: R@1=0.594, R@5=0.910, R@10=0.968, MedR=1.000, MeanR=2.738, mAP=0.731
+ 2026-06-19 at 06:08:19 | Epoch [21] | IndicVoices metrics | T2A: R@1=0.149, R@5=0.388, R@10=0.511, MedR=10.000, MeanR=38.697, mAP=0.265 | A2T: R@1=0.157, R@5=0.370, R@10=0.487, MedR=11.000, MeanR=38.649, mAP=0.266
+ 2026-06-19 at 06:08:28 | Saved new best Rasa checkpoint at epoch 21.
+ 2026-06-19 at 06:10:50 | Epoch [22] | Rasa metrics | T2A: R@1=0.593, R@5=0.914, R@10=0.961, MedR=1.000, MeanR=2.893, mAP=0.730 | A2T: R@1=0.599, R@5=0.914, R@10=0.965, MedR=1.000, MeanR=2.753, mAP=0.737
+ 2026-06-19 at 06:10:50 | Epoch [22] | IndicVoices metrics | T2A: R@1=0.181, R@5=0.388, R@10=0.505, MedR=10.000, MeanR=37.335, mAP=0.287 | A2T: R@1=0.154, R@5=0.378, R@10=0.473, MedR=12.000, MeanR=37.194, mAP=0.263
+ 2026-06-19 at 06:10:58 | Saved new best Rasa checkpoint at epoch 22.
+ 2026-06-19 at 06:13:21 | Epoch [23] | Rasa metrics | T2A: R@1=0.639, R@5=0.925, R@10=0.973, MedR=1.000, MeanR=2.593, mAP=0.764 | A2T: R@1=0.641, R@5=0.930, R@10=0.978, MedR=1.000, MeanR=2.486, mAP=0.765
+ 2026-06-19 at 06:13:21 | Epoch [23] | IndicVoices metrics | T2A: R@1=0.162, R@5=0.367, R@10=0.497, MedR=11.000, MeanR=36.872, mAP=0.272 | A2T: R@1=0.152, R@5=0.399, R@10=0.487, MedR=11.000, MeanR=37.082, mAP=0.264
+ 2026-06-19 at 06:13:29 | Saved new best Rasa checkpoint at epoch 23.
+ 2026-06-19 at 06:15:51 | Epoch [24] | Rasa metrics | T2A: R@1=0.663, R@5=0.932, R@10=0.971, MedR=1.000, MeanR=2.510, mAP=0.779 | A2T: R@1=0.674, R@5=0.935, R@10=0.976, MedR=1.000, MeanR=2.536, mAP=0.788
+ 2026-06-19 at 06:15:51 | Epoch [24] | IndicVoices metrics | T2A: R@1=0.194, R@5=0.404, R@10=0.537, MedR=8.000, MeanR=32.146, mAP=0.305 | A2T: R@1=0.181, R@5=0.418, R@10=0.513, MedR=10.000, MeanR=33.130, mAP=0.292
+ 2026-06-19 at 06:15:59 | Saved new best Rasa checkpoint at epoch 24.
+ 2026-06-19 at 06:18:21 | Epoch [25] | Rasa metrics | T2A: R@1=0.669, R@5=0.939, R@10=0.975, MedR=1.000, MeanR=2.270, mAP=0.785 | A2T: R@1=0.674, R@5=0.937, R@10=0.979, MedR=1.000, MeanR=2.245, mAP=0.789
+ 2026-06-19 at 06:18:21 | Epoch [25] | IndicVoices metrics | T2A: R@1=0.194, R@5=0.399, R@10=0.535, MedR=9.000, MeanR=31.239, mAP=0.305 | A2T: R@1=0.168, R@5=0.415, R@10=0.500, MedR=10.000, MeanR=32.779, mAP=0.280
+ 2026-06-19 at 06:18:29 | Saved new best Rasa checkpoint at epoch 25.
+ 2026-06-19 at 06:20:52 | Epoch [26] | Rasa metrics | T2A: R@1=0.682, R@5=0.939, R@10=0.978, MedR=1.000, MeanR=2.287, mAP=0.793 | A2T: R@1=0.690, R@5=0.951, R@10=0.979, MedR=1.000, MeanR=2.223, mAP=0.803
+ 2026-06-19 at 06:20:52 | Epoch [26] | IndicVoices metrics | T2A: R@1=0.176, R@5=0.378, R@10=0.516, MedR=9.000, MeanR=33.471, mAP=0.286 | A2T: R@1=0.173, R@5=0.391, R@10=0.492, MedR=11.000, MeanR=36.476, mAP=0.274
+ 2026-06-19 at 06:21:00 | Saved new best Rasa checkpoint at epoch 26.
+ 2026-06-19 at 06:23:23 | Epoch [27] | Rasa metrics | T2A: R@1=0.689, R@5=0.949, R@10=0.980, MedR=1.000, MeanR=2.224, mAP=0.799 | A2T: R@1=0.697, R@5=0.950, R@10=0.982, MedR=1.000, MeanR=2.114, mAP=0.807
+ 2026-06-19 at 06:23:23 | Epoch [27] | IndicVoices metrics | T2A: R@1=0.199, R@5=0.396, R@10=0.513, MedR=10.000, MeanR=34.215, mAP=0.301 | A2T: R@1=0.152, R@5=0.362, R@10=0.484, MedR=12.000, MeanR=35.750, mAP=0.261
+ 2026-06-19 at 06:23:31 | Saved new best Rasa checkpoint at epoch 27.
+ 2026-06-19 at 06:25:53 | Epoch [28] | Rasa metrics | T2A: R@1=0.683, R@5=0.938, R@10=0.976, MedR=1.000, MeanR=2.307, mAP=0.794 | A2T: R@1=0.685, R@5=0.946, R@10=0.983, MedR=1.000, MeanR=2.199, mAP=0.798
+ 2026-06-19 at 06:25:53 | Epoch [28] | IndicVoices metrics | T2A: R@1=0.181, R@5=0.388, R@10=0.519, MedR=10.000, MeanR=33.787, mAP=0.295 | A2T: R@1=0.178, R@5=0.391, R@10=0.489, MedR=11.000, MeanR=35.939, mAP=0.279
+ 2026-06-19 at 06:28:15 | Epoch [29] | Rasa metrics | T2A: R@1=0.734, R@5=0.960, R@10=0.986, MedR=1.000, MeanR=1.870, mAP=0.834 | A2T: R@1=0.747, R@5=0.966, R@10=0.989, MedR=1.000, MeanR=1.871, mAP=0.841
+ 2026-06-19 at 06:28:15 | Epoch [29] | IndicVoices metrics | T2A: R@1=0.205, R@5=0.420, R@10=0.545, MedR=8.000, MeanR=31.484, mAP=0.313 | A2T: R@1=0.178, R@5=0.386, R@10=0.508, MedR=10.000, MeanR=31.912, mAP=0.289
+ 2026-06-19 at 06:28:23 | Saved new best Rasa checkpoint at epoch 29.
+ 2026-06-19 at 06:30:45 | Epoch [30] | Rasa metrics | T2A: R@1=0.719, R@5=0.953, R@10=0.982, MedR=1.000, MeanR=1.956, mAP=0.823 | A2T: R@1=0.731, R@5=0.961, R@10=0.985, MedR=1.000, MeanR=1.926, mAP=0.831
+ 2026-06-19 at 06:30:45 | Epoch [30] | IndicVoices metrics | T2A: R@1=0.234, R@5=0.420, R@10=0.543, MedR=8.000, MeanR=31.367, mAP=0.329 | A2T: R@1=0.199, R@5=0.420, R@10=0.516, MedR=9.000, MeanR=32.293, mAP=0.303
+ 2026-06-19 at 06:33:07 | Epoch [31] | Rasa metrics | T2A: R@1=0.755, R@5=0.966, R@10=0.987, MedR=1.000, MeanR=1.772, mAP=0.846 | A2T: R@1=0.761, R@5=0.969, R@10=0.987, MedR=1.000, MeanR=1.721, mAP=0.853
+ 2026-06-19 at 06:33:07 | Epoch [31] | IndicVoices metrics | T2A: R@1=0.234, R@5=0.447, R@10=0.566, MedR=7.000, MeanR=28.920, mAP=0.337 | A2T: R@1=0.189, R@5=0.426, R@10=0.553, MedR=8.000, MeanR=28.787, mAP=0.307
+ 2026-06-19 at 06:33:15 | Saved new best Rasa checkpoint at epoch 31.
+ 2026-06-19 at 06:35:37 | Epoch [32] | Rasa metrics | T2A: R@1=0.754, R@5=0.962, R@10=0.984, MedR=1.000, MeanR=1.831, mAP=0.846 | A2T: R@1=0.761, R@5=0.967, R@10=0.988, MedR=1.000, MeanR=1.789, mAP=0.852
+ 2026-06-19 at 06:35:37 | Epoch [32] | IndicVoices metrics | T2A: R@1=0.229, R@5=0.426, R@10=0.561, MedR=8.000, MeanR=29.981, mAP=0.332 | A2T: R@1=0.210, R@5=0.418, R@10=0.545, MedR=8.000, MeanR=29.896, mAP=0.316
+ 2026-06-19 at 06:38:00 | Epoch [33] | Rasa metrics | T2A: R@1=0.744, R@5=0.952, R@10=0.981, MedR=1.000, MeanR=2.181, mAP=0.835 | A2T: R@1=0.744, R@5=0.961, R@10=0.981, MedR=1.000, MeanR=2.035, mAP=0.839
+ 2026-06-19 at 06:38:00 | Epoch [33] | IndicVoices metrics | T2A: R@1=0.242, R@5=0.465, R@10=0.598, MedR=6.000, MeanR=28.338, mAP=0.353 | A2T: R@1=0.226, R@5=0.426, R@10=0.556, MedR=8.000, MeanR=28.742, mAP=0.328
+ 2026-06-19 at 06:40:22 | Epoch [34] | Rasa metrics | T2A: R@1=0.748, R@5=0.961, R@10=0.983, MedR=1.000, MeanR=1.932, mAP=0.841 | A2T: R@1=0.747, R@5=0.963, R@10=0.986, MedR=1.000, MeanR=1.841, mAP=0.842
+ 2026-06-19 at 06:40:22 | Epoch [34] | IndicVoices metrics | T2A: R@1=0.237, R@5=0.468, R@10=0.604, MedR=7.000, MeanR=25.271, mAP=0.356 | A2T: R@1=0.202, R@5=0.468, R@10=0.548, MedR=7.000, MeanR=26.056, mAP=0.328
+ 2026-06-19 at 06:42:44 | Epoch [35] | Rasa metrics | T2A: R@1=0.797, R@5=0.972, R@10=0.991, MedR=1.000, MeanR=1.578, mAP=0.874 | A2T: R@1=0.802, R@5=0.976, R@10=0.992, MedR=1.000, MeanR=1.567, mAP=0.879
+ 2026-06-19 at 06:42:44 | Epoch [35] | IndicVoices metrics | T2A: R@1=0.223, R@5=0.447, R@10=0.585, MedR=7.000, MeanR=29.566, mAP=0.337 | A2T: R@1=0.207, R@5=0.426, R@10=0.532, MedR=9.000, MeanR=29.082, mAP=0.319
+ 2026-06-19 at 06:42:52 | Saved new best Rasa checkpoint at epoch 35.
+ 2026-06-19 at 06:45:15 | Epoch [36] | Rasa metrics | T2A: R@1=0.783, R@5=0.971, R@10=0.990, MedR=1.000, MeanR=1.725, mAP=0.866 | A2T: R@1=0.787, R@5=0.973, R@10=0.990, MedR=1.000, MeanR=1.684, mAP=0.871
+ 2026-06-19 at 06:45:15 | Epoch [36] | IndicVoices metrics | T2A: R@1=0.226, R@5=0.439, R@10=0.574, MedR=7.000, MeanR=30.370, mAP=0.336 | A2T: R@1=0.205, R@5=0.426, R@10=0.543, MedR=8.000, MeanR=28.340, mAP=0.316
+ 2026-06-19 at 06:47:38 | Epoch [37] | Rasa metrics | T2A: R@1=0.800, R@5=0.973, R@10=0.988, MedR=1.000, MeanR=1.613, mAP=0.877 | A2T: R@1=0.806, R@5=0.979, R@10=0.992, MedR=1.000, MeanR=1.586, mAP=0.883
+ 2026-06-19 at 06:47:38 | Epoch [37] | IndicVoices metrics | T2A: R@1=0.210, R@5=0.449, R@10=0.609, MedR=7.000, MeanR=30.452, mAP=0.333 | A2T: R@1=0.229, R@5=0.460, R@10=0.569, MedR=8.000, MeanR=28.295, mAP=0.337
+ 2026-06-19 at 06:47:46 | Saved new best Rasa checkpoint at epoch 37.
+ 2026-06-19 at 06:50:09 | Epoch [38] | Rasa metrics | T2A: R@1=0.796, R@5=0.974, R@10=0.991, MedR=1.000, MeanR=1.575, mAP=0.875 | A2T: R@1=0.796, R@5=0.981, R@10=0.993, MedR=1.000, MeanR=1.557, mAP=0.876
+ 2026-06-19 at 06:50:09 | Epoch [38] | IndicVoices metrics | T2A: R@1=0.221, R@5=0.473, R@10=0.609, MedR=6.000, MeanR=25.976, mAP=0.344 | A2T: R@1=0.207, R@5=0.415, R@10=0.545, MedR=9.000, MeanR=28.027, mAP=0.318
+ 2026-06-19 at 06:52:31 | Epoch [39] | Rasa metrics | T2A: R@1=0.804, R@5=0.976, R@10=0.992, MedR=1.000, MeanR=1.559, mAP=0.880 | A2T: R@1=0.809, R@5=0.981, R@10=0.993, MedR=1.000, MeanR=1.512, mAP=0.884
+ 2026-06-19 at 06:52:31 | Epoch [39] | IndicVoices metrics | T2A: R@1=0.242, R@5=0.473, R@10=0.617, MedR=6.000, MeanR=25.979, mAP=0.359 | A2T: R@1=0.213, R@5=0.428, R@10=0.566, MedR=8.000, MeanR=25.609, mAP=0.325
+ 2026-06-19 at 06:52:39 | Saved new best Rasa checkpoint at epoch 39.
+ 2026-06-19 at 06:55:02 | Epoch [40] | Rasa metrics | T2A: R@1=0.814, R@5=0.979, R@10=0.993, MedR=1.000, MeanR=1.499, mAP=0.888 | A2T: R@1=0.819, R@5=0.979, R@10=0.994, MedR=1.000, MeanR=1.515, mAP=0.890
+ 2026-06-19 at 06:55:02 | Epoch [40] | IndicVoices metrics | T2A: R@1=0.247, R@5=0.487, R@10=0.625, MedR=6.000, MeanR=25.920, mAP=0.363 | A2T: R@1=0.207, R@5=0.444, R@10=0.580, MedR=7.000, MeanR=24.753, mAP=0.326
+ 2026-06-19 at 06:55:10 | Saved new best Rasa checkpoint at epoch 40.
+ 2026-06-19 at 06:57:32 | Epoch [41] | Rasa metrics | T2A: R@1=0.816, R@5=0.976, R@10=0.992, MedR=1.000, MeanR=1.528, mAP=0.887 | A2T: R@1=0.819, R@5=0.979, R@10=0.994, MedR=1.000, MeanR=1.484, mAP=0.891
+ 2026-06-19 at 06:57:32 | Epoch [41] | IndicVoices metrics | T2A: R@1=0.247, R@5=0.489, R@10=0.625, MedR=6.000, MeanR=25.822, mAP=0.365 | A2T: R@1=0.229, R@5=0.444, R@10=0.572, MedR=7.000, MeanR=24.229, mAP=0.340
+ 2026-06-19 at 06:57:39 | Saved new best Rasa checkpoint at epoch 41.
+ 2026-06-19 at 07:00:01 | Epoch [42] | Rasa metrics | T2A: R@1=0.830, R@5=0.983, R@10=0.993, MedR=1.000, MeanR=1.445, mAP=0.899 | A2T: R@1=0.837, R@5=0.986, R@10=0.996, MedR=1.000, MeanR=1.413, mAP=0.904
+ 2026-06-19 at 07:00:01 | Epoch [42] | IndicVoices metrics | T2A: R@1=0.250, R@5=0.500, R@10=0.641, MedR=5.000, MeanR=23.872, mAP=0.373 | A2T: R@1=0.231, R@5=0.449, R@10=0.564, MedR=7.000, MeanR=23.199, mAP=0.342
+ 2026-06-19 at 07:00:09 | Saved new best Rasa checkpoint at epoch 42.
+ 2026-06-19 at 07:02:31 | Epoch [43] | Rasa metrics | T2A: R@1=0.834, R@5=0.982, R@10=0.994, MedR=1.000, MeanR=1.453, mAP=0.901 | A2T: R@1=0.839, R@5=0.986, R@10=0.996, MedR=1.000, MeanR=1.416, mAP=0.905
+ 2026-06-19 at 07:02:31 | Epoch [43] | IndicVoices metrics | T2A: R@1=0.247, R@5=0.489, R@10=0.633, MedR=6.000, MeanR=25.098, mAP=0.365 | A2T: R@1=0.231, R@5=0.447, R@10=0.553, MedR=7.000, MeanR=26.814, mAP=0.337
+ 2026-06-19 at 07:02:39 | Saved new best Rasa checkpoint at epoch 43.
+ 2026-06-19 at 07:05:01 | Epoch [44] | Rasa metrics | T2A: R@1=0.791, R@5=0.971, R@10=0.989, MedR=1.000, MeanR=1.676, mAP=0.870 | A2T: R@1=0.789, R@5=0.973, R@10=0.988, MedR=1.000, MeanR=1.742, mAP=0.871
+ 2026-06-19 at 07:05:01 | Epoch [44] | IndicVoices metrics | T2A: R@1=0.237, R@5=0.473, R@10=0.574, MedR=6.000, MeanR=30.109, mAP=0.347 | A2T: R@1=0.189, R@5=0.388, R@10=0.505, MedR=10.000, MeanR=31.096, mAP=0.296
+ 2026-06-19 at 07:07:23 | Epoch [45] | Rasa metrics | T2A: R@1=0.831, R@5=0.978, R@10=0.993, MedR=1.000, MeanR=1.515, mAP=0.897 | A2T: R@1=0.833, R@5=0.981, R@10=0.993, MedR=1.000, MeanR=1.505, mAP=0.900
+ 2026-06-19 at 07:07:23 | Epoch [45] | IndicVoices metrics | T2A: R@1=0.234, R@5=0.476, R@10=0.606, MedR=6.000, MeanR=27.699, mAP=0.353 | A2T: R@1=0.202, R@5=0.412, R@10=0.551, MedR=8.000, MeanR=26.465, mAP=0.317
+ 2026-06-19 at 07:09:46 | Epoch [46] | Rasa metrics | T2A: R@1=0.840, R@5=0.986, R@10=0.994, MedR=1.000, MeanR=1.400, mAP=0.905 | A2T: R@1=0.845, R@5=0.987, R@10=0.995, MedR=1.000, MeanR=1.408, mAP=0.908
+ 2026-06-19 at 07:09:46 | Epoch [46] | IndicVoices metrics | T2A: R@1=0.247, R@5=0.484, R@10=0.596, MedR=6.000, MeanR=28.173, mAP=0.362 | A2T: R@1=0.226, R@5=0.463, R@10=0.556, MedR=7.000, MeanR=26.008, mAP=0.334
+ 2026-06-19 at 07:09:54 | Saved new best Rasa checkpoint at epoch 46.
+ 2026-06-19 at 07:12:16 | Epoch [47] | Rasa metrics | T2A: R@1=0.838, R@5=0.988, R@10=0.995, MedR=1.000, MeanR=1.376, mAP=0.905 | A2T: R@1=0.847, R@5=0.988, R@10=0.998, MedR=1.000, MeanR=1.360, mAP=0.910
+ 2026-06-19 at 07:12:16 | Epoch [47] | IndicVoices metrics | T2A: R@1=0.271, R@5=0.513, R@10=0.622, MedR=5.000, MeanR=24.840, mAP=0.382 | A2T: R@1=0.218, R@5=0.449, R@10=0.585, MedR=7.000, MeanR=23.745, mAP=0.335
+ 2026-06-19 at 07:14:38 | Epoch [48] | Rasa metrics | T2A: R@1=0.845, R@5=0.988, R@10=0.995, MedR=1.000, MeanR=1.394, mAP=0.909 | A2T: R@1=0.853, R@5=0.989, R@10=0.997, MedR=1.000, MeanR=1.388, mAP=0.914
+ 2026-06-19 at 07:14:38 | Epoch [48] | IndicVoices metrics | T2A: R@1=0.266, R@5=0.503, R@10=0.644, MedR=5.000, MeanR=22.484, mAP=0.389 | A2T: R@1=0.226, R@5=0.484, R@10=0.596, MedR=6.000, MeanR=23.386, mAP=0.350
+ 2026-06-19 at 07:14:46 | Saved new best Rasa checkpoint at epoch 48.
+ 2026-06-19 at 07:17:08 | Epoch [49] | Rasa metrics | T2A: R@1=0.836, R@5=0.983, R@10=0.993, MedR=1.000, MeanR=1.449, mAP=0.903 | A2T: R@1=0.844, R@5=0.986, R@10=0.995, MedR=1.000, MeanR=1.415, mAP=0.909
+ 2026-06-19 at 07:17:08 | Epoch [49] | IndicVoices metrics | T2A: R@1=0.282, R@5=0.508, R@10=0.622, MedR=5.000, MeanR=23.146, mAP=0.393 | A2T: R@1=0.258, R@5=0.473, R@10=0.572, MedR=6.000, MeanR=23.894, mAP=0.362
+ 2026-06-19 at 07:19:31 | Epoch [50] | Rasa metrics | T2A: R@1=0.851, R@5=0.985, R@10=0.994, MedR=1.000, MeanR=1.455, mAP=0.911 | A2T: R@1=0.859, R@5=0.986, R@10=0.995, MedR=1.000, MeanR=1.436, mAP=0.917
+ 2026-06-19 at 07:19:31 | Epoch [50] | IndicVoices metrics | T2A: R@1=0.287, R@5=0.519, R@10=0.641, MedR=5.000, MeanR=25.471, mAP=0.396 | A2T: R@1=0.242, R@5=0.484, R@10=0.588, MedR=6.000, MeanR=23.588, mAP=0.355
+ 2026-06-19 at 07:19:39 | Saved new best Rasa checkpoint at epoch 50.
+ 2026-06-19 at 07:22:01 | Epoch [51] | Rasa metrics | T2A: R@1=0.873, R@5=0.991, R@10=0.997, MedR=1.000, MeanR=1.280, mAP=0.927 | A2T: R@1=0.881, R@5=0.992, R@10=0.998, MedR=1.000, MeanR=1.259, mAP=0.931
+ 2026-06-19 at 07:22:01 | Epoch [51] | IndicVoices metrics | T2A: R@1=0.298, R@5=0.521, R@10=0.665, MedR=5.000, MeanR=22.838, mAP=0.410 | A2T: R@1=0.210, R@5=0.471, R@10=0.572, MedR=6.000, MeanR=23.697, mAP=0.337
+ 2026-06-19 at 07:22:09 | Saved new best Rasa checkpoint at epoch 51.
+ 2026-06-19 at 07:24:31 | Epoch [52] | Rasa metrics | T2A: R@1=0.868, R@5=0.986, R@10=0.995, MedR=1.000, MeanR=1.343, mAP=0.923 | A2T: R@1=0.868, R@5=0.988, R@10=0.997, MedR=1.000, MeanR=1.328, mAP=0.923
+ 2026-06-19 at 07:24:31 | Epoch [52] | IndicVoices metrics | T2A: R@1=0.293, R@5=0.556, R@10=0.691, MedR=4.000, MeanR=20.559, mAP=0.414 | A2T: R@1=0.239, R@5=0.479, R@10=0.590, MedR=6.000, MeanR=23.580, mAP=0.355
+ 2026-06-19 at 07:26:53 | Epoch [53] | Rasa metrics | T2A: R@1=0.866, R@5=0.989, R@10=0.996, MedR=1.000, MeanR=1.351, mAP=0.921 | A2T: R@1=0.864, R@5=0.992, R@10=0.997, MedR=1.000, MeanR=1.324, mAP=0.921
+ 2026-06-19 at 07:26:53 | Epoch [53] | IndicVoices metrics | T2A: R@1=0.274, R@5=0.535, R@10=0.668, MedR=4.000, MeanR=20.923, mAP=0.401 | A2T: R@1=0.237, R@5=0.484, R@10=0.585, MedR=6.000, MeanR=23.902, mAP=0.353
+ 2026-06-19 at 07:29:15 | Epoch [54] | Rasa metrics | T2A: R@1=0.872, R@5=0.990, R@10=0.997, MedR=1.000, MeanR=1.293, mAP=0.926 | A2T: R@1=0.871, R@5=0.993, R@10=0.998, MedR=1.000, MeanR=1.282, mAP=0.925
+ 2026-06-19 at 07:29:15 | Epoch [54] | IndicVoices metrics | T2A: R@1=0.258, R@5=0.511, R@10=0.638, MedR=5.000, MeanR=21.894, mAP=0.387 | A2T: R@1=0.258, R@5=0.473, R@10=0.580, MedR=7.000, MeanR=23.444, mAP=0.363
+ 2026-06-19 at 07:31:38 | Epoch [55] | Rasa metrics | T2A: R@1=0.881, R@5=0.990, R@10=0.997, MedR=1.000, MeanR=1.276, mAP=0.931 | A2T: R@1=0.879, R@5=0.992, R@10=0.998, MedR=1.000, MeanR=1.268, mAP=0.930
+ 2026-06-19 at 07:31:38 | Epoch [55] | IndicVoices metrics | T2A: R@1=0.298, R@5=0.537, R@10=0.652, MedR=5.000, MeanR=21.412, mAP=0.414 | A2T: R@1=0.237, R@5=0.495, R@10=0.609, MedR=6.000, MeanR=21.636, mAP=0.363
+ 2026-06-19 at 07:31:46 | Saved new best Rasa checkpoint at epoch 55.
+ 2026-06-19 at 07:34:08 | Epoch [56] | Rasa metrics | T2A: R@1=0.861, R@5=0.987, R@10=0.995, MedR=1.000, MeanR=1.334, mAP=0.918 | A2T: R@1=0.861, R@5=0.987, R@10=0.997, MedR=1.000, MeanR=1.345, mAP=0.918
+ 2026-06-19 at 07:34:08 | Epoch [56] | IndicVoices metrics | T2A: R@1=0.277, R@5=0.508, R@10=0.636, MedR=5.000, MeanR=23.835, mAP=0.394 | A2T: R@1=0.234, R@5=0.460, R@10=0.590, MedR=7.000, MeanR=24.324, mAP=0.347
+ 2026-06-19 at 07:36:30 | Epoch [57] | Rasa metrics | T2A: R@1=0.869, R@5=0.992, R@10=0.998, MedR=1.000, MeanR=1.258, mAP=0.925 | A2T: R@1=0.876, R@5=0.991, R@10=0.997, MedR=1.000, MeanR=1.284, mAP=0.929
+ 2026-06-19 at 07:36:30 | Epoch [57] | IndicVoices metrics | T2A: R@1=0.269, R@5=0.535, R@10=0.638, MedR=5.000, MeanR=21.949, mAP=0.393 | A2T: R@1=0.245, R@5=0.457, R@10=0.585, MedR=7.000, MeanR=22.285, mAP=0.359
+ 2026-06-19 at 07:38:52 | Epoch [58] | Rasa metrics | T2A: R@1=0.879, R@5=0.988, R@10=0.995, MedR=1.000, MeanR=1.336, mAP=0.929 | A2T: R@1=0.881, R@5=0.992, R@10=0.997, MedR=1.000, MeanR=1.297, mAP=0.932
+ 2026-06-19 at 07:38:52 | Epoch [58] | IndicVoices metrics | T2A: R@1=0.327, R@5=0.559, R@10=0.681, MedR=4.000, MeanR=19.654, mAP=0.437 | A2T: R@1=0.277, R@5=0.500, R@10=0.596, MedR=5.000, MeanR=19.609, mAP=0.386
+ 2026-06-19 at 07:41:14 | Epoch [59] | Rasa metrics | T2A: R@1=0.881, R@5=0.992, R@10=0.996, MedR=1.000, MeanR=1.271, mAP=0.932 | A2T: R@1=0.892, R@5=0.993, R@10=0.998, MedR=1.000, MeanR=1.248, mAP=0.938
+ 2026-06-19 at 07:41:14 | Epoch [59] | IndicVoices metrics | T2A: R@1=0.295, R@5=0.548, R@10=0.670, MedR=4.000, MeanR=19.713, mAP=0.420 | A2T: R@1=0.253, R@5=0.495, R@10=0.590, MedR=6.000, MeanR=21.492, mAP=0.369
+ 2026-06-19 at 07:43:36 | Epoch [60] | Rasa metrics | T2A: R@1=0.893, R@5=0.993, R@10=0.997, MedR=1.000, MeanR=1.229, mAP=0.940 | A2T: R@1=0.894, R@5=0.993, R@10=0.998, MedR=1.000, MeanR=1.241, mAP=0.939
+ 2026-06-19 at 07:43:36 | Epoch [60] | IndicVoices metrics | T2A: R@1=0.290, R@5=0.537, R@10=0.657, MedR=4.000, MeanR=21.545, mAP=0.410 | A2T: R@1=0.255, R@5=0.492, R@10=0.606, MedR=6.000, MeanR=21.968, mAP=0.368
+ 2026-06-19 at 07:43:45 | Saved new best Rasa checkpoint at epoch 60.
+ 2026-06-19 at 07:46:06 | Epoch [61] | Rasa metrics | T2A: R@1=0.869, R@5=0.989, R@10=0.995, MedR=1.000, MeanR=1.449, mAP=0.924 | A2T: R@1=0.872, R@5=0.990, R@10=0.997, MedR=1.000, MeanR=1.413, mAP=0.926
+ 2026-06-19 at 07:46:06 | Epoch [61] | IndicVoices metrics | T2A: R@1=0.306, R@5=0.561, R@10=0.689, MedR=4.000, MeanR=19.814, mAP=0.428 | A2T: R@1=0.255, R@5=0.508, R@10=0.614, MedR=5.000, MeanR=21.348, mAP=0.378
+ 2026-06-19 at 07:48:28 | Epoch [62] | Rasa metrics | T2A: R@1=0.894, R@5=0.994, R@10=0.997, MedR=1.000, MeanR=1.232, mAP=0.940 | A2T: R@1=0.899, R@5=0.994, R@10=0.998, MedR=1.000, MeanR=1.217, mAP=0.943
+ 2026-06-19 at 07:48:28 | Epoch [62] | IndicVoices metrics | T2A: R@1=0.298, R@5=0.535, R@10=0.646, MedR=4.000, MeanR=21.559, mAP=0.415 | A2T: R@1=0.245, R@5=0.495, R@10=0.598, MedR=6.000, MeanR=21.843, mAP=0.367
+ 2026-06-19 at 07:48:37 | Saved new best Rasa checkpoint at epoch 62.
+ 2026-06-19 at 07:50:59 | Epoch [63] | Rasa metrics | T2A: R@1=0.894, R@5=0.994, R@10=0.998, MedR=1.000, MeanR=1.218, mAP=0.940 | A2T: R@1=0.890, R@5=0.997, R@10=0.998, MedR=1.000, MeanR=1.211, mAP=0.938
+ 2026-06-19 at 07:50:59 | Epoch [63] | IndicVoices metrics | T2A: R@1=0.319, R@5=0.551, R@10=0.657, MedR=4.000, MeanR=19.787, mAP=0.428 | A2T: R@1=0.250, R@5=0.500, R@10=0.606, MedR=5.000, MeanR=22.380, mAP=0.372
+ 2026-06-19 at 07:53:21 | Epoch [64] | Rasa metrics | T2A: R@1=0.899, R@5=0.993, R@10=0.998, MedR=1.000, MeanR=1.223, mAP=0.942 | A2T: R@1=0.902, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.250, mAP=0.945
+ 2026-06-19 at 07:53:21 | Epoch [64] | IndicVoices metrics | T2A: R@1=0.306, R@5=0.532, R@10=0.646, MedR=4.000, MeanR=21.561, mAP=0.422 | A2T: R@1=0.263, R@5=0.484, R@10=0.593, MedR=6.000, MeanR=23.934, mAP=0.372
+ 2026-06-19 at 07:53:29 | Saved new best Rasa checkpoint at epoch 64.
+ 2026-06-19 at 07:55:51 | Epoch [65] | Rasa metrics | T2A: R@1=0.897, R@5=0.994, R@10=0.998, MedR=1.000, MeanR=1.207, mAP=0.941 | A2T: R@1=0.900, R@5=0.996, R@10=0.999, MedR=1.000, MeanR=1.200, mAP=0.943
+ 2026-06-19 at 07:55:51 | Epoch [65] | IndicVoices metrics | T2A: R@1=0.306, R@5=0.532, R@10=0.638, MedR=4.000, MeanR=21.971, mAP=0.419 | A2T: R@1=0.271, R@5=0.484, R@10=0.574, MedR=6.000, MeanR=23.785, mAP=0.375
+ 2026-06-19 at 07:58:13 | Epoch [66] | Rasa metrics | T2A: R@1=0.899, R@5=0.994, R@10=0.998, MedR=1.000, MeanR=1.214, mAP=0.942 | A2T: R@1=0.897, R@5=0.995, R@10=0.998, MedR=1.000, MeanR=1.225, mAP=0.942
+ 2026-06-19 at 07:58:13 | Epoch [66] | IndicVoices metrics | T2A: R@1=0.295, R@5=0.566, R@10=0.670, MedR=4.000, MeanR=18.864, mAP=0.421 | A2T: R@1=0.263, R@5=0.537, R@10=0.614, MedR=5.000, MeanR=21.715, mAP=0.382
+ 2026-06-19 at 08:00:35 | Epoch [67] | Rasa metrics | T2A: R@1=0.885, R@5=0.991, R@10=0.997, MedR=1.000, MeanR=1.268, mAP=0.934 | A2T: R@1=0.884, R@5=0.992, R@10=0.996, MedR=1.000, MeanR=1.281, mAP=0.933
+ 2026-06-19 at 08:00:35 | Epoch [67] | IndicVoices metrics | T2A: R@1=0.314, R@5=0.577, R@10=0.665, MedR=4.000, MeanR=21.202, mAP=0.431 | A2T: R@1=0.255, R@5=0.511, R@10=0.606, MedR=5.000, MeanR=22.346, mAP=0.381
+ 2026-06-19 at 08:02:57 | Epoch [68] | Rasa metrics | T2A: R@1=0.898, R@5=0.993, R@10=0.997, MedR=1.000, MeanR=1.232, mAP=0.943 | A2T: R@1=0.904, R@5=0.996, R@10=0.998, MedR=1.000, MeanR=1.225, mAP=0.946
+ 2026-06-19 at 08:02:57 | Epoch [68] | IndicVoices metrics | T2A: R@1=0.301, R@5=0.529, R@10=0.668, MedR=4.000, MeanR=20.910, mAP=0.415 | A2T: R@1=0.269, R@5=0.505, R@10=0.585, MedR=5.000, MeanR=23.298, mAP=0.378
+ 2026-06-19 at 08:05:19 | Epoch [69] | Rasa metrics | T2A: R@1=0.895, R@5=0.994, R@10=0.997, MedR=1.000, MeanR=1.245, mAP=0.941 | A2T: R@1=0.902, R@5=0.995, R@10=0.998, MedR=1.000, MeanR=1.253, mAP=0.944
+ 2026-06-19 at 08:05:19 | Epoch [69] | IndicVoices metrics | T2A: R@1=0.311, R@5=0.545, R@10=0.676, MedR=4.000, MeanR=22.258, mAP=0.425 | A2T: R@1=0.255, R@5=0.508, R@10=0.598, MedR=5.000, MeanR=22.415, mAP=0.375
+ 2026-06-19 at 08:07:41 | Epoch [70] | Rasa metrics | T2A: R@1=0.906, R@5=0.993, R@10=0.998, MedR=1.000, MeanR=1.202, mAP=0.946 | A2T: R@1=0.904, R@5=0.994, R@10=0.999, MedR=1.000, MeanR=1.202, mAP=0.946
+ 2026-06-19 at 08:07:41 | Epoch [70] | IndicVoices metrics | T2A: R@1=0.309, R@5=0.545, R@10=0.676, MedR=4.000, MeanR=19.668, mAP=0.428 | A2T: R@1=0.266, R@5=0.505, R@10=0.598, MedR=5.000, MeanR=22.809, mAP=0.384
+ 2026-06-19 at 08:07:49 | Saved new best Rasa checkpoint at epoch 70.
+ 2026-06-19 at 08:10:11 | Epoch [71] | Rasa metrics | T2A: R@1=0.900, R@5=0.993, R@10=0.998, MedR=1.000, MeanR=1.220, mAP=0.943 | A2T: R@1=0.904, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.227, mAP=0.946
+ 2026-06-19 at 08:10:11 | Epoch [71] | IndicVoices metrics | T2A: R@1=0.298, R@5=0.524, R@10=0.652, MedR=5.000, MeanR=20.556, mAP=0.414 | A2T: R@1=0.271, R@5=0.505, R@10=0.612, MedR=5.000, MeanR=23.782, mAP=0.383
+ 2026-06-19 at 08:12:33 | Epoch [72] | Rasa metrics | T2A: R@1=0.904, R@5=0.995, R@10=0.998, MedR=1.000, MeanR=1.225, mAP=0.945 | A2T: R@1=0.901, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.221, mAP=0.944
+ 2026-06-19 at 08:12:33 | Epoch [72] | IndicVoices metrics | T2A: R@1=0.314, R@5=0.556, R@10=0.670, MedR=4.000, MeanR=20.830, mAP=0.431 | A2T: R@1=0.263, R@5=0.508, R@10=0.612, MedR=5.000, MeanR=22.077, mAP=0.384
+ 2026-06-19 at 08:14:56 | Epoch [73] | Rasa metrics | T2A: R@1=0.902, R@5=0.994, R@10=0.998, MedR=1.000, MeanR=1.231, mAP=0.944 | A2T: R@1=0.900, R@5=0.993, R@10=0.998, MedR=1.000, MeanR=1.219, mAP=0.943
+ 2026-06-19 at 08:14:56 | Epoch [73] | IndicVoices metrics | T2A: R@1=0.295, R@5=0.545, R@10=0.673, MedR=4.000, MeanR=20.434, mAP=0.421 | A2T: R@1=0.258, R@5=0.495, R@10=0.596, MedR=6.000, MeanR=22.343, mAP=0.375
+ 2026-06-19 at 08:17:18 | Epoch [74] | Rasa metrics | T2A: R@1=0.905, R@5=0.994, R@10=0.998, MedR=1.000, MeanR=1.208, mAP=0.947 | A2T: R@1=0.902, R@5=0.996, R@10=0.998, MedR=1.000, MeanR=1.237, mAP=0.945
+ 2026-06-19 at 08:17:18 | Epoch [74] | IndicVoices metrics | T2A: R@1=0.311, R@5=0.543, R@10=0.676, MedR=4.000, MeanR=21.088, mAP=0.428 | A2T: R@1=0.269, R@5=0.519, R@10=0.612, MedR=5.000, MeanR=22.859, mAP=0.386
+ 2026-06-19 at 08:19:40 | Epoch [75] | Rasa metrics | T2A: R@1=0.907, R@5=0.994, R@10=0.998, MedR=1.000, MeanR=1.214, mAP=0.947 | A2T: R@1=0.910, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.219, mAP=0.950
+ 2026-06-19 at 08:19:40 | Epoch [75] | IndicVoices metrics | T2A: R@1=0.311, R@5=0.548, R@10=0.676, MedR=4.000, MeanR=20.646, mAP=0.428 | A2T: R@1=0.261, R@5=0.508, R@10=0.588, MedR=5.000, MeanR=23.532, mAP=0.379
+ 2026-06-19 at 08:19:48 | Saved new best Rasa checkpoint at epoch 75.
+ 2026-06-19 at 08:22:11 | Epoch [76] | Rasa metrics | T2A: R@1=0.909, R@5=0.995, R@10=0.997, MedR=1.000, MeanR=1.203, mAP=0.949 | A2T: R@1=0.915, R@5=0.996, R@10=0.998, MedR=1.000, MeanR=1.205, mAP=0.953
+ 2026-06-19 at 08:22:11 | Epoch [76] | IndicVoices metrics | T2A: R@1=0.306, R@5=0.548, R@10=0.684, MedR=4.000, MeanR=19.487, mAP=0.429 | A2T: R@1=0.253, R@5=0.513, R@10=0.598, MedR=5.000, MeanR=23.056, mAP=0.374
+ 2026-06-19 at 08:22:19 | Saved new best Rasa checkpoint at epoch 76.
+ 2026-06-19 at 08:24:41 | Epoch [77] | Rasa metrics | T2A: R@1=0.909, R@5=0.995, R@10=0.998, MedR=1.000, MeanR=1.205, mAP=0.949 | A2T: R@1=0.915, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.212, mAP=0.953
+ 2026-06-19 at 08:24:41 | Epoch [77] | IndicVoices metrics | T2A: R@1=0.327, R@5=0.561, R@10=0.689, MedR=4.000, MeanR=19.657, mAP=0.444 | A2T: R@1=0.285, R@5=0.521, R@10=0.612, MedR=5.000, MeanR=20.130, mAP=0.401
+ 2026-06-19 at 08:27:04 | Epoch [78] | Rasa metrics | T2A: R@1=0.910, R@5=0.996, R@10=0.998, MedR=1.000, MeanR=1.219, mAP=0.949 | A2T: R@1=0.906, R@5=0.996, R@10=0.999, MedR=1.000, MeanR=1.240, mAP=0.948
+ 2026-06-19 at 08:27:04 | Epoch [78] | IndicVoices metrics | T2A: R@1=0.330, R@5=0.556, R@10=0.668, MedR=4.000, MeanR=19.298, mAP=0.445 | A2T: R@1=0.274, R@5=0.535, R@10=0.622, MedR=4.000, MeanR=19.774, mAP=0.400
+ 2026-06-19 at 08:27:12 | Saved new best Rasa checkpoint at epoch 78.
+ 2026-06-19 at 08:29:34 | Epoch [79] | Rasa metrics | T2A: R@1=0.909, R@5=0.996, R@10=0.997, MedR=1.000, MeanR=1.219, mAP=0.949 | A2T: R@1=0.915, R@5=0.997, R@10=0.998, MedR=1.000, MeanR=1.222, mAP=0.953
+ 2026-06-19 at 08:29:34 | Epoch [79] | IndicVoices metrics | T2A: R@1=0.322, R@5=0.556, R@10=0.673, MedR=4.000, MeanR=19.630, mAP=0.440 | A2T: R@1=0.271, R@5=0.524, R@10=0.596, MedR=5.000, MeanR=20.875, mAP=0.394
+ 2026-06-19 at 08:31:56 | Epoch [80] | Rasa metrics | T2A: R@1=0.912, R@5=0.995, R@10=0.998, MedR=1.000, MeanR=1.221, mAP=0.950 | A2T: R@1=0.909, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.251, mAP=0.950
+ 2026-06-19 at 08:31:56 | Epoch [80] | IndicVoices metrics | T2A: R@1=0.327, R@5=0.569, R@10=0.668, MedR=4.000, MeanR=18.638, mAP=0.444 | A2T: R@1=0.266, R@5=0.521, R@10=0.598, MedR=4.000, MeanR=20.774, mAP=0.393
+ 2026-06-19 at 08:32:05 | Saved new best Rasa checkpoint at epoch 80.
+ 2026-06-19 at 08:34:27 | Epoch [81] | Rasa metrics | T2A: R@1=0.919, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.183, mAP=0.955 | A2T: R@1=0.909, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.238, mAP=0.949
+ 2026-06-19 at 08:34:27 | Epoch [81] | IndicVoices metrics | T2A: R@1=0.311, R@5=0.569, R@10=0.678, MedR=4.000, MeanR=19.319, mAP=0.434 | A2T: R@1=0.269, R@5=0.532, R@10=0.617, MedR=5.000, MeanR=20.960, mAP=0.392
+ 2026-06-19 at 08:34:35 | Saved new best Rasa checkpoint at epoch 81.
+ 2026-06-19 at 08:36:57 | Epoch [82] | Rasa metrics | T2A: R@1=0.917, R@5=0.996, R@10=0.999, MedR=1.000, MeanR=1.173, mAP=0.954 | A2T: R@1=0.920, R@5=0.994, R@10=0.999, MedR=1.000, MeanR=1.206, mAP=0.955
+ 2026-06-19 at 08:36:57 | Epoch [82] | IndicVoices metrics | T2A: R@1=0.322, R@5=0.556, R@10=0.673, MedR=4.000, MeanR=19.872, mAP=0.438 | A2T: R@1=0.269, R@5=0.500, R@10=0.606, MedR=5.000, MeanR=21.793, mAP=0.382
+ 2026-06-19 at 08:39:20 | Epoch [83] | Rasa metrics | T2A: R@1=0.910, R@5=0.995, R@10=0.998, MedR=1.000, MeanR=1.223, mAP=0.949 | A2T: R@1=0.920, R@5=0.995, R@10=0.998, MedR=1.000, MeanR=1.238, mAP=0.955
+ 2026-06-19 at 08:39:20 | Epoch [83] | IndicVoices metrics | T2A: R@1=0.340, R@5=0.574, R@10=0.684, MedR=4.000, MeanR=19.590, mAP=0.449 | A2T: R@1=0.274, R@5=0.519, R@10=0.601, MedR=5.000, MeanR=20.785, mAP=0.394
+ 2026-06-19 at 08:41:42 | Epoch [84] | Rasa metrics | T2A: R@1=0.900, R@5=0.994, R@10=0.998, MedR=1.000, MeanR=1.239, mAP=0.944 | A2T: R@1=0.906, R@5=0.994, R@10=0.998, MedR=1.000, MeanR=1.241, mAP=0.947
+ 2026-06-19 at 08:41:42 | Epoch [84] | IndicVoices metrics | T2A: R@1=0.290, R@5=0.556, R@10=0.673, MedR=4.000, MeanR=20.213, mAP=0.414 | A2T: R@1=0.250, R@5=0.513, R@10=0.601, MedR=5.000, MeanR=22.684, mAP=0.370
+ 2026-06-19 at 08:44:05 | Epoch [85] | Rasa metrics | T2A: R@1=0.913, R@5=0.993, R@10=0.998, MedR=1.000, MeanR=1.189, mAP=0.950 | A2T: R@1=0.916, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.203, mAP=0.953
+ 2026-06-19 at 08:44:05 | Epoch [85] | IndicVoices metrics | T2A: R@1=0.322, R@5=0.553, R@10=0.684, MedR=4.000, MeanR=20.511, mAP=0.439 | A2T: R@1=0.282, R@5=0.535, R@10=0.625, MedR=4.000, MeanR=21.082, mAP=0.396
+ 2026-06-19 at 08:46:27 | Epoch [86] | Rasa metrics | T2A: R@1=0.917, R@5=0.995, R@10=0.998, MedR=1.000, MeanR=1.205, mAP=0.954 | A2T: R@1=0.912, R@5=0.997, R@10=0.998, MedR=1.000, MeanR=1.221, mAP=0.952
+ 2026-06-19 at 08:46:27 | Epoch [86] | IndicVoices metrics | T2A: R@1=0.319, R@5=0.561, R@10=0.684, MedR=4.000, MeanR=18.984, mAP=0.441 | A2T: R@1=0.269, R@5=0.529, R@10=0.606, MedR=4.000, MeanR=20.487, mAP=0.394
+ 2026-06-19 at 08:48:49 | Epoch [87] | Rasa metrics | T2A: R@1=0.915, R@5=0.994, R@10=0.998, MedR=1.000, MeanR=1.216, mAP=0.952 | A2T: R@1=0.911, R@5=0.996, R@10=0.998, MedR=1.000, MeanR=1.225, mAP=0.951
+ 2026-06-19 at 08:48:49 | Epoch [87] | IndicVoices metrics | T2A: R@1=0.295, R@5=0.551, R@10=0.670, MedR=4.000, MeanR=19.739, mAP=0.417 | A2T: R@1=0.231, R@5=0.500, R@10=0.596, MedR=5.000, MeanR=23.378, mAP=0.356
+ 2026-06-19 at 08:51:11 | Epoch [88] | Rasa metrics | T2A: R@1=0.916, R@5=0.994, R@10=0.998, MedR=1.000, MeanR=1.203, mAP=0.952 | A2T: R@1=0.917, R@5=0.996, R@10=0.998, MedR=1.000, MeanR=1.218, mAP=0.954
+ 2026-06-19 at 08:51:11 | Epoch [88] | IndicVoices metrics | T2A: R@1=0.316, R@5=0.572, R@10=0.678, MedR=4.000, MeanR=18.758, mAP=0.438 | A2T: R@1=0.279, R@5=0.511, R@10=0.612, MedR=5.000, MeanR=21.598, mAP=0.391
+ 2026-06-19 at 08:53:33 | Epoch [89] | Rasa metrics | T2A: R@1=0.916, R@5=0.994, R@10=0.998, MedR=1.000, MeanR=1.197, mAP=0.952 | A2T: R@1=0.918, R@5=0.995, R@10=0.998, MedR=1.000, MeanR=1.203, mAP=0.955
+ 2026-06-19 at 08:53:33 | Epoch [89] | IndicVoices metrics | T2A: R@1=0.324, R@5=0.582, R@10=0.686, MedR=4.000, MeanR=18.795, mAP=0.445 | A2T: R@1=0.271, R@5=0.524, R@10=0.609, MedR=5.000, MeanR=21.191, mAP=0.395
+ 2026-06-19 at 08:55:55 | Epoch [90] | Rasa metrics | T2A: R@1=0.918, R@5=0.995, R@10=0.998, MedR=1.000, MeanR=1.205, mAP=0.953 | A2T: R@1=0.913, R@5=0.995, R@10=0.998, MedR=1.000, MeanR=1.225, mAP=0.951
+ 2026-06-19 at 08:55:55 | Epoch [90] | IndicVoices metrics | T2A: R@1=0.330, R@5=0.556, R@10=0.689, MedR=4.000, MeanR=18.529, mAP=0.443 | A2T: R@1=0.287, R@5=0.524, R@10=0.604, MedR=4.000, MeanR=19.843, mAP=0.405
+ 2026-06-19 at 08:58:17 | Epoch [91] | Rasa metrics | T2A: R@1=0.915, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.179, mAP=0.952 | A2T: R@1=0.921, R@5=0.998, R@10=0.998, MedR=1.000, MeanR=1.188, mAP=0.956
+ 2026-06-19 at 08:58:17 | Epoch [91] | IndicVoices metrics | T2A: R@1=0.322, R@5=0.572, R@10=0.686, MedR=4.000, MeanR=18.269, mAP=0.443 | A2T: R@1=0.258, R@5=0.513, R@10=0.609, MedR=5.000, MeanR=21.415, mAP=0.383
+ 2026-06-19 at 09:00:39 | Epoch [92] | Rasa metrics | T2A: R@1=0.923, R@5=0.996, R@10=0.998, MedR=1.000, MeanR=1.184, mAP=0.957 | A2T: R@1=0.919, R@5=0.997, R@10=0.998, MedR=1.000, MeanR=1.203, mAP=0.955
+ 2026-06-19 at 09:00:39 | Epoch [92] | IndicVoices metrics | T2A: R@1=0.327, R@5=0.572, R@10=0.694, MedR=4.000, MeanR=18.082, mAP=0.446 | A2T: R@1=0.269, R@5=0.529, R@10=0.617, MedR=4.000, MeanR=20.561, mAP=0.390
+ 2026-06-19 at 09:00:47 | Saved new best Rasa checkpoint at epoch 92.
+ 2026-06-19 at 09:03:09 | Epoch [93] | Rasa metrics | T2A: R@1=0.917, R@5=0.995, R@10=0.997, MedR=1.000, MeanR=1.184, mAP=0.953 | A2T: R@1=0.917, R@5=0.997, R@10=0.998, MedR=1.000, MeanR=1.181, mAP=0.954
+ 2026-06-19 at 09:03:09 | Epoch [93] | IndicVoices metrics | T2A: R@1=0.330, R@5=0.559, R@10=0.678, MedR=4.000, MeanR=19.152, mAP=0.442 | A2T: R@1=0.277, R@5=0.519, R@10=0.609, MedR=5.000, MeanR=20.989, mAP=0.393
+ 2026-06-19 at 09:05:31 | Epoch [94] | Rasa metrics | T2A: R@1=0.921, R@5=0.995, R@10=0.998, MedR=1.000, MeanR=1.179, mAP=0.956 | A2T: R@1=0.922, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.184, mAP=0.957
+ 2026-06-19 at 09:05:31 | Epoch [94] | IndicVoices metrics | T2A: R@1=0.343, R@5=0.561, R@10=0.678, MedR=4.000, MeanR=18.471, mAP=0.451 | A2T: R@1=0.277, R@5=0.513, R@10=0.596, MedR=5.000, MeanR=21.827, mAP=0.389
+ 2026-06-19 at 09:07:53 | Epoch [95] | Rasa metrics | T2A: R@1=0.921, R@5=0.996, R@10=0.998, MedR=1.000, MeanR=1.172, mAP=0.956 | A2T: R@1=0.921, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.181, mAP=0.957
+ 2026-06-19 at 09:07:53 | Epoch [95] | IndicVoices metrics | T2A: R@1=0.324, R@5=0.577, R@10=0.699, MedR=4.000, MeanR=18.452, mAP=0.443 | A2T: R@1=0.282, R@5=0.524, R@10=0.606, MedR=5.000, MeanR=20.755, mAP=0.398
+ 2026-06-19 at 09:10:15 | Epoch [96] | Rasa metrics | T2A: R@1=0.925, R@5=0.996, R@10=0.998, MedR=1.000, MeanR=1.155, mAP=0.958 | A2T: R@1=0.925, R@5=0.997, R@10=0.998, MedR=1.000, MeanR=1.161, mAP=0.959
+ 2026-06-19 at 09:10:15 | Epoch [96] | IndicVoices metrics | T2A: R@1=0.335, R@5=0.577, R@10=0.668, MedR=4.000, MeanR=17.694, mAP=0.449 | A2T: R@1=0.263, R@5=0.513, R@10=0.622, MedR=5.000, MeanR=21.098, mAP=0.387
+ 2026-06-19 at 09:10:23 | Saved new best Rasa checkpoint at epoch 96.
+ 2026-06-19 at 09:12:45 | Epoch [97] | Rasa metrics | T2A: R@1=0.921, R@5=0.995, R@10=0.998, MedR=1.000, MeanR=1.171, mAP=0.956 | A2T: R@1=0.926, R@5=0.997, R@10=0.998, MedR=1.000, MeanR=1.168, mAP=0.959
+ 2026-06-19 at 09:12:45 | Epoch [97] | IndicVoices metrics | T2A: R@1=0.324, R@5=0.569, R@10=0.681, MedR=4.000, MeanR=19.181, mAP=0.442 | A2T: R@1=0.282, R@5=0.508, R@10=0.604, MedR=5.000, MeanR=21.125, mAP=0.397
+ 2026-06-19 at 09:15:07 | Epoch [98] | Rasa metrics | T2A: R@1=0.925, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.150, mAP=0.959 | A2T: R@1=0.929, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.149, mAP=0.961
+ 2026-06-19 at 09:15:07 | Epoch [98] | IndicVoices metrics | T2A: R@1=0.346, R@5=0.585, R@10=0.691, MedR=4.000, MeanR=18.630, mAP=0.458 | A2T: R@1=0.293, R@5=0.505, R@10=0.625, MedR=5.000, MeanR=19.976, mAP=0.408
+ 2026-06-19 at 09:15:15 | Saved new best Rasa checkpoint at epoch 98.
+ 2026-06-19 at 09:17:37 | Epoch [99] | Rasa metrics | T2A: R@1=0.929, R@5=0.997, R@10=0.998, MedR=1.000, MeanR=1.163, mAP=0.960 | A2T: R@1=0.928, R@5=0.997, R@10=0.998, MedR=1.000, MeanR=1.163, mAP=0.960
+ 2026-06-19 at 09:17:37 | Epoch [99] | IndicVoices metrics | T2A: R@1=0.346, R@5=0.580, R@10=0.691, MedR=3.000, MeanR=18.114, mAP=0.460 | A2T: R@1=0.298, R@5=0.532, R@10=0.630, MedR=5.000, MeanR=19.689, mAP=0.412
+ 2026-06-19 at 09:17:45 | Saved new best Rasa checkpoint at epoch 99.
+ 2026-06-19 at 09:20:08 | Epoch [100] | Rasa metrics | T2A: R@1=0.920, R@5=0.996, R@10=0.999, MedR=1.000, MeanR=1.163, mAP=0.956 | A2T: R@1=0.922, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.166, mAP=0.957
+ 2026-06-19 at 09:20:08 | Epoch [100] | IndicVoices metrics | T2A: R@1=0.343, R@5=0.577, R@10=0.678, MedR=3.000, MeanR=18.069, mAP=0.457 | A2T: R@1=0.255, R@5=0.519, R@10=0.620, MedR=5.000, MeanR=20.904, mAP=0.386
+ 2026-06-19 at 09:22:30 | Epoch [101] | Rasa metrics | T2A: R@1=0.926, R@5=0.997, R@10=0.998, MedR=1.000, MeanR=1.162, mAP=0.959 | A2T: R@1=0.925, R@5=0.997, R@10=0.998, MedR=1.000, MeanR=1.172, mAP=0.959
+ 2026-06-19 at 09:22:30 | Epoch [101] | IndicVoices metrics | T2A: R@1=0.348, R@5=0.577, R@10=0.670, MedR=4.000, MeanR=18.152, mAP=0.460 | A2T: R@1=0.277, R@5=0.524, R@10=0.622, MedR=5.000, MeanR=20.673, mAP=0.396
+ 2026-06-19 at 09:24:52 | Epoch [102] | Rasa metrics | T2A: R@1=0.925, R@5=0.995, R@10=0.998, MedR=1.000, MeanR=1.168, mAP=0.959 | A2T: R@1=0.928, R@5=0.998, R@10=0.998, MedR=1.000, MeanR=1.161, mAP=0.960
+ 2026-06-19 at 09:24:52 | Epoch [102] | IndicVoices metrics | T2A: R@1=0.338, R@5=0.580, R@10=0.668, MedR=4.000, MeanR=18.364, mAP=0.455 | A2T: R@1=0.277, R@5=0.527, R@10=0.622, MedR=5.000, MeanR=20.356, mAP=0.397
+ 2026-06-19 at 09:27:14 | Epoch [103] | Rasa metrics | T2A: R@1=0.928, R@5=0.997, R@10=0.998, MedR=1.000, MeanR=1.156, mAP=0.960 | A2T: R@1=0.930, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.159, mAP=0.962
+ 2026-06-19 at 09:27:14 | Epoch [103] | IndicVoices metrics | T2A: R@1=0.359, R@5=0.588, R@10=0.686, MedR=4.000, MeanR=18.056, mAP=0.466 | A2T: R@1=0.287, R@5=0.535, R@10=0.617, MedR=4.000, MeanR=20.215, mAP=0.405
+ 2026-06-19 at 09:29:35 | Epoch [104] | Rasa metrics | T2A: R@1=0.925, R@5=0.996, R@10=0.998, MedR=1.000, MeanR=1.158, mAP=0.958 | A2T: R@1=0.929, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.158, mAP=0.961
+ 2026-06-19 at 09:29:35 | Epoch [104] | IndicVoices metrics | T2A: R@1=0.340, R@5=0.585, R@10=0.691, MedR=4.000, MeanR=18.114, mAP=0.458 | A2T: R@1=0.279, R@5=0.535, R@10=0.614, MedR=4.000, MeanR=19.673, mAP=0.404
+ 2026-06-19 at 09:31:57 | Epoch [105] | Rasa metrics | T2A: R@1=0.926, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.155, mAP=0.959 | A2T: R@1=0.930, R@5=0.997, R@10=0.998, MedR=1.000, MeanR=1.148, mAP=0.962
+ 2026-06-19 at 09:31:57 | Epoch [105] | IndicVoices metrics | T2A: R@1=0.346, R@5=0.580, R@10=0.681, MedR=4.000, MeanR=18.654, mAP=0.457 | A2T: R@1=0.282, R@5=0.527, R@10=0.620, MedR=4.000, MeanR=20.715, mAP=0.403
+ 2026-06-19 at 09:34:20 | Epoch [106] | Rasa metrics | T2A: R@1=0.925, R@5=0.996, R@10=0.999, MedR=1.000, MeanR=1.167, mAP=0.958 | A2T: R@1=0.923, R@5=0.998, R@10=0.998, MedR=1.000, MeanR=1.162, mAP=0.958
+ 2026-06-19 at 09:34:20 | Epoch [106] | IndicVoices metrics | T2A: R@1=0.346, R@5=0.588, R@10=0.686, MedR=4.000, MeanR=17.769, mAP=0.459 | A2T: R@1=0.271, R@5=0.537, R@10=0.625, MedR=4.000, MeanR=20.133, mAP=0.399
+ 2026-06-19 at 09:36:42 | Epoch [107] | Rasa metrics | T2A: R@1=0.925, R@5=0.996, R@10=0.998, MedR=1.000, MeanR=1.163, mAP=0.958 | A2T: R@1=0.925, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.160, mAP=0.959
+ 2026-06-19 at 09:36:42 | Epoch [107] | IndicVoices metrics | T2A: R@1=0.348, R@5=0.580, R@10=0.689, MedR=3.000, MeanR=18.314, mAP=0.463 | A2T: R@1=0.290, R@5=0.540, R@10=0.630, MedR=4.000, MeanR=19.785, mAP=0.411
+ 2026-06-19 at 09:39:04 | Epoch [108] | Rasa metrics | T2A: R@1=0.927, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.160, mAP=0.959 | A2T: R@1=0.926, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.156, mAP=0.960
+ 2026-06-19 at 09:39:04 | Epoch [108] | IndicVoices metrics | T2A: R@1=0.351, R@5=0.582, R@10=0.678, MedR=4.000, MeanR=18.335, mAP=0.461 | A2T: R@1=0.279, R@5=0.529, R@10=0.617, MedR=5.000, MeanR=20.564, mAP=0.400
+ 2026-06-19 at 09:41:26 | Epoch [109] | Rasa metrics | T2A: R@1=0.927, R@5=0.996, R@10=0.999, MedR=1.000, MeanR=1.158, mAP=0.959 | A2T: R@1=0.928, R@5=0.997, R@10=0.998, MedR=1.000, MeanR=1.154, mAP=0.961
+ 2026-06-19 at 09:41:26 | Epoch [109] | IndicVoices metrics | T2A: R@1=0.340, R@5=0.582, R@10=0.686, MedR=4.000, MeanR=18.176, mAP=0.456 | A2T: R@1=0.282, R@5=0.532, R@10=0.620, MedR=4.000, MeanR=20.348, mAP=0.405
+ 2026-06-19 at 09:43:48 | Epoch [110] | Rasa metrics | T2A: R@1=0.927, R@5=0.996, R@10=0.999, MedR=1.000, MeanR=1.160, mAP=0.959 | A2T: R@1=0.927, R@5=0.998, R@10=0.998, MedR=1.000, MeanR=1.155, mAP=0.960
+ 2026-06-19 at 09:43:48 | Epoch [110] | IndicVoices metrics | T2A: R@1=0.340, R@5=0.580, R@10=0.689, MedR=4.000, MeanR=18.178, mAP=0.455 | A2T: R@1=0.277, R@5=0.532, R@10=0.620, MedR=4.000, MeanR=20.199, mAP=0.403
+ 2026-06-19 at 09:46:10 | Epoch [111] | Rasa metrics | T2A: R@1=0.928, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.152, mAP=0.960 | A2T: R@1=0.927, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.150, mAP=0.960
+ 2026-06-19 at 09:46:10 | Epoch [111] | IndicVoices metrics | T2A: R@1=0.343, R@5=0.580, R@10=0.689, MedR=4.000, MeanR=18.223, mAP=0.455 | A2T: R@1=0.274, R@5=0.529, R@10=0.628, MedR=4.000, MeanR=20.239, mAP=0.400
+ 2026-06-19 at 09:48:32 | Epoch [112] | Rasa metrics | T2A: R@1=0.928, R@5=0.995, R@10=0.998, MedR=1.000, MeanR=1.157, mAP=0.960 | A2T: R@1=0.928, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.156, mAP=0.960
+ 2026-06-19 at 09:48:32 | Epoch [112] | IndicVoices metrics | T2A: R@1=0.351, R@5=0.585, R@10=0.694, MedR=4.000, MeanR=18.064, mAP=0.461 | A2T: R@1=0.287, R@5=0.532, R@10=0.625, MedR=4.000, MeanR=19.758, mAP=0.409
+ 2026-06-19 at 09:50:55 | Epoch [113] | Rasa metrics | T2A: R@1=0.928, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.152, mAP=0.960 | A2T: R@1=0.926, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.153, mAP=0.960
+ 2026-06-19 at 09:50:55 | Epoch [113] | IndicVoices metrics | T2A: R@1=0.343, R@5=0.582, R@10=0.691, MedR=3.000, MeanR=18.074, mAP=0.457 | A2T: R@1=0.282, R@5=0.529, R@10=0.620, MedR=4.000, MeanR=20.040, mAP=0.405
+ 2026-06-19 at 09:53:17 | Epoch [114] | Rasa metrics | T2A: R@1=0.930, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.148, mAP=0.961 | A2T: R@1=0.928, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.153, mAP=0.961
+ 2026-06-19 at 09:53:17 | Epoch [114] | IndicVoices metrics | T2A: R@1=0.343, R@5=0.582, R@10=0.694, MedR=3.000, MeanR=17.995, mAP=0.459 | A2T: R@1=0.293, R@5=0.527, R@10=0.625, MedR=4.000, MeanR=19.723, mAP=0.411
+ 2026-06-19 at 09:53:25 | Saved new best Rasa checkpoint at epoch 114.
+ 2026-06-19 at 09:55:47 | Epoch [115] | Rasa metrics | T2A: R@1=0.929, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.152, mAP=0.960 | A2T: R@1=0.927, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.153, mAP=0.960
+ 2026-06-19 at 09:55:47 | Epoch [115] | IndicVoices metrics | T2A: R@1=0.343, R@5=0.588, R@10=0.699, MedR=4.000, MeanR=17.979, mAP=0.458 | A2T: R@1=0.285, R@5=0.532, R@10=0.633, MedR=4.000, MeanR=19.816, mAP=0.408
+ 2026-06-19 at 09:58:10 | Epoch [116] | Rasa metrics | T2A: R@1=0.930, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.153, mAP=0.961 | A2T: R@1=0.930, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.151, mAP=0.962
+ 2026-06-19 at 09:58:10 | Epoch [116] | IndicVoices metrics | T2A: R@1=0.343, R@5=0.588, R@10=0.702, MedR=4.000, MeanR=17.918, mAP=0.459 | A2T: R@1=0.287, R@5=0.532, R@10=0.633, MedR=4.000, MeanR=19.747, mAP=0.409
+ 2026-06-19 at 10:00:32 | Epoch [117] | Rasa metrics | T2A: R@1=0.929, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.154, mAP=0.960 | A2T: R@1=0.928, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.155, mAP=0.961
+ 2026-06-19 at 10:00:32 | Epoch [117] | IndicVoices metrics | T2A: R@1=0.348, R@5=0.588, R@10=0.699, MedR=3.000, MeanR=17.926, mAP=0.461 | A2T: R@1=0.290, R@5=0.535, R@10=0.633, MedR=4.000, MeanR=19.793, mAP=0.410
+ 2026-06-19 at 10:02:54 | Epoch [118] | Rasa metrics | T2A: R@1=0.929, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.153, mAP=0.961 | A2T: R@1=0.928, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.153, mAP=0.961
+ 2026-06-19 at 10:02:54 | Epoch [118] | IndicVoices metrics | T2A: R@1=0.351, R@5=0.588, R@10=0.697, MedR=3.000, MeanR=17.872, mAP=0.463 | A2T: R@1=0.287, R@5=0.532, R@10=0.633, MedR=4.000, MeanR=19.753, mAP=0.409
+ 2026-06-19 at 10:05:16 | Epoch [119] | Rasa metrics | T2A: R@1=0.930, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.153, mAP=0.961 | A2T: R@1=0.926, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.155, mAP=0.960
+ 2026-06-19 at 10:05:16 | Epoch [119] | IndicVoices metrics | T2A: R@1=0.348, R@5=0.588, R@10=0.702, MedR=3.000, MeanR=17.899, mAP=0.461 | A2T: R@1=0.290, R@5=0.532, R@10=0.633, MedR=4.000, MeanR=19.777, mAP=0.410
+ 2026-06-19 at 10:07:38 | Epoch [120] | Rasa metrics | T2A: R@1=0.929, R@5=0.995, R@10=0.999, MedR=1.000, MeanR=1.154, mAP=0.961 | A2T: R@1=0.930, R@5=0.997, R@10=0.999, MedR=1.000, MeanR=1.151, mAP=0.962
+ 2026-06-19 at 10:07:38 | Epoch [120] | IndicVoices metrics | T2A: R@1=0.348, R@5=0.588, R@10=0.702, MedR=3.000, MeanR=17.880, mAP=0.461 | A2T: R@1=0.293, R@5=0.535, R@10=0.630, MedR=4.000, MeanR=19.758, mAP=0.412

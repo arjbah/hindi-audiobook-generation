@@ -8,7 +8,7 @@ from transformers import AutoTokenizer
 import numpy as np
 
 class IndicVoicesCLAPDataset(Dataset):
-    def __init__(self, dataset_name, split="train", target_sr=32000, max_audio_len=10.24, max_text_len=128, muril_model_name="google/muril-base-cased"):
+    def __init__(self, dataset_name, split="train", target_sr=16000, max_audio_len=13, max_text_len=128, muril_model_name="google/muril-base-cased"):
         if dataset_name == "indicvoices":
             self.dataset = load_dataset("ai4bharat/indicvoices_r", "Hindi", split=split)
         elif dataset_name == "rasa":
@@ -20,7 +20,7 @@ class IndicVoicesCLAPDataset(Dataset):
         
         self.tokenizer = AutoTokenizer.from_pretrained(muril_model_name)
         
-        # Audio length in samples (11.89s @ 22050Hz with 256 hop = 1024 frames)
+        # Audio length in samples (16.384s @ 16000Hz with 256 hop = 1024 frames)
         self.max_samples = int(target_sr * max_audio_len)
 
     def __len__(self):
@@ -71,7 +71,7 @@ class IndicVoicesCLAPDataset(Dataset):
             "attention_mask": tokens["attention_mask"].squeeze(0)
         }
 
-def get_dataloader(split="train", batch_size=32, num_workers=4):
+def get_dataloader(split="train", batch_size=128, num_workers=4):
     dataset = IndicVoicesCLAPDataset(dataset_name="rasa", split=split)
     
     return DataLoader(dataset, batch_size=batch_size, shuffle=(split=="train"), num_workers=num_workers)

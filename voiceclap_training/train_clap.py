@@ -6,33 +6,12 @@ from torch.cuda.amp import GradScaler
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import argparse
+from loguru import logger
+import sys
+from pathlib import Path
 
 from clap_model import CLAPModel, contrastive_loss
 from clap_dataset import IndicVoicesCLAPDataset, get_dataloader
-
-class HTSATConfig:
-    # HTS-AT hyperparamaters as per CLAP Plan and HTS-AT defaults
-    htsat_window_size = 8
-    htsat_spec_size = 256
-    htsat_patch_size = 4 
-    htsat_stride = (4, 4)
-    htsat_num_head = [4, 8, 16, 32]
-    htsat_dim = 96 
-    htsat_depth = [2, 2, 6, 2]
-    
-    # Signal processing parameters from CLAP Plan.md
-    sample_rate = 32000
-    window_size = 1024
-    hop_size = 320
-    mel_bins = 64
-    fmin = 50
-    fmax = 14000 # sr // 2
-    
-    classes_num = 527 # Default for HTS-AT, but we'll use latent_output
-    enable_tscam = True
-    htsat_attn_heatmap = False
-    loss_type = "clip_bce" # For internal HTS-AT logic if needed
-    enable_repeat_mode = False
 
 
 def retrieval_metrics(similarity_matrix, ks=(1, 5, 10)):
@@ -78,18 +57,29 @@ def evaluate_rasa(model, dataloader, device):
     metrics_t2a = retrieval_metrics(similarity_a2t.T)
     return metrics_t2a, metrics_a2t
 
+log_output_dir = Path(".")
+logger.remove()
+logger.add(sys.stdout, format='{time: YYYY-MM-DD at HH:mm:ss} | {message}', level='INFO',
+            filter=lambda record: record['extra']['indent'] == 1)
+logger.add(log_output_dir.joinpath('train_log.txt'), format='{time: YYYY-MM-DD at HH:mm:ss} | {message}', level='INFO',
+            filter=lambda record: record['extra']['indent'] == 1)
+main_logger = logger.bind(indent=1)
+
 def train():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f"Using device: {device}")
+    main_logger.info(f"Using device: {device}")
 
     # 1. Config and Model
-    config = HTSATConfig()
-    model = CLAPModel(config).to(device)
+    model = CLAPModel().to(device)
+    print(f"Total params: {sum(p.numel() for p in model.parameters()):,}")
+    print(f"Trainable params: {sum(p.numel() for p in model.parameters() if p.requires_grad):,}")
 
     # 2. Data
     train_loader = get_dataloader(split="train", batch_size=128, num_workers=4)
     rasa_eval_dataset = IndicVoicesCLAPDataset(dataset_name="rasa", split="test")
-    rasa_eval_loader = DataLoader(rasa_eval_dataset, batch_size=512, shuffle=False, num_workers=4)
+    rasa_eval_loader = DataLoader(rasa_eval_dataset, batch_size=32, shuffle=False, num_workers=4)
+    indicvoices_eval_dataset = IndicVoicesCLAPDataset(dataset_name="indicvoices", split="test")
+    indicvoices_eval_loader = DataLoader(indicvoices_eval_dataset, batch_size=32, shuffle=False, num_workers=4)
 
     # 3. Optimizer and Scheduler
     # Lower LR for backbones, higher for projection heads
@@ -136,10 +126,21 @@ def train():
         
         model.eval()
         metrics_t2a, metrics_a2t = evaluate_rasa(model, rasa_eval_loader, device)
+        metrics_t2a_indicvoices, metrics_a2t_indicvoices = evaluate_rasa(model, indicvoices_eval_loader, device)
         rasa_r1 = metrics_t2a["R@1"]
-        print(
-            f"Epoch {epoch+1}: Rasa T2A R@1={metrics_t2a['R@1']:.4f}, "
-            f"A2T R@1={metrics_a2t['R@1']:.4f}, best={best_rasa_r1:.4f}"
+        main_logger.info(
+            f"Epoch [{epoch+1}] | Rasa metrics | "
+            f"T2A: R@1={metrics_t2a['R@1']:.3f}, R@5={metrics_t2a['R@5']:.3f}, R@10={metrics_t2a['R@10']:.3f}, "
+            f"MedR={metrics_t2a['MedianRank']:.3f}, MeanR={metrics_t2a['MeanRank']:.3f}, mAP={metrics_t2a['mAP']:.3f} | "
+            f"A2T: R@1={metrics_a2t['R@1']:.3f}, R@5={metrics_a2t['R@5']:.3f}, R@10={metrics_a2t['R@10']:.3f}, "
+            f"MedR={metrics_a2t['MedianRank']:.3f}, MeanR={metrics_a2t['MeanRank']:.3f}, mAP={metrics_a2t['mAP']:.3f}"
+        )
+        main_logger.info(
+            f"Epoch [{epoch+1}] | IndicVoices metrics | "
+            f"T2A: R@1={metrics_t2a_indicvoices['R@1']:.3f}, R@5={metrics_t2a_indicvoices['R@5']:.3f}, R@10={metrics_t2a_indicvoices['R@10']:.3f}, "
+            f"MedR={metrics_t2a_indicvoices['MedianRank']:.3f}, MeanR={metrics_t2a_indicvoices['MeanRank']:.3f}, mAP={metrics_t2a_indicvoices['mAP']:.3f} | "
+            f"A2T: R@1={metrics_a2t_indicvoices['R@1']:.3f}, R@5={metrics_a2t_indicvoices['R@5']:.3f}, R@10={metrics_a2t_indicvoices['R@10']:.3f}, "
+            f"MedR={metrics_a2t_indicvoices['MedianRank']:.3f}, MeanR={metrics_a2t_indicvoices['MeanRank']:.3f}, mAP={metrics_a2t_indicvoices['mAP']:.3f}"
         )
 
         if rasa_r1 > best_rasa_r1:
@@ -154,7 +155,7 @@ def train():
                 'rasa_a2t_metrics': metrics_a2t,
                 'best_rasa_r1': best_rasa_r1,
             }, "clap_checkpoint_best_rasa.pt")
-            print(f"Saved new best Rasa checkpoint at epoch {epoch+1}.")
+            main_logger.info(f"Saved new best Rasa checkpoint at epoch {epoch+1}.")
 
 if __name__ == "__main__":
     train()

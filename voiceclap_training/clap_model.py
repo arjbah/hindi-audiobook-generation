@@ -18,10 +18,12 @@ class ProjectionHead(nn.Module):
         return self.projection(x)
 
 class CLAPModel(nn.Module):
-    def __init__(self, htsat_config, muril_model_name="google/muril-base-cased", projection_dim=768):
+    def __init__(self, muril_model_name="google/muril-base-cased", projection_dim=768):
         super().__init__()
         
         self.audio_encoder = AutoModel.from_pretrained("laion/voiceclap-small-v2", trust_remote_code=True)
+        self.audio_encoder.text_encoder = None
+        self.audio_encoder.text_proj = None
         self.audio_projection = ProjectionHead(768, projection_dim)
         
         self.text_encoder = AutoModel.from_pretrained(muril_model_name)
@@ -35,7 +37,8 @@ class CLAPModel(nn.Module):
         Output: (batch_size, projection_dim) normalized
         """
         # HTS-AT forward returns a dict with 'latent_output' if enable_tscam is True
-        audio_features = self.audio_encoder.encode_waveform(audio)
+        mel = self.audio_encoder.compute_log_mel(audio, sample_rate=16000)
+        audio_features = self.audio_encoder.encode_audio(mel)
         audio_features = self.audio_projection(audio_features)
         audio_features = F.normalize(audio_features, p=2, dim=-1)
         return audio_features
@@ -65,11 +68,9 @@ class CLAPModel(nn.Module):
 
 def contrastive_loss(logits_per_audio, logits_per_text):
     batch_size = logits_per_audio.shape[0]
-
-    labels = torch.full_like(logits_per_audio, -1.0)
-    labels.fill_diagonal_(1.0)
-
-    loss_a = F.softplus(-(labels * logits_per_audio))
-    loss_t = F.softplus(-(labels * logits_per_text))
-
-    return (loss_a.mean() + loss_t.mean()) / 2
+    labels = torch.arange(batch_size, device=logits_per_audio.device)
+    
+    loss_a = F.cross_entropy(logits_per_audio, labels)
+    loss_t = F.cross_entropy(logits_per_text, labels)
+    
+    return (loss_a + loss_t) / 2
