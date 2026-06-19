@@ -1,3 +1,5 @@
+
+
 import os
 import torch
 import torch.optim as optim
@@ -40,14 +42,14 @@ def train():
     print(f"Using device: {device}")
 
     # Initialize custom hybrid model
-    # To use local checkpoint, change custom_audio_ckpt=None to your filename (e.g., "hts_weights.ckpt")
+    # To use local checkpoint, change custom_audio_ckpt=None to custom filename (e.g., "hts_weights.ckpt")
     model = CLAPModel(
         muril_model_name="google/muril-base-cased",
         laion_model_name="laion/clap-htsat-unfused",
         custom_audio_ckpt=None 
     ).to(device)
 
-    # Data Loader (uses your zero-change dataset structure at 48kHz)
+    # Data Loader (uses  zero-change dataset structure at 48kHz)
     train_loader = get_dataloader(split="train", batch_size=128, num_workers=4)
 
     # Optimizer with learning rates
