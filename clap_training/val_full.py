@@ -3,9 +3,10 @@
 2. Make the dataset of test datasets of Rasa and IndicVoices
 3. Calculate loss
 """
+import os
 from transformers import logging
 from clap_model import CLAPModel, contrastive_loss
-from train_clap import HTSATConfig
+#from train_clap import HTSATConfig
 from clap_dataset import get_dataloader
 import torch
 from tqdm import tqdm
@@ -42,26 +43,52 @@ def retrieval_metrics(similarity_matrix, ks=[1,5,10]):
 
     metrics["mAP"] = sum(APs) / len(APs)
 
+    # mAP@10 (Official LAION-CLAP Metric)
+    ranks_zero_indexed = ranks - 1
+    mAP_10 = torch.where(
+        ranks_zero_indexed < 10, 
+        1.0 / ranks.float(), 
+        torch.tensor(0.0, device=ranks.device)
+    )
+    metrics["mAP@10"] = mAP_10.mean().item()
+
     return metrics
 
 device = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 print(f"Using device: {device}")
 
-config = HTSATConfig()
+#config = HTSATConfig()
 
 loader = get_dataloader(split="test", batch_size=512, num_workers=4)
 
+# Keep your loop structure (currently set to check epoch 120)
 for i in range(120, 121, 10):
-    model = CLAPModel(config).to(device)
-    checkpoint = torch.load(f"clap_model_epoch_{i}.pt", map_location=device)
-    model.load_state_dict(checkpoint) # ["model_state_dict"]
-    model.train()
+    # Initialize your new hybrid model cleanly
+    model = CLAPModel().to(device)
+    
+    # Check both potential checkpoint file names to prevent FileNotFoundError
+    checkpoint_path = f"clap_checkpoint_epoch_{i}.pt"
+    if not os.path.exists(checkpoint_path):
+        checkpoint_path = f"clap_model_epoch_{i}.pt"
+        
+    print(f"\n==========================================")
+    print(f"Evaluating Checkpoint: {checkpoint_path}")
+    print(f"==========================================")
+    
+    checkpoint = torch.load(checkpoint_path, map_location=device)
+    
+    # Retrieve state-dict (handles both raw state-dicts and nested dictionaries safely)
+    state_dict = checkpoint.get("model_state_dict", checkpoint)
+    model.load_state_dict(state_dict, strict=False)
+    
+    # Toggle evaluation mode for precise validation
+    model.eval()
     
     all_audio_embs = []
     all_text_embs = []
 
     with torch.no_grad():
-        for batch in loader:
+        for batch in tqdm(loader, desc="Running inference"):
             mel_spec = batch['mel_spec'].to(device)
             input_ids = batch['input_ids'].to(device)
             attention_mask = batch['attention_mask'].to(device)
@@ -80,6 +107,7 @@ for i in range(120, 121, 10):
     all_audio_embs = torch.cat(all_audio_embs)
     all_text_embs = torch.cat(all_text_embs)
     
+    # Symmetrical matrix calculation using model's trained logit scale
     similarity_a2t = (
         model.logit_scale.exp().cpu()
         * all_audio_embs @ all_text_embs.T
@@ -87,7 +115,7 @@ for i in range(120, 121, 10):
 
     metrics_a2t = retrieval_metrics(similarity_a2t)
     metrics_t2a = retrieval_metrics(similarity_a2t.T)
-    print(f"Checkpoint {i}")
-    print(f"T2A metrics: {metrics_t2a}")
-    print(f"A2T metrics: {metrics_a2t}")
     
+    print(f"\n--- Checkpoint {i} Global Evaluation Results ---")
+    print(f"T2A metrics (Text-to-Audio): {metrics_t2a}")
+    print(f"A2T metrics (Audio-to-Text): {metrics_a2t}")
