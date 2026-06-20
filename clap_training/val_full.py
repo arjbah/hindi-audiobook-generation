@@ -43,6 +43,7 @@ def retrieval_metrics(similarity_matrix, ks=[1,5,10]):
 
     metrics["mAP"] = sum(APs) / len(APs)
 
+    '''
     # mAP@10 (Official LAION-CLAP Metric)
     ranks_zero_indexed = ranks - 1
     mAP_10 = torch.where(
@@ -51,6 +52,7 @@ def retrieval_metrics(similarity_matrix, ks=[1,5,10]):
         torch.tensor(0.0, device=ranks.device)
     )
     metrics["mAP@10"] = mAP_10.mean().item()
+    '''
 
     return metrics
 
@@ -61,9 +63,8 @@ print(f"Using device: {device}")
 
 loader = get_dataloader(split="test", batch_size=512, num_workers=4)
 
-# Keep your loop structure (currently set to check epoch 120)
 for i in range(120, 121, 10):
-    # Initialize your new hybrid model cleanly
+    # Initialize model
     model = CLAPModel().to(device)
     
     # Check both potential checkpoint file names to prevent FileNotFoundError
@@ -107,7 +108,6 @@ for i in range(120, 121, 10):
     all_audio_embs = torch.cat(all_audio_embs)
     all_text_embs = torch.cat(all_text_embs)
     
-    # Symmetrical matrix calculation using model's trained logit scale
     similarity_a2t = (
         model.logit_scale.exp().cpu()
         * all_audio_embs @ all_text_embs.T
