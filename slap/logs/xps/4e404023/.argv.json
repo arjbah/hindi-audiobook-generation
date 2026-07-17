@@ -1,0 +1,1 @@
+["data=rasa", "model=slap", "model/audio_encoder=htsat_audioset_slap", "model/text_encoder=muril_slap", "trainer=hindi"]

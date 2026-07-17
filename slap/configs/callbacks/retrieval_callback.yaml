@@ -1,0 +1,9 @@
+# https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.callbacks.ModelCheckpoint.html
+
+retrieval_callback:
+  _target_: src.callbacks.retrieval.RetrievalEvaluation
+  distance: cosine
+  log_path: ${paths.output_dir}/train_log.txt
+  dataset_names:
+    - Rasa
+    - IndicVoices

@@ -1,0 +1,3 @@
+Install ffmpeg after requirements.txt
+sudo apt install libpython3.11
+sudo apt install ffmpeg

@@ -1,0 +1,19 @@
+_target_: lightning.pytorch.trainer.Trainer
+
+default_root_dir: ${paths.output_dir}
+
+min_epochs: 1
+max_epochs: 240
+
+accelerator: gpu
+devices: 1
+
+precision: bf16-mixed
+
+check_val_every_n_epoch: 1
+
+deterministic: false
+gradient_clip_val: 3.0
+
+# Effective global batch size is 128: data batch 128 x accumulation 1.
+accumulate_grad_batches: 1

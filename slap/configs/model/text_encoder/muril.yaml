@@ -1,0 +1,16 @@
+defaults:
+  - default
+
+encoder:
+  _target_: src.networks.text.bert.HuggingFaceTextEncoder
+  model_name: google/muril-base-cased
+  load_pretrained: true
+
+projector:
+  _target_: src.networks.mlp.MLP
+  dims:
+    - 768
+    - ${model.embed_dim}
+    - ${model.embed_dim}
+  activation: true
+  normalization: true

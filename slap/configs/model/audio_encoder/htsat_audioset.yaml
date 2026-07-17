@@ -1,0 +1,39 @@
+defaults:
+  - default
+
+encoder:
+  _target_: src.networks.audio.htsat.HTSATSwinTransformer
+  spec_size: 256
+  patch_size: 4
+  patch_stride:
+    - 4
+    - 4
+  embed_dim: 96
+  depths:
+    - 2
+    - 2
+    - 6
+    - 2
+  num_heads:
+    - 4
+    - 8
+    - 16
+    - 32
+  window_size: 8
+  mel_bins: 64
+  sample_rate: 32000
+  spec_window_size: 1024
+  hop_size: 320
+  fmin: 50
+  fmax: 14000
+  precomputed_lms: false
+  checkpoint_path: ${paths.pretrained}/HTSAT_AudioSet_Saved_6.ckpt
+
+projector:
+  _target_: src.networks.mlp.MLP
+  dims:
+    - 768
+    - ${model.embed_dim}
+    - ${model.embed_dim}
+  activation: true
+  normalization: true
