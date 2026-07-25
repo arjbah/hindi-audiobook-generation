@@ -1,7 +1,16 @@
-## Long Story Generation
-The story transcript is in `data/long_story_transcript.txt`. To replicate the audio generation with IndicParler-TTS, run `long-story-generation/long_story_generation.py` to get audio samples for ~100 tokens segments. Then, run `long-story-generation/stitch_stories.py` to stitch together all the samples in order into `full_story.wav`. Based on previous generations, IndicParler-TTS seems to have a maximum audio generation length of 30 seconds, so 100 tokens is about the maximum generation length where no samples are 30 seconds long. Longer generations (~300+ tokens) result in incoherent speech.
+# Important Folders
+* `laion_clap_training`
+This folder is used to train LAION CLAP. Run `train_clap.py` to train.
+* `voiceclap_training`
+This folder is used for VoiceCLAP training. This is identical to the LAION CLAP code, just the audio encoder is swapped out. Run `train_clap.py` to train.
+* `slap`
+This folder is used to train SLAP. It is a modified version of the original Guinot SLAP repository. Run 
+```bash
+python src/train.py data=rasa model=slap "model/audio_encoder=htsat_audioset_slap" "model/text_encoder=muril_slap" trainer=hindi
+```
+to train.
+* `mga_clap_training`
+This folder is used to train MGA-CLAP. It is a modified version of the original MGA-CLAP repository. Simply run `pretrain.py` to train.
 
-## Rasa Model Comparison
-The code in the `rasa-model-comparison` folder creates the Hugging Face table that runs inference on **IndicParler-TTS** and **ElevenLabs-V3** and then allows you to compare the results to **Rasa**'s ground truth. Run `rasa_model_comparison.csv` to create the 96 total generations for IndicParler-TTS and Elevenlabs-V3 along with the full dataset, then run `hf_commit.py` to commit the dataset to Hugging Face where you can listen to the audio samples instead of seeing the raw bytes.
-
-Link to IndicParler-TTS + ElevenLabs testing on emotional Rasa dataset: https://huggingface.co/datasets/williamxing1/rasa_indicparler_comparison
+Note that the current code trains the CLAP model on the female and male subsets of Rasa Hindi. This is incorrect in practice because the generated audio would alternate between
+sounding male and sounding female, which is bad for speaker consistency. However, fixing this is pretty simple.
