@@ -31,7 +31,11 @@ class TextEncoder(nn.Module):
                                     truncation=True,
                                     max_length=128,
                                     return_tensors="pt",
-                                    return_special_tokens_mask=True).to(self.device)
-        text_output = self.text_encoder(input_ids=text_input.input_ids,
-                                        attention_mask=text_input.attention_mask)[0]
+                                    return_special_tokens_mask=True)
+        text_input = {
+            key: value.to(self.device, non_blocking=True)
+            for key, value in text_input.items()
+        }
+        text_output = self.text_encoder(input_ids=text_input["input_ids"],
+                                        attention_mask=text_input["attention_mask"])[0]
         return text_output, (1 - text_input["special_tokens_mask"][:, 1:]).contiguous()

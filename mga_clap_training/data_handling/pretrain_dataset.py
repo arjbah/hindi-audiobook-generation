@@ -5,6 +5,7 @@
 
 
 import json
+from pathlib import Path
 import torch
 import random
 import time
@@ -18,14 +19,42 @@ import torch.nn.functional as F
 import torchaudio.transforms as T
 from datasets import load_dataset, concatenate_datasets
 from torch.utils.data import ConcatDataset
+from tqdm import tqdm
+
+
+HF_CACHE_DIR = Path("/mnt/huggingface")
+DATA_CACHE_DIR = Path("/mnt/mga_clap_training_cache")
 
 class AudioLanguagePretrainDataset(Dataset):
 
-    def __init__(self, audio_config, split, dataset_name):
+    def __init__(self, audio_config, dataset_name, language, split=None):
         if dataset_name == "indicvoices":
-            self.dataset = load_dataset("ai4bharat/indicvoices_r", "Hindi", split="test")
+            dataset_split = "train"
+            self.dataset = load_dataset(
+                "ai4bharat/indicvoices_r",
+                language,
+                split=dataset_split,
+                cache_dir=str(HF_CACHE_DIR),
+            )
+            self.dataset = self.dataset.filter(
+                lambda item: item["gender"] == "Male",
+                desc=f"Filtering {language} IndicVoices to Male",
+            )
+            self.dataset = self.dataset.select(
+                range(min(2000, len(self.dataset)))
+            )
         elif dataset_name == "rasa":
-            self.dataset = load_dataset("ai4bharat/Rasa", "Hindi", split=split)
+            dataset_split = split
+            self.dataset = load_dataset(
+                "ai4bharat/Rasa",
+                language,
+                split=dataset_split,
+                cache_dir=str(HF_CACHE_DIR),
+            )
+            self.dataset = self.dataset.filter(
+                lambda item: item["gender"] == "Male",
+                desc=f"Filtering {language} Rasa {split} to Male",
+            )
 
         self.sr = audio_config["sr"]
         if audio_config["max_length"] != 0:
@@ -33,11 +62,33 @@ class AudioLanguagePretrainDataset(Dataset):
         else:
             self.max_length = 0
         self.dataset_name = dataset_name
+        self.language = language
+        self.cache_dir = (
+            DATA_CACHE_DIR
+            / f"{dataset_name}_{language}_{dataset_split}_sr{self.sr}_max{self.max_length}"
+        )
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
+        self.build_cache()
 
     def __len__(self):
         return len(self.dataset)
 
     def __getitem__(self, index):
+        return torch.load(self.cache_path(index), map_location="cpu")
+
+    def cache_path(self, index):
+        return self.cache_dir / f"{index:08d}.pt"
+
+    def build_cache(self):
+        for index in tqdm(
+            range(len(self.dataset)),
+            desc=f"Caching {self.dataset_name} {self.language}",
+        ):
+            path = self.cache_path(index)
+            if not path.exists():
+                torch.save(self.process_item(index), path)
+
+    def process_item(self, index):
         item = self.dataset[index]
         
         audio_array = item['audio']['array']
@@ -92,8 +143,11 @@ def pretrain_dataloader(config,
                         is_distributed: bool = False,
                         num_tasks: int = 0,
                         global_rank: int = 0,
-                        split: str = "train"):
-    dataset = AudioLanguagePretrainDataset(config["audio_args"], split, "rasa")
+                        split: str = "train",
+                        language: str = "Hindi"):
+    dataset = AudioLanguagePretrainDataset(
+        config["audio_args"], "rasa", language, split=split
+    )
 
     if split == "train":
         return DataLoader(
@@ -122,8 +176,11 @@ def indicvoices_dataloader(config,
                         bucket_boundaries: tuple = (5, 30, 6),
                         is_distributed: bool = False,
                         num_tasks: int = 0,
-                        global_rank: int = 0):
-    dataset = AudioLanguagePretrainDataset(config["audio_args"], "", "indicvoices")
+                        global_rank: int = 0,
+                        language: str = "Hindi"):
+    dataset = AudioLanguagePretrainDataset(
+        config["audio_args"], "indicvoices", language
+    )
     return DataLoader(
         dataset,
         batch_size=config["data_args"]["batch_size"],

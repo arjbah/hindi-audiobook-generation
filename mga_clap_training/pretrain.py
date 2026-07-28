@@ -54,12 +54,10 @@ def train(model, dataloader, optimizer, scheduler, device, epoch, scaler):
     }
 
 
-def main():
+def main(language):
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", default="settings/pretrain.yaml", type=str,
                         help="Setting files")
-    parser.add_argument("-n", "--exp_name", default="exp_name", type=str,
-                        help="name of this experiment.")
     parser.add_argument("-l", "--lr", default=5e-5, type=float,
                         help="Learning rate.")
     parser.add_argument("-t", "--model_type", default="cnn", type=str,
@@ -75,8 +73,6 @@ def main():
     parser.add_argument('--local_rank', default=-1, type=int)
     args = parser.parse_args()
 
-    exp_name = args.exp_name
-
     with open(args.config, "r") as f:
         yaml = YAML(typ='safe', pure=True)
         config = yaml.load(f)
@@ -89,7 +85,6 @@ def main():
     seed = config["seed"] + get_rank()
     setup_seed(seed)
 
-    exp_name = exp_name + f"_lr_{args.lr}_seed_{seed}"
     # create pretrain dataloader
     dataloader = pretrain_dataloader(config,
                                      bucket=False,
@@ -97,7 +92,8 @@ def main():
                                      is_distributed=is_dist_avail_and_initialized(),
                                      num_tasks=get_world_size(),
                                      global_rank=get_rank(),
-                                     split="train")
+                                     split="train",
+                                     language=language)
     
     
     """clotho_datamodule = AudioCaptionDataModule("Clotho")
@@ -110,13 +106,15 @@ def main():
                                      is_distributed=is_dist_avail_and_initialized(),
                                      num_tasks=get_world_size(),
                                      global_rank=get_rank(),
-                                     split="test")
+                                     split="test",
+                                     language=language)
     test_loader_indicvoices = indicvoices_dataloader(config,
                                      bucket=False,
                                      bucket_boundaries=(5, 30, 6),
                                      is_distributed=is_dist_avail_and_initialized(),
                                      num_tasks=get_world_size(),
-                                     global_rank=get_rank())
+                                     global_rank=get_rank(),
+                                     language=language)
     
     # setup model
     model = ASE(config)
@@ -145,7 +143,7 @@ def main():
         model.load_state_dict(state_dict)
 
     # setup logger
-    model_output_dir, log_output_dir = set_logger(exp_name)
+    model_output_dir, log_output_dir = set_logger(language)
 
     main_logger = logger.bind(indent=1)
 
@@ -241,19 +239,11 @@ def main():
                     "model": model_without_ddp.state_dict(),
                     "optimizer": optimizer.state_dict(),
                     "config": config,
-                    "epoch": epoch
+                    "epoch": epoch,
+                    "language": language,
                 }
                 torch.save(sav_obj, str(model_output_dir) + "/val_rasa_best_model.pt")
 
-        if is_main_process() and epoch % 10 == 0:
-            sav_obj = {
-                "model": model_without_ddp.state_dict(),
-                "optimizer": optimizer.state_dict(),
-                "config": config,
-                "epoch": epoch
-            }
-            torch.save(sav_obj, str(model_output_dir) + "/model_" + str(epoch) + ".pt")
-            
         if is_dist_avail_and_initialized():
             dist.barrier()
             torch.cuda.empty_cache()
@@ -344,4 +334,15 @@ def validate_re(model, dataloader, device):
             "a2t": [r1_a, r5_a, r10_a, r50_a, medr_a, meanr_a, mAP_a]}
 
 if __name__ == '__main__':
-    main()
+    for language in [
+        "Assamese",
+        "Bengali",
+        "Gujarati",
+        "Hindi",
+        "Kannada",
+        "Malayalam",
+        "Marathi",
+        "Tamil",
+        "Telugu",
+    ]:
+        main(language)
