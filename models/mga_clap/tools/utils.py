@@ -40,9 +40,9 @@ class AverageMeter(object):
         self.avg = self.sum / self.count
 
 
-def set_logger(exp_name):
-    log_output_dir = Path('outputs', exp_name, 'logging')
-    model_output_dir = Path('outputs', exp_name, 'models')
+def set_logger(exp_name, root='outputs'):
+    log_output_dir = Path(root, exp_name, 'logging')
+    model_output_dir = Path(root, exp_name, 'models')
     log_output_dir.mkdir(parents=True, exist_ok=True)
     model_output_dir.mkdir(parents=True, exist_ok=True)
 

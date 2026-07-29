@@ -18,6 +18,7 @@ from data_handling.text_transform import text_preprocess
 import torch.nn.functional as F
 import torchaudio.transforms as T
 from datasets import load_dataset, concatenate_datasets
+from common.data import filter_by_gender
 from torch.utils.data import ConcatDataset
 from tqdm import tqdm
 
@@ -27,7 +28,8 @@ DATA_CACHE_DIR = Path("/mnt/mga_clap_training_cache")
 
 class AudioLanguagePretrainDataset(Dataset):
 
-    def __init__(self, audio_config, dataset_name, language, split=None):
+    def __init__(self, audio_config, dataset_name, language, split=None,
+                 gender="male", limit=None):
         if dataset_name == "indicvoices":
             dataset_split = "train"
             self.dataset = load_dataset(
@@ -36,6 +38,8 @@ class AudioLanguagePretrainDataset(Dataset):
                 split=dataset_split,
                 cache_dir=str(HF_CACHE_DIR),
             )
+            # IndicVoices stays male-only and capped regardless of --gender:
+            # this is the eval set the existing MGA numbers were measured on.
             self.dataset = self.dataset.filter(
                 lambda item: item["gender"] == "Male",
                 desc=f"Filtering {language} IndicVoices to Male",
@@ -43,6 +47,7 @@ class AudioLanguagePretrainDataset(Dataset):
             self.dataset = self.dataset.select(
                 range(min(2000, len(self.dataset)))
             )
+            gender = "male"
         elif dataset_name == "rasa":
             dataset_split = split
             self.dataset = load_dataset(
@@ -51,10 +56,11 @@ class AudioLanguagePretrainDataset(Dataset):
                 split=dataset_split,
                 cache_dir=str(HF_CACHE_DIR),
             )
-            self.dataset = self.dataset.filter(
-                lambda item: item["gender"] == "Male",
-                desc=f"Filtering {language} Rasa {split} to Male",
-            )
+            self.dataset = filter_by_gender(
+                self.dataset, gender, label=f"{language} Rasa {split}")
+
+        if limit is not None:
+            self.dataset = self.dataset.select(range(min(limit, len(self.dataset))))
 
         self.sr = audio_config["sr"]
         if audio_config["max_length"] != 0:
@@ -63,9 +69,11 @@ class AudioLanguagePretrainDataset(Dataset):
             self.max_length = 0
         self.dataset_name = dataset_name
         self.language = language
+        # Gender belongs in the cache key: entries are named by row index, so a
+        # male-filtered cache would silently serve wrong audio to a female run.
         self.cache_dir = (
             DATA_CACHE_DIR
-            / f"{dataset_name}_{language}_{dataset_split}_sr{self.sr}_max{self.max_length}"
+            / f"{dataset_name}_{language}_{dataset_split}_sr{self.sr}_max{self.max_length}_gender-{gender}"
         )
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.build_cache()
@@ -144,9 +152,11 @@ def pretrain_dataloader(config,
                         num_tasks: int = 0,
                         global_rank: int = 0,
                         split: str = "train",
-                        language: str = "Hindi"):
+                        language: str = "Hindi",
+                        gender: str = "male",
+                        limit=None):
     dataset = AudioLanguagePretrainDataset(
-        config["audio_args"], "rasa", language, split=split
+        config["audio_args"], "rasa", language, split=split, gender=gender, limit=limit
     )
 
     if split == "train":
@@ -177,9 +187,10 @@ def indicvoices_dataloader(config,
                         is_distributed: bool = False,
                         num_tasks: int = 0,
                         global_rank: int = 0,
-                        language: str = "Hindi"):
+                        language: str = "Hindi",
+                        limit=None):
     dataset = AudioLanguagePretrainDataset(
-        config["audio_args"], "indicvoices", language
+        config["audio_args"], "indicvoices", language, limit=limit
     )
     return DataLoader(
         dataset,

@@ -12,6 +12,12 @@ import ruamel.yaml as yaml
 from ruamel.yaml import YAML
 from tqdm import tqdm
 from loguru import logger
+import sys
+from pathlib import Path
+
+sys.path.append(str(Path(__file__).resolve().parents[1]))
+
+from common.data import add_shared_args
 from data_handling.datamodule import AudioCaptionDataModule
 from data_handling.pretrain_dataset import pretrain_dataloader, indicvoices_dataloader
 from models.ase_model import ASE
@@ -71,6 +77,9 @@ def main(language):
     parser.add_argument("-b", "--blacklist", default='blacklist_exclude_ub8k_esc50_vggsound.json', type=str,
                         help="Blacklist file.")
     parser.add_argument('--local_rank', default=-1, type=int)
+    # -s/--batch_size already exists. gender defaults to male so that omitting
+    # the flag reproduces this file's previous hardcoded Male filter.
+    add_shared_args(parser, include_batch_size=False, gender_default="male")
     args = parser.parse_args()
 
     with open(args.config, "r") as f:
@@ -82,7 +91,10 @@ def main(language):
     device = config["device"]
 
     # setup seed
-    seed = config["seed"] + get_rank()
+    seed = (args.seed if args.seed is not None else config["seed"]) + get_rank()
+    if args.epochs is not None:
+        config["training"]["epochs"] = args.epochs
+    config["data_args"]["batch_size"] = args.batch_size
     setup_seed(seed)
 
     # create pretrain dataloader
@@ -93,7 +105,9 @@ def main(language):
                                      num_tasks=get_world_size(),
                                      global_rank=get_rank(),
                                      split="train",
-                                     language=language)
+                                     language=language,
+                                     gender=args.gender,
+                                     limit=args.limit)
     
     
     """clotho_datamodule = AudioCaptionDataModule("Clotho")
@@ -107,14 +121,17 @@ def main(language):
                                      num_tasks=get_world_size(),
                                      global_rank=get_rank(),
                                      split="test",
-                                     language=language)
+                                     language=language,
+                                     gender=args.gender,
+                                     limit=args.limit)
     test_loader_indicvoices = indicvoices_dataloader(config,
                                      bucket=False,
                                      bucket_boundaries=(5, 30, 6),
                                      is_distributed=is_dist_avail_and_initialized(),
                                      num_tasks=get_world_size(),
                                      global_rank=get_rank(),
-                                     language=language)
+                                     language=language,
+                                     limit=args.limit)
     
     # setup model
     model = ASE(config)
@@ -143,7 +160,8 @@ def main(language):
         model.load_state_dict(state_dict)
 
     # setup logger
-    model_output_dir, log_output_dir = set_logger(language.lower())
+    model_output_dir, log_output_dir = set_logger(
+        language.lower(), root=args.output_dir if args.output_dir else 'outputs')
 
     main_logger = logger.bind(indent=1)
 

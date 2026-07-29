@@ -2,17 +2,18 @@ from pathlib import Path
 
 import torch
 import torchaudio.functional as F
-from datasets import load_dataset
 from torch.utils.data import Dataset, DataLoader
 from transformers import AutoTokenizer, ClapProcessor
 from tqdm import tqdm
 
+from common.data import load_indicvoices, load_rasa
+
 class IndicVoicesCLAPDataset(Dataset):
-    def __init__(self, dataset_name, split="train", target_sr=48000):
+    def __init__(self, dataset_name, split="train", target_sr=48000, gender="both", limit=None):
         if dataset_name == "indicvoices":
-            self.dataset = load_dataset("ai4bharat/indicvoices_r", "Hindi", split=split)
+            self.dataset = load_indicvoices(split, limit)
         elif dataset_name == "rasa":
-            self.dataset = load_dataset("ai4bharat/Rasa", "Hindi", split=split)
+            self.dataset = load_rasa(split, gender, limit)
 
         self.dataset_name = dataset_name
         self.split = split
@@ -26,7 +27,7 @@ class IndicVoicesCLAPDataset(Dataset):
         cache_root = Path(__file__).resolve().parent / ".cache"
         clap_name = self.clap_model_name.replace("/", "__")
         muril_name = self.muril_model_name.replace("/", "__")
-        self.cache_dir = cache_root / "clap_features_v1" / clap_name / muril_name / f"{dataset_name}_{split}_sr{target_sr}_txt{self.max_text_len}"
+        self.cache_dir = cache_root / "clap_features_v1" / clap_name / muril_name / f"{dataset_name}_{split}_sr{target_sr}_txt{self.max_text_len}_gender-{gender}"
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.build_cache()
 
@@ -85,6 +86,6 @@ class IndicVoicesCLAPDataset(Dataset):
         return torch.load(self.cache_path(idx), map_location="cpu")
 
 
-def get_dataloader(split="train", batch_size=128, num_workers=4):
-    dataset = IndicVoicesCLAPDataset(dataset_name="rasa", split=split)
+def get_dataloader(split="train", batch_size=128, num_workers=4, gender="both", limit=None):
+    dataset = IndicVoicesCLAPDataset(dataset_name="rasa", split=split, gender=gender, limit=limit)
     return DataLoader(dataset, batch_size=batch_size, shuffle=(split=="train"), num_workers=num_workers, pin_memory=True, persistent_workers=(num_workers > 0))

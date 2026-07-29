@@ -1,3 +1,4 @@
+import contextlib
 import os
 import torch
 import torch.optim as optim
@@ -10,8 +11,11 @@ from loguru import logger
 import sys
 from pathlib import Path
 
+sys.path.append(str(Path(__file__).resolve().parents[1]))
+
 from clap_model import CLAPModel, contrastive_loss
 from clap_dataset import IndicVoicesCLAPDataset, get_dataloader
+from common.data import add_shared_args, set_seed
 
 
 def retrieval_metrics(similarity_matrix, ks=(1, 5, 10)):
@@ -42,7 +46,7 @@ def evaluate_rasa(model, dataloader, device):
         input_ids = batch["input_ids"].to(device)
         attention_mask = batch["attention_mask"].to(device)
 
-        with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
+        with amp(device):
             audio_embs = model.encode_audio(mel_spec)
             text_embs = model.encode_text(input_ids, attention_mask)
 
@@ -57,16 +61,29 @@ def evaluate_rasa(model, dataloader, device):
     metrics_t2a = retrieval_metrics(similarity_a2t.T)
     return metrics_t2a, metrics_a2t
 
-log_output_dir = Path(".")
-logger.remove()
-logger.add(sys.stdout, format='{time: YYYY-MM-DD at HH:mm:ss} | {message}', level='INFO',
-            filter=lambda record: record['extra']['indent'] == 1)
-logger.add(log_output_dir.joinpath('train_log.txt'), format='{time: YYYY-MM-DD at HH:mm:ss} | {message}', level='INFO',
-            filter=lambda record: record['extra']['indent'] == 1)
-main_logger = logger.bind(indent=1)
+def amp(device):
+    """bf16 autocast on CUDA, no-op elsewhere so CPU smoke tests run."""
+    if device.type == "cuda":
+        return torch.autocast(device_type="cuda", dtype=torch.bfloat16)
+    return contextlib.nullcontext()
 
-def train():
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+def setup_logging(log_output_dir):
+    logger.remove()
+    logger.add(sys.stdout, format='{time: YYYY-MM-DD at HH:mm:ss} | {message}', level='INFO',
+                filter=lambda record: record['extra']['indent'] == 1)
+    logger.add(log_output_dir.joinpath('train_log.txt'), format='{time: YYYY-MM-DD at HH:mm:ss} | {message}', level='INFO',
+                filter=lambda record: record['extra']['indent'] == 1)
+    return logger.bind(indent=1)
+
+
+def train(args):
+    output_dir = Path(args.output_dir) if args.output_dir else Path(".")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    main_logger = setup_logging(output_dir)
+    seed = set_seed(args.seed)
+    main_logger.info(f"Run config | gender={args.gender}, seed={seed or 'unseeded'}")
+    device = torch.device(args.device if getattr(args, "device", None) else ("cuda" if torch.cuda.is_available() else "cpu"))
     main_logger.info(f"Using device: {device}")
 
     # 1. Config and Model
@@ -75,10 +92,11 @@ def train():
     print(f"Trainable params: {sum(p.numel() for p in model.parameters() if p.requires_grad):,}")
 
     # 2. Data
-    train_loader = get_dataloader(split="train", batch_size=128, num_workers=4)
-    rasa_eval_dataset = IndicVoicesCLAPDataset(dataset_name="rasa", split="test")
+    batch_size = args.batch_size or 128
+    train_loader = get_dataloader(split="train", batch_size=batch_size, num_workers=4, gender=args.gender, limit=args.limit)
+    rasa_eval_dataset = IndicVoicesCLAPDataset(dataset_name="rasa", split="test", gender=args.gender, limit=args.limit)
     rasa_eval_loader = DataLoader(rasa_eval_dataset, batch_size=32, shuffle=False, num_workers=4)
-    indicvoices_eval_dataset = IndicVoicesCLAPDataset(dataset_name="indicvoices", split="test")
+    indicvoices_eval_dataset = IndicVoicesCLAPDataset(dataset_name="indicvoices", split="test", limit=args.limit)
     indicvoices_eval_loader = DataLoader(indicvoices_eval_dataset, batch_size=32, shuffle=False, num_workers=4)
 
     # 3. Optimizer and Scheduler
@@ -91,7 +109,7 @@ def train():
         {'params': [model.logit_scale], 'lr': 1e-4}
     ], weight_decay=0.01)
 
-    num_epochs = 120
+    num_epochs = args.epochs or 120
     total_steps = len(train_loader) * num_epochs
     scheduler = CosineAnnealingLR(optimizer, T_max=total_steps)
     #scaler = GradScaler()
@@ -110,7 +128,7 @@ def train():
 
             optimizer.zero_grad()
 
-            with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
+            with amp(device):
                 logits_per_audio, logits_per_text = model(mel_spec, input_ids, attention_mask)
                 loss = contrastive_loss(logits_per_audio, logits_per_text)
             
@@ -154,8 +172,11 @@ def train():
                 'rasa_t2a_metrics': metrics_t2a,
                 'rasa_a2t_metrics': metrics_a2t,
                 'best_rasa_r1': best_rasa_r1,
-            }, "clap_checkpoint_best_rasa.pt")
+            }, output_dir / "clap_checkpoint_best_rasa.pt")
             main_logger.info(f"Saved new best Rasa checkpoint at epoch {epoch+1}.")
 
 if __name__ == "__main__":
-    train()
+    parser = argparse.ArgumentParser()
+    add_shared_args(parser)
+    parser.add_argument("--device", default=None)
+    train(parser.parse_args())

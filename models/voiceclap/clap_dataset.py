@@ -3,16 +3,17 @@ import torchaudio
 import torchaudio.functional as F
 import torchaudio.transforms as T
 from torch.utils.data import Dataset, DataLoader, ConcatDataset
-from datasets import load_dataset
 from transformers import AutoTokenizer
 import numpy as np
 
+from common.data import load_indicvoices, load_rasa
+
 class IndicVoicesCLAPDataset(Dataset):
-    def __init__(self, dataset_name, split="train", target_sr=16000, max_audio_len=13, max_text_len=128, muril_model_name="google/muril-base-cased"):
+    def __init__(self, dataset_name, split="train", target_sr=16000, max_audio_len=13, max_text_len=128, muril_model_name="google/muril-base-cased", gender="both", limit=None):
         if dataset_name == "indicvoices":
-            self.dataset = load_dataset("ai4bharat/indicvoices_r", "Hindi", split=split)
+            self.dataset = load_indicvoices(split, limit)
         elif dataset_name == "rasa":
-            self.dataset = load_dataset("ai4bharat/Rasa", "Hindi", split=split)
+            self.dataset = load_rasa(split, gender, limit)
         self.dataset_name = dataset_name
         self.target_sr = target_sr
         self.max_audio_len = max_audio_len
@@ -71,7 +72,7 @@ class IndicVoicesCLAPDataset(Dataset):
             "attention_mask": tokens["attention_mask"].squeeze(0)
         }
 
-def get_dataloader(split="train", batch_size=128, num_workers=4):
-    dataset = IndicVoicesCLAPDataset(dataset_name="rasa", split=split)
+def get_dataloader(split="train", batch_size=128, num_workers=4, gender="both", limit=None):
+    dataset = IndicVoicesCLAPDataset(dataset_name="rasa", split=split, gender=gender, limit=limit)
     
     return DataLoader(dataset, batch_size=batch_size, shuffle=(split=="train"), num_workers=num_workers)

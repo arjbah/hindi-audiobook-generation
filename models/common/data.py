@@ -3,11 +3,12 @@
 This is the only shared module. Each model keeps its own metrics, logging,
 optimizer and preprocessing exactly as it had them.
 
-Rasa exposes a free-text ``gender`` column whose exact spelling for the Hindi
-config is unverified: ``rasa_model_comparison.py`` uses ``"Male"`` and comments
-that Hindi has no female samples. So matching is case- and whitespace-
-insensitive, every filter logs its before/after counts, and an empty result is
-a hard error rather than a silent zero-row training set.
+Rasa exposes a free-text ``gender`` column. Two places in this repo match it as
+the exact string ``"Male"`` -- ``rasa_model_comparison.py``, and MGA-CLAP's
+dataset since a16a513 -- but the full set of values per language config is still
+unverified. So matching here is case- and whitespace-insensitive, every filter
+logs its before/after counts, and an empty result is a hard error rather than a
+silent zero-row training set.
 """
 
 from __future__ import annotations
@@ -112,7 +113,9 @@ def load_indicvoices(split: str = "test", limit: int | None = None) -> Dataset:
     return _truncate(dataset, limit, label=label)
 
 
-def add_shared_args(parser, include_batch_size: bool = True) -> None:
+def add_shared_args(
+    parser, include_batch_size: bool = True, gender_default: str = "both"
+) -> None:
     """Attach the shared flags to a model's own argparse parser.
 
     :param include_batch_size: MGA-CLAP already defines ``-s/--batch_size``.
@@ -120,11 +123,16 @@ def add_shared_args(parser, include_batch_size: bool = True) -> None:
         ``--batch_size`` and ``--batch-size`` differ -- but both write to
         ``args.batch_size``, so whichever appeared last on the command line
         would silently win. MGA-CLAP opts out and keeps its original flag.
+    :param gender_default: what ``--gender`` falls back to when the flag is
+        absent. MGA-CLAP passes ``"male"`` so that omitting the flag reproduces
+        the hardcoded ``item["gender"] == "Male"`` filter it carried before this
+        flag existed; the other three models never filtered and default to
+        ``"both"``.
     """
     parser.add_argument(
         "--gender",
         choices=GENDER_CHOICES,
-        default="both",
+        default=gender_default,
         help="Rasa subset for training and in-domain eval. IndicVoices is never filtered.",
     )
     parser.add_argument(
