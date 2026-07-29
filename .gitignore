@@ -241,3 +241,6 @@ data/*.parquet
 # Credentials
 .hf_token
 *.pem
+
+# ...except the archived SLAP run logs, which are baseline evidence.
+!models/slap/logs/xps/**/*.log
