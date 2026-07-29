@@ -143,7 +143,7 @@ def main(language):
         model.load_state_dict(state_dict)
 
     # setup logger
-    model_output_dir, log_output_dir = set_logger(language)
+    model_output_dir, log_output_dir = set_logger(language.lower())
 
     main_logger = logger.bind(indent=1)
 

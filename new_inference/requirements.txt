@@ -1,0 +1,12 @@
+torch
+transformers
+parler-tts
+indic-nlp-library
+pydub 
+soundfile
+sentencepiece
+elevenlabs
+python-dotenv
+ruamel.yaml
+numpy
+datasets
