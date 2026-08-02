@@ -15,6 +15,7 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))
 
 from common.data import (
     GenderFilterError,
+    _drop_other_genders,
     add_shared_args,
     filter_by_gender,
     gender_distribution,
@@ -115,6 +116,28 @@ def main() -> int:
         results.append(check("unknown gender raises", False, "no exception raised"))
     except GenderFilterError:
         results.append(check("unknown gender raises", True))
+
+    print("\nIndicVoices drops genders outside male/female")
+    with_other = make_dataset(["Male"] * 5 + ["Female"] * 4 + ["other"] * 3)
+    kept = _drop_other_genders(with_other, label="IndicVoices/Hindi/train")
+    results.append(
+        check("3 'other' rows dropped, 9 kept", len(kept) == 9, f"{len(kept)} rows")
+    )
+    results.append(
+        check(
+            "both now equals male + female",
+            len(filter_by_gender(kept, "both", label="t"))
+            == len(filter_by_gender(kept, "male", label="t"))
+            + len(filter_by_gender(kept, "female", label="t")),
+        )
+    )
+    results.append(
+        check(
+            "no gender column is a passthrough",
+            len(_drop_other_genders(Dataset.from_dict({"text": ["a", "b"]}), label="t"))
+            == 2,
+        )
+    )
 
     print("\nper-model CLI defaults")
     import argparse

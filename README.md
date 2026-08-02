@@ -32,15 +32,17 @@ in-domain eval; IndicVoices is never filtered.
 
 **Omitting the flag preserves each model's prior behavior, which differs between
 them.** LAION-CLAP, VoiceCLAP and SLAP never filtered by gender and default to
-`both`. MGA-CLAP filters Rasa to male, matching the hardcoded
-`item["gender"] == "Male"` it has carried since a16a513, and its IndicVoices
-eval split stays male-only and capped at 2000 rows. Pass `--gender` explicitly
-whenever you compare models against each other.
+`both`. MGA-CLAP filters Rasa to male — a deliberate choice, and note it trains
+nine models, one per language, rather than one Hindi model like the others. Its
+IndicVoices eval split stays male-only and capped at 2000 rows. Pass `--gender`
+explicitly whenever you compare models against each other.
 
-Whether Rasa Hindi even contains both genders is unsettled:
-`rasa_model_comparison/rasa_model_comparison.py:35` asserts it has no female
-samples. If that is right, `--gender female` fails immediately with a message
-listing the values actually present. `models/README.md` explains how to check.
+Rasa Hindi contains both genders, counted 2026-08-02 from the Hub parquet:
+train is 25,713 rows (12,116 male / 13,597 female) and test is 2,858 rows
+(1,348 / 1,510). `rasa_model_comparison/rasa_model_comparison.py:35` claims
+there are no female samples; **that claim is incorrect**. See
+[`models/README.md`](models/README.md) for the full table, including
+IndicVoices and the 72 `other` rows that are dropped.
 
 ## Other folders
 

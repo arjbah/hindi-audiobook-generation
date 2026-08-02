@@ -102,14 +102,36 @@ def load_rasa(split: str, gender: str = "both", limit: int | None = None) -> Dat
     return _truncate(filter_by_gender(dataset, gender, label=label), limit, label=label)
 
 
+def _drop_other_genders(dataset: Dataset, *, label: str) -> Dataset:
+    """Drop rows whose gender is neither male nor female.
+
+    IndicVoices Hindi train carries 72 rows labelled ``other``. No ``--gender``
+    setting selects them, so leaving them in would make ``both`` quietly differ
+    from male + female. Per William, they are excluded outright.
+    """
+    if GENDER_COLUMN not in dataset.column_names:
+        return dataset
+    before = len(dataset)
+    filtered = dataset.filter(
+        lambda row: normalize_gender_value(row[GENDER_COLUMN]) in {"male", "female"},
+        desc=f"Dropping non-male/female rows from {label}",
+    )
+    dropped = before - len(filtered)
+    if dropped:
+        log.info("%s: dropped %d rows with gender outside male/female", label, dropped)
+    return filtered
+
+
 def load_indicvoices(split: str = "test", limit: int | None = None) -> Dataset:
     """Load an IndicVoices Hindi split.
 
-    Never gender-filtered: it is the fixed out-of-domain probe, so holding it
-    constant keeps that column comparable across gender settings.
+    Never filtered to a single gender: it is the fixed out-of-domain probe, so
+    holding it constant keeps that column comparable across gender settings.
+    Rows outside male/female are dropped -- see ``_drop_other_genders``.
     """
     label = f"IndicVoices/{LANGUAGE}/{split}"
     dataset = load_dataset(INDICVOICES_REPO, LANGUAGE, split=split)
+    dataset = _drop_other_genders(dataset, label=label)
     return _truncate(dataset, limit, label=label)
 
 

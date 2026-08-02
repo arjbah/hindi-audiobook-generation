@@ -13,14 +13,19 @@ and whitespace-insensitive, and an empty result is a hard error rather than a
 silent zero-row training set.
 
 **Omitting `--gender` preserves each model's prior behavior, which is not the
-same across models.** MGA-CLAP hardcoded `item["gender"] == "Male"` in a16a513,
-so it defaults to `male`; the other three never filtered and default to `both`.
-Pass `--gender` explicitly whenever you compare models to each other.
+same across models.** MGA-CLAP defaults to `male`; the other three never
+filtered and default to `both`. Per William the male-only choice is deliberate,
+not an artifact of the incorrect comment below. Pass `--gender` explicitly
+whenever you compare models to each other.
 
-MGA-CLAP has two further filters that `--gender` does **not** reach, both kept
-deliberately so its numbers stay comparable to the existing runs: its
-IndicVoices eval split is male-only and capped at 2000 rows, and it loops over
-nine languages, not just Hindi.
+**MGA-CLAP is not doing the same job as the other three.** It trains nine
+models — one per language, Assamese through Telugu — on the Rasa *male* subset.
+The other three train a single model on the full Rasa Hindi data. `--gender`
+also does not reach its IndicVoices eval split, which stays male-only and
+capped at 2000 rows.
+
+Rows whose gender is neither male nor female are dropped from IndicVoices
+(Hindi train has 72), so `both` always equals male + female.
 
 `--seed` defaults to unset, keeping each model's existing behavior: LAION-CLAP
 and VoiceCLAP unseeded (they have no seeding code, so their baselines are not
@@ -31,10 +36,18 @@ intend to report.
 |---|---|---|
 | `laion_clap` | yes | 0.847 / 0.133 |
 | `voiceclap` | yes | 0.929 / 0.348 |
-| `mga_clap` | needs `HTSAT_AudioSet_Saved_6.ckpt` | 0.968 / 0.548 |
-| `slap` | needs `HTSAT_AudioSet_Saved_6.ckpt` | 0.953 / 0.391 |
+| `mga_clap` | yes | 0.968 / 0.548 — **needs `--gender both`**, see below |
+| `slap` | yes | 0.953 / 0.391 |
 
 `train.py` reports any missing file up front with the reason.
+
+**MGA-CLAP's baseline does not reproduce under the default.** Its logged run
+(`mga_clap/outputs/exp_name_lr_5e-05_seed_20/logging/output.txt`, 2026-06-18)
+records `Size of training set: 25713` — the full Hindi train split, both
+genders. The male-only filter landed six weeks later, and male is 12,116 of
+those rows. To reproduce `0.968 / 0.548` you must pass `--gender both`; the
+default `male` is the current intended training configuration, not the
+configuration that produced the number in this table.
 
 **Prerequisites:** `hf auth login` plus accepted gates on `ai4bharat/Rasa` and
 `ai4bharat/indicvoices_r` (both gated); ~200 GB disk (Rasa is ~8–17 GB and
@@ -47,11 +60,20 @@ seeding, and the shared CLI flags. Each model keeps its own metrics, logging,
 optimizer and preprocessing untouched. `models/tests/test_data.py` covers the
 filtering, including the single-gender case, with no GPU or credentials needed.
 
-**Whether Rasa Hindi has female samples is unsettled.** Two places assume
-male-only: `rasa_model_comparison/rasa_model_comparison.py:35`, and MGA-CLAP's
-dataset. If they are right, `--gender female` fails immediately listing the
-values actually present — that is intended, not a bug. To check:
-`python -c "from common.data import *; print(gender_distribution(load_rasa('train')))"`
+**Measured gender distribution** (counted 2026-08-02 by reading the `gender`
+column straight from the Hub parquet; spellings are exactly `Male`/`Female`):
+
+| Dataset / split | Rows | Male | Female | Other |
+|---|---|---|---|---|
+| Rasa Hindi train | 25,713 | 12,116 | 13,597 | — |
+| Rasa Hindi test | 2,858 | 1,348 | 1,510 | — |
+| IndicVoices Hindi train | 26,318 | 14,209 | 12,037 | 72 |
+| IndicVoices Hindi test | 376 | 205 | 171 | — |
+
+Note `rasa_model_comparison/rasa_model_comparison.py:35` claims Hindi has no
+female samples. **That is incorrect** — female is the slight majority. The
+comment is left in place because that script is outside this directory's scope,
+but do not rely on it.
 
 **Unverified:** SLAP's `paths.output_dir` normally resolves through Dora
 (`${dora:xp.folder}`). The launcher overrides it; that path has not been run.
