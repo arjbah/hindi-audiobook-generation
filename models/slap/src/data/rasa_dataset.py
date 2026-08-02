@@ -1,5 +1,7 @@
 import logging
 import random
+import sys
+from pathlib import Path
 from typing import Any, List, Tuple
 
 import torch
@@ -9,7 +11,10 @@ from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence
 
 from lightning import LightningDataModule
-from datasets import load_dataset
+
+sys.path.append(str(Path(__file__).resolve().parents[3]))
+
+from common.data import load_indicvoices, load_rasa
 
 from src.tokenizer.base import Tokenizer, HuggingFaceTokenizer
 
@@ -21,10 +26,10 @@ MAX_SAMPLES = int(TARGET_SR * MAX_DURATION)
 
 
 class RasaDataset(Dataset):
-    def __init__(self, split: str = "train"):
+    def __init__(self, split: str = "train", gender: str = "both", limit: int | None = None):
         self.split = split
-        self.dataset = load_dataset("ai4bharat/Rasa", "Hindi", split=split)
-        log.info(f"Loaded Rasa Hindi {split}: {len(self.dataset)} samples")
+        self.dataset = load_rasa(split, gender, limit)
+        log.info(f"Loaded Rasa Hindi {split} (gender={gender}): {len(self.dataset)} samples")
 
     def __len__(self):
         return len(self.dataset)
@@ -56,9 +61,10 @@ def _collate(batch):
     return list(audios), list(texts)
 
 class IndicVoicesDataset(Dataset):
-    def __init__(self, split: str = "train"):
+    def __init__(self, split: str = "train", limit: int | None = None):
         self.split = split
-        self.dataset = load_dataset("ai4bharat/indicvoices_r", "Hindi", split=split)
+        # Never gender-filtered: the fixed out-of-domain probe.
+        self.dataset = load_indicvoices(split, limit)
         log.info(f"Loaded IndicVoices Hindi {split}: {len(self.dataset)} samples")
 
     def __len__(self):
@@ -90,10 +96,14 @@ class RasaDataModule(LightningDataModule):
         self,
         tokenizer: Tokenizer,
         dataloader_kwargs: dict,
+        gender: str = "both",
+        limit: int | None = None,
         **kwargs,
     ):
         super().__init__()
         self.tokenizer = tokenizer
+        self.gender = gender
+        self.limit = limit
 
         devices = dataloader_kwargs.pop("devices", 1)
         if not isinstance(devices, int):
@@ -111,11 +121,11 @@ class RasaDataModule(LightningDataModule):
     def setup(self, stage: str | None = None):
         if self.train_dataset is not None:
             return
-        self.train_dataset = RasaDataset(split="train")
-        self.val_dataset_1 = RasaDataset(split="test")
+        self.train_dataset = RasaDataset(split="train", gender=self.gender, limit=self.limit)
+        self.val_dataset_1 = RasaDataset(split="test", gender=self.gender, limit=self.limit)
         # Evaluate retrieval on the IndicVoices test split during validation too.
-        self.val_dataset_2 = IndicVoicesDataset(split="test")
-        self.test_dataset = RasaDataset(split="test")
+        self.val_dataset_2 = IndicVoicesDataset(split="test", limit=self.limit)
+        self.test_dataset = RasaDataset(split="test", gender=self.gender, limit=self.limit)
 
     def train_dataloader(self):
         return DataLoader(

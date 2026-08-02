@@ -15,6 +15,7 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))
 
 from common.data import (
     GenderFilterError,
+    add_shared_args,
     filter_by_gender,
     gender_distribution,
     normalize_gender_value,
@@ -114,6 +115,33 @@ def main() -> int:
         results.append(check("unknown gender raises", False, "no exception raised"))
     except GenderFilterError:
         results.append(check("unknown gender raises", True))
+
+    print("\nper-model CLI defaults")
+    import argparse
+
+    other = argparse.ArgumentParser()
+    add_shared_args(other)
+    results.append(
+        check(
+            "default is both when unspecified",
+            other.parse_args([]).gender == "both",
+        )
+    )
+    mga = argparse.ArgumentParser()
+    mga.add_argument("-s", "--batch_size", type=int, default=128)
+    add_shared_args(mga, include_batch_size=False, gender_default="male")
+    results.append(
+        check(
+            "mga_clap defaults to male (reproduces a16a513)",
+            mga.parse_args([]).gender == "male",
+        )
+    )
+    results.append(
+        check(
+            "explicit --gender still overrides the default",
+            mga.parse_args(["--gender", "both"]).gender == "both",
+        )
+    )
 
     passed, total = sum(results), len(results)
     print(f"\n{passed}/{total} checks passed")

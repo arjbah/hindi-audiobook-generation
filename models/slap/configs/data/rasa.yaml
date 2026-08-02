@@ -1,5 +1,11 @@
 _target_: src.data.rasa_dataset.RasaDataModule
 
+# Rasa subset used for training and in-domain eval: male, female or both.
+# IndicVoices is never filtered.
+gender: both
+# Truncate every split to N rows. Smoke tests only.
+limit: null
+
 tokenizer:
   _target_: src.tokenizer.base.HuggingFaceTokenizer
   max_sequence_length: 128

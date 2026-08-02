@@ -56,28 +56,29 @@ MODELS: dict[str, tuple[str, tuple[str, ...], tuple[tuple[str, str], ...]]] = {
             "model/text_encoder=muril_slap",
             "trainer=hindi",
         ),
-        (
-            ("src/data/rasa_dataset.py", "RasaDataModule. Absent from every branch."),
-            ("configs/data/rasa.yaml", "The `data=rasa` config group."),
-            (".project-root", "Empty marker for rootutils; create with `touch`."),
-            ("pretrained/HTSAT_AudioSet_Saved_6.ckpt", HTSAT_NOTE),
-        ),
+        (("pretrained/HTSAT_AudioSet_Saved_6.ckpt", HTSAT_NOTE),),
     ),
 }
+
+# MGA-CLAP filtered Rasa to Male in a16a513; omitting --gender reproduces that.
+# The other three never filtered, so they default to the full dataset.
+DEFAULT_GENDER = {"mga_clap": "male"}
 
 # Cheapest first, so a broken environment surfaces in minutes rather than
 # after a 25-hour SLAP run.
 ALL_ORDER = ("voiceclap", "mga_clap", "laion_clap", "slap")
 
 
-def build_command(name: str, args: argparse.Namespace, output_dir: Path) -> list[str]:
+def build_command(
+    name: str, args: argparse.Namespace, output_dir: Path, gender: str
+) -> list[str]:
     """Translate the shared flags into that model's own argument style."""
     script, hydra_overrides, _ = MODELS[name]
     command = [sys.executable, script]
 
     if hydra_overrides:
         command.extend(hydra_overrides)
-        command += [f"data.gender={args.gender}", f"paths.output_dir={output_dir}"]
+        command += [f"data.gender={gender}", f"paths.output_dir={output_dir}"]
         if args.seed is not None:
             command.append(f"seed={args.seed}")
         if args.epochs is not None:
@@ -88,7 +89,7 @@ def build_command(name: str, args: argparse.Namespace, output_dir: Path) -> list
             command.append(f"data.limit={args.limit}")
         return command
 
-    command += ["--gender", args.gender, "--output-dir", str(output_dir)]
+    command += ["--gender", gender, "--output-dir", str(output_dir)]
     if args.seed is not None:
         command += ["--seed", str(args.seed)]
     if args.epochs is not None:
@@ -107,6 +108,7 @@ def run_model(name: str, args: argparse.Namespace) -> int:
     """Run one model to completion, returning its exit code."""
     _, _, required = MODELS[name]
     directory = MODELS_DIR / name
+    gender = args.gender or DEFAULT_GENDER.get(name, "both")
 
     missing = [(p, why) for p, why in required if not (directory / p).exists()]
     if missing:
@@ -119,7 +121,7 @@ def run_model(name: str, args: argparse.Namespace) -> int:
         return 78  # EX_CONFIG
 
     output_dir = (
-        Path(args.output_dir) if args.output_dir else RUNS_DIR / f"{name}_{args.gender}"
+        Path(args.output_dir) if args.output_dir else RUNS_DIR / f"{name}_{gender}"
     )
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -132,7 +134,7 @@ def run_model(name: str, args: argparse.Namespace) -> int:
     )
     env.setdefault("TOKENIZERS_PARALLELISM", "false")
 
-    command = build_command(name, args, output_dir)
+    command = build_command(name, args, output_dir, gender)
     print(
         f"\n{'=' * 70}\n[{name}] {' '.join(command)}\n  cwd: {directory}\n"
         f"  out: {output_dir}\n{'=' * 70}",
@@ -157,8 +159,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--gender",
         choices=GENDERS,
-        default="both",
-        help="Rasa subset for training and in-domain eval; IndicVoices is never filtered.",
+        default=None,
+        help="Rasa subset for training and in-domain eval; IndicVoices is never "
+        "filtered. Omit to keep each model's own default (mga_clap: male, "
+        "others: both).",
     )
     parser.add_argument(
         "--seed",
