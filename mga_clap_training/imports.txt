@@ -1,4 +1,0 @@
-pip install torch librosa torchaudio datasets numpy scipy einops torchlibrosa ruamel.yaml transformers sentence-transformers wandb loguru sed_scores_eval matplotlib psds-eval torchcodec huggingface_hub
-sudo apt update
-sudo apt install ffmpeg
-hf auth login

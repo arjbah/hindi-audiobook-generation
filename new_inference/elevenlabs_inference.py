@@ -16,6 +16,8 @@ for folder in folders:
         print(f"Starting {file}")
         with file.open("r", encoding="utf-8") as f:
             text = f.read()
+        if not text.strip():
+            continue
 
         output_path = Path("audio") / folder.name / "elevenlabs" / f"{file.stem}.mp3"
         output_path.parent.mkdir(parents=True, exist_ok=True)

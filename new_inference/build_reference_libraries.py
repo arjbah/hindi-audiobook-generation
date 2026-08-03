@@ -3,22 +3,24 @@ from datasets import load_dataset
 import torchaudio.functional as AF
 import torchaudio
 from ruamel.yaml import YAML
-from mga_clap_training.models.ase_model import ASE
 from pathlib import Path
+import sys
+sys.path.append(str((Path(__file__).parent.parent / "mga_clap_training").resolve()))
+from models.ase_model import ASE
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
 languages = ["assamese", "bengali", "gujarati", "hindi", "kannada", "malayalam", "marathi", "tamil", "telugu"]
-with open("settings/pretrain.yaml", "r") as f:
+with open("../mga_clap_training/settings/pretrain.yaml", "r") as f:
     yaml = YAML(typ='safe', pure=True)
     config = yaml.load(f)
 
 max_samples = 32000 * 10
 for language in languages:
     model = ASE(config).to(device)
-    state_dict = torch.load(f"../mga_clap_training/outputs/{language}/val_rasa_best_model.pt", map_location=device)
-    model.load_state_dict(state_dict)
+    checkpoint = torch.load(f"../mga_clap_training/outputs/{language}/models/val_rasa_best_model.pt", map_location=device, weights_only=False)
+    model.load_state_dict(checkpoint["model"])
     model.eval()
 
     reference_library = []
@@ -26,7 +28,7 @@ for language in languages:
     count = 0
     with torch.no_grad():
         for split in ["train", "test"]:
-            ds = load_dataset("ai4bharat/Rasa", language.capitalize(), split=split)
+            ds = load_dataset("ai4bharat/Rasa", language.capitalize(), split=split, cache_dir="/mnt/huggingface")
             ds = ds.filter(
                 lambda item: item["gender"] == "Male",
                 desc=f"Filtering {language} Rasa to Male",
@@ -54,7 +56,7 @@ for language in languages:
                 if audio_32k.ndim > 1:
                     audio_32k = audio_32k[0]
 
-                audio_path = Path(f"reference_audio/rasa_male_{language}_{count}.wav")
+                audio_path = Path(f"reference_audio/{language}/rasa_male_{count}.wav")
                 audio_path.parent.mkdir(parents=True, exist_ok=True)
                 torchaudio.save(audio_path, audio_24k.unsqueeze(0).cpu(), 24000)
 
@@ -63,7 +65,9 @@ for language in languages:
                 else:
                     audio_32k = torch.nn.functional.pad(audio_32k, (0, max_samples - audio_32k.shape[0]))
 
-                embedding = model.encode_audio(audio_32k.unsqueeze(0).to(device))
+                _, frame_embeddings = model.encode_audio(audio_32k.unsqueeze(0).to(device))
+                embedding = model.msc(frame_embeddings, model.codebook)
+                embedding = torch.nn.functional.normalize(embedding, dim=-1)
 
                 text = item["text"].strip()
 

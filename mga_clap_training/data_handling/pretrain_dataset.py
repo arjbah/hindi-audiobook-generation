@@ -29,19 +29,17 @@ class AudioLanguagePretrainDataset(Dataset):
 
     def __init__(self, audio_config, dataset_name, language, split=None):
         if dataset_name == "indicvoices":
-            dataset_split = "train"
+            dataset_split = "test"
             self.dataset = load_dataset(
                 "ai4bharat/indicvoices_r",
                 language,
                 split=dataset_split,
                 cache_dir=str(HF_CACHE_DIR),
+                streaming=True,
             )
             self.dataset = self.dataset.filter(
-                lambda item: item["gender"] == "Male",
-                desc=f"Filtering {language} IndicVoices to Male",
-            )
-            self.dataset = self.dataset.select(
-                range(min(2000, len(self.dataset)))
+                lambda gender: gender == "Male",
+                input_columns=["gender"],
             )
         elif dataset_name == "rasa":
             dataset_split = split
@@ -50,10 +48,11 @@ class AudioLanguagePretrainDataset(Dataset):
                 language,
                 split=dataset_split,
                 cache_dir=str(HF_CACHE_DIR),
+                streaming=True,
             )
             self.dataset = self.dataset.filter(
-                lambda item: item["gender"] == "Male",
-                desc=f"Filtering {language} Rasa {split} to Male",
+                lambda gender: gender == "Male",
+                input_columns=["gender"],
             )
 
         self.sr = audio_config["sr"]
@@ -68,29 +67,30 @@ class AudioLanguagePretrainDataset(Dataset):
             / f"{dataset_name}_{language}_{dataset_split}_sr{self.sr}_max{self.max_length}"
         )
         self.cache_dir.mkdir(parents=True, exist_ok=True)
-        self.build_cache()
+        self.length = self.build_cache()
 
     def __len__(self):
-        return len(self.dataset)
+        return self.length
 
     def __getitem__(self, index):
-        return torch.load(self.cache_path(index), map_location="cpu")
+        return torch.load(self.cache_path(index), map_location="cpu", weights_only=False)
 
     def cache_path(self, index):
         return self.cache_dir / f"{index:08d}.pt"
 
     def build_cache(self):
-        for index in tqdm(
-            range(len(self.dataset)),
-            desc=f"Caching {self.dataset_name} {self.language}",
-        ):
+        length = 0
+        items = tqdm(
+            self.dataset, desc=f"Caching {self.dataset_name} {self.language}"
+        )
+        for index, item in enumerate(items):
             path = self.cache_path(index)
             if not path.exists():
-                torch.save(self.process_item(index), path)
+                torch.save(self.process_item(item, index), path)
+            length = index + 1
+        return length
 
-    def process_item(self, index):
-        item = self.dataset[index]
-        
+    def process_item(self, item, index):
         audio_array = item['audio']['array']
         orig_sr = item['audio']['sampling_rate']
         

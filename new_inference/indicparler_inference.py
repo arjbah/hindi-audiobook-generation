@@ -52,6 +52,8 @@ def inference(transcript, output_folder, lang_code):
 
     if current_chunk:
         chunks.append(current_chunk.strip())
+    if not chunks:
+        return
 
     for i in range(0, len(chunks), batch_size):
         batch = chunks[i:i + batch_size]
@@ -75,7 +77,7 @@ def inference(transcript, output_folder, lang_code):
 
             sf.write(output_path, audio_arr, model.config.sampling_rate)
 
-    files = sorted(output_folder.glob("*.wav"), key=lambda p: int(p.stem))
+    files = [output_folder / f"{i}.wav" for i in range(len(chunks))]
 
     combined = AudioSegment.empty()
 
