@@ -37,7 +37,7 @@ nine models, one per language, rather than one Hindi model like the others. Its
 IndicVoices eval split stays male-only and capped at 2000 rows. Pass `--gender`
 explicitly whenever you compare models against each other.
 
-Rasa Hindi contains both genders, counted 2026-08-02 from the Hub parquet:
+Rasa Hindi contains both genders:
 train is 25,713 rows (12,116 male / 13,597 female) and test is 2,858 rows
 (1,348 / 1,510). `rasa_model_comparison/rasa_model_comparison.py:35` claims
 there are no female samples; **that claim is incorrect**. See
