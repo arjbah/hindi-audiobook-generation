@@ -63,8 +63,8 @@ Epoch 99 vs 119 are essentially tied — the "best val loss" checkpoint didn't t
 
 | Model | T2A R@1 | A2T R@1 | R@5 |
 |---|---|---|---|
-| VoiceCLAP (`voiceclap_training/train_log.txt`) | ~0.93 | ~0.93 | ~0.997 |
-| MGA-CLAP (`mga_clap_training/outputs/.../output.txt`) | ~0.97 | ~0.97 | ~1.00 |
+| VoiceCLAP (`models/voiceclap/train_log.txt`) | ~0.93 | ~0.93 | ~0.997 |
+| MGA-CLAP (`models/mga_clap/outputs/.../output.txt`) | ~0.97 | ~0.97 | ~1.00 |
 | **SLAP (this run, predictions)** | 0.57 | 0.56 | 0.81 |
 
 Both contrastive baselines are near-saturated; SLAP is well behind. Root causes (see conversation for full discussion):
