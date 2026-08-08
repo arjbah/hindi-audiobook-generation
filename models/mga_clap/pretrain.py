@@ -60,6 +60,35 @@ def train(model, dataloader, optimizer, scheduler, device, epoch, scaler):
     }
 
 
+# The nine languages this file has always trained, one model each.
+ALL_LANGUAGES = [
+    "Assamese",
+    "Bengali",
+    "Gujarati",
+    "Hindi",
+    "Kannada",
+    "Malayalam",
+    "Marathi",
+    "Tamil",
+    "Telugu",
+]
+
+
+def add_language_arg(parser):
+    """``--languages`` narrows the training loop; omitting it keeps all nine.
+
+    Declared on both the module-level pre-parser and ``main``'s parser so that
+    ``main``'s ``parse_args`` does not reject it as unknown.
+    """
+    parser.add_argument(
+        "--languages",
+        nargs="+",
+        default=ALL_LANGUAGES,
+        metavar="LANG",
+        help="Languages to train, one model each. Default: all nine.",
+    )
+
+
 def main(language):
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", default="settings/pretrain.yaml", type=str,
@@ -80,6 +109,7 @@ def main(language):
     # -s/--batch_size already exists. gender defaults to male so that omitting
     # the flag reproduces this file's previous hardcoded Male filter.
     add_shared_args(parser, include_batch_size=False, gender_default="male")
+    add_language_arg(parser)  # consumed by the loop below, ignored here
     args = parser.parse_args()
 
     with open(args.config, "r") as f:
@@ -352,15 +382,7 @@ def validate_re(model, dataloader, device):
             "a2t": [r1_a, r5_a, r10_a, r50_a, medr_a, meanr_a, mAP_a]}
 
 if __name__ == '__main__':
-    for language in [
-        "Assamese",
-        "Bengali",
-        "Gujarati",
-        "Hindi",
-        "Kannada",
-        "Malayalam",
-        "Marathi",
-        "Tamil",
-        "Telugu",
-    ]:
+    _pre = argparse.ArgumentParser(add_help=False)
+    add_language_arg(_pre)
+    for language in _pre.parse_known_args()[0].languages:
         main(language)

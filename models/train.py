@@ -101,6 +101,9 @@ def build_command(
         ]
     if args.limit is not None:
         command += ["--limit", str(args.limit)]
+    # Only MGA-CLAP loops over languages; the other three are Hindi-only.
+    if name == "mga_clap" and args.languages:
+        command += ["--languages", *args.languages]
     return command
 
 
@@ -177,6 +180,13 @@ def main(argv: list[str] | None = None) -> int:
         type=int,
         default=None,
         help="Truncate splits to N rows (smoke tests only).",
+    )
+    parser.add_argument(
+        "--languages",
+        nargs="+",
+        default=None,
+        metavar="LANG",
+        help="MGA-CLAP only: which languages to train. Omit for all nine.",
     )
     parser.add_argument("--output-dir", default=None)
     args = parser.parse_args(argv)
