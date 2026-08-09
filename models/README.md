@@ -49,6 +49,12 @@ those rows. To reproduce `0.968 / 0.548` you must pass `--gender both`; the
 default `male` is the current intended training configuration, not the
 configuration that produced the number in this table.
 
+**Phase A (2026-08-09) verified all four models start and train on a clean
+L40S box.** See [`PHASE_A.md`](PHASE_A.md) for the frozen environments
+(`requirements-clap.lock`, `requirements-slap.lock`) and nine setup gotchas --
+including that `--limit` below the batch size makes `mga_clap` and `slap`
+report success while training zero batches.
+
 **Prerequisites:** `hf auth login` plus accepted gates on `ai4bharat/Rasa` and
 `ai4bharat/indicvoices_r` (both gated); ~200 GB disk (Rasa is ~8–17 GB and
 LAION-CLAP caches ~26 GB of features); a 24 GB GPU. MGA-CLAP additionally
