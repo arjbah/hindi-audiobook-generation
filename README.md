@@ -10,14 +10,6 @@ python models/train.py --model laion_clap                  # gender=both
 python models/train.py --model voiceclap --gender female
 python models/train.py --model all --seed 42
 ```
-
-| Model | Directory | Runs today |
-|---|---|---|
-| LAION-CLAP | `models/laion_clap` | yes |
-| VoiceCLAP | `models/voiceclap` | yes |
-| MGA-CLAP | `models/mga_clap` | needs `HTSAT_AudioSet_Saved_6.ckpt` |
-| SLAP | `models/slap` | needs `HTSAT_AudioSet_Saved_6.ckpt` |
-
 See [`models/README.md`](models/README.md) for prerequisites, the `--gender` and
 `--seed` semantics, baseline results, and MGA-CLAP's remaining hardcoded paths.
 
@@ -36,13 +28,6 @@ them.** LAION-CLAP, VoiceCLAP and SLAP never filtered by gender and default to
 nine models, one per language, rather than one Hindi model like the others. Its
 IndicVoices eval split stays male-only and capped at 2000 rows. Pass `--gender`
 explicitly whenever you compare models against each other.
-
-Rasa Hindi contains both genders:
-train is 25,713 rows (12,116 male / 13,597 female) and test is 2,858 rows
-(1,348 / 1,510). `rasa_model_comparison/rasa_model_comparison.py:35` claims
-there are no female samples; **that claim is incorrect**. See
-[`models/README.md`](models/README.md) for the full table, including
-IndicVoices and the 72 `other` rows that are dropped.
 
 ## Other folders
 
