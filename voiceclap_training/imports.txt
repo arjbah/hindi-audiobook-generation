@@ -1,2 +1,0 @@
-pip install torch torchaudio datasets transformers numpy loguru
-hf auth login

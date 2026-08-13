@@ -1,0 +1,14 @@
+# https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.callbacks.ModelCheckpoint.html
+
+model_checkpoint_best:
+  _target_: src.callbacks.checkpoint.PTModelCheckpoint
+  dirpath: .
+  verbose: true # verbosity mode
+  save_last: false
+  save_top_k: 1 # save k best models (determined by above metric)
+  mode: "max"
+  monitor: "Retrieval/val_0/predictions/T2A/R@1"
+  auto_insert_metric_name: false # when True, the checkpoints filenames will contain the metric name
+  filename: "${data.language}_best_rasa"
+  save_weights_only: false # if True, then only the model’s weights will be saved
+  every_n_epochs: 1 # number of epochs between checkpoints
