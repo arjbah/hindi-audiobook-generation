@@ -2,7 +2,7 @@
 
 model_checkpoint_best:
   _target_: src.callbacks.checkpoint.PTModelCheckpoint
-  dirpath: .
+  dirpath: ${paths.ckpt_dir}
   verbose: true # verbosity mode
   save_last: false
   save_top_k: 1 # save k best models (determined by above metric)

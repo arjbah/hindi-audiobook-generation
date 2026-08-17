@@ -1,0 +1,133 @@
+Model: mga_clap
+Checkpoint: /root/models/mga_clap_training/checkpoints/telugu_best_rasa.pt
+Seed: 42
+Gender: male
+Language: telugu
+IndicVoices limit: 1500
+
+Rasa Embeddings metrics
+T2A: R@1=0.975, R@5=0.997, R@10=0.999, R@50=1.000, MedianRank=1.000, MeanRank=1.057, mAP=0.984
+A2T: R@1=0.975, R@5=0.997, R@10=1.000, R@50=1.000, MedianRank=1.000, MeanRank=1.049, mAP=0.985
+
+IndicVoices Embeddings metrics
+T2A: R@1=0.122, R@5=0.251, R@10=0.331, R@50=0.569, MedianRank=34.000, MeanRank=126.675, mAP=0.193
+A2T: R@1=0.073, R@5=0.171, R@10=0.237, R@50=0.444, MedianRank=73.000, MeanRank=191.995, mAP=0.129
+
+--------------------------------------------------------------------------------
+
+Model: mga_clap
+Checkpoint: /root/models/mga_clap_training/checkpoints/tamil_best_rasa.pt
+Seed: 42
+Gender: male
+Language: tamil
+IndicVoices limit: 1500
+
+Rasa Embeddings metrics
+T2A: R@1=0.994, R@5=0.999, R@10=0.999, R@50=0.999, MedianRank=1.000, MeanRank=1.366, mAP=0.996
+A2T: R@1=0.992, R@5=0.998, R@10=0.999, R@50=0.999, MedianRank=1.000, MeanRank=1.405, mAP=0.995
+
+IndicVoices Embeddings metrics
+T2A: R@1=0.136, R@5=0.279, R@10=0.365, R@50=0.589, MedianRank=28.000, MeanRank=121.715, mAP=0.211
+A2T: R@1=0.085, R@5=0.184, R@10=0.237, R@50=0.439, MedianRank=75.000, MeanRank=195.246, mAP=0.139
+
+--------------------------------------------------------------------------------
+
+Model: mga_clap
+Checkpoint: /root/models/mga_clap_training/checkpoints/marathi_best_rasa.pt
+Seed: 42
+Gender: male
+Language: marathi
+IndicVoices limit: 1500
+
+Rasa Embeddings metrics
+T2A: R@1=0.973, R@5=0.997, R@10=0.998, R@50=1.000, MedianRank=1.000, MeanRank=1.091, mAP=0.983
+A2T: R@1=0.974, R@5=0.997, R@10=0.998, R@50=0.999, MedianRank=1.000, MeanRank=1.104, mAP=0.984
+
+IndicVoices Embeddings metrics
+T2A: R@1=0.085, R@5=0.196, R@10=0.260, R@50=0.495, MedianRank=52.000, MeanRank=168.268, mAP=0.146
+A2T: R@1=0.051, R@5=0.115, R@10=0.170, R@50=0.357, MedianRank=109.000, MeanRank=247.457, mAP=0.095
+
+--------------------------------------------------------------------------------
+
+Model: mga_clap
+Checkpoint: /root/models/mga_clap_training/checkpoints/kannada_best_rasa.pt
+Seed: 42
+Gender: male
+Language: kannada
+IndicVoices limit: 1500
+
+Rasa Embeddings metrics
+T2A: R@1=0.990, R@5=0.998, R@10=0.999, R@50=1.000, MedianRank=1.000, MeanRank=1.035, mAP=0.994
+A2T: R@1=0.993, R@5=0.999, R@10=1.000, R@50=1.000, MedianRank=1.000, MeanRank=1.018, mAP=0.995
+
+IndicVoices Embeddings metrics
+T2A: R@1=0.138, R@5=0.278, R@10=0.356, R@50=0.587, MedianRank=29.000, MeanRank=131.667, mAP=0.213
+A2T: R@1=0.085, R@5=0.191, R@10=0.257, R@50=0.477, MedianRank=59.000, MeanRank=193.607, mAP=0.145
+
+--------------------------------------------------------------------------------
+
+Model: mga_clap
+Checkpoint: /root/models/mga_clap_training/checkpoints/hindi_best_rasa.pt
+Seed: 42
+Gender: male
+Language: hindi
+IndicVoices limit: 1500
+
+Rasa Embeddings metrics
+T2A: R@1=0.972, R@5=0.997, R@10=0.999, R@50=0.999, MedianRank=1.000, MeanRank=1.107, mAP=0.983
+A2T: R@1=0.970, R@5=0.996, R@10=0.999, R@50=1.000, MedianRank=1.000, MeanRank=1.094, mAP=0.982
+
+IndicVoices Embeddings metrics
+T2A: R@1=0.074, R@5=0.181, R@10=0.263, R@50=0.470, MedianRank=59.000, MeanRank=170.921, mAP=0.136
+A2T: R@1=0.055, R@5=0.137, R@10=0.191, R@50=0.380, MedianRank=97.000, MeanRank=228.815, mAP=0.102
+
+--------------------------------------------------------------------------------
+
+Model: mga_clap
+Checkpoint: /root/models/mga_clap_training/checkpoints/gujarati_best_rasa.pt
+Seed: 42
+Gender: male
+Language: gujarati
+IndicVoices limit: 1500
+
+Rasa Embeddings metrics
+T2A: R@1=0.987, R@5=0.999, R@10=0.999, R@50=1.000, MedianRank=1.000, MeanRank=1.062, mAP=0.992
+A2T: R@1=0.989, R@5=0.998, R@10=0.999, R@50=0.999, MedianRank=1.000, MeanRank=1.065, mAP=0.993
+
+IndicVoices Embeddings metrics
+T2A: R@1=0.159, R@5=0.311, R@10=0.407, R@50=0.636, MedianRank=21.000, MeanRank=86.490, mAP=0.241
+A2T: R@1=0.095, R@5=0.236, R@10=0.311, R@50=0.538, MedianRank=40.000, MeanRank=125.693, mAP=0.169
+
+--------------------------------------------------------------------------------
+
+Model: mga_clap
+Checkpoint: /root/models/mga_clap_training/checkpoints/bengali_best_rasa.pt
+Seed: 42
+Gender: male
+Language: bengali
+IndicVoices limit: 1500
+
+Rasa Embeddings metrics
+T2A: R@1=0.973, R@5=0.994, R@10=0.996, R@50=0.999, MedianRank=1.000, MeanRank=1.247, mAP=0.983
+A2T: R@1=0.965, R@5=0.994, R@10=0.996, R@50=0.999, MedianRank=1.000, MeanRank=1.288, mAP=0.978
+
+IndicVoices Embeddings metrics
+T2A: R@1=0.078, R@5=0.189, R@10=0.254, R@50=0.462, MedianRank=64.000, MeanRank=198.794, mAP=0.140
+A2T: R@1=0.041, R@5=0.114, R@10=0.157, R@50=0.364, MedianRank=121.000, MeanRank=254.715, mAP=0.083
+
+--------------------------------------------------------------------------------
+
+Model: mga_clap
+Checkpoint: /root/models/mga_clap_training/checkpoints/assamese_best_rasa.pt
+Seed: 42
+Gender: male
+Language: assamese
+IndicVoices limit: 1500
+
+Rasa Embeddings metrics
+T2A: R@1=0.978, R@5=0.997, R@10=0.999, R@50=1.000, MedianRank=1.000, MeanRank=1.059, mAP=0.986
+A2T: R@1=0.981, R@5=0.996, R@10=0.999, R@50=1.000, MedianRank=1.000, MeanRank=1.055, mAP=0.988
+
+IndicVoices Embeddings metrics
+T2A: R@1=0.137, R@5=0.285, R@10=0.365, R@50=0.591, MedianRank=29.000, MeanRank=127.809, mAP=0.214
+A2T: R@1=0.097, R@5=0.211, R@10=0.298, R@50=0.516, MedianRank=44.000, MeanRank=152.165, mAP=0.162

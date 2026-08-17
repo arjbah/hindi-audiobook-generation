@@ -1,6 +1,6 @@
 import torch
 import torchaudio.functional as AF
-import torchaudio
+import soundfile as sf
 from ruamel.yaml import YAML
 from pathlib import Path
 import sys
@@ -17,7 +17,7 @@ from models.ase_model import ASE
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
-languages = ["assamese", "bengali", "gujarati", "hindi", "kannada", "malayalam", "marathi", "tamil", "telugu"]
+languages = ["malayalam", "marathi", "tamil", "telugu"]
 with (MGA_DIR / "settings" / "pretrain.yaml").open() as f:
     yaml = YAML(typ='safe', pure=True)
     config = yaml.load(f)
@@ -26,7 +26,7 @@ config["device"] = str(device)
 max_samples = 32000 * AUDIO_DURATION
 for language in languages:
     model = ASE(config).to(device)
-    checkpoint = torch.load(MGA_DIR / f"{language}_best_rasa.pt", map_location=device, weights_only=False)
+    checkpoint = torch.load(MGA_DIR / "checkpoints" / f"{language}_best_rasa.pt", map_location=device, weights_only=False)
     model.load_state_dict(checkpoint["model"])
     model.eval()
 
@@ -43,8 +43,10 @@ for language in languages:
                 sr = item["audio"]["sampling_rate"]
                 length_seconds = audio.shape[-1] / sr
                 if length_seconds < 3:
-                    print(f"Skipped {count} because it's too short")
+                    # print(f"Skipped {count} because it's too short")
                     count += 1
+                    if count % 1000 == 0:
+                        print(count)
                     continue
 
                 audio_24k = audio
@@ -61,7 +63,7 @@ for language in languages:
 
                 audio_path = OUTPUT_DIR / "reference_audio" / language / f"rasa_male_{count}.wav"
                 audio_path.parent.mkdir(parents=True, exist_ok=True)
-                torchaudio.save(audio_path, audio_24k.unsqueeze(0).cpu(), 24000)
+                sf.write(audio_path, audio_24k.cpu().numpy(), 24000, subtype="PCM_16")
 
                 if audio_32k.shape[0] > max_samples:
                     audio_32k = audio_32k[:max_samples]
@@ -81,5 +83,8 @@ for language in languages:
                     "embedding": embedding.squeeze(0).cpu()
                 })
                 count += 1
+
+                if count % 1000 == 0:
+                    print(count)
 
     torch.save(reference_library, OUTPUT_DIR / f"rasa_male_{language}_reference_library.pt")

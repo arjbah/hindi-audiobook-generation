@@ -1,0 +1,427 @@
+ 2026-08-17 at 04:48:48 | Using device: cuda
+ 2026-08-17 at 04:48:49 | Total params: 266,418,121
+ 2026-08-17 at 04:48:49 | Trainable params: 266,418,121
+ 2026-08-17 at 04:49:31 | Epoch 1 loss: 4.084759596774453
+ 2026-08-17 at 04:49:38 | Epoch [1] | Rasa metrics | T2A: R@1=0.006, R@5=0.016, R@10=0.028, MedR=142.000, MeanR=164.593, mAP=0.022 | A2T: R@1=0.004, R@5=0.012, R@10=0.021, MedR=165.000, MeanR=174.747, mAP=0.017
+ 2026-08-17 at 04:49:38 | Epoch [1] | IndicVoices metrics | T2A: R@1=0.005, R@5=0.020, R@10=0.038, MedR=247.000, MeanR=311.851, mAP=0.021 | A2T: R@1=0.004, R@5=0.013, R@10=0.033, MedR=222.000, MeanR=264.932, mAP=0.019
+ 2026-08-17 at 04:49:41 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 1.
+ 2026-08-17 at 04:50:13 | Epoch 2 loss: 3.175764698731272
+ 2026-08-17 at 04:50:19 | Epoch [2] | Rasa metrics | T2A: R@1=0.004, R@5=0.020, R@10=0.047, MedR=134.000, MeanR=140.693, mAP=0.025 | A2T: R@1=0.001, R@5=0.019, R@10=0.038, MedR=149.000, MeanR=157.578, mAP=0.020
+ 2026-08-17 at 04:50:19 | Epoch [2] | IndicVoices metrics | T2A: R@1=0.005, R@5=0.016, R@10=0.037, MedR=240.000, MeanR=299.756, mAP=0.022 | A2T: R@1=0.004, R@5=0.017, R@10=0.028, MedR=240.000, MeanR=287.388, mAP=0.019
+ 2026-08-17 at 04:50:50 | Epoch 3 loss: 3.0041824240433543
+ 2026-08-17 at 04:50:56 | Epoch [3] | Rasa metrics | T2A: R@1=0.004, R@5=0.016, R@10=0.032, MedR=174.000, MeanR=174.476, mAP=0.020 | A2T: R@1=0.003, R@5=0.014, R@10=0.025, MedR=184.000, MeanR=191.713, mAP=0.017
+ 2026-08-17 at 04:50:56 | Epoch [3] | IndicVoices metrics | T2A: R@1=0.002, R@5=0.016, R@10=0.039, MedR=232.000, MeanR=290.189, mAP=0.019 | A2T: R@1=0.005, R@5=0.015, R@10=0.029, MedR=230.000, MeanR=272.336, mAP=0.020
+ 2026-08-17 at 04:51:27 | Epoch 4 loss: 2.882811410803544
+ 2026-08-17 at 04:51:33 | Epoch [4] | Rasa metrics | T2A: R@1=0.007, R@5=0.042, R@10=0.090, MedR=79.000, MeanR=94.872, mAP=0.041 | A2T: R@1=0.007, R@5=0.036, R@10=0.073, MedR=92.000, MeanR=105.863, mAP=0.037
+ 2026-08-17 at 04:51:33 | Epoch [4] | IndicVoices metrics | T2A: R@1=0.006, R@5=0.023, R@10=0.033, MedR=291.000, MeanR=343.604, mAP=0.021 | A2T: R@1=0.007, R@5=0.019, R@10=0.040, MedR=276.000, MeanR=314.777, mAP=0.022
+ 2026-08-17 at 12:07:58 | Using device: cuda
+ 2026-08-17 at 12:08:00 | Total params: 266,418,121
+ 2026-08-17 at 12:08:00 | Trainable params: 266,418,121
+ 2026-08-17 at 12:08:41 | Epoch 1 loss: 4.1087390698884665
+ 2026-08-17 at 12:08:48 | Epoch [1] | Rasa metrics | T2A: R@1=0.003, R@5=0.010, R@10=0.020, MedR=175.000, MeanR=193.226, mAP=0.016 | A2T: R@1=0.001, R@5=0.007, R@10=0.013, MedR=198.000, MeanR=206.206, mAP=0.012
+ 2026-08-17 at 12:08:48 | Epoch [1] | IndicVoices metrics | T2A: R@1=0.005, R@5=0.017, R@10=0.035, MedR=240.000, MeanR=309.950, mAP=0.020 | A2T: R@1=0.003, R@5=0.017, R@10=0.032, MedR=223.000, MeanR=267.833, mAP=0.019
+ 2026-08-17 at 12:08:51 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 1.
+ 2026-08-17 at 12:09:24 | Epoch 2 loss: 3.211970369439376
+ 2026-08-17 at 12:09:31 | Epoch [2] | Rasa metrics | T2A: R@1=0.004, R@5=0.021, R@10=0.041, MedR=151.000, MeanR=156.786, mAP=0.024 | A2T: R@1=0.007, R@5=0.016, R@10=0.035, MedR=172.000, MeanR=177.879, mAP=0.022
+ 2026-08-17 at 12:09:31 | Epoch [2] | IndicVoices metrics | T2A: R@1=0.003, R@5=0.018, R@10=0.037, MedR=244.000, MeanR=303.155, mAP=0.019 | A2T: R@1=0.001, R@5=0.013, R@10=0.028, MedR=244.000, MeanR=292.015, mAP=0.015
+ 2026-08-17 at 12:09:34 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 2.
+ 2026-08-17 at 12:10:07 | Epoch 3 loss: 3.0049401534231084
+ 2026-08-17 at 12:10:14 | Epoch [3] | Rasa metrics | T2A: R@1=0.009, R@5=0.024, R@10=0.046, MedR=144.000, MeanR=148.669, mAP=0.029 | A2T: R@1=0.007, R@5=0.022, R@10=0.041, MedR=154.000, MeanR=165.662, mAP=0.026
+ 2026-08-17 at 12:10:14 | Epoch [3] | IndicVoices metrics | T2A: R@1=0.001, R@5=0.016, R@10=0.036, MedR=253.000, MeanR=303.007, mAP=0.018 | A2T: R@1=0.003, R@5=0.019, R@10=0.032, MedR=237.000, MeanR=284.031, mAP=0.019
+ 2026-08-17 at 12:10:17 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 3.
+ 2026-08-17 at 12:10:49 | Epoch 4 loss: 2.849903598584627
+ 2026-08-17 at 12:10:56 | Epoch [4] | Rasa metrics | T2A: R@1=0.007, R@5=0.045, R@10=0.088, MedR=80.000, MeanR=96.617, mAP=0.042 | A2T: R@1=0.010, R@5=0.042, R@10=0.076, MedR=90.000, MeanR=107.152, mAP=0.040
+ 2026-08-17 at 12:10:56 | Epoch [4] | IndicVoices metrics | T2A: R@1=0.004, R@5=0.019, R@10=0.031, MedR=289.000, MeanR=336.227, mAP=0.019 | A2T: R@1=0.005, R@5=0.020, R@10=0.036, MedR=269.000, MeanR=309.859, mAP=0.021
+ 2026-08-17 at 12:11:28 | Epoch 5 loss: 2.7109452624070016
+ 2026-08-17 at 12:11:35 | Epoch [5] | Rasa metrics | T2A: R@1=0.005, R@5=0.024, R@10=0.050, MedR=107.000, MeanR=122.858, mAP=0.028 | A2T: R@1=0.005, R@5=0.028, R@10=0.050, MedR=122.000, MeanR=133.065, mAP=0.028
+ 2026-08-17 at 12:11:35 | Epoch [5] | IndicVoices metrics | T2A: R@1=0.003, R@5=0.022, R@10=0.041, MedR=212.000, MeanR=270.346, mAP=0.022 | A2T: R@1=0.008, R@5=0.021, R@10=0.038, MedR=201.000, MeanR=256.385, mAP=0.024
+ 2026-08-17 at 12:12:08 | Epoch 6 loss: 2.5406080271068374
+ 2026-08-17 at 12:12:15 | Epoch [6] | Rasa metrics | T2A: R@1=0.009, R@5=0.032, R@10=0.061, MedR=76.000, MeanR=98.659, mAP=0.038 | A2T: R@1=0.008, R@5=0.037, R@10=0.064, MedR=81.000, MeanR=101.116, mAP=0.037
+ 2026-08-17 at 12:12:15 | Epoch [6] | IndicVoices metrics | T2A: R@1=0.005, R@5=0.019, R@10=0.041, MedR=235.000, MeanR=288.241, mAP=0.022 | A2T: R@1=0.005, R@5=0.023, R@10=0.038, MedR=220.000, MeanR=267.683, mAP=0.024
+ 2026-08-17 at 12:12:47 | Epoch 7 loss: 2.3447945695174366
+ 2026-08-17 at 12:12:54 | Epoch [7] | Rasa metrics | T2A: R@1=0.012, R@5=0.056, R@10=0.115, MedR=57.000, MeanR=78.622, mAP=0.055 | A2T: R@1=0.011, R@5=0.060, R@10=0.116, MedR=62.000, MeanR=83.496, mAP=0.054
+ 2026-08-17 at 12:12:54 | Epoch [7] | IndicVoices metrics | T2A: R@1=0.004, R@5=0.019, R@10=0.038, MedR=252.000, MeanR=313.701, mAP=0.020 | A2T: R@1=0.009, R@5=0.021, R@10=0.036, MedR=233.000, MeanR=285.698, mAP=0.024
+ 2026-08-17 at 12:12:58 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 7.
+ 2026-08-17 at 12:13:30 | Epoch 8 loss: 2.227683566745959
+ 2026-08-17 at 12:13:37 | Epoch [8] | Rasa metrics | T2A: R@1=0.010, R@5=0.045, R@10=0.082, MedR=69.000, MeanR=92.370, mAP=0.044 | A2T: R@1=0.010, R@5=0.045, R@10=0.079, MedR=75.000, MeanR=99.501, mAP=0.044
+ 2026-08-17 at 12:13:37 | Epoch [8] | IndicVoices metrics | T2A: R@1=0.003, R@5=0.020, R@10=0.041, MedR=224.000, MeanR=288.284, mAP=0.021 | A2T: R@1=0.009, R@5=0.021, R@10=0.036, MedR=217.000, MeanR=278.524, mAP=0.024
+ 2026-08-17 at 12:14:10 | Epoch 9 loss: 2.138839729208695
+ 2026-08-17 at 12:14:17 | Epoch [9] | Rasa metrics | T2A: R@1=0.022, R@5=0.076, R@10=0.160, MedR=46.000, MeanR=63.099, mAP=0.072 | A2T: R@1=0.016, R@5=0.082, R@10=0.147, MedR=47.000, MeanR=68.795, mAP=0.066
+ 2026-08-17 at 12:14:17 | Epoch [9] | IndicVoices metrics | T2A: R@1=0.005, R@5=0.019, R@10=0.038, MedR=255.000, MeanR=314.871, mAP=0.022 | A2T: R@1=0.006, R@5=0.025, R@10=0.041, MedR=239.000, MeanR=300.539, mAP=0.023
+ 2026-08-17 at 12:14:20 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 9.
+ 2026-08-17 at 12:14:52 | Epoch 10 loss: 2.0423891318471807
+ 2026-08-17 at 12:14:59 | Epoch [10] | Rasa metrics | T2A: R@1=0.010, R@5=0.073, R@10=0.150, MedR=48.000, MeanR=73.063, mAP=0.061 | A2T: R@1=0.019, R@5=0.078, R@10=0.138, MedR=50.000, MeanR=74.453, mAP=0.067
+ 2026-08-17 at 12:14:59 | Epoch [10] | IndicVoices metrics | T2A: R@1=0.006, R@5=0.020, R@10=0.036, MedR=260.000, MeanR=329.071, mAP=0.021 | A2T: R@1=0.005, R@5=0.025, R@10=0.043, MedR=233.000, MeanR=304.190, mAP=0.023
+ 2026-08-17 at 12:15:31 | Epoch 11 loss: 1.953902516866985
+ 2026-08-17 at 12:15:38 | Epoch [11] | Rasa metrics | T2A: R@1=0.022, R@5=0.099, R@10=0.177, MedR=39.000, MeanR=59.030, mAP=0.079 | A2T: R@1=0.017, R@5=0.099, R@10=0.173, MedR=41.000, MeanR=64.489, mAP=0.076
+ 2026-08-17 at 12:15:38 | Epoch [11] | IndicVoices metrics | T2A: R@1=0.006, R@5=0.019, R@10=0.039, MedR=261.000, MeanR=339.321, mAP=0.022 | A2T: R@1=0.005, R@5=0.027, R@10=0.041, MedR=238.000, MeanR=317.402, mAP=0.023
+ 2026-08-17 at 12:16:10 | Epoch 12 loss: 1.8658921442533793
+ 2026-08-17 at 12:16:17 | Epoch [12] | Rasa metrics | T2A: R@1=0.025, R@5=0.104, R@10=0.182, MedR=45.000, MeanR=69.861, mAP=0.080 | A2T: R@1=0.019, R@5=0.085, R@10=0.160, MedR=48.000, MeanR=71.329, mAP=0.070
+ 2026-08-17 at 12:16:17 | Epoch [12] | IndicVoices metrics | T2A: R@1=0.003, R@5=0.023, R@10=0.037, MedR=253.000, MeanR=335.016, mAP=0.021 | A2T: R@1=0.005, R@5=0.027, R@10=0.043, MedR=239.000, MeanR=326.541, mAP=0.023
+ 2026-08-17 at 12:16:21 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 12.
+ 2026-08-17 at 12:16:53 | Epoch 13 loss: 1.782733436634666
+ 2026-08-17 at 12:17:00 | Epoch [13] | Rasa metrics | T2A: R@1=0.023, R@5=0.099, R@10=0.169, MedR=46.000, MeanR=73.521, mAP=0.079 | A2T: R@1=0.021, R@5=0.085, R@10=0.151, MedR=49.000, MeanR=74.086, mAP=0.072
+ 2026-08-17 at 12:17:00 | Epoch [13] | IndicVoices metrics | T2A: R@1=0.005, R@5=0.029, R@10=0.043, MedR=241.000, MeanR=313.799, mAP=0.024 | A2T: R@1=0.005, R@5=0.031, R@10=0.047, MedR=217.000, MeanR=300.065, mAP=0.026
+ 2026-08-17 at 12:17:32 | Epoch 14 loss: 1.6854978348079481
+ 2026-08-17 at 12:17:39 | Epoch [14] | Rasa metrics | T2A: R@1=0.039, R@5=0.141, R@10=0.239, MedR=33.000, MeanR=59.953, mAP=0.107 | A2T: R@1=0.031, R@5=0.131, R@10=0.218, MedR=37.000, MeanR=59.632, mAP=0.097
+ 2026-08-17 at 12:17:39 | Epoch [14] | IndicVoices metrics | T2A: R@1=0.005, R@5=0.026, R@10=0.043, MedR=254.000, MeanR=343.376, mAP=0.023 | A2T: R@1=0.007, R@5=0.027, R@10=0.053, MedR=231.000, MeanR=332.185, mAP=0.026
+ 2026-08-17 at 12:17:42 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 14.
+ 2026-08-17 at 12:18:14 | Epoch 15 loss: 1.5600781340348093
+ 2026-08-17 at 12:18:22 | Epoch [15] | Rasa metrics | T2A: R@1=0.044, R@5=0.163, R@10=0.269, MedR=31.000, MeanR=58.570, mAP=0.119 | A2T: R@1=0.032, R@5=0.144, R@10=0.225, MedR=34.000, MeanR=58.170, mAP=0.102
+ 2026-08-17 at 12:18:22 | Epoch [15] | IndicVoices metrics | T2A: R@1=0.005, R@5=0.028, R@10=0.043, MedR=236.000, MeanR=325.877, mAP=0.024 | A2T: R@1=0.006, R@5=0.029, R@10=0.049, MedR=234.000, MeanR=318.410, mAP=0.026
+ 2026-08-17 at 12:18:25 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 15.
+ 2026-08-17 at 12:18:57 | Epoch 16 loss: 1.4309721520072536
+ 2026-08-17 at 12:19:05 | Epoch [16] | Rasa metrics | T2A: R@1=0.075, R@5=0.243, R@10=0.366, MedR=20.000, MeanR=42.766, mAP=0.170 | A2T: R@1=0.065, R@5=0.211, R@10=0.334, MedR=22.000, MeanR=43.154, mAP=0.155
+ 2026-08-17 at 12:19:05 | Epoch [16] | IndicVoices metrics | T2A: R@1=0.006, R@5=0.026, R@10=0.041, MedR=260.000, MeanR=369.873, mAP=0.024 | A2T: R@1=0.009, R@5=0.030, R@10=0.047, MedR=265.000, MeanR=359.731, mAP=0.027
+ 2026-08-17 at 12:19:08 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 16.
+ 2026-08-17 at 12:19:40 | Epoch 17 loss: 1.2816306490647165
+ 2026-08-17 at 12:19:47 | Epoch [17] | Rasa metrics | T2A: R@1=0.083, R@5=0.278, R@10=0.418, MedR=16.000, MeanR=36.472, mAP=0.187 | A2T: R@1=0.076, R@5=0.252, R@10=0.375, MedR=18.000, MeanR=37.951, mAP=0.173
+ 2026-08-17 at 12:19:47 | Epoch [17] | IndicVoices metrics | T2A: R@1=0.004, R@5=0.024, R@10=0.042, MedR=245.000, MeanR=356.202, mAP=0.023 | A2T: R@1=0.009, R@5=0.029, R@10=0.051, MedR=244.000, MeanR=343.158, mAP=0.028
+ 2026-08-17 at 12:19:50 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 17.
+ 2026-08-17 at 12:20:22 | Epoch 18 loss: 1.166130560950229
+ 2026-08-17 at 12:20:29 | Epoch [18] | Rasa metrics | T2A: R@1=0.134, R@5=0.372, R@10=0.513, MedR=10.000, MeanR=25.796, mAP=0.253 | A2T: R@1=0.107, R@5=0.337, R@10=0.474, MedR=12.000, MeanR=27.554, mAP=0.227
+ 2026-08-17 at 12:20:29 | Epoch [18] | IndicVoices metrics | T2A: R@1=0.005, R@5=0.031, R@10=0.049, MedR=242.000, MeanR=358.938, mAP=0.025 | A2T: R@1=0.008, R@5=0.031, R@10=0.052, MedR=245.000, MeanR=350.289, mAP=0.028
+ 2026-08-17 at 12:20:33 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 18.
+ 2026-08-17 at 12:21:05 | Epoch 19 loss: 1.0272856800179733
+ 2026-08-17 at 12:21:12 | Epoch [19] | Rasa metrics | T2A: R@1=0.123, R@5=0.364, R@10=0.492, MedR=11.000, MeanR=27.967, mAP=0.242 | A2T: R@1=0.110, R@5=0.323, R@10=0.447, MedR=13.000, MeanR=31.458, mAP=0.220
+ 2026-08-17 at 12:21:12 | Epoch [19] | IndicVoices metrics | T2A: R@1=0.007, R@5=0.031, R@10=0.055, MedR=216.000, MeanR=323.408, mAP=0.028 | A2T: R@1=0.009, R@5=0.035, R@10=0.067, MedR=236.000, MeanR=328.272, mAP=0.032
+ 2026-08-17 at 12:21:44 | Epoch 20 loss: 0.9286062591954282
+ 2026-08-17 at 12:21:50 | Epoch [20] | Rasa metrics | T2A: R@1=0.192, R@5=0.464, R@10=0.584, MedR=7.000, MeanR=21.617, mAP=0.324 | A2T: R@1=0.165, R@5=0.427, R@10=0.559, MedR=8.000, MeanR=23.195, mAP=0.295
+ 2026-08-17 at 12:21:50 | Epoch [20] | IndicVoices metrics | T2A: R@1=0.006, R@5=0.027, R@10=0.055, MedR=240.000, MeanR=362.577, mAP=0.027 | A2T: R@1=0.010, R@5=0.035, R@10=0.070, MedR=244.000, MeanR=355.234, mAP=0.032
+ 2026-08-17 at 12:21:54 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 20.
+ 2026-08-17 at 12:22:25 | Epoch 21 loss: 0.8425094221767626
+ 2026-08-17 at 12:22:32 | Epoch [21] | Rasa metrics | T2A: R@1=0.189, R@5=0.455, R@10=0.617, MedR=6.000, MeanR=18.883, mAP=0.322 | A2T: R@1=0.171, R@5=0.430, R@10=0.573, MedR=7.000, MeanR=21.545, mAP=0.298
+ 2026-08-17 at 12:22:32 | Epoch [21] | IndicVoices metrics | T2A: R@1=0.008, R@5=0.033, R@10=0.061, MedR=209.000, MeanR=325.683, mAP=0.031 | A2T: R@1=0.015, R@5=0.039, R@10=0.067, MedR=219.000, MeanR=326.453, mAP=0.037
+ 2026-08-17 at 12:23:04 | Epoch 22 loss: 0.7268310851172397
+ 2026-08-17 at 12:23:11 | Epoch [22] | Rasa metrics | T2A: R@1=0.220, R@5=0.522, R@10=0.667, MedR=5.000, MeanR=16.092, mAP=0.360 | A2T: R@1=0.196, R@5=0.490, R@10=0.624, MedR=6.000, MeanR=18.544, mAP=0.335
+ 2026-08-17 at 12:23:11 | Epoch [22] | IndicVoices metrics | T2A: R@1=0.006, R@5=0.032, R@10=0.061, MedR=221.000, MeanR=341.633, mAP=0.029 | A2T: R@1=0.014, R@5=0.041, R@10=0.073, MedR=228.000, MeanR=338.468, mAP=0.038
+ 2026-08-17 at 12:23:14 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 22.
+ 2026-08-17 at 12:23:45 | Epoch 23 loss: 0.6476693219260166
+ 2026-08-17 at 12:23:52 | Epoch [23] | Rasa metrics | T2A: R@1=0.254, R@5=0.572, R@10=0.716, MedR=4.000, MeanR=13.430, mAP=0.399 | A2T: R@1=0.222, R@5=0.536, R@10=0.662, MedR=5.000, MeanR=15.873, mAP=0.365
+ 2026-08-17 at 12:23:52 | Epoch [23] | IndicVoices metrics | T2A: R@1=0.009, R@5=0.041, R@10=0.073, MedR=203.000, MeanR=328.772, mAP=0.034 | A2T: R@1=0.012, R@5=0.043, R@10=0.073, MedR=216.000, MeanR=331.569, mAP=0.037
+ 2026-08-17 at 12:23:55 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 23.
+ 2026-08-17 at 12:24:28 | Epoch 24 loss: 0.5513155378793415
+ 2026-08-17 at 12:24:35 | Epoch [24] | Rasa metrics | T2A: R@1=0.251, R@5=0.568, R@10=0.697, MedR=4.000, MeanR=15.612, mAP=0.395 | A2T: R@1=0.238, R@5=0.535, R@10=0.664, MedR=5.000, MeanR=17.795, mAP=0.375
+ 2026-08-17 at 12:24:35 | Epoch [24] | IndicVoices metrics | T2A: R@1=0.008, R@5=0.040, R@10=0.074, MedR=191.000, MeanR=316.881, mAP=0.034 | A2T: R@1=0.014, R@5=0.047, R@10=0.074, MedR=208.000, MeanR=319.089, mAP=0.040
+ 2026-08-17 at 12:25:06 | Epoch 25 loss: 0.492662481728353
+ 2026-08-17 at 12:25:13 | Epoch [25] | Rasa metrics | T2A: R@1=0.325, R@5=0.654, R@10=0.772, MedR=3.000, MeanR=10.666, mAP=0.472 | A2T: R@1=0.301, R@5=0.611, R@10=0.731, MedR=3.000, MeanR=12.777, mAP=0.443
+ 2026-08-17 at 12:25:13 | Epoch [25] | IndicVoices metrics | T2A: R@1=0.009, R@5=0.042, R@10=0.078, MedR=198.000, MeanR=324.386, mAP=0.035 | A2T: R@1=0.015, R@5=0.049, R@10=0.084, MedR=218.000, MeanR=332.968, mAP=0.040
+ 2026-08-17 at 12:25:16 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 25.
+ 2026-08-17 at 12:25:48 | Epoch 26 loss: 0.43811686258567006
+ 2026-08-17 at 12:25:55 | Epoch [26] | Rasa metrics | T2A: R@1=0.325, R@5=0.657, R@10=0.785, MedR=3.000, MeanR=9.839, mAP=0.476 | A2T: R@1=0.300, R@5=0.608, R@10=0.737, MedR=3.000, MeanR=12.482, mAP=0.443
+ 2026-08-17 at 12:25:55 | Epoch [26] | IndicVoices metrics | T2A: R@1=0.009, R@5=0.044, R@10=0.076, MedR=198.000, MeanR=330.754, mAP=0.036 | A2T: R@1=0.016, R@5=0.047, R@10=0.077, MedR=225.000, MeanR=335.951, mAP=0.040
+ 2026-08-17 at 12:26:27 | Epoch 27 loss: 0.39581616426769056
+ 2026-08-17 at 12:26:33 | Epoch [27] | Rasa metrics | T2A: R@1=0.338, R@5=0.658, R@10=0.785, MedR=3.000, MeanR=9.738, mAP=0.486 | A2T: R@1=0.309, R@5=0.621, R@10=0.746, MedR=3.000, MeanR=11.955, mAP=0.452
+ 2026-08-17 at 12:26:33 | Epoch [27] | IndicVoices metrics | T2A: R@1=0.008, R@5=0.042, R@10=0.085, MedR=190.000, MeanR=316.431, mAP=0.036 | A2T: R@1=0.016, R@5=0.044, R@10=0.077, MedR=214.000, MeanR=329.390, mAP=0.040
+ 2026-08-17 at 12:26:37 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 27.
+ 2026-08-17 at 12:27:08 | Epoch 28 loss: 0.3641481201899679
+ 2026-08-17 at 12:27:15 | Epoch [28] | Rasa metrics | T2A: R@1=0.308, R@5=0.656, R@10=0.781, MedR=3.000, MeanR=10.298, mAP=0.463 | A2T: R@1=0.279, R@5=0.602, R@10=0.734, MedR=3.000, MeanR=12.795, mAP=0.428
+ 2026-08-17 at 12:27:15 | Epoch [28] | IndicVoices metrics | T2A: R@1=0.011, R@5=0.051, R@10=0.087, MedR=170.000, MeanR=294.228, mAP=0.041 | A2T: R@1=0.014, R@5=0.048, R@10=0.091, MedR=192.000, MeanR=310.417, mAP=0.042
+ 2026-08-17 at 12:27:47 | Epoch 29 loss: 0.32800126452195016
+ 2026-08-17 at 12:27:54 | Epoch [29] | Rasa metrics | T2A: R@1=0.327, R@5=0.677, R@10=0.803, MedR=3.000, MeanR=9.797, mAP=0.482 | A2T: R@1=0.301, R@5=0.627, R@10=0.751, MedR=3.000, MeanR=12.423, mAP=0.448
+ 2026-08-17 at 12:27:54 | Epoch [29] | IndicVoices metrics | T2A: R@1=0.010, R@5=0.051, R@10=0.082, MedR=187.000, MeanR=314.933, mAP=0.039 | A2T: R@1=0.015, R@5=0.049, R@10=0.080, MedR=216.000, MeanR=337.344, mAP=0.040
+ 2026-08-17 at 12:28:26 | Epoch 30 loss: 0.2954763861078965
+ 2026-08-17 at 12:28:33 | Epoch [30] | Rasa metrics | T2A: R@1=0.365, R@5=0.705, R@10=0.823, MedR=2.000, MeanR=8.194, mAP=0.519 | A2T: R@1=0.340, R@5=0.660, R@10=0.780, MedR=3.000, MeanR=10.282, mAP=0.487
+ 2026-08-17 at 12:28:33 | Epoch [30] | IndicVoices metrics | T2A: R@1=0.013, R@5=0.053, R@10=0.088, MedR=183.000, MeanR=306.147, mAP=0.041 | A2T: R@1=0.015, R@5=0.047, R@10=0.087, MedR=206.000, MeanR=323.734, mAP=0.042
+ 2026-08-17 at 12:28:36 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 30.
+ 2026-08-17 at 12:29:08 | Epoch 31 loss: 0.27582147999813683
+ 2026-08-17 at 12:29:15 | Epoch [31] | Rasa metrics | T2A: R@1=0.364, R@5=0.690, R@10=0.818, MedR=2.000, MeanR=9.044, mAP=0.513 | A2T: R@1=0.338, R@5=0.662, R@10=0.778, MedR=3.000, MeanR=11.147, mAP=0.482
+ 2026-08-17 at 12:29:15 | Epoch [31] | IndicVoices metrics | T2A: R@1=0.014, R@5=0.053, R@10=0.089, MedR=181.000, MeanR=317.362, mAP=0.044 | A2T: R@1=0.015, R@5=0.048, R@10=0.087, MedR=206.000, MeanR=328.970, mAP=0.041
+ 2026-08-17 at 12:29:46 | Epoch 32 loss: 0.25369980946967474
+ 2026-08-17 at 12:29:53 | Epoch [32] | Rasa metrics | T2A: R@1=0.372, R@5=0.733, R@10=0.832, MedR=2.000, MeanR=7.703, mAP=0.530 | A2T: R@1=0.358, R@5=0.688, R@10=0.814, MedR=2.000, MeanR=9.273, mAP=0.508
+ 2026-08-17 at 12:29:53 | Epoch [32] | IndicVoices metrics | T2A: R@1=0.012, R@5=0.056, R@10=0.097, MedR=180.000, MeanR=307.064, mAP=0.043 | A2T: R@1=0.016, R@5=0.047, R@10=0.089, MedR=208.000, MeanR=326.091, mAP=0.043
+ 2026-08-17 at 12:29:56 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 32.
+ 2026-08-17 at 12:30:28 | Epoch 33 loss: 0.2415332054621295
+ 2026-08-17 at 12:30:35 | Epoch [33] | Rasa metrics | T2A: R@1=0.413, R@5=0.751, R@10=0.853, MedR=2.000, MeanR=7.315, mAP=0.564 | A2T: R@1=0.389, R@5=0.703, R@10=0.812, MedR=2.000, MeanR=9.274, mAP=0.531
+ 2026-08-17 at 12:30:35 | Epoch [33] | IndicVoices metrics | T2A: R@1=0.018, R@5=0.057, R@10=0.095, MedR=176.000, MeanR=306.661, mAP=0.047 | A2T: R@1=0.013, R@5=0.050, R@10=0.085, MedR=202.000, MeanR=329.514, mAP=0.040
+ 2026-08-17 at 12:30:38 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 33.
+ 2026-08-17 at 12:31:09 | Epoch 34 loss: 0.22148002935083289
+ 2026-08-17 at 12:31:16 | Epoch [34] | Rasa metrics | T2A: R@1=0.419, R@5=0.760, R@10=0.868, MedR=2.000, MeanR=6.679, mAP=0.570 | A2T: R@1=0.407, R@5=0.720, R@10=0.832, MedR=2.000, MeanR=7.955, mAP=0.548
+ 2026-08-17 at 12:31:16 | Epoch [34] | IndicVoices metrics | T2A: R@1=0.015, R@5=0.055, R@10=0.096, MedR=175.000, MeanR=309.035, mAP=0.045 | A2T: R@1=0.013, R@5=0.048, R@10=0.090, MedR=210.000, MeanR=321.739, mAP=0.040
+ 2026-08-17 at 12:31:19 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 34.
+ 2026-08-17 at 12:31:51 | Epoch 35 loss: 0.2061164881053724
+ 2026-08-17 at 12:31:57 | Epoch [35] | Rasa metrics | T2A: R@1=0.432, R@5=0.763, R@10=0.859, MedR=2.000, MeanR=6.731, mAP=0.578 | A2T: R@1=0.409, R@5=0.725, R@10=0.822, MedR=2.000, MeanR=8.311, mAP=0.550
+ 2026-08-17 at 12:31:57 | Epoch [35] | IndicVoices metrics | T2A: R@1=0.014, R@5=0.057, R@10=0.100, MedR=177.000, MeanR=313.689, mAP=0.044 | A2T: R@1=0.013, R@5=0.054, R@10=0.091, MedR=207.000, MeanR=328.039, mAP=0.042
+ 2026-08-17 at 12:32:01 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 35.
+ 2026-08-17 at 12:32:33 | Epoch 36 loss: 0.19245108256214544
+ 2026-08-17 at 12:32:40 | Epoch [36] | Rasa metrics | T2A: R@1=0.418, R@5=0.754, R@10=0.861, MedR=2.000, MeanR=7.097, mAP=0.568 | A2T: R@1=0.400, R@5=0.720, R@10=0.818, MedR=2.000, MeanR=8.676, mAP=0.541
+ 2026-08-17 at 12:32:40 | Epoch [36] | IndicVoices metrics | T2A: R@1=0.015, R@5=0.059, R@10=0.099, MedR=167.000, MeanR=302.024, mAP=0.046 | A2T: R@1=0.011, R@5=0.051, R@10=0.091, MedR=200.000, MeanR=326.653, mAP=0.041
+ 2026-08-17 at 12:33:11 | Epoch 37 loss: 0.17774319138966108
+ 2026-08-17 at 12:33:18 | Epoch [37] | Rasa metrics | T2A: R@1=0.444, R@5=0.772, R@10=0.871, MedR=2.000, MeanR=6.493, mAP=0.587 | A2T: R@1=0.416, R@5=0.720, R@10=0.829, MedR=2.000, MeanR=8.531, mAP=0.552
+ 2026-08-17 at 12:33:18 | Epoch [37] | IndicVoices metrics | T2A: R@1=0.016, R@5=0.059, R@10=0.095, MedR=174.000, MeanR=311.436, mAP=0.046 | A2T: R@1=0.011, R@5=0.052, R@10=0.083, MedR=214.000, MeanR=336.301, mAP=0.039
+ 2026-08-17 at 12:33:22 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 37.
+ 2026-08-17 at 12:33:53 | Epoch 38 loss: 0.16529626932583358
+ 2026-08-17 at 12:34:01 | Epoch [38] | Rasa metrics | T2A: R@1=0.455, R@5=0.782, R@10=0.875, MedR=2.000, MeanR=6.328, mAP=0.598 | A2T: R@1=0.424, R@5=0.739, R@10=0.841, MedR=2.000, MeanR=7.766, mAP=0.566
+ 2026-08-17 at 12:34:01 | Epoch [38] | IndicVoices metrics | T2A: R@1=0.019, R@5=0.053, R@10=0.102, MedR=173.000, MeanR=308.828, mAP=0.048 | A2T: R@1=0.015, R@5=0.055, R@10=0.089, MedR=207.000, MeanR=331.402, mAP=0.042
+ 2026-08-17 at 12:34:04 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 38.
+ 2026-08-17 at 12:34:36 | Epoch 39 loss: 0.16842948457128123
+ 2026-08-17 at 12:34:44 | Epoch [39] | Rasa metrics | T2A: R@1=0.444, R@5=0.789, R@10=0.885, MedR=2.000, MeanR=6.065, mAP=0.593 | A2T: R@1=0.432, R@5=0.729, R@10=0.856, MedR=2.000, MeanR=7.613, mAP=0.571
+ 2026-08-17 at 12:34:44 | Epoch [39] | IndicVoices metrics | T2A: R@1=0.017, R@5=0.063, R@10=0.102, MedR=172.000, MeanR=308.011, mAP=0.048 | A2T: R@1=0.013, R@5=0.054, R@10=0.089, MedR=205.000, MeanR=328.091, mAP=0.042
+ 2026-08-17 at 12:35:15 | Epoch 40 loss: 0.15123673700972606
+ 2026-08-17 at 12:35:23 | Epoch [40] | Rasa metrics | T2A: R@1=0.473, R@5=0.807, R@10=0.892, MedR=2.000, MeanR=5.886, mAP=0.617 | A2T: R@1=0.462, R@5=0.760, R@10=0.852, MedR=2.000, MeanR=7.555, mAP=0.595
+ 2026-08-17 at 12:35:23 | Epoch [40] | IndicVoices metrics | T2A: R@1=0.015, R@5=0.054, R@10=0.093, MedR=187.000, MeanR=329.267, mAP=0.043 | A2T: R@1=0.011, R@5=0.051, R@10=0.085, MedR=223.000, MeanR=347.224, mAP=0.038
+ 2026-08-17 at 12:35:26 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 40.
+ 2026-08-17 at 12:35:57 | Epoch 41 loss: 0.1471805532511912
+ 2026-08-17 at 12:36:05 | Epoch [41] | Rasa metrics | T2A: R@1=0.481, R@5=0.806, R@10=0.891, MedR=2.000, MeanR=5.859, mAP=0.621 | A2T: R@1=0.455, R@5=0.760, R@10=0.858, MedR=2.000, MeanR=7.254, mAP=0.590
+ 2026-08-17 at 12:36:05 | Epoch [41] | IndicVoices metrics | T2A: R@1=0.021, R@5=0.060, R@10=0.103, MedR=180.000, MeanR=312.144, mAP=0.049 | A2T: R@1=0.013, R@5=0.055, R@10=0.094, MedR=213.000, MeanR=338.140, mAP=0.042
+ 2026-08-17 at 12:36:09 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 41.
+ 2026-08-17 at 12:36:41 | Epoch 42 loss: 0.13343227097862645
+ 2026-08-17 at 12:36:47 | Epoch [42] | Rasa metrics | T2A: R@1=0.498, R@5=0.820, R@10=0.899, MedR=2.000, MeanR=5.437, mAP=0.638 | A2T: R@1=0.471, R@5=0.765, R@10=0.862, MedR=2.000, MeanR=7.114, mAP=0.602
+ 2026-08-17 at 12:36:47 | Epoch [42] | IndicVoices metrics | T2A: R@1=0.019, R@5=0.062, R@10=0.101, MedR=167.000, MeanR=306.007, mAP=0.050 | A2T: R@1=0.017, R@5=0.052, R@10=0.091, MedR=216.000, MeanR=335.575, mAP=0.043
+ 2026-08-17 at 12:36:51 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 42.
+ 2026-08-17 at 12:37:22 | Epoch 43 loss: 0.12822388394882805
+ 2026-08-17 at 12:37:29 | Epoch [43] | Rasa metrics | T2A: R@1=0.506, R@5=0.820, R@10=0.904, MedR=1.000, MeanR=5.300, mAP=0.646 | A2T: R@1=0.486, R@5=0.784, R@10=0.874, MedR=2.000, MeanR=6.510, mAP=0.618
+ 2026-08-17 at 12:37:29 | Epoch [43] | IndicVoices metrics | T2A: R@1=0.017, R@5=0.060, R@10=0.095, MedR=172.000, MeanR=311.959, mAP=0.047 | A2T: R@1=0.013, R@5=0.055, R@10=0.093, MedR=209.000, MeanR=338.137, mAP=0.042
+ 2026-08-17 at 12:37:33 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 43.
+ 2026-08-17 at 12:38:04 | Epoch 44 loss: 0.13649656231466092
+ 2026-08-17 at 12:38:12 | Epoch [44] | Rasa metrics | T2A: R@1=0.513, R@5=0.825, R@10=0.905, MedR=1.000, MeanR=5.297, mAP=0.649 | A2T: R@1=0.490, R@5=0.782, R@10=0.875, MedR=2.000, MeanR=6.401, mAP=0.620
+ 2026-08-17 at 12:38:12 | Epoch [44] | IndicVoices metrics | T2A: R@1=0.017, R@5=0.059, R@10=0.092, MedR=176.000, MeanR=318.053, mAP=0.047 | A2T: R@1=0.012, R@5=0.056, R@10=0.089, MedR=221.000, MeanR=339.458, mAP=0.041
+ 2026-08-17 at 12:38:16 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 44.
+ 2026-08-17 at 12:38:48 | Epoch 45 loss: 0.1192764370849258
+ 2026-08-17 at 12:38:55 | Epoch [45] | Rasa metrics | T2A: R@1=0.489, R@5=0.803, R@10=0.898, MedR=2.000, MeanR=6.019, mAP=0.629 | A2T: R@1=0.472, R@5=0.760, R@10=0.851, MedR=2.000, MeanR=7.686, mAP=0.600
+ 2026-08-17 at 12:38:55 | Epoch [45] | IndicVoices metrics | T2A: R@1=0.021, R@5=0.063, R@10=0.103, MedR=164.000, MeanR=311.755, mAP=0.052 | A2T: R@1=0.013, R@5=0.055, R@10=0.092, MedR=208.000, MeanR=334.658, mAP=0.041
+ 2026-08-17 at 12:39:27 | Epoch 46 loss: 0.11465381532907486
+ 2026-08-17 at 12:39:34 | Epoch [46] | Rasa metrics | T2A: R@1=0.490, R@5=0.822, R@10=0.901, MedR=2.000, MeanR=5.672, mAP=0.634 | A2T: R@1=0.475, R@5=0.783, R@10=0.873, MedR=2.000, MeanR=6.723, mAP=0.607
+ 2026-08-17 at 12:39:34 | Epoch [46] | IndicVoices metrics | T2A: R@1=0.019, R@5=0.064, R@10=0.109, MedR=164.000, MeanR=298.756, mAP=0.052 | A2T: R@1=0.013, R@5=0.059, R@10=0.091, MedR=199.000, MeanR=326.754, mAP=0.044
+ 2026-08-17 at 12:40:06 | Epoch 47 loss: 0.11201334783905431
+ 2026-08-17 at 12:40:13 | Epoch [47] | Rasa metrics | T2A: R@1=0.501, R@5=0.820, R@10=0.901, MedR=1.000, MeanR=5.778, mAP=0.640 | A2T: R@1=0.481, R@5=0.767, R@10=0.862, MedR=2.000, MeanR=7.155, mAP=0.608
+ 2026-08-17 at 12:40:13 | Epoch [47] | IndicVoices metrics | T2A: R@1=0.022, R@5=0.069, R@10=0.105, MedR=167.000, MeanR=305.492, mAP=0.054 | A2T: R@1=0.015, R@5=0.060, R@10=0.095, MedR=203.000, MeanR=331.440, mAP=0.045
+ 2026-08-17 at 12:40:44 | Epoch 48 loss: 0.1069759303801938
+ 2026-08-17 at 12:40:51 | Epoch [48] | Rasa metrics | T2A: R@1=0.530, R@5=0.849, R@10=0.911, MedR=1.000, MeanR=4.931, mAP=0.669 | A2T: R@1=0.514, R@5=0.812, R@10=0.889, MedR=1.000, MeanR=5.867, mAP=0.645
+ 2026-08-17 at 12:40:51 | Epoch [48] | IndicVoices metrics | T2A: R@1=0.019, R@5=0.066, R@10=0.101, MedR=172.000, MeanR=315.670, mAP=0.051 | A2T: R@1=0.015, R@5=0.055, R@10=0.093, MedR=216.000, MeanR=333.330, mAP=0.044
+ 2026-08-17 at 12:40:55 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 48.
+ 2026-08-17 at 12:41:27 | Epoch 49 loss: 0.10231107128293891
+ 2026-08-17 at 12:41:34 | Epoch [49] | Rasa metrics | T2A: R@1=0.487, R@5=0.829, R@10=0.904, MedR=2.000, MeanR=5.678, mAP=0.636 | A2T: R@1=0.491, R@5=0.783, R@10=0.870, MedR=2.000, MeanR=7.013, mAP=0.619
+ 2026-08-17 at 12:41:34 | Epoch [49] | IndicVoices metrics | T2A: R@1=0.021, R@5=0.068, R@10=0.111, MedR=166.000, MeanR=301.243, mAP=0.054 | A2T: R@1=0.017, R@5=0.055, R@10=0.093, MedR=205.000, MeanR=332.665, mAP=0.044
+ 2026-08-17 at 12:42:05 | Epoch 50 loss: 0.10207075641343469
+ 2026-08-17 at 12:42:12 | Epoch [50] | Rasa metrics | T2A: R@1=0.536, R@5=0.852, R@10=0.909, MedR=1.000, MeanR=4.946, mAP=0.669 | A2T: R@1=0.512, R@5=0.803, R@10=0.890, MedR=1.000, MeanR=5.945, mAP=0.640
+ 2026-08-17 at 12:42:12 | Epoch [50] | IndicVoices metrics | T2A: R@1=0.019, R@5=0.063, R@10=0.109, MedR=168.000, MeanR=307.095, mAP=0.050 | A2T: R@1=0.016, R@5=0.061, R@10=0.095, MedR=201.000, MeanR=330.649, mAP=0.045
+ 2026-08-17 at 12:42:15 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 50.
+ 2026-08-17 at 12:42:47 | Epoch 51 loss: 0.0973479414456769
+ 2026-08-17 at 12:42:54 | Epoch [51] | Rasa metrics | T2A: R@1=0.541, R@5=0.852, R@10=0.918, MedR=1.000, MeanR=4.964, mAP=0.677 | A2T: R@1=0.517, R@5=0.807, R@10=0.882, MedR=1.000, MeanR=6.125, mAP=0.646
+ 2026-08-17 at 12:42:54 | Epoch [51] | IndicVoices metrics | T2A: R@1=0.019, R@5=0.068, R@10=0.108, MedR=165.000, MeanR=307.321, mAP=0.052 | A2T: R@1=0.013, R@5=0.056, R@10=0.099, MedR=203.000, MeanR=332.291, mAP=0.043
+ 2026-08-17 at 12:42:57 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 51.
+ 2026-08-17 at 12:43:28 | Epoch 52 loss: 0.09700019390959488
+ 2026-08-17 at 12:43:35 | Epoch [52] | Rasa metrics | T2A: R@1=0.529, R@5=0.853, R@10=0.913, MedR=1.000, MeanR=4.961, mAP=0.668 | A2T: R@1=0.507, R@5=0.812, R@10=0.889, MedR=1.000, MeanR=6.001, mAP=0.640
+ 2026-08-17 at 12:43:35 | Epoch [52] | IndicVoices metrics | T2A: R@1=0.021, R@5=0.065, R@10=0.107, MedR=176.000, MeanR=318.249, mAP=0.051 | A2T: R@1=0.013, R@5=0.053, R@10=0.093, MedR=211.000, MeanR=340.923, mAP=0.042
+ 2026-08-17 at 12:44:07 | Epoch 53 loss: 0.09297097603741446
+ 2026-08-17 at 12:44:13 | Epoch [53] | Rasa metrics | T2A: R@1=0.530, R@5=0.849, R@10=0.924, MedR=1.000, MeanR=4.782, mAP=0.668 | A2T: R@1=0.507, R@5=0.808, R@10=0.892, MedR=1.000, MeanR=6.017, mAP=0.640
+ 2026-08-17 at 12:44:13 | Epoch [53] | IndicVoices metrics | T2A: R@1=0.021, R@5=0.061, R@10=0.105, MedR=172.000, MeanR=320.864, mAP=0.051 | A2T: R@1=0.013, R@5=0.057, R@10=0.085, MedR=211.000, MeanR=345.956, mAP=0.041
+ 2026-08-17 at 12:44:45 | Epoch 54 loss: 0.08423013647920206
+ 2026-08-17 at 12:44:52 | Epoch [54] | Rasa metrics | T2A: R@1=0.522, R@5=0.844, R@10=0.914, MedR=1.000, MeanR=5.189, mAP=0.661 | A2T: R@1=0.513, R@5=0.802, R@10=0.889, MedR=1.000, MeanR=5.908, mAP=0.641
+ 2026-08-17 at 12:44:52 | Epoch [54] | IndicVoices metrics | T2A: R@1=0.021, R@5=0.071, R@10=0.109, MedR=162.000, MeanR=300.871, mAP=0.053 | A2T: R@1=0.017, R@5=0.058, R@10=0.091, MedR=200.000, MeanR=329.030, mAP=0.044
+ 2026-08-17 at 12:45:23 | Epoch 55 loss: 0.0853239528442684
+ 2026-08-17 at 12:45:30 | Epoch [55] | Rasa metrics | T2A: R@1=0.532, R@5=0.844, R@10=0.920, MedR=1.000, MeanR=4.941, mAP=0.670 | A2T: R@1=0.505, R@5=0.811, R@10=0.892, MedR=1.000, MeanR=5.955, mAP=0.640
+ 2026-08-17 at 12:45:30 | Epoch [55] | IndicVoices metrics | T2A: R@1=0.019, R@5=0.063, R@10=0.108, MedR=168.000, MeanR=315.127, mAP=0.050 | A2T: R@1=0.016, R@5=0.055, R@10=0.088, MedR=214.000, MeanR=340.039, mAP=0.044
+ 2026-08-17 at 12:46:02 | Epoch 56 loss: 0.0785526563854594
+ 2026-08-17 at 12:46:09 | Epoch [56] | Rasa metrics | T2A: R@1=0.540, R@5=0.859, R@10=0.920, MedR=1.000, MeanR=4.749, mAP=0.680 | A2T: R@1=0.529, R@5=0.820, R@10=0.895, MedR=1.000, MeanR=5.696, mAP=0.655
+ 2026-08-17 at 12:46:09 | Epoch [56] | IndicVoices metrics | T2A: R@1=0.019, R@5=0.065, R@10=0.104, MedR=170.000, MeanR=312.125, mAP=0.050 | A2T: R@1=0.016, R@5=0.058, R@10=0.092, MedR=211.000, MeanR=339.607, mAP=0.045
+ 2026-08-17 at 12:46:40 | Epoch 57 loss: 0.07687595855248602
+ 2026-08-17 at 12:46:47 | Epoch [57] | Rasa metrics | T2A: R@1=0.561, R@5=0.872, R@10=0.925, MedR=1.000, MeanR=4.510, mAP=0.695 | A2T: R@1=0.542, R@5=0.826, R@10=0.898, MedR=1.000, MeanR=5.517, mAP=0.667
+ 2026-08-17 at 12:46:47 | Epoch [57] | IndicVoices metrics | T2A: R@1=0.020, R@5=0.068, R@10=0.115, MedR=163.000, MeanR=300.659, mAP=0.054 | A2T: R@1=0.016, R@5=0.061, R@10=0.099, MedR=200.000, MeanR=329.621, mAP=0.045
+ 2026-08-17 at 12:46:50 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 57.
+ 2026-08-17 at 12:47:22 | Epoch 58 loss: 0.0753175702142088
+ 2026-08-17 at 12:47:29 | Epoch [58] | Rasa metrics | T2A: R@1=0.530, R@5=0.856, R@10=0.917, MedR=1.000, MeanR=4.792, mAP=0.670 | A2T: R@1=0.519, R@5=0.818, R@10=0.892, MedR=1.000, MeanR=5.675, mAP=0.647
+ 2026-08-17 at 12:47:29 | Epoch [58] | IndicVoices metrics | T2A: R@1=0.017, R@5=0.069, R@10=0.111, MedR=163.000, MeanR=309.805, mAP=0.051 | A2T: R@1=0.014, R@5=0.058, R@10=0.093, MedR=202.000, MeanR=330.258, mAP=0.044
+ 2026-08-17 at 12:48:01 | Epoch 59 loss: 0.07237790575937221
+ 2026-08-17 at 12:48:08 | Epoch [59] | Rasa metrics | T2A: R@1=0.532, R@5=0.852, R@10=0.916, MedR=1.000, MeanR=5.048, mAP=0.670 | A2T: R@1=0.516, R@5=0.791, R@10=0.891, MedR=1.000, MeanR=6.140, mAP=0.641
+ 2026-08-17 at 12:48:08 | Epoch [59] | IndicVoices metrics | T2A: R@1=0.017, R@5=0.068, R@10=0.111, MedR=163.000, MeanR=305.366, mAP=0.051 | A2T: R@1=0.015, R@5=0.059, R@10=0.096, MedR=201.000, MeanR=331.577, mAP=0.045
+ 2026-08-17 at 12:48:40 | Epoch 60 loss: 0.06846693420880719
+ 2026-08-17 at 12:48:46 | Epoch [60] | Rasa metrics | T2A: R@1=0.568, R@5=0.869, R@10=0.926, MedR=1.000, MeanR=4.507, mAP=0.697 | A2T: R@1=0.550, R@5=0.826, R@10=0.901, MedR=1.000, MeanR=5.517, mAP=0.669
+ 2026-08-17 at 12:48:46 | Epoch [60] | IndicVoices metrics | T2A: R@1=0.019, R@5=0.068, R@10=0.105, MedR=168.000, MeanR=311.663, mAP=0.052 | A2T: R@1=0.014, R@5=0.059, R@10=0.096, MedR=207.000, MeanR=336.356, mAP=0.043
+ 2026-08-17 at 12:48:50 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 60.
+ 2026-08-17 at 12:49:21 | Epoch 61 loss: 0.0730218568914815
+ 2026-08-17 at 12:49:28 | Epoch [61] | Rasa metrics | T2A: R@1=0.542, R@5=0.857, R@10=0.919, MedR=1.000, MeanR=4.960, mAP=0.678 | A2T: R@1=0.537, R@5=0.810, R@10=0.897, MedR=1.000, MeanR=5.992, mAP=0.659
+ 2026-08-17 at 12:49:28 | Epoch [61] | IndicVoices metrics | T2A: R@1=0.020, R@5=0.065, R@10=0.103, MedR=163.000, MeanR=303.526, mAP=0.052 | A2T: R@1=0.013, R@5=0.059, R@10=0.094, MedR=203.000, MeanR=334.451, mAP=0.043
+ 2026-08-17 at 12:50:00 | Epoch 62 loss: 0.06959524676203728
+ 2026-08-17 at 12:50:07 | Epoch [62] | Rasa metrics | T2A: R@1=0.565, R@5=0.864, R@10=0.918, MedR=1.000, MeanR=4.663, mAP=0.693 | A2T: R@1=0.568, R@5=0.829, R@10=0.902, MedR=1.000, MeanR=5.206, mAP=0.683
+ 2026-08-17 at 12:50:07 | Epoch [62] | IndicVoices metrics | T2A: R@1=0.017, R@5=0.065, R@10=0.107, MedR=169.000, MeanR=308.337, mAP=0.051 | A2T: R@1=0.016, R@5=0.059, R@10=0.096, MedR=200.000, MeanR=330.552, mAP=0.046
+ 2026-08-17 at 12:50:38 | Epoch 63 loss: 0.0676336521380826
+ 2026-08-17 at 12:50:45 | Epoch [63] | Rasa metrics | T2A: R@1=0.581, R@5=0.878, R@10=0.933, MedR=1.000, MeanR=4.235, mAP=0.708 | A2T: R@1=0.559, R@5=0.849, R@10=0.914, MedR=1.000, MeanR=5.025, mAP=0.683
+ 2026-08-17 at 12:50:45 | Epoch [63] | IndicVoices metrics | T2A: R@1=0.018, R@5=0.067, R@10=0.110, MedR=170.000, MeanR=321.214, mAP=0.051 | A2T: R@1=0.017, R@5=0.056, R@10=0.095, MedR=217.000, MeanR=345.117, mAP=0.045
+ 2026-08-17 at 12:50:48 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 63.
+ 2026-08-17 at 12:51:20 | Epoch 64 loss: 0.06332939063247882
+ 2026-08-17 at 12:51:27 | Epoch [64] | Rasa metrics | T2A: R@1=0.551, R@5=0.858, R@10=0.930, MedR=1.000, MeanR=5.023, mAP=0.685 | A2T: R@1=0.527, R@5=0.814, R@10=0.898, MedR=1.000, MeanR=5.921, mAP=0.656
+ 2026-08-17 at 12:51:27 | Epoch [64] | IndicVoices metrics | T2A: R@1=0.019, R@5=0.070, R@10=0.111, MedR=161.000, MeanR=299.113, mAP=0.052 | A2T: R@1=0.017, R@5=0.061, R@10=0.097, MedR=204.000, MeanR=331.137, mAP=0.046
+ 2026-08-17 at 12:51:59 | Epoch 65 loss: 0.06382967241500553
+ 2026-08-17 at 12:52:06 | Epoch [65] | Rasa metrics | T2A: R@1=0.576, R@5=0.870, R@10=0.932, MedR=1.000, MeanR=4.356, mAP=0.705 | A2T: R@1=0.557, R@5=0.841, R@10=0.912, MedR=1.000, MeanR=4.947, mAP=0.680
+ 2026-08-17 at 12:52:06 | Epoch [65] | IndicVoices metrics | T2A: R@1=0.021, R@5=0.069, R@10=0.115, MedR=157.000, MeanR=299.869, mAP=0.053 | A2T: R@1=0.017, R@5=0.060, R@10=0.095, MedR=198.000, MeanR=326.863, mAP=0.046
+ 2026-08-17 at 12:52:37 | Epoch 66 loss: 0.06060406357834214
+ 2026-08-17 at 12:52:44 | Epoch [66] | Rasa metrics | T2A: R@1=0.581, R@5=0.878, R@10=0.932, MedR=1.000, MeanR=4.306, mAP=0.711 | A2T: R@1=0.553, R@5=0.843, R@10=0.910, MedR=1.000, MeanR=5.291, mAP=0.680
+ 2026-08-17 at 12:52:44 | Epoch [66] | IndicVoices metrics | T2A: R@1=0.023, R@5=0.072, R@10=0.113, MedR=164.000, MeanR=305.672, mAP=0.055 | A2T: R@1=0.016, R@5=0.062, R@10=0.095, MedR=205.000, MeanR=338.018, mAP=0.045
+ 2026-08-17 at 12:53:16 | Epoch 67 loss: 0.06288564189484244
+ 2026-08-17 at 12:53:23 | Epoch [67] | Rasa metrics | T2A: R@1=0.584, R@5=0.873, R@10=0.932, MedR=1.000, MeanR=4.295, mAP=0.711 | A2T: R@1=0.562, R@5=0.849, R@10=0.915, MedR=1.000, MeanR=4.893, mAP=0.685
+ 2026-08-17 at 12:53:23 | Epoch [67] | IndicVoices metrics | T2A: R@1=0.020, R@5=0.070, R@10=0.115, MedR=156.000, MeanR=300.437, mAP=0.053 | A2T: R@1=0.017, R@5=0.054, R@10=0.094, MedR=203.000, MeanR=331.575, mAP=0.045
+ 2026-08-17 at 12:53:26 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 67.
+ 2026-08-17 at 12:53:58 | Epoch 68 loss: 0.05640135130992061
+ 2026-08-17 at 12:54:05 | Epoch [68] | Rasa metrics | T2A: R@1=0.596, R@5=0.891, R@10=0.944, MedR=1.000, MeanR=3.774, mAP=0.724 | A2T: R@1=0.587, R@5=0.858, R@10=0.923, MedR=1.000, MeanR=4.550, mAP=0.704
+ 2026-08-17 at 12:54:05 | Epoch [68] | IndicVoices metrics | T2A: R@1=0.025, R@5=0.071, R@10=0.113, MedR=169.000, MeanR=315.432, mAP=0.057 | A2T: R@1=0.018, R@5=0.054, R@10=0.091, MedR=213.000, MeanR=341.100, mAP=0.045
+ 2026-08-17 at 12:54:08 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 68.
+ 2026-08-17 at 12:54:40 | Epoch 69 loss: 0.05596716792175644
+ 2026-08-17 at 12:54:47 | Epoch [69] | Rasa metrics | T2A: R@1=0.574, R@5=0.879, R@10=0.936, MedR=1.000, MeanR=4.147, mAP=0.707 | A2T: R@1=0.567, R@5=0.844, R@10=0.919, MedR=1.000, MeanR=4.742, mAP=0.691
+ 2026-08-17 at 12:54:47 | Epoch [69] | IndicVoices metrics | T2A: R@1=0.020, R@5=0.071, R@10=0.111, MedR=166.000, MeanR=308.313, mAP=0.054 | A2T: R@1=0.019, R@5=0.055, R@10=0.092, MedR=211.000, MeanR=339.572, mAP=0.046
+ 2026-08-17 at 12:55:18 | Epoch 70 loss: 0.05618203223535889
+ 2026-08-17 at 12:55:25 | Epoch [70] | Rasa metrics | T2A: R@1=0.602, R@5=0.887, R@10=0.939, MedR=1.000, MeanR=3.863, mAP=0.727 | A2T: R@1=0.583, R@5=0.852, R@10=0.920, MedR=1.000, MeanR=4.478, mAP=0.702
+ 2026-08-17 at 12:55:25 | Epoch [70] | IndicVoices metrics | T2A: R@1=0.023, R@5=0.074, R@10=0.111, MedR=167.000, MeanR=312.016, mAP=0.055 | A2T: R@1=0.019, R@5=0.061, R@10=0.095, MedR=201.000, MeanR=335.368, mAP=0.047
+ 2026-08-17 at 12:55:29 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 70.
+ 2026-08-17 at 12:56:01 | Epoch 71 loss: 0.054293822183420784
+ 2026-08-17 at 12:56:08 | Epoch [71] | Rasa metrics | T2A: R@1=0.593, R@5=0.884, R@10=0.935, MedR=1.000, MeanR=4.211, mAP=0.717 | A2T: R@1=0.554, R@5=0.845, R@10=0.918, MedR=1.000, MeanR=5.185, mAP=0.681
+ 2026-08-17 at 12:56:08 | Epoch [71] | IndicVoices metrics | T2A: R@1=0.021, R@5=0.075, R@10=0.111, MedR=160.000, MeanR=301.990, mAP=0.055 | A2T: R@1=0.018, R@5=0.060, R@10=0.096, MedR=202.000, MeanR=337.379, mAP=0.046
+ 2026-08-17 at 12:56:40 | Epoch 72 loss: 0.05088124900664154
+ 2026-08-17 at 12:56:47 | Epoch [72] | Rasa metrics | T2A: R@1=0.605, R@5=0.892, R@10=0.940, MedR=1.000, MeanR=3.880, mAP=0.728 | A2T: R@1=0.573, R@5=0.852, R@10=0.918, MedR=1.000, MeanR=4.763, mAP=0.695
+ 2026-08-17 at 12:56:47 | Epoch [72] | IndicVoices metrics | T2A: R@1=0.022, R@5=0.073, R@10=0.111, MedR=161.000, MeanR=305.739, mAP=0.056 | A2T: R@1=0.017, R@5=0.058, R@10=0.090, MedR=203.000, MeanR=335.077, mAP=0.045
+ 2026-08-17 at 12:56:50 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 72.
+ 2026-08-17 at 12:57:22 | Epoch 73 loss: 0.05136770166848835
+ 2026-08-17 at 12:57:30 | Epoch [73] | Rasa metrics | T2A: R@1=0.591, R@5=0.883, R@10=0.937, MedR=1.000, MeanR=4.103, mAP=0.715 | A2T: R@1=0.577, R@5=0.839, R@10=0.915, MedR=1.000, MeanR=4.786, mAP=0.693
+ 2026-08-17 at 12:57:30 | Epoch [73] | IndicVoices metrics | T2A: R@1=0.022, R@5=0.081, R@10=0.119, MedR=155.000, MeanR=299.742, mAP=0.057 | A2T: R@1=0.020, R@5=0.056, R@10=0.095, MedR=190.000, MeanR=324.099, mAP=0.048
+ 2026-08-17 at 12:58:02 | Epoch 74 loss: 0.047687841383250135
+ 2026-08-17 at 12:58:09 | Epoch [74] | Rasa metrics | T2A: R@1=0.605, R@5=0.892, R@10=0.942, MedR=1.000, MeanR=4.036, mAP=0.727 | A2T: R@1=0.584, R@5=0.855, R@10=0.926, MedR=1.000, MeanR=4.570, mAP=0.702
+ 2026-08-17 at 12:58:09 | Epoch [74] | IndicVoices metrics | T2A: R@1=0.022, R@5=0.076, R@10=0.113, MedR=153.000, MeanR=299.080, mAP=0.056 | A2T: R@1=0.021, R@5=0.055, R@10=0.093, MedR=200.000, MeanR=330.547, mAP=0.048
+ 2026-08-17 at 12:58:13 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 74.
+ 2026-08-17 at 12:58:45 | Epoch 75 loss: 0.05049955974283971
+ 2026-08-17 at 12:58:52 | Epoch [75] | Rasa metrics | T2A: R@1=0.606, R@5=0.899, R@10=0.949, MedR=1.000, MeanR=3.757, mAP=0.731 | A2T: R@1=0.592, R@5=0.866, R@10=0.927, MedR=1.000, MeanR=4.392, mAP=0.709
+ 2026-08-17 at 12:58:52 | Epoch [75] | IndicVoices metrics | T2A: R@1=0.022, R@5=0.077, R@10=0.119, MedR=176.000, MeanR=316.117, mAP=0.055 | A2T: R@1=0.017, R@5=0.059, R@10=0.099, MedR=211.000, MeanR=338.125, mAP=0.045
+ 2026-08-17 at 12:58:56 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 75.
+ 2026-08-17 at 12:59:27 | Epoch 76 loss: 0.05000063388755447
+ 2026-08-17 at 12:59:34 | Epoch [76] | Rasa metrics | T2A: R@1=0.605, R@5=0.894, R@10=0.938, MedR=1.000, MeanR=3.915, mAP=0.730 | A2T: R@1=0.594, R@5=0.855, R@10=0.923, MedR=1.000, MeanR=4.598, mAP=0.709
+ 2026-08-17 at 12:59:34 | Epoch [76] | IndicVoices metrics | T2A: R@1=0.022, R@5=0.076, R@10=0.119, MedR=160.000, MeanR=303.191, mAP=0.056 | A2T: R@1=0.019, R@5=0.061, R@10=0.099, MedR=195.000, MeanR=327.734, mAP=0.048
+ 2026-08-17 at 13:00:06 | Epoch 77 loss: 0.04801930994971802
+ 2026-08-17 at 13:00:13 | Epoch [77] | Rasa metrics | T2A: R@1=0.584, R@5=0.888, R@10=0.938, MedR=1.000, MeanR=4.217, mAP=0.714 | A2T: R@1=0.567, R@5=0.852, R@10=0.918, MedR=1.000, MeanR=5.003, mAP=0.690
+ 2026-08-17 at 13:00:13 | Epoch [77] | IndicVoices metrics | T2A: R@1=0.022, R@5=0.073, R@10=0.114, MedR=159.000, MeanR=303.820, mAP=0.056 | A2T: R@1=0.019, R@5=0.056, R@10=0.094, MedR=203.000, MeanR=332.697, mAP=0.046
+ 2026-08-17 at 13:00:44 | Epoch 78 loss: 0.04543676311640363
+ 2026-08-17 at 13:00:52 | Epoch [78] | Rasa metrics | T2A: R@1=0.595, R@5=0.892, R@10=0.935, MedR=1.000, MeanR=4.223, mAP=0.722 | A2T: R@1=0.581, R@5=0.858, R@10=0.922, MedR=1.000, MeanR=4.687, mAP=0.703
+ 2026-08-17 at 13:00:52 | Epoch [78] | IndicVoices metrics | T2A: R@1=0.023, R@5=0.067, R@10=0.115, MedR=160.000, MeanR=303.791, mAP=0.056 | A2T: R@1=0.017, R@5=0.056, R@10=0.097, MedR=200.000, MeanR=329.975, mAP=0.045
+ 2026-08-17 at 13:01:24 | Epoch 79 loss: 0.043338280622112126
+ 2026-08-17 at 13:01:31 | Epoch [79] | Rasa metrics | T2A: R@1=0.607, R@5=0.892, R@10=0.939, MedR=1.000, MeanR=3.985, mAP=0.731 | A2T: R@1=0.582, R@5=0.856, R@10=0.924, MedR=1.000, MeanR=4.612, mAP=0.702
+ 2026-08-17 at 13:01:31 | Epoch [79] | IndicVoices metrics | T2A: R@1=0.019, R@5=0.076, R@10=0.118, MedR=161.000, MeanR=301.568, mAP=0.055 | A2T: R@1=0.019, R@5=0.055, R@10=0.097, MedR=202.000, MeanR=331.470, mAP=0.047
+ 2026-08-17 at 13:01:35 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 79.
+ 2026-08-17 at 13:02:07 | Epoch 80 loss: 0.045674251314056544
+ 2026-08-17 at 13:02:14 | Epoch [80] | Rasa metrics | T2A: R@1=0.622, R@5=0.907, R@10=0.946, MedR=1.000, MeanR=3.777, mAP=0.745 | A2T: R@1=0.611, R@5=0.869, R@10=0.927, MedR=1.000, MeanR=4.375, mAP=0.724
+ 2026-08-17 at 13:02:14 | Epoch [80] | IndicVoices metrics | T2A: R@1=0.023, R@5=0.074, R@10=0.118, MedR=163.000, MeanR=306.407, mAP=0.058 | A2T: R@1=0.018, R@5=0.056, R@10=0.093, MedR=207.000, MeanR=336.799, mAP=0.045
+ 2026-08-17 at 13:02:17 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 80.
+ 2026-08-17 at 13:02:50 | Epoch 81 loss: 0.045211925749716005
+ 2026-08-17 at 13:02:57 | Epoch [81] | Rasa metrics | T2A: R@1=0.616, R@5=0.898, R@10=0.943, MedR=1.000, MeanR=3.776, mAP=0.740 | A2T: R@1=0.605, R@5=0.869, R@10=0.930, MedR=1.000, MeanR=4.369, mAP=0.720
+ 2026-08-17 at 13:02:57 | Epoch [81] | IndicVoices metrics | T2A: R@1=0.022, R@5=0.075, R@10=0.112, MedR=168.000, MeanR=306.305, mAP=0.056 | A2T: R@1=0.015, R@5=0.055, R@10=0.091, MedR=201.000, MeanR=336.734, mAP=0.044
+ 2026-08-17 at 13:03:28 | Epoch 82 loss: 0.04234292756177877
+ 2026-08-17 at 13:03:35 | Epoch [82] | Rasa metrics | T2A: R@1=0.619, R@5=0.889, R@10=0.941, MedR=1.000, MeanR=4.022, mAP=0.737 | A2T: R@1=0.605, R@5=0.861, R@10=0.927, MedR=1.000, MeanR=4.561, mAP=0.720
+ 2026-08-17 at 13:03:35 | Epoch [82] | IndicVoices metrics | T2A: R@1=0.020, R@5=0.070, R@10=0.119, MedR=161.000, MeanR=306.393, mAP=0.055 | A2T: R@1=0.017, R@5=0.059, R@10=0.091, MedR=204.000, MeanR=334.543, mAP=0.045
+ 2026-08-17 at 13:04:07 | Epoch 83 loss: 0.043946283761607974
+ 2026-08-17 at 13:04:14 | Epoch [83] | Rasa metrics | T2A: R@1=0.631, R@5=0.900, R@10=0.946, MedR=1.000, MeanR=3.767, mAP=0.748 | A2T: R@1=0.607, R@5=0.866, R@10=0.927, MedR=1.000, MeanR=4.340, mAP=0.722
+ 2026-08-17 at 13:04:14 | Epoch [83] | IndicVoices metrics | T2A: R@1=0.022, R@5=0.076, R@10=0.117, MedR=159.000, MeanR=302.676, mAP=0.057 | A2T: R@1=0.015, R@5=0.057, R@10=0.097, MedR=206.000, MeanR=333.247, mAP=0.045
+ 2026-08-17 at 13:04:17 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 83.
+ 2026-08-17 at 13:04:49 | Epoch 84 loss: 0.04048579762640752
+ 2026-08-17 at 13:04:58 | Epoch [84] | Rasa metrics | T2A: R@1=0.629, R@5=0.901, R@10=0.947, MedR=1.000, MeanR=3.746, mAP=0.747 | A2T: R@1=0.604, R@5=0.870, R@10=0.931, MedR=1.000, MeanR=4.312, mAP=0.720
+ 2026-08-17 at 13:04:58 | Epoch [84] | IndicVoices metrics | T2A: R@1=0.023, R@5=0.075, R@10=0.111, MedR=164.000, MeanR=306.201, mAP=0.057 | A2T: R@1=0.015, R@5=0.054, R@10=0.092, MedR=209.000, MeanR=339.724, mAP=0.043
+ 2026-08-17 at 13:05:30 | Epoch 85 loss: 0.04013535509768285
+ 2026-08-17 at 13:05:37 | Epoch [85] | Rasa metrics | T2A: R@1=0.613, R@5=0.897, R@10=0.941, MedR=1.000, MeanR=3.956, mAP=0.734 | A2T: R@1=0.576, R@5=0.858, R@10=0.921, MedR=1.000, MeanR=4.547, mAP=0.701
+ 2026-08-17 at 13:05:37 | Epoch [85] | IndicVoices metrics | T2A: R@1=0.025, R@5=0.077, R@10=0.115, MedR=157.000, MeanR=303.442, mAP=0.059 | A2T: R@1=0.018, R@5=0.058, R@10=0.098, MedR=198.000, MeanR=330.677, mAP=0.046
+ 2026-08-17 at 13:06:09 | Epoch 86 loss: 0.04027938931003997
+ 2026-08-17 at 13:06:16 | Epoch [86] | Rasa metrics | T2A: R@1=0.619, R@5=0.903, R@10=0.945, MedR=1.000, MeanR=3.860, mAP=0.739 | A2T: R@1=0.594, R@5=0.866, R@10=0.924, MedR=1.000, MeanR=4.495, mAP=0.712
+ 2026-08-17 at 13:06:16 | Epoch [86] | IndicVoices metrics | T2A: R@1=0.023, R@5=0.075, R@10=0.113, MedR=158.000, MeanR=305.891, mAP=0.057 | A2T: R@1=0.018, R@5=0.060, R@10=0.089, MedR=208.000, MeanR=334.329, mAP=0.046
+ 2026-08-17 at 13:06:48 | Epoch 87 loss: 0.04026793125820787
+ 2026-08-17 at 13:06:54 | Epoch [87] | Rasa metrics | T2A: R@1=0.620, R@5=0.899, R@10=0.945, MedR=1.000, MeanR=3.827, mAP=0.743 | A2T: R@1=0.599, R@5=0.866, R@10=0.930, MedR=1.000, MeanR=4.545, mAP=0.716
+ 2026-08-17 at 13:06:54 | Epoch [87] | IndicVoices metrics | T2A: R@1=0.023, R@5=0.073, R@10=0.116, MedR=166.000, MeanR=307.250, mAP=0.057 | A2T: R@1=0.017, R@5=0.053, R@10=0.091, MedR=212.000, MeanR=340.943, mAP=0.044
+ 2026-08-17 at 13:07:26 | Epoch 88 loss: 0.036797841010909334
+ 2026-08-17 at 13:07:33 | Epoch [88] | Rasa metrics | T2A: R@1=0.613, R@5=0.895, R@10=0.944, MedR=1.000, MeanR=3.881, mAP=0.739 | A2T: R@1=0.605, R@5=0.869, R@10=0.928, MedR=1.000, MeanR=4.323, mAP=0.721
+ 2026-08-17 at 13:07:33 | Epoch [88] | IndicVoices metrics | T2A: R@1=0.022, R@5=0.076, R@10=0.114, MedR=160.000, MeanR=301.981, mAP=0.057 | A2T: R@1=0.017, R@5=0.057, R@10=0.098, MedR=199.000, MeanR=330.402, mAP=0.046
+ 2026-08-17 at 13:08:05 | Epoch 89 loss: 0.03792756405708037
+ 2026-08-17 at 13:08:11 | Epoch [89] | Rasa metrics | T2A: R@1=0.629, R@5=0.904, R@10=0.944, MedR=1.000, MeanR=3.757, mAP=0.747 | A2T: R@1=0.607, R@5=0.876, R@10=0.930, MedR=1.000, MeanR=4.335, mAP=0.723
+ 2026-08-17 at 13:08:11 | Epoch [89] | IndicVoices metrics | T2A: R@1=0.023, R@5=0.074, R@10=0.119, MedR=161.000, MeanR=303.433, mAP=0.057 | A2T: R@1=0.018, R@5=0.061, R@10=0.099, MedR=200.000, MeanR=334.583, mAP=0.046
+ 2026-08-17 at 13:08:44 | Epoch 90 loss: 0.03822537156704225
+ 2026-08-17 at 13:08:51 | Epoch [90] | Rasa metrics | T2A: R@1=0.628, R@5=0.902, R@10=0.947, MedR=1.000, MeanR=3.739, mAP=0.749 | A2T: R@1=0.608, R@5=0.874, R@10=0.931, MedR=1.000, MeanR=4.324, mAP=0.725
+ 2026-08-17 at 13:08:51 | Epoch [90] | IndicVoices metrics | T2A: R@1=0.025, R@5=0.077, R@10=0.119, MedR=159.000, MeanR=304.141, mAP=0.059 | A2T: R@1=0.018, R@5=0.061, R@10=0.091, MedR=202.000, MeanR=334.793, mAP=0.046
+ 2026-08-17 at 13:09:22 | Epoch 91 loss: 0.039661761255640735
+ 2026-08-17 at 13:09:30 | Epoch [91] | Rasa metrics | T2A: R@1=0.624, R@5=0.907, R@10=0.948, MedR=1.000, MeanR=3.734, mAP=0.748 | A2T: R@1=0.599, R@5=0.870, R@10=0.932, MedR=1.000, MeanR=4.493, mAP=0.717
+ 2026-08-17 at 13:09:30 | Epoch [91] | IndicVoices metrics | T2A: R@1=0.024, R@5=0.074, R@10=0.116, MedR=162.000, MeanR=302.917, mAP=0.058 | A2T: R@1=0.019, R@5=0.053, R@10=0.093, MedR=210.000, MeanR=339.209, mAP=0.045
+ 2026-08-17 at 13:10:01 | Epoch 92 loss: 0.03825489323782293
+ 2026-08-17 at 13:10:09 | Epoch [92] | Rasa metrics | T2A: R@1=0.623, R@5=0.904, R@10=0.944, MedR=1.000, MeanR=3.795, mAP=0.745 | A2T: R@1=0.614, R@5=0.875, R@10=0.933, MedR=1.000, MeanR=4.196, mAP=0.728
+ 2026-08-17 at 13:10:09 | Epoch [92] | IndicVoices metrics | T2A: R@1=0.021, R@5=0.075, R@10=0.118, MedR=161.000, MeanR=305.037, mAP=0.056 | A2T: R@1=0.016, R@5=0.057, R@10=0.095, MedR=205.000, MeanR=335.304, mAP=0.045
+ 2026-08-17 at 13:10:40 | Epoch 93 loss: 0.037193617028625385
+ 2026-08-17 at 13:10:48 | Epoch [93] | Rasa metrics | T2A: R@1=0.639, R@5=0.907, R@10=0.948, MedR=1.000, MeanR=3.638, mAP=0.754 | A2T: R@1=0.619, R@5=0.882, R@10=0.932, MedR=1.000, MeanR=4.117, mAP=0.732
+ 2026-08-17 at 13:10:48 | Epoch [93] | IndicVoices metrics | T2A: R@1=0.025, R@5=0.075, R@10=0.116, MedR=159.000, MeanR=304.186, mAP=0.058 | A2T: R@1=0.017, R@5=0.057, R@10=0.093, MedR=207.000, MeanR=335.276, mAP=0.046
+ 2026-08-17 at 13:10:51 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 93.
+ 2026-08-17 at 13:11:23 | Epoch 94 loss: 0.035246626170058
+ 2026-08-17 at 13:11:30 | Epoch [94] | Rasa metrics | T2A: R@1=0.634, R@5=0.904, R@10=0.947, MedR=1.000, MeanR=3.760, mAP=0.751 | A2T: R@1=0.615, R@5=0.881, R@10=0.933, MedR=1.000, MeanR=4.332, mAP=0.729
+ 2026-08-17 at 13:11:30 | Epoch [94] | IndicVoices metrics | T2A: R@1=0.021, R@5=0.077, R@10=0.118, MedR=165.000, MeanR=308.534, mAP=0.057 | A2T: R@1=0.018, R@5=0.056, R@10=0.092, MedR=211.000, MeanR=342.022, mAP=0.045
+ 2026-08-17 at 13:12:02 | Epoch 95 loss: 0.03728520650612681
+ 2026-08-17 at 13:12:10 | Epoch [95] | Rasa metrics | T2A: R@1=0.641, R@5=0.912, R@10=0.949, MedR=1.000, MeanR=3.607, mAP=0.757 | A2T: R@1=0.613, R@5=0.883, R@10=0.930, MedR=1.000, MeanR=4.180, mAP=0.728
+ 2026-08-17 at 13:12:10 | Epoch [95] | IndicVoices metrics | T2A: R@1=0.023, R@5=0.075, R@10=0.119, MedR=158.000, MeanR=304.906, mAP=0.058 | A2T: R@1=0.018, R@5=0.056, R@10=0.095, MedR=204.000, MeanR=335.289, mAP=0.046
+ 2026-08-17 at 13:12:14 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 95.
+ 2026-08-17 at 13:12:46 | Epoch 96 loss: 0.0338090098217914
+ 2026-08-17 at 13:12:53 | Epoch [96] | Rasa metrics | T2A: R@1=0.619, R@5=0.905, R@10=0.944, MedR=1.000, MeanR=3.757, mAP=0.741 | A2T: R@1=0.600, R@5=0.871, R@10=0.924, MedR=1.000, MeanR=4.357, mAP=0.718
+ 2026-08-17 at 13:12:53 | Epoch [96] | IndicVoices metrics | T2A: R@1=0.021, R@5=0.073, R@10=0.113, MedR=158.000, MeanR=306.016, mAP=0.056 | A2T: R@1=0.019, R@5=0.054, R@10=0.094, MedR=203.000, MeanR=335.267, mAP=0.046
+ 2026-08-17 at 13:13:25 | Epoch 97 loss: 0.03603946354828383
+ 2026-08-17 at 13:13:32 | Epoch [97] | Rasa metrics | T2A: R@1=0.628, R@5=0.901, R@10=0.944, MedR=1.000, MeanR=3.806, mAP=0.746 | A2T: R@1=0.617, R@5=0.877, R@10=0.930, MedR=1.000, MeanR=4.398, mAP=0.729
+ 2026-08-17 at 13:13:32 | Epoch [97] | IndicVoices metrics | T2A: R@1=0.022, R@5=0.078, R@10=0.116, MedR=158.000, MeanR=301.981, mAP=0.057 | A2T: R@1=0.019, R@5=0.058, R@10=0.097, MedR=209.000, MeanR=338.045, mAP=0.047
+ 2026-08-17 at 13:14:04 | Epoch 98 loss: 0.032565724183070036
+ 2026-08-17 at 13:14:12 | Epoch [98] | Rasa metrics | T2A: R@1=0.631, R@5=0.905, R@10=0.947, MedR=1.000, MeanR=3.743, mAP=0.750 | A2T: R@1=0.611, R@5=0.879, R@10=0.930, MedR=1.000, MeanR=4.335, mAP=0.726
+ 2026-08-17 at 13:14:12 | Epoch [98] | IndicVoices metrics | T2A: R@1=0.023, R@5=0.075, R@10=0.121, MedR=159.000, MeanR=301.325, mAP=0.058 | A2T: R@1=0.018, R@5=0.058, R@10=0.093, MedR=204.000, MeanR=334.871, mAP=0.046
+ 2026-08-17 at 13:14:44 | Epoch 99 loss: 0.03419387548377639
+ 2026-08-17 at 13:14:51 | Epoch [99] | Rasa metrics | T2A: R@1=0.636, R@5=0.903, R@10=0.947, MedR=1.000, MeanR=3.662, mAP=0.753 | A2T: R@1=0.624, R@5=0.882, R@10=0.934, MedR=1.000, MeanR=4.208, mAP=0.735
+ 2026-08-17 at 13:14:51 | Epoch [99] | IndicVoices metrics | T2A: R@1=0.022, R@5=0.077, R@10=0.115, MedR=163.000, MeanR=307.049, mAP=0.057 | A2T: R@1=0.017, R@5=0.056, R@10=0.093, MedR=210.000, MeanR=337.057, mAP=0.045
+ 2026-08-17 at 13:15:23 | Epoch 100 loss: 0.03428507843299916
+ 2026-08-17 at 13:15:29 | Epoch [100] | Rasa metrics | T2A: R@1=0.634, R@5=0.904, R@10=0.944, MedR=1.000, MeanR=3.741, mAP=0.751 | A2T: R@1=0.611, R@5=0.878, R@10=0.929, MedR=1.000, MeanR=4.299, mAP=0.726
+ 2026-08-17 at 13:15:29 | Epoch [100] | IndicVoices metrics | T2A: R@1=0.023, R@5=0.075, R@10=0.118, MedR=162.000, MeanR=303.612, mAP=0.058 | A2T: R@1=0.018, R@5=0.056, R@10=0.093, MedR=208.000, MeanR=336.837, mAP=0.046
+ 2026-08-17 at 13:16:02 | Epoch 101 loss: 0.0337444445216342
+ 2026-08-17 at 13:16:08 | Epoch [101] | Rasa metrics | T2A: R@1=0.636, R@5=0.908, R@10=0.948, MedR=1.000, MeanR=3.566, mAP=0.754 | A2T: R@1=0.610, R@5=0.879, R@10=0.933, MedR=1.000, MeanR=4.148, mAP=0.728
+ 2026-08-17 at 13:16:08 | Epoch [101] | IndicVoices metrics | T2A: R@1=0.025, R@5=0.074, R@10=0.117, MedR=163.000, MeanR=308.217, mAP=0.057 | A2T: R@1=0.017, R@5=0.057, R@10=0.091, MedR=212.000, MeanR=340.679, mAP=0.045
+ 2026-08-17 at 13:16:40 | Epoch 102 loss: 0.03418909197575168
+ 2026-08-17 at 13:16:47 | Epoch [102] | Rasa metrics | T2A: R@1=0.625, R@5=0.899, R@10=0.944, MedR=1.000, MeanR=3.739, mAP=0.745 | A2T: R@1=0.611, R@5=0.872, R@10=0.931, MedR=1.000, MeanR=4.271, mAP=0.725
+ 2026-08-17 at 13:16:47 | Epoch [102] | IndicVoices metrics | T2A: R@1=0.021, R@5=0.073, R@10=0.117, MedR=159.000, MeanR=301.593, mAP=0.056 | A2T: R@1=0.017, R@5=0.055, R@10=0.094, MedR=203.000, MeanR=333.232, mAP=0.045
+ 2026-08-17 at 13:17:19 | Epoch 103 loss: 0.03490589976702866
+ 2026-08-17 at 13:17:26 | Epoch [103] | Rasa metrics | T2A: R@1=0.631, R@5=0.904, R@10=0.948, MedR=1.000, MeanR=3.743, mAP=0.748 | A2T: R@1=0.606, R@5=0.871, R@10=0.930, MedR=1.000, MeanR=4.402, mAP=0.721
+ 2026-08-17 at 13:17:26 | Epoch [103] | IndicVoices metrics | T2A: R@1=0.021, R@5=0.077, R@10=0.115, MedR=162.000, MeanR=303.959, mAP=0.056 | A2T: R@1=0.019, R@5=0.056, R@10=0.095, MedR=207.000, MeanR=335.726, mAP=0.046
+ 2026-08-17 at 13:17:58 | Epoch 104 loss: 0.031479402190368426
+ 2026-08-17 at 13:18:05 | Epoch [104] | Rasa metrics | T2A: R@1=0.630, R@5=0.904, R@10=0.943, MedR=1.000, MeanR=3.789, mAP=0.748 | A2T: R@1=0.614, R@5=0.873, R@10=0.932, MedR=1.000, MeanR=4.379, mAP=0.727
+ 2026-08-17 at 13:18:05 | Epoch [104] | IndicVoices metrics | T2A: R@1=0.023, R@5=0.077, R@10=0.118, MedR=161.000, MeanR=302.420, mAP=0.057 | A2T: R@1=0.017, R@5=0.058, R@10=0.096, MedR=206.000, MeanR=334.597, mAP=0.046
+ 2026-08-17 at 13:18:36 | Epoch 105 loss: 0.03227363915035599
+ 2026-08-17 at 13:18:43 | Epoch [105] | Rasa metrics | T2A: R@1=0.631, R@5=0.902, R@10=0.945, MedR=1.000, MeanR=3.702, mAP=0.750 | A2T: R@1=0.614, R@5=0.872, R@10=0.933, MedR=1.000, MeanR=4.272, mAP=0.726
+ 2026-08-17 at 13:18:43 | Epoch [105] | IndicVoices metrics | T2A: R@1=0.023, R@5=0.081, R@10=0.115, MedR=162.000, MeanR=304.751, mAP=0.057 | A2T: R@1=0.019, R@5=0.055, R@10=0.096, MedR=204.000, MeanR=334.255, mAP=0.047
+ 2026-08-17 at 13:19:15 | Epoch 106 loss: 0.03519144864066651
+ 2026-08-17 at 13:19:22 | Epoch [106] | Rasa metrics | T2A: R@1=0.632, R@5=0.904, R@10=0.945, MedR=1.000, MeanR=3.759, mAP=0.750 | A2T: R@1=0.615, R@5=0.879, R@10=0.929, MedR=1.000, MeanR=4.295, mAP=0.730
+ 2026-08-17 at 13:19:22 | Epoch [106] | IndicVoices metrics | T2A: R@1=0.024, R@5=0.076, R@10=0.116, MedR=166.000, MeanR=305.799, mAP=0.058 | A2T: R@1=0.017, R@5=0.054, R@10=0.096, MedR=207.000, MeanR=337.173, mAP=0.045
+ 2026-08-17 at 13:19:54 | Epoch 107 loss: 0.03340670188006602
+ 2026-08-17 at 13:20:00 | Epoch [107] | Rasa metrics | T2A: R@1=0.636, R@5=0.906, R@10=0.944, MedR=1.000, MeanR=3.740, mAP=0.752 | A2T: R@1=0.608, R@5=0.877, R@10=0.929, MedR=1.000, MeanR=4.317, mAP=0.724
+ 2026-08-17 at 13:20:00 | Epoch [107] | IndicVoices metrics | T2A: R@1=0.024, R@5=0.077, R@10=0.114, MedR=163.000, MeanR=305.281, mAP=0.058 | A2T: R@1=0.019, R@5=0.057, R@10=0.093, MedR=206.000, MeanR=336.486, mAP=0.046
+ 2026-08-17 at 13:20:32 | Epoch 108 loss: 0.03171991616683571
+ 2026-08-17 at 13:20:39 | Epoch [108] | Rasa metrics | T2A: R@1=0.642, R@5=0.905, R@10=0.944, MedR=1.000, MeanR=3.647, mAP=0.755 | A2T: R@1=0.609, R@5=0.877, R@10=0.934, MedR=1.000, MeanR=4.228, mAP=0.726
+ 2026-08-17 at 13:20:39 | Epoch [108] | IndicVoices metrics | T2A: R@1=0.025, R@5=0.076, R@10=0.117, MedR=161.000, MeanR=303.613, mAP=0.058 | A2T: R@1=0.018, R@5=0.057, R@10=0.093, MedR=209.000, MeanR=335.395, mAP=0.046
+ 2026-08-17 at 13:20:42 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 108.
+ 2026-08-17 at 13:21:14 | Epoch 109 loss: 0.03310167509082117
+ 2026-08-17 at 13:21:21 | Epoch [109] | Rasa metrics | T2A: R@1=0.642, R@5=0.905, R@10=0.944, MedR=1.000, MeanR=3.617, mAP=0.756 | A2T: R@1=0.612, R@5=0.882, R@10=0.934, MedR=1.000, MeanR=4.150, mAP=0.729
+ 2026-08-17 at 13:21:21 | Epoch [109] | IndicVoices metrics | T2A: R@1=0.023, R@5=0.075, R@10=0.117, MedR=164.000, MeanR=304.715, mAP=0.058 | A2T: R@1=0.018, R@5=0.058, R@10=0.091, MedR=208.000, MeanR=335.875, mAP=0.046
+ 2026-08-17 at 13:21:25 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 109.
+ 2026-08-17 at 13:21:57 | Epoch 110 loss: 0.03268460411774485
+ 2026-08-17 at 13:22:04 | Epoch [110] | Rasa metrics | T2A: R@1=0.638, R@5=0.907, R@10=0.946, MedR=1.000, MeanR=3.654, mAP=0.754 | A2T: R@1=0.616, R@5=0.878, R@10=0.932, MedR=1.000, MeanR=4.228, mAP=0.729
+ 2026-08-17 at 13:22:04 | Epoch [110] | IndicVoices metrics | T2A: R@1=0.025, R@5=0.077, R@10=0.115, MedR=160.000, MeanR=304.986, mAP=0.058 | A2T: R@1=0.017, R@5=0.059, R@10=0.095, MedR=208.000, MeanR=336.066, mAP=0.045
+ 2026-08-17 at 13:22:35 | Epoch 111 loss: 0.03349641179175753
+ 2026-08-17 at 13:22:42 | Epoch [111] | Rasa metrics | T2A: R@1=0.635, R@5=0.907, R@10=0.943, MedR=1.000, MeanR=3.663, mAP=0.753 | A2T: R@1=0.612, R@5=0.878, R@10=0.930, MedR=1.000, MeanR=4.250, mAP=0.726
+ 2026-08-17 at 13:22:42 | Epoch [111] | IndicVoices metrics | T2A: R@1=0.025, R@5=0.076, R@10=0.118, MedR=159.000, MeanR=303.273, mAP=0.059 | A2T: R@1=0.018, R@5=0.058, R@10=0.094, MedR=203.000, MeanR=334.137, mAP=0.046
+ 2026-08-17 at 13:23:14 | Epoch 112 loss: 0.033245807101852015
+ 2026-08-17 at 13:23:21 | Epoch [112] | Rasa metrics | T2A: R@1=0.641, R@5=0.905, R@10=0.945, MedR=1.000, MeanR=3.639, mAP=0.756 | A2T: R@1=0.613, R@5=0.876, R@10=0.932, MedR=1.000, MeanR=4.211, mAP=0.728
+ 2026-08-17 at 13:23:21 | Epoch [112] | IndicVoices metrics | T2A: R@1=0.024, R@5=0.077, R@10=0.119, MedR=161.000, MeanR=304.271, mAP=0.058 | A2T: R@1=0.017, R@5=0.057, R@10=0.092, MedR=205.000, MeanR=335.748, mAP=0.045
+ 2026-08-17 at 13:23:53 | Epoch 113 loss: 0.03249178644465773
+ 2026-08-17 at 13:23:59 | Epoch [113] | Rasa metrics | T2A: R@1=0.641, R@5=0.908, R@10=0.948, MedR=1.000, MeanR=3.592, mAP=0.757 | A2T: R@1=0.615, R@5=0.883, R@10=0.932, MedR=1.000, MeanR=4.154, mAP=0.730
+ 2026-08-17 at 13:23:59 | Epoch [113] | IndicVoices metrics | T2A: R@1=0.024, R@5=0.075, R@10=0.119, MedR=161.000, MeanR=305.324, mAP=0.058 | A2T: R@1=0.017, R@5=0.057, R@10=0.091, MedR=205.000, MeanR=335.997, mAP=0.045
+ 2026-08-17 at 13:24:31 | Epoch 114 loss: 0.03253306630802782
+ 2026-08-17 at 13:24:38 | Epoch [114] | Rasa metrics | T2A: R@1=0.644, R@5=0.909, R@10=0.949, MedR=1.000, MeanR=3.572, mAP=0.759 | A2T: R@1=0.616, R@5=0.880, R@10=0.936, MedR=1.000, MeanR=4.119, mAP=0.730
+ 2026-08-17 at 13:24:38 | Epoch [114] | IndicVoices metrics | T2A: R@1=0.024, R@5=0.077, R@10=0.123, MedR=161.000, MeanR=304.733, mAP=0.058 | A2T: R@1=0.018, R@5=0.057, R@10=0.093, MedR=203.000, MeanR=334.949, mAP=0.046
+ 2026-08-17 at 13:24:41 | Saved new best Rasa checkpoint to checkpoints/hindi_best_rasa.pt at epoch 114.
+ 2026-08-17 at 13:25:13 | Epoch 115 loss: 0.03128249986391318
+ 2026-08-17 at 13:25:20 | Epoch [115] | Rasa metrics | T2A: R@1=0.643, R@5=0.906, R@10=0.948, MedR=1.000, MeanR=3.642, mAP=0.757 | A2T: R@1=0.614, R@5=0.878, R@10=0.932, MedR=1.000, MeanR=4.182, mAP=0.729
+ 2026-08-17 at 13:25:20 | Epoch [115] | IndicVoices metrics | T2A: R@1=0.025, R@5=0.075, R@10=0.122, MedR=159.000, MeanR=304.118, mAP=0.059 | A2T: R@1=0.017, R@5=0.057, R@10=0.093, MedR=207.000, MeanR=335.471, mAP=0.045
+ 2026-08-17 at 13:25:52 | Epoch 116 loss: 0.03315176832440652
+ 2026-08-17 at 13:25:59 | Epoch [116] | Rasa metrics | T2A: R@1=0.642, R@5=0.907, R@10=0.947, MedR=1.000, MeanR=3.643, mAP=0.756 | A2T: R@1=0.611, R@5=0.878, R@10=0.933, MedR=1.000, MeanR=4.181, mAP=0.727
+ 2026-08-17 at 13:25:59 | Epoch [116] | IndicVoices metrics | T2A: R@1=0.024, R@5=0.075, R@10=0.120, MedR=159.000, MeanR=304.007, mAP=0.058 | A2T: R@1=0.017, R@5=0.057, R@10=0.093, MedR=206.000, MeanR=335.602, mAP=0.045
+ 2026-08-17 at 13:26:30 | Epoch 117 loss: 0.03294475466797226
+ 2026-08-17 at 13:26:37 | Epoch [117] | Rasa metrics | T2A: R@1=0.642, R@5=0.907, R@10=0.949, MedR=1.000, MeanR=3.626, mAP=0.757 | A2T: R@1=0.611, R@5=0.881, R@10=0.933, MedR=1.000, MeanR=4.180, mAP=0.728
+ 2026-08-17 at 13:26:37 | Epoch [117] | IndicVoices metrics | T2A: R@1=0.024, R@5=0.076, R@10=0.120, MedR=161.000, MeanR=304.155, mAP=0.058 | A2T: R@1=0.017, R@5=0.057, R@10=0.091, MedR=208.000, MeanR=336.019, mAP=0.045
+ 2026-08-17 at 13:27:09 | Epoch 118 loss: 0.03155979059244457
+ 2026-08-17 at 13:27:16 | Epoch [118] | Rasa metrics | T2A: R@1=0.642, R@5=0.906, R@10=0.950, MedR=1.000, MeanR=3.617, mAP=0.756 | A2T: R@1=0.611, R@5=0.881, R@10=0.935, MedR=1.000, MeanR=4.154, mAP=0.727
+ 2026-08-17 at 13:27:16 | Epoch [118] | IndicVoices metrics | T2A: R@1=0.024, R@5=0.075, R@10=0.120, MedR=161.000, MeanR=304.295, mAP=0.058 | A2T: R@1=0.017, R@5=0.057, R@10=0.093, MedR=204.000, MeanR=335.984, mAP=0.045
+ 2026-08-17 at 13:27:48 | Epoch 119 loss: 0.032678385118120594
+ 2026-08-17 at 13:27:55 | Epoch [119] | Rasa metrics | T2A: R@1=0.642, R@5=0.907, R@10=0.944, MedR=1.000, MeanR=3.635, mAP=0.756 | A2T: R@1=0.614, R@5=0.880, R@10=0.932, MedR=1.000, MeanR=4.182, mAP=0.728
+ 2026-08-17 at 13:27:55 | Epoch [119] | IndicVoices metrics | T2A: R@1=0.024, R@5=0.075, R@10=0.121, MedR=160.000, MeanR=303.923, mAP=0.058 | A2T: R@1=0.017, R@5=0.057, R@10=0.092, MedR=203.000, MeanR=335.637, mAP=0.045
+ 2026-08-17 at 13:28:27 | Epoch 120 loss: 0.033507163234447176
+ 2026-08-17 at 13:28:34 | Epoch [120] | Rasa metrics | T2A: R@1=0.642, R@5=0.904, R@10=0.947, MedR=1.000, MeanR=3.650, mAP=0.756 | A2T: R@1=0.612, R@5=0.880, R@10=0.933, MedR=1.000, MeanR=4.179, mAP=0.728
+ 2026-08-17 at 13:28:34 | Epoch [120] | IndicVoices metrics | T2A: R@1=0.023, R@5=0.075, R@10=0.120, MedR=159.000, MeanR=303.961, mAP=0.058 | A2T: R@1=0.017, R@5=0.057, R@10=0.093, MedR=206.000, MeanR=335.605, mAP=0.045

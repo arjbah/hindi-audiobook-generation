@@ -1,0 +1,1 @@
+["data=rasa", "model=slap", "model/audio_encoder=htsat_audioset_slap", "model/text_encoder=muril_slap", "trainer=hindi", "paths.pretrained=/root/models/pretrained", "seed=42", "trainer.max_epochs=120", "data.dataloader_kwargs.batch_size=128", "data.gender=male", "data.language=hindi", "data.indicvoices_limit=1500"]

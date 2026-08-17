@@ -100,6 +100,9 @@ def train(seed=42, epochs=120, batch_size=128, gender="male", language="all", in
     #scaler = GradScaler()
 
     # 4. Training Loop
+    checkpoint_dir = Path("checkpoints")
+    checkpoint_dir.mkdir(parents=True, exist_ok=True)
+    checkpoint_path = checkpoint_dir / f"{language}_best_rasa.pt"
     best_rasa_r1 = -1.0
     for epoch in range(num_epochs):
         model.train()
@@ -161,5 +164,5 @@ def train(seed=42, epochs=120, batch_size=128, gender="male", language="all", in
                 'rasa_t2a_metrics': metrics_t2a,
                 'rasa_a2t_metrics': metrics_a2t,
                 'best_rasa_r1': best_rasa_r1,
-            }, f"{language}_best_rasa.pt")
-            main_logger.info(f"Saved new best Rasa checkpoint at epoch {epoch+1}.")
+            }, checkpoint_path)
+            main_logger.info(f"Saved new best Rasa checkpoint to {checkpoint_path} at epoch {epoch+1}.")

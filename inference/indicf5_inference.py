@@ -6,7 +6,11 @@ import soundfile as sf
 from ruamel.yaml import YAML
 import sys
 from pathlib import Path
-sys.path.append(str((Path(__file__).parent.parent / "mga_clap_training").resolve()))
+
+INFERENCE_DIR = Path(__file__).resolve().parent
+ROOT = INFERENCE_DIR.parent
+MGA_DIR = ROOT / "models" / "mga_clap_training"
+sys.path.insert(0, str(MGA_DIR))
 from models.ase_model import ASE
 from pydub import AudioSegment
 
@@ -51,7 +55,7 @@ def inference(transcript: str, output_folder: Path, lang_code: str, model: ASE, 
 
     combined.export(output_folder / f"{output_folder.name}.wav", format="wav")
 
-root = Path("text")
+root = INFERENCE_DIR / "text"
 folders = [p for p in root.iterdir() if p.is_dir()]
 LANG_CODES = {
     "assamese": "as",
@@ -64,18 +68,22 @@ LANG_CODES = {
     "tamil": "ta",
     "telugu": "te",
 }
-with open("../mga_clap_training/settings/pretrain.yaml", "r") as f:
+with (MGA_DIR / "settings" / "pretrain.yaml").open() as f:
     yaml = YAML(typ='safe', pure=True)
     config = yaml.load(f)
 
 for folder in folders:
     model = ASE(config).to(device)
-    checkpoint = torch.load(f"../mga_clap_training/outputs/{folder.name}/models/val_rasa_best_model.pt", map_location=device, weights_only=False)
+    checkpoint_path = MGA_DIR / "checkpoints" / f"{folder.name}_best_rasa.pt"
+    checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
     model.load_state_dict(checkpoint["model"])
     model.eval()
 
     tts_model = AutoModel.from_pretrained("ai4bharat/IndicF5", trust_remote_code=True).to(device)
-    reference_library = torch.load(f"rasa_male_{folder.name}_reference_library.pt", weights_only=False)
+    reference_library = torch.load(
+        INFERENCE_DIR / f"rasa_male_{folder.name}_reference_library.pt",
+        weights_only=False,
+    )
     for ref in reference_library:
         ref["embedding"] = ref["embedding"].to(device)
     all_embeddings = torch.stack([r["embedding"] for r in reference_library]).to(device)
@@ -88,7 +96,7 @@ for folder in folders:
         with file.open("r", encoding="utf-8") as f:
             text = f.read()
 
-        output_folder = Path("audio") / folder.name / "indicf5" / file.stem
+        output_folder = INFERENCE_DIR / "audio" / folder.name / "indicf5" / file.stem
         output_folder.mkdir(parents=True, exist_ok=True)
 
         inference(text, output_folder, LANG_CODES[folder.name], model, tts_model, reference_library, all_embeddings)

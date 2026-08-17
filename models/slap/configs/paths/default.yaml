@@ -18,4 +18,4 @@ pretrained: ${paths.root_dir}/../pretrained
 output_dir: ${dora:xp.folder}
 
 # where checkpoints should be stored
-ckpt_dir: ${paths.output_dir}/checkpoints
+ckpt_dir: ${paths.root_dir}/checkpoints

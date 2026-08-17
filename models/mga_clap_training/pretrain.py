@@ -5,6 +5,7 @@
 
 from torch.cuda.amp import GradScaler
 import time
+from pathlib import Path
 from pprint import PrettyPrinter
 from types import SimpleNamespace
 import torch
@@ -57,6 +58,9 @@ def train(model, dataloader, optimizer, scheduler, device, epoch, scaler):
 
 def main(seed=42, epochs=120, batch_size=128, gender="male", language="all", indicvoices_limit=INDICVOICES_EVAL_SAMPLES):
     args = SimpleNamespace(local_rank=-1)
+    checkpoint_dir = Path("checkpoints")
+    checkpoint_dir.mkdir(parents=True, exist_ok=True)
+    checkpoint_path = checkpoint_dir / f"{language}_best_rasa.pt"
     with open("settings/pretrain.yaml", "r") as f:
         yaml = YAML(typ='safe', pure=True)
         config = yaml.load(f)
@@ -235,7 +239,7 @@ def main(seed=42, epochs=120, batch_size=128, gender="male", language="all", ind
                     "epoch": epoch,
                     "language": language,
                 }
-                torch.save(sav_obj, f"{language}_best_rasa.pt")
+                torch.save(sav_obj, checkpoint_path)
 
         if is_dist_avail_and_initialized():
             dist.barrier()

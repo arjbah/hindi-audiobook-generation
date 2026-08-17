@@ -100,7 +100,11 @@ def train(cfg: DictConfig) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         was_s3 = False
 
     if os.path.exists(cfg.paths.ckpt_dir) and cfg.resume:
-        candidates = [os.path.join(cfg.paths.ckpt_dir, ckpt_file) for ckpt_file in os.listdir(cfg.paths.ckpt_dir) if ckpt_file.endswith(".ckpt")]
+        candidates = [
+            os.path.join(cfg.paths.ckpt_dir, ckpt_file)
+            for ckpt_file in os.listdir(cfg.paths.ckpt_dir)
+            if ckpt_file.endswith((".ckpt", ".pt"))
+        ]
         if candidates:
             # get the last modified ckpt else get last.ckpt, reason is that s3 downloads are not in order of creation
             # ckpt_path = max(candidates, key=os.path.getmtime) if not was_s3 else 

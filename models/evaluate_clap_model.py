@@ -81,7 +81,7 @@ def evaluate_clap(name, args):
         dataset_module = importlib.import_module("clap_dataset")
         model_module = importlib.import_module("clap_model")
         model = model_module.CLAPModel()
-        checkpoint = checkpoint_path(args.path, path / f"{args.language}_best_rasa.pt")
+        checkpoint = checkpoint_path(args.path, path / "checkpoints" / f"{args.language}_best_rasa.pt")
         state = torch.load(checkpoint, map_location="cpu", weights_only=False)
         model.load_state_dict(state["model_state_dict"])
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -121,7 +121,7 @@ def evaluate_mga(args):
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         config["device"] = str(device)
         model = model_module.ASE(config).to(device)
-        checkpoint = checkpoint_path(args.path, path / f"{args.language}_best_rasa.pt")
+        checkpoint = checkpoint_path(args.path, path / "checkpoints" / f"{args.language}_best_rasa.pt")
         state = torch.load(checkpoint, map_location="cpu", weights_only=False)
         model.load_state_dict(state["model"])
         model.eval()
@@ -162,7 +162,7 @@ def evaluate_slap(args):
         with initialize_config_dir(config_dir=str(path / "configs"), version_base="1.3"):
             config = compose(config_name="train", overrides=overrides)
         model = hydra.utils.instantiate(config.model)
-        checkpoint = checkpoint_path(args.path, path / f"{args.language}_best_rasa.pt")
+        checkpoint = checkpoint_path(args.path, path / "checkpoints" / f"{args.language}_best_rasa.pt")
         state = torch.load(checkpoint, map_location="cpu", weights_only=False)
         model.load_state_dict(state["state_dict"])
         model.on_load_checkpoint(state)
@@ -218,7 +218,12 @@ def write_evaluation(args, checkpoint, results):
             lines.append(f"{dataset_name} {space} metrics")
             lines.append(f"T2A: {format_metrics(directions['T2A'])}")
             lines.append(f"A2T: {format_metrics(directions['A2T'])}")
-    (ROOT / "evaluation.txt").write_text("\n".join(lines) + "\n")
+    output_path = ROOT / "evaluation.txt"
+    new_evaluation = "\n".join(lines) + "\n"
+    previous_evaluations = output_path.read_text() if output_path.exists() else ""
+    if previous_evaluations:
+        new_evaluation += "\n" + "-" * 80 + "\n\n" + previous_evaluations
+    output_path.write_text(new_evaluation)
 
 def main():
     args = parse_args()

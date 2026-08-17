@@ -23,7 +23,6 @@ class IndicVoicesCLAPDataset(Dataset):
         self.split = split
         self.target_sr = target_sr
         self.max_text_len = MAX_TEXT_LENGTH
-        self.max_samples = target_sr * AUDIO_DURATION
         self.muril_model_name = "google/muril-base-cased"
         self.clap_model_name = "laion/clap-htsat-fused"
         self.tokenizer = AutoTokenizer.from_pretrained(self.muril_model_name)
@@ -67,13 +66,13 @@ class IndicVoicesCLAPDataset(Dataset):
             audio_tensor = F.resample(audio_tensor, orig_sr, self.target_sr)
         if audio_tensor.ndim > 1:
             audio_tensor = audio_tensor[0]
-        if audio_tensor.shape[0] > self.max_samples:
-            audio_tensor = audio_tensor[:self.max_samples]
-        else:
-            audio_tensor = torch.nn.functional.pad(audio_tensor, (0, self.max_samples - audio_tensor.shape[0]))
 
         audio_tensor = self.int16_to_float32_torch(self.float32_to_int16_torch(audio_tensor))
-        audio_inputs = self.audio_processor(audio=audio_tensor.numpy(), sampling_rate=self.target_sr, max_length=self.max_samples, return_tensors="pt")
+        audio_inputs = self.audio_processor(
+            audio=audio_tensor.numpy(),
+            sampling_rate=self.target_sr,
+            return_tensors="pt",
+        )
 
         if self.dataset_name == "indicvoices":
             text = self.clean_text(item["normalized"])

@@ -5,8 +5,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from transformers import AutoModel, AutoTokenizer
 
-from pretrained_htsat import load_pretrained_htsat
-
 class ProjectionHead(nn.Module):
     def __init__(self, input_dim, output_dim):
         super().__init__()
@@ -22,9 +20,8 @@ class ProjectionHead(nn.Module):
 class CLAPModel(nn.Module):
     def __init__(self, muril_model_name="google/muril-base-cased", projection_dim=768):
         super().__init__()
-        
+
         self.audio_encoder = AutoModel.from_pretrained("laion/voiceclap-small-v2", trust_remote_code=True)
-        load_pretrained_htsat(self.audio_encoder)
         self.audio_encoder.text_encoder = None
         self.audio_encoder.text_proj = None
         self.audio_projection = ProjectionHead(768, projection_dim)

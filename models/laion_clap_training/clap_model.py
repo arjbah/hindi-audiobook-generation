@@ -6,8 +6,6 @@ import torch.nn.functional as F
 from transformers import AutoModel, ClapAudioModelWithProjection
 import math
 
-from pretrained_htsat import load_pretrained_htsat
-
 class ProjectionHead(nn.Module):
     def __init__(self, input_dim, output_dim):
         super().__init__()
@@ -25,7 +23,6 @@ class CLAPModel(nn.Module):
         super().__init__()
         
         self.audio_encoder = ClapAudioModelWithProjection.from_pretrained("laion/clap-htsat-fused")
-        load_pretrained_htsat(self.audio_encoder)
         
         self.text_encoder = AutoModel.from_pretrained(muril_model_name)
         self.text_projection = ProjectionHead(768, projection_dim)

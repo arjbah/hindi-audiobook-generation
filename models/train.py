@@ -7,7 +7,7 @@ from pathlib import Path
 
 from data import INDICVOICES_EVAL_SAMPLES, LANGUAGES
 
-MODELS = ["laion_clap", "voiceclap", "mga_clap", "slap"]
+MODELS = ["voiceclap", "slap", "mga_clap", "laion_clap"]
 ROOT = Path(__file__).resolve().parent
 
 def parse_args():

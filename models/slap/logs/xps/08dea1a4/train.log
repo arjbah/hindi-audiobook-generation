@@ -1,0 +1,173 @@
+[2026-08-17 04:44:35,329][src.utils.utils][INFO] - [rank: 0] Enforcing tags! <cfg.extras.enforce_tags=True>
+[2026-08-17 04:44:35,335][src.utils.utils][INFO] - [rank: 0] Printing config tree with Rich! <cfg.extras.print_config=True>
+[2026-08-17 04:44:35,335][src.utils.rich_utils][WARNING] - [rank: 0] Field 'logger' not found in config. Skipping 'logger' config printing...
+[2026-08-17 04:44:35,390][src.utils.utils][INFO] - [rank: 0] Saving config in /root/models/slap/logs/xps/08dea1a4/config.yaml! <cfg.extras.save_config=True>
+[2026-08-17 04:44:35,407][__main__][INFO] - [rank: 0] Instantiating datamodule <src.data.rasa_dataset.RasaDataModule>
+[2026-08-17 04:44:35,441][__main__][INFO] - [rank: 0] Instantiating model <src.models.slap.SLAP>
+[2026-08-17 04:44:36,619][src.networks.audio.htsat][WARNING] - Error(s) in loading state_dict for HTSATSwinTransformer:
+	Unexpected key(s) in state_dict: "tscam_conv.weight", "tscam_conv.bias", "head.weight", "head.bias". 
+[2026-08-17 04:44:36,812][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/google/muril-base-cased/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+[2026-08-17 04:44:36,824][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/google/muril-base-cased/afd9f36c7923d54e97903922ff1b260d091d202f/config.json "HTTP/1.1 200 OK"
+[2026-08-17 04:44:36,893][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/google/muril-base-cased/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+[2026-08-17 04:44:36,905][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/google/muril-base-cased/afd9f36c7923d54e97903922ff1b260d091d202f/tokenizer_config.json "HTTP/1.1 200 OK"
+[2026-08-17 04:44:36,965][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/models/google/muril-base-cased/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+[2026-08-17 04:44:37,025][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/models/google/muril-base-cased/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+[2026-08-17 04:44:37,241][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/models/google/muril-base-cased "HTTP/1.1 200 OK"
+[2026-08-17 04:44:37,299][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/google/muril-base-cased/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+[2026-08-17 04:44:37,309][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/google/muril-base-cased/afd9f36c7923d54e97903922ff1b260d091d202f/config.json "HTTP/1.1 200 OK"
+[2026-08-17 04:44:37,826][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/google/muril-base-cased/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+[2026-08-17 04:44:37,888][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/models/google/muril-base-cased "HTTP/1.1 200 OK"
+[2026-08-17 04:44:37,965][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/models/google/muril-base-cased/commits/main "HTTP/1.1 200 OK"
+[2026-08-17 04:44:38,017][src.networks.text.bert][INFO] - Loaded model google/muril-base-cased pretrained: True
+[2026-08-17 04:44:38,051][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/models/google/muril-base-cased/discussions?p=0 "HTTP/1.1 200 OK"
+[2026-08-17 04:44:38,129][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/models/google/muril-base-cased/commits/refs%2Fpr%2F3 "HTTP/1.1 200 OK"
+[2026-08-17 04:44:38,193][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/google/muril-base-cased/resolve/refs%2Fpr%2F3/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+[2026-08-17 04:44:38,256][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/google/muril-base-cased/resolve/refs%2Fpr%2F3/model.safetensors "HTTP/1.1 302 Found"
+[2026-08-17 04:44:38,624][__main__][INFO] - [rank: 0] Instantiating callbacks...
+[2026-08-17 04:44:38,624][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <src.callbacks.checkpoint.PTModelCheckpoint>
+[2026-08-17 04:44:38,629][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <src.callbacks.retrieval.RetrievalEvaluation>
+[2026-08-17 04:44:38,631][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <lightning.pytorch.callbacks.RichModelSummary>
+[2026-08-17 04:44:38,631][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <lightning.pytorch.callbacks.RichProgressBar>
+[2026-08-17 04:44:38,632][__main__][INFO] - [rank: 0] Instantiating loggers...
+[2026-08-17 04:44:38,632][src.utils.instantiators][WARNING] - [rank: 0] No logger configs found! Skipping...
+[2026-08-17 04:44:38,632][__main__][INFO] - [rank: 0] Instantiating trainer <lightning.pytorch.trainer.Trainer>
+[2026-08-17 04:44:38,647][__main__][INFO] - [rank: 0] Starting training!
+[2026-08-17 04:44:39,027][datasets][INFO] - PyTorch version 2.11.0+cu128 available.
+[2026-08-17 04:44:39,028][datasets][INFO] - TensorFlow version 2.20.0 available.
+[2026-08-17 04:44:39,263][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/main/README.md "HTTP/1.1 200 OK"
+[2026-08-17 04:44:39,327][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/Rasa.py "HTTP/1.1 404 Not Found"
+[2026-08-17 04:44:39,468][httpx][INFO] - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/ai4bharat/Rasa/ai4bharat/Rasa.py "HTTP/1.1 404 Not Found"
+[2026-08-17 04:44:39,658][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/Rasa/revision/632f55c7ac590219d41cd7adffce5b440e4604f5 "HTTP/1.1 200 OK"
+[2026-08-17 04:44:39,723][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/.huggingface.yaml "HTTP/1.1 404 Not Found"
+[2026-08-17 04:44:39,891][httpx][INFO] - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=ai4bharat/Rasa "HTTP/1.1 200 OK"
+[2026-08-17 04:44:39,958][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/Rasa/tree/632f55c7ac590219d41cd7adffce5b440e4604f5/Assamese?recursive=true&expand=false "HTTP/1.1 200 OK"
+[2026-08-17 04:44:40,020][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/Rasa/tree/632f55c7ac590219d41cd7adffce5b440e4604f5?recursive=false&expand=false "HTTP/1.1 200 OK"
+[2026-08-17 04:44:40,144][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/dataset_infos.json "HTTP/1.1 404 Not Found"
+[2026-08-17 04:44:40,210][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/Rasa/tree/632f55c7ac590219d41cd7adffce5b440e4604f5/Hindi?recursive=true&expand=false "HTTP/1.1 200 OK"
+[2026-08-17 04:45:52,708][src.data.rasa_dataset][INFO] - Loaded Rasa hindi train: 12116 samples
+[2026-08-17 04:45:52,818][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/main/README.md "HTTP/1.1 200 OK"
+[2026-08-17 04:45:52,888][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/Rasa.py "HTTP/1.1 404 Not Found"
+[2026-08-17 04:45:53,019][httpx][INFO] - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/ai4bharat/Rasa/ai4bharat/Rasa.py "HTTP/1.1 404 Not Found"
+[2026-08-17 04:45:53,155][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/.huggingface.yaml "HTTP/1.1 404 Not Found"
+[2026-08-17 04:45:53,345][httpx][INFO] - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=ai4bharat/Rasa "HTTP/1.1 200 OK"
+[2026-08-17 04:45:53,456][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/dataset_infos.json "HTTP/1.1 404 Not Found"
+[2026-08-17 04:46:01,453][src.data.rasa_dataset][INFO] - Loaded Rasa hindi test: 1348 samples
+[2026-08-17 04:46:01,550][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/indicvoices_r/resolve/main/README.md "HTTP/1.1 200 OK"
+[2026-08-17 04:46:01,617][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/indicvoices_r/resolve/5f4495c91d500742a58d1be2ab07d77f73c0acf8/indicvoices_r.py "HTTP/1.1 404 Not Found"
+[2026-08-17 04:46:01,785][httpx][INFO] - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/ai4bharat/indicvoices_r/ai4bharat/indicvoices_r.py "HTTP/1.1 404 Not Found"
+[2026-08-17 04:46:01,998][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/revision/5f4495c91d500742a58d1be2ab07d77f73c0acf8 "HTTP/1.1 200 OK"
+[2026-08-17 04:46:02,056][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/indicvoices_r/resolve/5f4495c91d500742a58d1be2ab07d77f73c0acf8/.huggingface.yaml "HTTP/1.1 404 Not Found"
+[2026-08-17 04:46:02,246][httpx][INFO] - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=ai4bharat/indicvoices_r "HTTP/1.1 200 OK"
+[2026-08-17 04:46:02,329][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/tree/5f4495c91d500742a58d1be2ab07d77f73c0acf8/Assamese?recursive=true&expand=false "HTTP/1.1 200 OK"
+[2026-08-17 04:46:02,399][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/tree/5f4495c91d500742a58d1be2ab07d77f73c0acf8?recursive=false&expand=false "HTTP/1.1 200 OK"
+[2026-08-17 04:46:02,548][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/revision/5f4495c91d500742a58d1be2ab07d77f73c0acf8 "HTTP/1.1 200 OK"
+[2026-08-17 04:46:02,578][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/revision/5f4495c91d500742a58d1be2ab07d77f73c0acf8 "HTTP/1.1 200 OK"
+[2026-08-17 04:46:02,622][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/revision/5f4495c91d500742a58d1be2ab07d77f73c0acf8 "HTTP/1.1 200 OK"
+[2026-08-17 04:46:02,706][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/indicvoices_r/resolve/5f4495c91d500742a58d1be2ab07d77f73c0acf8/dataset_infos.json "HTTP/1.1 404 Not Found"
+[2026-08-17 04:46:02,775][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/tree/5f4495c91d500742a58d1be2ab07d77f73c0acf8/Hindi?recursive=true&expand=false "HTTP/1.1 200 OK"
+[2026-08-17 04:46:02,890][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/revision/5f4495c91d500742a58d1be2ab07d77f73c0acf8 "HTTP/1.1 200 OK"
+[2026-08-17 04:46:32,335][src.data.rasa_dataset][INFO] - Loaded IndicVoices hindi train: 1500 samples
+[2026-08-17 04:46:32,434][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/main/README.md "HTTP/1.1 200 OK"
+[2026-08-17 04:46:32,495][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/Rasa.py "HTTP/1.1 404 Not Found"
+[2026-08-17 04:46:32,635][httpx][INFO] - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/ai4bharat/Rasa/ai4bharat/Rasa.py "HTTP/1.1 404 Not Found"
+[2026-08-17 04:46:32,783][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/.huggingface.yaml "HTTP/1.1 404 Not Found"
+[2026-08-17 04:46:32,932][httpx][INFO] - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=ai4bharat/Rasa "HTTP/1.1 200 OK"
+[2026-08-17 04:46:33,064][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/dataset_infos.json "HTTP/1.1 404 Not Found"
+[2026-08-17 04:46:33,133][src.data.rasa_dataset][INFO] - Loaded Rasa hindi test: 1348 samples
+[2026-08-17 04:46:34,067][src.models.base][INFO] - Set tokenizer to BertTokenizer(name_or_path='google/muril-base-cased', vocab_size=197258, model_max_length=512, padding_side='right', truncation_side='right', special_tokens={'unk_token': '[UNK]', 'sep_token': '[SEP]', 'pad_token': '[PAD]', 'cls_token': '[CLS]', 'mask_token': '[MASK]'}, added_tokens_decoder={
+	0: AddedToken("[PAD]", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+	100: AddedToken("[UNK]", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+	103: AddedToken("[MASK]", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+	104: AddedToken("[CLS]", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+	105: AddedToken("[SEP]", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+}) as no tokenizer was set in the datamodule
+[2026-08-17 06:45:55,838][src.utils.utils][INFO] - [rank: 0] Enforcing tags! <cfg.extras.enforce_tags=True>
+[2026-08-17 06:45:55,842][src.utils.utils][INFO] - [rank: 0] Printing config tree with Rich! <cfg.extras.print_config=True>
+[2026-08-17 06:45:55,843][src.utils.rich_utils][WARNING] - [rank: 0] Field 'logger' not found in config. Skipping 'logger' config printing...
+[2026-08-17 06:45:55,900][src.utils.utils][INFO] - [rank: 0] Saving config in /root/models/slap/logs/xps/08dea1a4/config.yaml! <cfg.extras.save_config=True>
+[2026-08-17 06:45:55,919][__main__][INFO] - [rank: 0] Instantiating datamodule <src.data.rasa_dataset.RasaDataModule>
+[2026-08-17 06:45:55,959][__main__][INFO] - [rank: 0] Instantiating model <src.models.slap.SLAP>
+[2026-08-17 06:45:57,206][src.networks.audio.htsat][WARNING] - Error(s) in loading state_dict for HTSATSwinTransformer:
+	Unexpected key(s) in state_dict: "tscam_conv.weight", "tscam_conv.bias", "head.weight", "head.bias". 
+[2026-08-17 06:45:57,406][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/google/muril-base-cased/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+[2026-08-17 06:45:57,418][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/google/muril-base-cased/afd9f36c7923d54e97903922ff1b260d091d202f/config.json "HTTP/1.1 200 OK"
+[2026-08-17 06:45:57,481][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/google/muril-base-cased/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+[2026-08-17 06:45:57,492][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/google/muril-base-cased/afd9f36c7923d54e97903922ff1b260d091d202f/tokenizer_config.json "HTTP/1.1 200 OK"
+[2026-08-17 06:45:57,558][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/models/google/muril-base-cased/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+[2026-08-17 06:45:57,619][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/models/google/muril-base-cased/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+[2026-08-17 06:45:57,850][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/models/google/muril-base-cased "HTTP/1.1 200 OK"
+[2026-08-17 06:45:57,914][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/google/muril-base-cased/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+[2026-08-17 06:45:57,924][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/google/muril-base-cased/afd9f36c7923d54e97903922ff1b260d091d202f/config.json "HTTP/1.1 200 OK"
+[2026-08-17 06:45:58,394][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/google/muril-base-cased/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+[2026-08-17 06:45:58,451][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/models/google/muril-base-cased "HTTP/1.1 200 OK"
+[2026-08-17 06:45:58,542][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/models/google/muril-base-cased/commits/main "HTTP/1.1 200 OK"
+[2026-08-17 06:45:58,568][src.networks.text.bert][INFO] - Loaded model google/muril-base-cased pretrained: True
+[2026-08-17 06:45:58,629][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/models/google/muril-base-cased/discussions?p=0 "HTTP/1.1 200 OK"
+[2026-08-17 06:45:58,704][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/models/google/muril-base-cased/commits/refs%2Fpr%2F3 "HTTP/1.1 200 OK"
+[2026-08-17 06:45:58,766][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/google/muril-base-cased/resolve/refs%2Fpr%2F3/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+[2026-08-17 06:45:58,824][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/google/muril-base-cased/resolve/refs%2Fpr%2F3/model.safetensors "HTTP/1.1 302 Found"
+[2026-08-17 06:45:59,395][__main__][INFO] - [rank: 0] Instantiating callbacks...
+[2026-08-17 06:45:59,396][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <src.callbacks.checkpoint.PTModelCheckpoint>
+[2026-08-17 06:45:59,401][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <src.callbacks.retrieval.RetrievalEvaluation>
+[2026-08-17 06:45:59,403][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <lightning.pytorch.callbacks.RichModelSummary>
+[2026-08-17 06:45:59,403][src.utils.instantiators][INFO] - [rank: 0] Instantiating callback <lightning.pytorch.callbacks.RichProgressBar>
+[2026-08-17 06:45:59,404][__main__][INFO] - [rank: 0] Instantiating loggers...
+[2026-08-17 06:45:59,404][src.utils.instantiators][WARNING] - [rank: 0] No logger configs found! Skipping...
+[2026-08-17 06:45:59,404][__main__][INFO] - [rank: 0] Instantiating trainer <lightning.pytorch.trainer.Trainer>
+[2026-08-17 06:45:59,419][__main__][INFO] - [rank: 0] Starting training!
+[2026-08-17 06:45:59,684][datasets][INFO] - PyTorch version 2.11.0+cu128 available.
+[2026-08-17 06:45:59,684][datasets][INFO] - TensorFlow version 2.20.0 available.
+[2026-08-17 06:45:59,919][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/main/README.md "HTTP/1.1 200 OK"
+[2026-08-17 06:45:59,976][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/Rasa.py "HTTP/1.1 404 Not Found"
+[2026-08-17 06:46:00,114][httpx][INFO] - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/ai4bharat/Rasa/ai4bharat/Rasa.py "HTTP/1.1 404 Not Found"
+[2026-08-17 06:46:00,295][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/Rasa/revision/632f55c7ac590219d41cd7adffce5b440e4604f5 "HTTP/1.1 200 OK"
+[2026-08-17 06:46:00,362][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/.huggingface.yaml "HTTP/1.1 404 Not Found"
+[2026-08-17 06:46:00,553][httpx][INFO] - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=ai4bharat/Rasa "HTTP/1.1 200 OK"
+[2026-08-17 06:46:00,624][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/Rasa/tree/632f55c7ac590219d41cd7adffce5b440e4604f5/Assamese?recursive=true&expand=false "HTTP/1.1 200 OK"
+[2026-08-17 06:46:00,684][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/Rasa/tree/632f55c7ac590219d41cd7adffce5b440e4604f5?recursive=false&expand=false "HTTP/1.1 200 OK"
+[2026-08-17 06:46:00,793][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/dataset_infos.json "HTTP/1.1 404 Not Found"
+[2026-08-17 06:46:00,858][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/Rasa/tree/632f55c7ac590219d41cd7adffce5b440e4604f5/Hindi?recursive=true&expand=false "HTTP/1.1 200 OK"
+[2026-08-17 06:46:01,189][src.data.rasa_dataset][INFO] - Loaded Rasa hindi train: 12116 samples
+[2026-08-17 06:46:01,247][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/main/README.md "HTTP/1.1 200 OK"
+[2026-08-17 06:46:01,307][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/Rasa.py "HTTP/1.1 404 Not Found"
+[2026-08-17 06:46:01,351][httpx][INFO] - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/ai4bharat/Rasa/ai4bharat/Rasa.py "HTTP/1.1 404 Not Found"
+[2026-08-17 06:46:01,488][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/.huggingface.yaml "HTTP/1.1 404 Not Found"
+[2026-08-17 06:46:01,557][httpx][INFO] - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=ai4bharat/Rasa "HTTP/1.1 200 OK"
+[2026-08-17 06:46:01,664][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/dataset_infos.json "HTTP/1.1 404 Not Found"
+[2026-08-17 06:46:01,725][src.data.rasa_dataset][INFO] - Loaded Rasa hindi test: 1348 samples
+[2026-08-17 06:46:01,779][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/indicvoices_r/resolve/main/README.md "HTTP/1.1 200 OK"
+[2026-08-17 06:46:01,841][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/indicvoices_r/resolve/5f4495c91d500742a58d1be2ab07d77f73c0acf8/indicvoices_r.py "HTTP/1.1 404 Not Found"
+[2026-08-17 06:46:01,882][httpx][INFO] - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/ai4bharat/indicvoices_r/ai4bharat/indicvoices_r.py "HTTP/1.1 404 Not Found"
+[2026-08-17 06:46:02,089][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/revision/5f4495c91d500742a58d1be2ab07d77f73c0acf8 "HTTP/1.1 200 OK"
+[2026-08-17 06:46:05,060][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/indicvoices_r/resolve/5f4495c91d500742a58d1be2ab07d77f73c0acf8/.huggingface.yaml "HTTP/1.1 404 Not Found"
+[2026-08-17 06:46:05,156][httpx][INFO] - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=ai4bharat/indicvoices_r "HTTP/1.1 200 OK"
+[2026-08-17 06:46:05,236][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/tree/5f4495c91d500742a58d1be2ab07d77f73c0acf8/Assamese?recursive=true&expand=false "HTTP/1.1 200 OK"
+[2026-08-17 06:46:05,310][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/tree/5f4495c91d500742a58d1be2ab07d77f73c0acf8?recursive=false&expand=false "HTTP/1.1 200 OK"
+[2026-08-17 06:46:05,409][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/revision/5f4495c91d500742a58d1be2ab07d77f73c0acf8 "HTTP/1.1 200 OK"
+[2026-08-17 06:46:05,499][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/revision/5f4495c91d500742a58d1be2ab07d77f73c0acf8 "HTTP/1.1 200 OK"
+[2026-08-17 06:46:05,541][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/revision/5f4495c91d500742a58d1be2ab07d77f73c0acf8 "HTTP/1.1 200 OK"
+[2026-08-17 06:46:05,560][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/revision/5f4495c91d500742a58d1be2ab07d77f73c0acf8 "HTTP/1.1 200 OK"
+[2026-08-17 06:46:05,561][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/revision/5f4495c91d500742a58d1be2ab07d77f73c0acf8 "HTTP/1.1 200 OK"
+[2026-08-17 06:46:05,574][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/revision/5f4495c91d500742a58d1be2ab07d77f73c0acf8 "HTTP/1.1 200 OK"
+[2026-08-17 06:46:05,575][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/revision/5f4495c91d500742a58d1be2ab07d77f73c0acf8 "HTTP/1.1 200 OK"
+[2026-08-17 06:46:05,692][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/indicvoices_r/resolve/5f4495c91d500742a58d1be2ab07d77f73c0acf8/dataset_infos.json "HTTP/1.1 404 Not Found"
+[2026-08-17 06:46:05,767][httpx][INFO] - HTTP Request: GET https://huggingface.co/api/datasets/ai4bharat/indicvoices_r/tree/5f4495c91d500742a58d1be2ab07d77f73c0acf8/Hindi?recursive=true&expand=false "HTTP/1.1 200 OK"
+[2026-08-17 06:46:05,978][src.data.rasa_dataset][INFO] - Loaded IndicVoices hindi train: 1500 samples
+[2026-08-17 06:46:06,032][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/main/README.md "HTTP/1.1 200 OK"
+[2026-08-17 06:46:06,095][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/Rasa.py "HTTP/1.1 404 Not Found"
+[2026-08-17 06:46:06,138][httpx][INFO] - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/ai4bharat/Rasa/ai4bharat/Rasa.py "HTTP/1.1 404 Not Found"
+[2026-08-17 06:46:06,268][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/.huggingface.yaml "HTTP/1.1 404 Not Found"
+[2026-08-17 06:46:06,355][httpx][INFO] - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=ai4bharat/Rasa "HTTP/1.1 200 OK"
+[2026-08-17 06:46:06,482][httpx][INFO] - HTTP Request: HEAD https://huggingface.co/datasets/ai4bharat/Rasa/resolve/632f55c7ac590219d41cd7adffce5b440e4604f5/dataset_infos.json "HTTP/1.1 404 Not Found"
+[2026-08-17 06:46:06,548][src.data.rasa_dataset][INFO] - Loaded Rasa hindi test: 1348 samples
+[2026-08-17 06:46:07,502][src.models.base][INFO] - Set tokenizer to BertTokenizer(name_or_path='google/muril-base-cased', vocab_size=197258, model_max_length=512, padding_side='right', truncation_side='right', special_tokens={'unk_token': '[UNK]', 'sep_token': '[SEP]', 'pad_token': '[PAD]', 'cls_token': '[CLS]', 'mask_token': '[MASK]'}, added_tokens_decoder={
+	0: AddedToken("[PAD]", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+	100: AddedToken("[UNK]", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+	103: AddedToken("[MASK]", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+	104: AddedToken("[CLS]", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+	105: AddedToken("[SEP]", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+}) as no tokenizer was set in the datamodule
+[2026-08-17 09:27:30,962][__main__][INFO] - [rank: 0] Starting testing!
+[2026-08-17 09:27:49,682][__main__][INFO] - [rank: 0] Best ckpt path: /root/models/slap/checkpoints/hindi_best_rasa-v1.pt
+[2026-08-17 09:27:49,685][src.utils.utils][INFO] - [rank: 0] Output dir: /root/models/slap/logs/xps/08dea1a4
+[2026-08-17 09:27:50,227][src.utils.utils][INFO] - [rank: 0] Metric name is None! Skipping metric value retrieval...
