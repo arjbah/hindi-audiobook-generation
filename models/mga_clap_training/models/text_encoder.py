@@ -3,9 +3,16 @@
 # @Author  : Yiming Li @ ICT, CAS
 # @E-mail  : liyiming22s1@ict.ac.cn
 
+import sys
+from pathlib import Path
 
 import torch.nn as nn
 from transformers import AutoTokenizer, AutoModel
+
+MODELS_DIR = Path(__file__).resolve().parents[2]
+if str(MODELS_DIR) not in sys.path:
+    sys.path.insert(0, str(MODELS_DIR))
+
 from data import MAX_TEXT_LENGTH
 
 class TextEncoder(nn.Module):

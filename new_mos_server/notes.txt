@@ -1,0 +1,16 @@
+Activate website:
+MYSQL_HOST=127.0.0.1 \
+MYSQL_USER=reseval_user \
+MYSQL_PASS=reseval_pass \
+python -m reseval.create mos_config.yaml ../inference/mos_audio/ --local
+
+Each participant receives 10 unique, randomly ordered clips from the 12
+available transcript/model combinations for their selected language.
+
+Get tables:
+python -m reseval.results assamese-audiobook-mos
+python -m reseval.results assamese-audiobook-nmos
+python -m reseval.results assamese-audiobook-emos
+
+Clear tables:
+rm -rf ~/Library/Caches/reseval/evaluations/indian-audiobook-evaluation

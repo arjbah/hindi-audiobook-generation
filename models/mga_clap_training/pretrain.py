@@ -4,6 +4,7 @@
 # @E-mail  : liyiming22s1@ict.ac.cn
 
 from torch.cuda.amp import GradScaler
+import sys
 import time
 from pathlib import Path
 from pprint import PrettyPrinter
@@ -13,6 +14,11 @@ import ruamel.yaml as yaml
 from ruamel.yaml import YAML
 from tqdm import tqdm
 from loguru import logger
+
+MODELS_DIR = Path(__file__).resolve().parent.parent
+if str(MODELS_DIR) not in sys.path:
+    sys.path.insert(0, str(MODELS_DIR))
+
 from data_handling.datamodule import AudioCaptionDataModule
 from data_handling.pretrain_dataset import pretrain_dataloader, indicvoices_dataloader
 from data import INDICVOICES_EVAL_SAMPLES

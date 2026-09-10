@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from data import AUDIO_DURATION, MAX_TEXT_LENGTH, load_indicvoices, load_rasa
+from data import MAX_TEXT_LENGTH, load_indicvoices, load_rasa
 
 class IndicVoicesCLAPDataset(Dataset):
     def __init__(self, dataset_name, split="train", target_sr=48000, gender="male", language="all", limit=None):
@@ -29,7 +29,7 @@ class IndicVoicesCLAPDataset(Dataset):
         self.audio_processor = ClapProcessor.from_pretrained(self.clap_model_name)
 
         cache_root = Path(__file__).resolve().parents[1] / ".cache" / "laion_clap"
-        self.cache_dir = cache_root / f"{dataset_name}_{language}_{gender}_{split}_sr{target_sr}_seconds{AUDIO_DURATION}_txt{self.max_text_len}"
+        self.cache_dir = cache_root / f"{dataset_name}_{language}_{gender}_{split}_sr{target_sr}_txt{self.max_text_len}"
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.build_cache()
 

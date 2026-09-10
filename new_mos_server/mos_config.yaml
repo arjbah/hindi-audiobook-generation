@@ -1,0 +1,89 @@
+# Combined multilingual MOS/NMOS/EMOS audiobook evaluation
+
+name: indian-audiobook-evaluation
+test: multi-mos
+datatype: audio
+
+storage: local
+database: localhost
+server: local
+
+languages:
+  - assamese
+  - bengali
+  - gujarati
+  - hindi
+  - kannada
+  - malayalam
+  - marathi
+  - tamil
+  - telugu
+
+metrics:
+  - mos
+  - nmos
+  - emos
+
+crowdsource:
+  platform: mturk
+  title: "Evaluate Indian-language Audiobook Speech"
+  description: "Listen to audiobook clips and rate audio quality, naturalness, and emotional expressiveness."
+  keywords: "Indian languages, Speech, Audio, MOS, NMOS, EMOS, Evaluation"
+
+  filter:
+    countries: ['IN', 'US']
+    approved_tasks: 100
+    approval_rating: 95
+
+  payment:
+    base: 0.05
+    completion: 0.45
+
+  duration:
+    total: 86400
+    assignment: 1800
+    autoapprove: 172800
+
+participants: 20
+
+# Three transcripts x four model conditions produce 12 unique clips per
+# language. Each participant receives 10 randomly selected clips without
+# replacement.
+samples_per_participant: 10
+random_seed: 42
+
+welcome_text: |
+  # Welcome!
+
+  We are evaluating synthesized audiobook speech in nine Indian languages.
+  After a short headphone check, select the language you understand. You will
+  hear ten randomly selected clips in that language and rate every clip for overall quality,
+  naturalness, and emotional expressiveness.
+
+  ### Consent
+
+  By pressing **I Agree**, you confirm that you are willing to participate.
+
+listening_test:
+  instructions: "Please wear headphones. Count how many distinct tones you hear in the clip."
+  num_questions: 1
+  retries: 2
+
+survey_instructions: |
+  ## Instructions
+
+  Listen to the entire audio clip, then give all three ratings from 1 to 5:
+
+  - **MOS:** Overall audio quality (1 = Very poor, 5 = Excellent)
+  - **NMOS:** Naturalness (1 = Robotic or unnatural, 5 = Human-like)
+  - **EMOS:** Emotional expressiveness (1 = Flat or mismatched, 5 = Highly expressive)
+
+  **IMPORTANT: Ignore periods of silence or an abrupt cut at the end of the audio.**
+
+prescreen_questions: []
+
+followup_questions:
+  - name: Feedback
+    type: free-response
+    text: "Any feedback on the audio? After submitting, you will receive a completion code."
+    placeholder: "Optional feedback..."

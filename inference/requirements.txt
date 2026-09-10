@@ -3,9 +3,9 @@ torchaudio
 torchcodec
 torchlibrosa
 setuptools==80.9.0
-transformers==4.46.1
+transformers==4.49.0
 parler-tts==0.2.3
-protobuf==4.25.9
+protobuf==4.25.3
 proto-plus==1.26.1
 googleapis-common-protos==1.66.0
 google-api-core==2.24.1
@@ -19,7 +19,7 @@ sentencepiece
 elevenlabs
 python-dotenv
 ruamel.yaml
-numpy
+numpy==1.23.5
 datasets==3.6.0
 einops
 huggingface_hub

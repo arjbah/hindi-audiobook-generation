@@ -9,6 +9,10 @@ from loguru import logger
 import sys
 from pathlib import Path
 
+MODELS_DIR = Path(__file__).resolve().parent.parent
+if str(MODELS_DIR) not in sys.path:
+    sys.path.insert(0, str(MODELS_DIR))
+
 from clap_model import CLAPModel, contrastive_loss
 from clap_dataset import IndicVoicesCLAPDataset, get_dataloader
 from data import INDICVOICES_EVAL_SAMPLES

@@ -1,0 +1,83 @@
+Model: mga_clap
+Checkpoint: /root/models/mga_clap_training/checkpoints/hindi_best_rasa.pt
+Epoch: 95
+Language: hindi
+Training loss: 0.025000
+
+Rasa Embeddings metrics
+T2A: R@1=0.972, R@5=0.997, R@10=0.999, R@50=0.999, MedR=1.000, MeanR=1.107, mAP=0.983
+A2T: R@1=0.970, R@5=0.996, R@10=0.999, R@50=1.000, MedR=1.000, MeanR=1.094, mAP=0.982
+
+IndicVoices Embeddings metrics
+T2A: R@1=0.074, R@5=0.181, R@10=0.263, R@50=0.470, MedR=59.000, MeanR=170.921, mAP=0.136
+A2T: R@1=0.055, R@5=0.137, R@10=0.191, R@50=0.380, MedR=97.000, MeanR=228.815, mAP=0.102
+
+--------------------------------------------------------------------------------
+
+Model: laion_clap
+Checkpoint: /root/models/laion_clap_training/checkpoints/hindi_best_rasa.pt
+Epoch: 114
+Language: hindi
+Training loss: 0.032533
+
+Rasa Embeddings metrics
+T2A: R@1=0.644, R@5=0.909, R@10=0.949, MedR=1.000, MeanR=3.572, mAP=0.759
+A2T: R@1=0.616, R@5=0.880, R@10=0.936, MedR=1.000, MeanR=4.119, mAP=0.730
+
+IndicVoices Embeddings metrics
+T2A: R@1=0.024, R@5=0.077, R@10=0.123, MedR=161.000, MeanR=304.733, mAP=0.058
+A2T: R@1=0.018, R@5=0.057, R@10=0.093, MedR=203.000, MeanR=334.949, mAP=0.046
+
+--------------------------------------------------------------------------------
+
+Model: voiceclap
+Checkpoint: /root/models/voiceclap_training/checkpoints/hindi_best_rasa.pt
+Epoch: 117
+Language: hindi
+
+Rasa Embeddings metrics
+T2A: R@1=0.696, R@5=0.915, R@10=0.953, MedR=1.000, MeanR=3.381, mAP=0.789
+A2T: R@1=0.697, R@5=0.918, R@10=0.957, MedR=1.000, MeanR=3.226, mAP=0.794
+
+IndicVoices Embeddings metrics
+T2A: R@1=0.043, R@5=0.113, R@10=0.164, MedR=115.000, MeanR=244.993, mAP=0.086
+A2T: R@1=0.038, R@5=0.113, R@10=0.155, MedR=130.000, MeanR=260.837, mAP=0.078
+
+--------------------------------------------------------------------------------
+
+Model: slap
+Checkpoint: /root/models/slap/checkpoints/hindi_best_rasa-v1.pt
+Epoch: 73
+Language: hindi
+
+Rasa Projections metrics
+T2A: R@1=0.390, R@5=0.585, R@10=0.654, MedR=3.000, MeanR=135.418, mAP=0.484
+A2T: R@1=0.412, R@5=0.604, R@10=0.659, MedR=2.000, MeanR=147.352, mAP=0.499
+
+Rasa Predictions metrics
+T2A: R@1=0.665, R@5=0.773, R@10=0.795, MedR=1.000, MeanR=125.533, mAP=0.713
+A2T: R@1=0.665, R@5=0.775, R@10=0.795, MedR=1.000, MeanR=118.410, mAP=0.715
+
+Rasa EMA Projections metrics
+T2A: R@1=0.400, R@5=0.593, R@10=0.662, MedR=3.000, MeanR=132.735, mAP=0.490
+A2T: R@1=0.412, R@5=0.614, R@10=0.665, MedR=2.000, MeanR=146.719, mAP=0.503
+
+Rasa EMA Predictions metrics
+T2A: R@1=0.664, R@5=0.776, R@10=0.800, MedR=1.000, MeanR=124.263, mAP=0.714
+A2T: R@1=0.667, R@5=0.775, R@10=0.798, MedR=1.000, MeanR=119.972, mAP=0.717
+
+IndicVoices Projections metrics
+T2A: R@1=0.007, R@5=0.030, R@10=0.045, MedR=457.000, MeanR=535.504, mAP=0.024
+A2T: R@1=0.011, R@5=0.023, R@10=0.035, MedR=485.000, MeanR=560.171, mAP=0.022
+
+IndicVoices Predictions metrics
+T2A: R@1=0.030, R@5=0.076, R@10=0.115, MedR=212.000, MeanR=375.887, mAP=0.060
+A2T: R@1=0.015, R@5=0.061, R@10=0.096, MedR=261.000, MeanR=401.636, mAP=0.045
+
+IndicVoices EMA Projections metrics
+T2A: R@1=0.008, R@5=0.027, R@10=0.044, MedR=460.000, MeanR=537.127, mAP=0.024
+A2T: R@1=0.009, R@5=0.023, R@10=0.039, MedR=501.000, MeanR=561.173, mAP=0.022
+
+IndicVoices EMA Predictions metrics
+T2A: R@1=0.029, R@5=0.077, R@10=0.116, MedR=214.000, MeanR=378.020, mAP=0.060
+A2T: R@1=0.016, R@5=0.060, R@10=0.096, MedR=279.000, MeanR=403.043, mAP=0.045

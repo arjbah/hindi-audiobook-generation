@@ -6,6 +6,10 @@ import sys
 from contextlib import contextmanager, nullcontext
 from pathlib import Path
 
+MODELS_DIR = Path(__file__).resolve().parent
+if str(MODELS_DIR) not in sys.path:
+    sys.path.insert(0, str(MODELS_DIR))
+
 from data import INDICVOICES_EVAL_SAMPLES, LANGUAGES
 
 MODELS = ["laion_clap", "voiceclap", "mga_clap", "slap"]
